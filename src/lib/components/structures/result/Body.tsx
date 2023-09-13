@@ -40,7 +40,7 @@ export default function Body() {
     calculateBatteriesMutation.mutate(requestData, {
       onSuccess: (data) => {
         setBattery(data);
-        console.log(data);
+        // console.log(data);
       },
       onError: (error, variables, context) => {
         console.log(error);

@@ -2,7 +2,7 @@ export const useLocalStorage = (name: string): Function[] => {
   const getLocalStorage = () => {
     if (typeof window !== 'undefined') {
       const local = localStorage.getItem(name);
-      console.log('oi'+ local)
+      // console.log('oi'+ local)
       if (local != null) {
         return JSON.parse(local);
       }
