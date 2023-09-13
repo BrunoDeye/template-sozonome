@@ -17,8 +17,7 @@
     "up-interactive": "pnpm up -i",
     "up-latest": "pnpm up-interactive -L",
     "release": "cross-env HUSKY=0 standard-version",
-    "push-release": "git push --follow-tags origin main",
-    "prepare": "husky install"
+    "push-release": "git push --follow-tags origin main"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.1",
