@@ -39,6 +39,112 @@
 }
 
 @layer base {
+
+  #loadingDiv {
+    display: flex;
+    top: 0;
+    width: 44px;
+    height: 48px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.5s; /* Transition for the swipe */
+    transform: translateX(0);
+  }
+
+  /* HIDE LOADER WHEN EDITING */
+  .w-editor-body #loadingDiv {
+    display: none;
+  }
+
+  #loadingDiv.visible {
+    transform: translateX(100%);
+  }
+
+  #lottieContainer {
+    width: 64px;
+    height: 64px;
+    opacity: 1;
+    transition: opacity 0.4s;
+  }
+
+  .faded {
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .loaderAnim {
+    --path: #2073be;
+    --dot: #de2a26;
+    --duration: 3s;
+    width: 44px;
+    height: 44px;
+    position: relative;
+    display: inline-block;
+    margin: 0 16px;
+  }
+
+  .loaderAnim:before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 37px;
+    left: 19px;
+    transform: translate(-18px, -4px);
+    background: var(--dot);
+    animation: dotRect var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86)
+      infinite;
+  }
+
+  .loaderAnim svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .loaderAnim svg rect {
+    fill: none;
+    stroke: var(--path);
+    stroke-width: 10px;
+    stroke-dasharray: 192 64 192 64;
+    stroke-dashoffset: 32;
+    animation: pathRect var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86)
+      infinite;
+  }
+
+  @keyframes pathRect {
+    25% {
+      stroke-dashoffset: 96;
+    }
+    50% {
+      stroke-dashoffset: 156;
+    }
+    75% {
+      stroke-dashoffset: 222;
+    }
+    100% {
+      stroke-dashoffset: 288;
+    }
+  }
+
+  @keyframes dotRect {
+    25% {
+      transform: translate(14px, -4px);
+    }
+    50% {
+      transform: translate(14px, -36px);
+    }
+    75% {
+      transform: translate(-18px, -36px);
+    }
+    100% {
+      transform: translate(-18px, -4px);
+    }
+  }
+
+
   :root {
     --background: 0 0% 100%;
     --foreground: 224 71.4% 4.1%;

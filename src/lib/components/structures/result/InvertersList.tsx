@@ -2,6 +2,7 @@ import { formatInverter } from '@/utils/functions';
 import Tables from './Tables';
 import { useDataStore } from '@/store/data';
 import { useCalculateInvertersQuery } from '@/services/ReactQueryHooks/useCalculateInvertersQuery';
+import LoadingDeye from '../../Loading';
 
 export const inverters = [
   {
@@ -17,31 +18,38 @@ export const inverters = [
 ];
 
 export default function InvertersList() {
-
   const {
-    state: {  grid, totalPower },
+    state: { grid, totalPower },
   } = useDataStore();
 
   const requestData = {
     gridVoltage: grid || '220V (Fase + Fase + Terra/Neutro)',
     tPower: totalPower || 1,
   };
-  const { invertersList, isLoading, isError } = useCalculateInvertersQuery(requestData);
+  const { invertersList, isLoading, isError } =
+    useCalculateInvertersQuery(requestData);
 
-  return (
-    isError ? <span className='flex flex-col text-center mx-auto w-full'>Ops algo deu errado...</span> :
+  return isError ? (
+    <span className="mx-auto flex w-full flex-col text-center">
+      Ops algo deu errado...
+    </span>
+  ) : (
     <div className="flex flex-col gap-6">
       <h4 className="text-center text-xl font-bold tracking-tight sm:text-2xl">
         Inversor Recomendado
       </h4>
       {isLoading ? (
-        <span className='text-center mx-auto w-full'>Loading...</span>
+        <span className="mx-auto w-full text-center">
+          <LoadingDeye />
+        </span>
       ) : (
         <Tables variant="sky" data={formatInverter(invertersList![0])} />
       )}
 
       {isLoading ? (
-        <span className='text-center mx-auto w-full'>Loading...</span>
+        <span className="mx-auto w-full text-center">
+          <LoadingDeye />
+        </span>
       ) : invertersList?.length === 1 ? null : (
         <>
           <h4 className="text-center text-xl font-bold tracking-tight sm:text-2xl">
