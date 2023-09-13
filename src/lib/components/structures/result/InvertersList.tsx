@@ -43,7 +43,15 @@ export default function InvertersList() {
           <LoadingDeye />
         </span>
       ) : (
-        <Tables variant="sky" data={formatInverter(invertersList![0])} />
+        <Tables
+          variant="sky"
+          data={formatInverter(invertersList![0])}
+          description={
+            invertersList![0].model.includes('LP')
+              ? 'Esse Inversor só aceita Baterias do modelo: Low Voltage(LV).'
+              : 'Esse Inversor só aceita Baterias do modelo: High Voltage(HV).'
+          }
+        />
       )}
 
       {isLoading ? (
@@ -57,7 +65,15 @@ export default function InvertersList() {
           </h4>
           {invertersList?.slice(1).map((inverter) => (
             <div key={inverter.model}>
-              <Tables variant="darkBlue" data={formatInverter(inverter)} />
+              <Tables
+                variant="darkBlue"
+                data={formatInverter(inverter)}
+                description={
+                  inverter.model.includes('LP')
+                    ? 'Esse Inversor só aceita Baterias do modelo: Low Voltage(LV).'
+                    : 'Esse Inversor só aceita Baterias do modelo: High Voltage(HV).'
+                }
+              />
             </div>
           ))}
         </>

@@ -65,14 +65,22 @@ type TableData = {
 
 type TableProps = VariantProps<typeof tableVariants> & {
   data: TableData[];
+  description?: string;
 };
 
-export default function Tables({ variant, data = defaultData }: TableProps) {
+export default function Tables({
+  variant,
+  data = defaultData,
+  description = 'Esse Inversor só aceita Baterias do modelo: High Voltage(HV).',
+}: TableProps) {
   return (
     <div className="w-full sm:p-4">
       <div className={cn(tableVariants({ variant }))}>
         <Table>
-          {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
+          {description === '' ? null :<TableCaption className="px-4 pb-2 text-[10px] text-gray-600 dark:text-gray-100">
+            {description}
+          </TableCaption>}
+          
           <TableHeader>
             <TableRow className="border-gray-200 dark:border-sky-300">
               <TableHead className="w-[100px] text-gray-600 dark:font-bold dark:text-sky-100">

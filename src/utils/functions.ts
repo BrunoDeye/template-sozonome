@@ -102,7 +102,7 @@ export const formatBattery = (battery: Battery) =>
         },
         {
           attribute: 'Modelo',
-          value: battery.modelFullName.includes('BOG')
+          value: battery.modelFullName.includes('BOS')
             ? 'High Voltage(HV)'
             : 'Low Voltage(LV)',
         },
