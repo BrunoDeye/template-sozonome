@@ -11,7 +11,7 @@ const Footer = () => {
     <footer className="wrapper mt-6">
       <div className="flex">
         <p className="flex flex-col items-center justify-center gap-2 text-xs">
-          {theme === 'light' || theme === undefined ? (
+          {theme === 'light' || theme === undefined || theme === 'system' ? (
             <Image
               className=""
               width={40}
