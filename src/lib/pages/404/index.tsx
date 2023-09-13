@@ -12,6 +12,7 @@ const Page404 = () => {
           width={320}
           height={320}
           alt="404 Illustration"
+          className="mx-auto"
         />
         <Button variant="link" asChild>
           <a href="https://storyset.com/web" className="text-xs">

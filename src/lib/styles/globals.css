@@ -24,8 +24,17 @@
   }
 
   .wrapper {
-    @apply mx-auto p-6 sm:p-8;
-    max-width: 48rem;
+    @apply mx-auto px-1 py-6 sm:p-6;
+    max-width: 100vw;
+  }
+
+  .remove-arrow::-webkit-inner-spin-button,
+  .remove-arrow::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .remove-arrow {
+    -moz-appearance: textfield;
   }
 }
 
@@ -88,7 +97,7 @@
     --accent: 215 27.9% 16.9%;
     --accent-foreground: 210 20% 98%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 62.8% 50.6%;
     --destructive-foreground: 0 85.7% 97.3%;
 
     --ring: 215 27.9% 16.9%;
