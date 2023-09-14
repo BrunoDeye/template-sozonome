@@ -28,21 +28,46 @@ const initialState = [
     powerValueIsEditing: false,
     hoursIsEditing: false,
   },
-]
+];
 
 const DeviceCard = () => {
-  const router = useRouter()
+  const router = useRouter();
   const {
     state: { FC, totalPower, totalEnergy },
     actions: { addTotalEnergy, addTotalPower, addFC },
   } = useDataStore();
 
-  const [savedDevicesList, setSavedDevicesList, clearLocalStorage] = useLocalStorage("devices-list")
-  const [items, setItems] = useState<typeof initialState>(savedDevicesList() || initialState );
+  const [savedDevicesList, setSavedDevicesList, clearLocalStorage] =
+    useLocalStorage('devices-list');
+  const [items, setItems] = useState<typeof initialState>(
+    savedDevicesList() || initialState
+  );
   useEffect(() => {
-    setSavedDevicesList(items)
-  },[setSavedDevicesList, items])
+    setSavedDevicesList(items);
+  }, [setSavedDevicesList, items]);
   const [triggerUpdate, setTriggerUpdate] = useState(0);
+
+  const handleCleaning = (id: number) => {
+    const itemCleared = items.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          powerValue: 0,
+          energyValue: 0,
+          hours: 0,
+          equipName: '',
+          selected: false,
+          manual: false,
+          powerValueIsEditing: false,
+          hoursIsEditing: false,
+        };
+      }
+      return item;
+    });
+
+    setItems(itemCleared);
+    setTriggerUpdate(triggerUpdate + 1);
+  };
 
   const handleEditing = (
     id: number,
@@ -197,15 +222,14 @@ const DeviceCard = () => {
       setTriggerUpdate(0);
     };
   }, [triggerUpdate]);
-  const [isClient, setIsClient] = useState(false)
- 
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
+  const [isClient, setIsClient] = useState(false);
 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
-    <div id="start" className="flex flex-col px-6 py-4 sm:py-6 isolate lg:px-6">
+    <div id="start" className="isolate flex flex-col px-6 py-4 sm:py-6 lg:px-6">
       <div className="mx-auto max-w-4xl text-center">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
           Equipamentos em Sua Residência
@@ -220,186 +244,211 @@ const DeviceCard = () => {
           consumo médio brasileiro.
         </p>
       </div>
-      <div className="mx-auto flex flex-col mt-12 items-center justify-center">
-        {isClient ? items.map((item) => (
-          <div className="mb-6 flex w-full gap-2 " key={item.id}>
-            <div className="flex flex-col gap-2">
-              <Counter
-                quantity={item.quantity}
-                handleValueChange={handleValueChange}
-                handleIncrement={handleIncrement}
-                handleDecrement={handleDecrement}
-                id={item.id}
-              />
-              <Button
-                disabled={items.length === 1}
-                variant="gradientRed"
-                onClick={() => handleDelete(item.id)}
-              >
-                Remover
-              </Button>
-            </div>
-            <div className="flex w-full flex-col items-start justify-center gap-[0.11rem]">
-              {item.manual ? (
-                <>
-                  <div className="grid w-full items-center gap-1.5">
+      <div className="mx-auto mt-12 flex flex-col items-center justify-center">
+        {isClient
+          ? items.map((item) => (
+              <div className="mb-6 flex w-full gap-2 " key={item.id}>
+                <div className="flex flex-col gap-2">
+                  <Counter
+                    quantity={item.quantity}
+                    handleValueChange={handleValueChange}
+                    handleIncrement={handleIncrement}
+                    handleDecrement={handleDecrement}
+                    id={item.id}
+                  />
+                  <Button
+                    disabled={items.length === 1}
+                    variant="gradientRed"
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    Remover
+                  </Button>
+                </div>
+                <div className="flex w-full flex-col items-start justify-center gap-[0.11rem]">
+                  {item.manual ? (
                     <div className="relative">
-                      <Input
-                        id={`power-${item.id}`}
-                        type="number"
-                        placeholder=" "
-                        className="remove-arrow border-1 peer block w-full !appearance-none rounded-md border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-none focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
-                        onChange={(e) =>
-                          handleInputChange(
-                            item.id,
-                            e.target.value,
-                            'powerValue'
-                          )
-                        }
-                      />
-                      <Label
-                        htmlFor={`power-${item.id}`}
-                        className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-sm text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
+                      <Button
+                        className="absolute -right-6 top-5 z-50 origin-[0] -translate-y-[37px] scale-50 transform text-md rounded-md duration-300"
+                        onClick={() => handleCleaning(item.id)}
+                        variant="gradientRed"
+                        size="sm"
                       >
-                        Potência (W)
-                      </Label>
+                        X
+                      </Button>
+                      <div className="grid w-full items-center gap-1.5">
+                        <div className="relative">
+                          <Input
+                            id={`power-${item.id}`}
+                            type="number"
+                            placeholder=" "
+                            className="remove-arrow border-1 peer block w-full !appearance-none rounded-md border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-none focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
+                            onChange={(e) =>
+                              handleInputChange(
+                                item.id,
+                                e.target.value,
+                                'powerValue'
+                              )
+                            }
+                          />
+                          <Label
+                            htmlFor={`power-${item.id}`}
+                            className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-sm text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
+                          >
+                            Potência (W)
+                          </Label>
+                        </div>
+                        <div className="relative">
+                          <Input
+                            id={`hours-${item.id}`}
+                            type="number"
+                            placeholder=" "
+                            className="remove-arrow border-1 peer block w-full !appearance-none rounded-md border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-none focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
+                            onChange={(e) =>
+                              handleInputChange(
+                                item.id,
+                                e.target.value,
+                                'hours'
+                              )
+                            }
+                          />
+                          <Label
+                            htmlFor={`hours-${item.id}`}
+                            className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-sm text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
+                          >
+                            Uso Diário (h)
+                          </Label>
+                        </div>
+                      </div>
                     </div>
-                    <div className="relative">
-                      <Input
-                        id={`hours-${item.id}`}
-                        type="number"
-                        placeholder=" "
-                        className="remove-arrow border-1 peer block w-full !appearance-none rounded-md border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-none focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
-                        onChange={(e) =>
-                          handleInputChange(item.id, e.target.value, 'hours')
-                        }
-                      />
-                      <Label
-                        htmlFor={`hours-${item.id}`}
-                        className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-sm text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
-                      >
-                        Uso Diário (h)
-                      </Label>
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  {item.selected ? (
-                    <>
-                      <h5 className="... max-w-[60vw] truncate text-[12px] tracking-tight max-[668px]:max-w-[50vw] max-[281px]:max-w-[40vw]">
-                        {item.equipName}
-                      </h5>
-                      {item.powerValueIsEditing ? (
-                        <>
-                          <div className="relative">
-                            <Input
-                              id={`power-${item.id}`}
-                              type="number"
-                              placeholder=" "
-                              className="remove-arrow border-1 peer block h-5 w-full !appearance-none rounded-md border-gray-300 bg-transparent px-2.5 pb-3 pt-3.5 text-[11px] text-gray-900 focus:border-none focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
-                              onChange={(e) =>
-                                handleInputChange(
-                                  item.id,
-                                  e.target.value,
-                                  'powerValue'
-                                )
-                              }
-                              defaultValue={item.powerValue}
-                            />
-                            <Label
-                              htmlFor={`power-${item.id}`}
-                              className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-[11px] text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
-                            >
-                              Potência (W)
-                            </Label>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="flex gap-1">
-                            <p className="text-[11px] max-[301px]:truncate max-[301px]:tracking-tight">
-                              Potência: {item.powerValue} Watts
-                            </p>
-                            <Button
-                              onClick={() =>
-                                handleEditing(item.id, 'powerValueIsEditing')
-                              }
-                              variant="ghost"
-                              size="sm"
-                              className="z-10 h-5 -translate-y-[2px] scale-100 transform rounded-lg bg-transparent !px-1 px-2 text-sm text-gray-500 dark:text-gray-400 peer-focus:dark:text-blue-500"
-                            >
-                              <Edit3 height="16" width="16" />
-                            </Button>
-                          </div>
-                        </>
-                      )}
-
-                      {item.hoursIsEditing ? (
-                        <>
-                          <div className="relative">
-                            <Input
-                              id={`hours-${item.id}`}
-                              type="number"
-                              placeholder=" "
-                              className="remove-arrow border-1 peer block h-5 w-full !appearance-none rounded-md border-gray-300 bg-transparent px-2.5 pb-3 pt-3.5 text-[11px] text-gray-900 focus:border-none focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
-                              onChange={(e) =>
-                                handleInputChange(
-                                  item.id,
-                                  e.target.value,
-                                  'hours'
-                                )
-                              }
-                              defaultValue={item.hours}
-                            />
-                            <Label
-                              htmlFor={`hours-${item.id}`}
-                              className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-[11px] text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
-                            >
-                              Uso Diário (h)
-                            </Label>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="flex gap-1">
-                            <p className="text-[11px] max-[301px]:truncate max-[301px]:tracking-tight">
-                              Uso Diário: {item.hours} Hora(s)
-                            </p>
-                            <Button
-                              onClick={() =>
-                                handleEditing(item.id, 'hoursIsEditing')
-                              }
-                              variant="ghost"
-                              size="sm"
-                              className="z-10 h-5 -translate-y-[2px] scale-100 transform rounded-lg bg-transparent !px-1 px-2 text-sm text-gray-500 dark:text-gray-400 peer-focus:dark:text-blue-500"
-                            >
-                              <Edit3 height="16" width="16" />
-                            </Button>
-                          </div>
-                        </>
-                      )}
-                    </>
                   ) : (
                     <>
-                      <DevicesList
-                        handleEquipList={handleEquipList}
-                        id={item.id}
-                      />
-                      <Button
-                        onClick={() => handleManual(item.id)}
-                        variant="gradientGhost"
-                        className="mt-[0.45rem] w-full"
-                      >
-                        Manualmente
-                      </Button>
+                      {item.selected ? (
+                        <div className="relative">
+                          <Button
+                            className="absolute -right-6 sm:-right-8 top-5 z-50 origin-[0] -translate-y-[43px] scale-50 transform text-md rounded-md duration-300"
+                            onClick={() => handleCleaning(item.id)}
+                            variant="gradientRed"
+                            size="sm"
+                          >
+                            X
+                          </Button>
+                          <h5 className="... max-w-[60vw] truncate text-[12px] tracking-tight max-[668px]:max-w-[50vw] max-[281px]:max-w-[40vw]">
+                            {item.equipName}
+                          </h5>
+                          {item.powerValueIsEditing ? (
+                            <>
+                              <div className="relative">
+                                <Input
+                                  id={`power-${item.id}`}
+                                  type="number"
+                                  placeholder=" "
+                                  className="remove-arrow border-1 peer block h-5 w-full !appearance-none rounded-md border-gray-300 bg-transparent px-2.5 pb-3 pt-3.5 text-[11px] text-gray-900 focus:border-none focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
+                                  onChange={(e) =>
+                                    handleInputChange(
+                                      item.id,
+                                      e.target.value,
+                                      'powerValue'
+                                    )
+                                  }
+                                  defaultValue={item.powerValue}
+                                />
+                                <Label
+                                  htmlFor={`power-${item.id}`}
+                                  className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-[11px] text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
+                                >
+                                  Potência (W)
+                                </Label>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <div className="flex gap-1">
+                                <p className="text-[11px] max-[301px]:truncate max-[301px]:tracking-tight">
+                                  Potência: {item.powerValue} Watts
+                                </p>
+                                <Button
+                                  onClick={() =>
+                                    handleEditing(
+                                      item.id,
+                                      'powerValueIsEditing'
+                                    )
+                                  }
+                                  variant="ghost"
+                                  size="sm"
+                                  className="z-10 h-5 -translate-y-[2px] scale-100 transform rounded-lg bg-transparent !px-1 px-2 text-sm text-gray-500 dark:text-gray-400 peer-focus:dark:text-blue-500"
+                                >
+                                  <Edit3 height="16" width="16" />
+                                </Button>
+                              </div>
+                            </>
+                          )}
+
+                          {item.hoursIsEditing ? (
+                            <>
+                              <div className="relative">
+                                <Input
+                                  id={`hours-${item.id}`}
+                                  type="number"
+                                  placeholder=" "
+                                  className="remove-arrow border-1 peer block h-5 w-full !appearance-none rounded-md border-gray-300 bg-transparent px-2.5 pb-3 pt-3.5 text-[11px] text-gray-900 focus:border-none focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
+                                  onChange={(e) =>
+                                    handleInputChange(
+                                      item.id,
+                                      e.target.value,
+                                      'hours'
+                                    )
+                                  }
+                                  defaultValue={item.hours}
+                                />
+                                <Label
+                                  htmlFor={`hours-${item.id}`}
+                                  className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-[11px] text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
+                                >
+                                  Uso Diário (h)
+                                </Label>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <div className="flex gap-1">
+                                <p className="text-[11px] max-[301px]:truncate max-[301px]:tracking-tight">
+                                  Uso Diário: {item.hours} Hora(s)
+                                </p>
+                                <Button
+                                  onClick={() =>
+                                    handleEditing(item.id, 'hoursIsEditing')
+                                  }
+                                  variant="ghost"
+                                  size="sm"
+                                  className="z-10 h-5 -translate-y-[2px] scale-100 transform rounded-lg bg-transparent !px-1 px-2 text-sm text-gray-500 dark:text-gray-400 peer-focus:dark:text-blue-500"
+                                >
+                                  <Edit3 height="16" width="16" />
+                                </Button>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      ) : (
+                        <>
+                          <DevicesList
+                            handleEquipList={handleEquipList}
+                            id={item.id}
+                          />
+                          <Button
+                            onClick={() => handleManual(item.id)}
+                            variant="gradientGhost"
+                            className="mt-[0.45rem] w-full"
+                          >
+                            Manualmente
+                          </Button>
+                        </>
+                      )}
                     </>
                   )}
-                </>
-              )}
-            </div>
-          </div>
-        )): null}
+                </div>
+              </div>
+            ))
+          : null}
       </div>
 
       <div className="space-y-2">
@@ -428,7 +477,12 @@ const DeviceCard = () => {
           <div className="space-y-6">
             <DisplayTotal />
 
-            <Button disabled={totalEnergy===0 || totalPower===0} onClick={() => router.push('/result')} variant="gradientSky" className="w-full" >
+            <Button
+              disabled={totalEnergy === 0 || totalPower === 0}
+              onClick={() => router.push('/result')}
+              variant="gradientSky"
+              className="w-full"
+            >
               Resultados
             </Button>
           </div>
