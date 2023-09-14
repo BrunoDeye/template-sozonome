@@ -39,9 +39,11 @@ export default function InvertersList() {
         Inversor Recomendado
       </h4>
       {isLoading ? (
-        <span className="mx-auto w-full text-center">
-          <LoadingDeye />
-        </span>
+        <div className="mx-auto my-auto flex min-h-[377px] w-full items-center justify-center text-center">
+          <div className="pb-12">
+            <LoadingDeye />
+          </div>
+        </div>
       ) : (
         <Tables
           variant="sky"
@@ -55,9 +57,11 @@ export default function InvertersList() {
       )}
 
       {isLoading ? (
-        <span className="mx-auto w-full text-center">
-          <LoadingDeye />
-        </span>
+        <div className="mx-auto my-auto flex min-h-[377px] w-full items-center justify-center text-center">
+          <div className="pb-12">
+            <LoadingDeye />
+          </div>
+        </div>
       ) : invertersList?.length === 1 ? null : (
         <>
           <h4 className="text-center text-xl font-bold tracking-tight sm:text-2xl">

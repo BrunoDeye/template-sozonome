@@ -74,8 +74,8 @@ export default function Body() {
             setSelectedBattery={setSelectedBattery}
           />
           {calculateBatteriesMutation.isLoading ? (
-            <div className="mx-auto w-full text-center">
-              <LoadingDeye />
+            <div className="mx-auto my-auto flex justify-center items-center min-h-[377px] w-full text-center">
+              <div className="pb-12"><LoadingDeye /></div>
             </div>
           ) : (
             <Tables
