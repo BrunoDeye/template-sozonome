@@ -290,6 +290,7 @@ const DeviceCard = () => {
                                 'powerValue'
                               )
                             }
+                            value={item.powerValue === 0 ? undefined : item.powerValue}
                           />
                           <Label
                             htmlFor={`power-${item.id}`}
@@ -311,6 +312,7 @@ const DeviceCard = () => {
                                 'hours'
                               )
                             }
+                            value={item.hours === 0 ? undefined : item.hours}
                           />
                           <Label
                             htmlFor={`hours-${item.id}`}
