@@ -52,6 +52,7 @@ const DeviceCard = () => {
       if (item.id === id) {
         return {
           ...item,
+          quantity: 1,
           powerValue: 0,
           energyValue: 0,
           hours: 0,
