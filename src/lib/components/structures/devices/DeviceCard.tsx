@@ -325,7 +325,7 @@ const DeviceCard = () => {
                       {item.selected ? (
                         <div className="relative">
                           <Button
-                            className="absolute -right-6 sm:-right-8 top-5 z-50 origin-[0] -translate-y-[43px] scale-50 transform text-md rounded-md duration-300"
+                            className="absolute -right-6 top-5 z-50 origin-[0] -translate-y-[43px] scale-50 transform text-md rounded-md duration-300"
                             onClick={() => handleCleaning(item.id)}
                             variant="gradientRed"
                             size="sm"
