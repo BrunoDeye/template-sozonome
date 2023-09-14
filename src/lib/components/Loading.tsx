@@ -3,7 +3,7 @@ export default function LoadingDeye() {
     <div className="flex h-full w-full items-center justify-center">
       <div id="loadingDiv" className="loadingdiv flex">
         <div className="w-embed">
-          <div className="loaderAnim">
+          <div className="loaderAnim dark:[--path:white]">
             <svg viewBox="0 0 80 80">
               <rect x="8" y="8" width="64" height="64"></rect>
             </svg>
