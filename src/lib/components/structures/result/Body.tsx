@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { useCalculateBatteriesMutation } from '@/services/ReactQueryHooks/useCalculateBatteriesMutation';
 import { useDataStore } from '@/store/data';
 import { useCalculateInvertersQuery } from '@/services/ReactQueryHooks/useCalculateInvertersQuery';
+import LoadingDeye from '../../Loading';
 
 export default function Body() {
   const [selectedBattery, setSelectedBattery] = useState<string | undefined>(
@@ -72,19 +73,25 @@ export default function Body() {
             selectedBattery={selectedBattery}
             setSelectedBattery={setSelectedBattery}
           />
-          <Tables
-            data={formatBattery(battery)}
-            description={
-              !battery.modelFullName || battery.modelFullName === '\u00A0'
-                ? ''
-                : (invertersList![0].model.includes('LP') &&
-                    battery.modelFullName.includes('BOS')) ||
-                  (invertersList![0].model.includes('HP') &&
-                    !battery.modelFullName.includes('BOS'))
-                ? 'Essa Bateria não é compatível com o seu Inversor Recomendado'
-                : ''
-            }
-          />
+          {calculateBatteriesMutation.isLoading ? (
+            <div className="mx-auto w-full text-center">
+              <LoadingDeye />
+            </div>
+          ) : (
+            <Tables
+              data={formatBattery(battery)}
+              description={
+                !battery.modelFullName || battery.modelFullName === '\u00A0'
+                  ? ''
+                  : (invertersList![0].model.includes('LP') &&
+                      battery.modelFullName.includes('BOS')) ||
+                    (invertersList![0].model.includes('HP') &&
+                      !battery.modelFullName.includes('BOS'))
+                  ? 'Essa Bateria não é compatível com o seu Inversor Recomendado'
+                  : ''
+              }
+            />
+          )}
         </FadeIn>
       </div>
     </>

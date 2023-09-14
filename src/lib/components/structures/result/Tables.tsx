@@ -74,7 +74,7 @@ export default function Tables({
   description = 'Esse Inversor só aceita Baterias do modelo: High Voltage(HV).',
 }: TableProps) {
   return (
-    <div className="w-full sm:p-4">
+    <div className="w-full sm:p-4 trasition-all">
       <div className={cn(tableVariants({ variant }))}>
         <Table>
           {description === '' ? null :<TableCaption className="px-4 pb-2 text-[10px] text-gray-600 dark:text-gray-100">
