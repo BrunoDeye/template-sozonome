@@ -87,7 +87,7 @@ export default function Body() {
                       battery.modelFullName.includes('BOS')) ||
                     (invertersList![0].model.includes('HP') &&
                       !battery.modelFullName.includes('BOS'))
-                  ? 'Essa Bateria não é compatível com o seu Inversor Recomendado'
+                  ? '⚠️ Essa Bateria não é compatível com o seu Inversor Recomendado'
                   : ''
               }
             />
