@@ -39,7 +39,6 @@ const GridOptions = () => {
   const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-    defaultValues: { grid: localStorage.getItem('calculator-storage') ? (grid as any) : undefined },
   });
 
   const onSubmit: SubmitHandler<z.infer<typeof FormSchema>> = (
@@ -56,6 +55,7 @@ const GridOptions = () => {
 
   useEffect(() => {
     setIsClient(true);
+    form.setValue( "grid", localStorage.getItem('calculator-storage') ? (grid as any) : undefined )
   }, []);
   return (
     <div className="isolate px-6 py-2 sm:py-4 lg:px-6">

@@ -6,6 +6,8 @@ import { cn } from '@/lib/utils';
 
 import '@/lib/styles/globals.css';
 import { Providers } from '@/services/ReactQuery/Providers.client';
+import { Suspense } from 'react';
+import Loading from './loading';
 
 const APP_NAME = 'Deye ◌ Calculadora Solar';
 
@@ -54,7 +56,10 @@ const RootLayout = ({ children }: RootLayoutProps) => {
       >
         <Providers>
           <Layout>
-            <div className="flex-1">{children}</div>
+            <Suspense fallback={<Loading />}>
+              <div className="flex-1">{children}</div>
+            </Suspense>
+            
           </Layout>
         </Providers>
       </body>
