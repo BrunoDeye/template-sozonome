@@ -264,7 +264,7 @@ const DeviceCard = () => {
                     Remover
                   </Button>
                 </div>
-                <div className="flex w-full flex-col items-start justify-center gap-[0.11rem]">
+                <div className="flex w-full flex-col justify-center gap-[0.11rem]">
                   {item.manual ? (
                     <div className="relative">
                       <Button
@@ -275,7 +275,7 @@ const DeviceCard = () => {
                       >
                         X
                       </Button>
-                      <div className="grid w-full items-center gap-1.5">
+                      <div className="grid w-full gap-1.5">
                         <div className="relative">
                           <Input
                             id={`power-${item.id}`}
