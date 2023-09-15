@@ -11,6 +11,8 @@ import {
   SelectValue,
 } from '@/lib/components/ui/select';
 import { useGetBatteries } from '@/services/ReactQueryHooks/useGetBatteries';
+import { useDataStore } from '@/store/data';
+import { useCalculateInvertersQuery } from '@/services/ReactQueryHooks/useCalculateInvertersQuery';
 
 type SelectBatteryProps = {
   selectedBattery: string | undefined;
@@ -24,6 +26,17 @@ export function SelectBattery({
   const { data: batteriesData, isLoading: batteriesDataIsLoading } =
     useGetBatteries();
 
+  const {
+    state: { grid, totalPower, place },
+  } = useDataStore();
+
+  const requestData = {
+    gridVoltage: grid || '220V (Fase + Fase + Terra/Neutro)',
+    tPower: totalPower || 1,
+  };
+  const { invertersList, isLoading, isError } =
+    useCalculateInvertersQuery(requestData);
+  console.log(invertersList);
   // console.log(batteriesData);
   // console.log(selectedBattery)
   return (
@@ -35,14 +48,38 @@ export function SelectBattery({
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Baterias</SelectLabel>
-            {batteriesDataIsLoading ? (
-              <span>loading</span>
+            {batteriesDataIsLoading || isLoading || !invertersList ? (
+              <span>Carregando...</span>
             ) : (
-              batteriesData?.map((batteryData) => (
-                <SelectItem key={batteryData.model} value={batteryData.model}>
-                  {batteryData.model}
-                </SelectItem>
-              ))
+              batteriesData
+                ?.filter(
+                  (battery) =>
+                    (battery.model.includes('BOS') &&
+                      invertersList!
+                        .filter((inverter) =>
+                          place === 'Indústria'
+                            ? inverter.model.includes('HP')
+                            : inverter.model.includes('LP')
+                        )[0]
+                        .model.includes('HP')) ||
+                    (!battery.model.includes('BOS') &&
+                      invertersList!
+                        .filter((inverter) =>
+                          place === 'Indústria'
+                            ? inverter.model.includes('HP')
+                            : inverter.model.includes('LP')
+                        )[0]
+                        .model.includes('LP'))
+                )
+                .map((batteryData) => (
+                  <SelectItem
+                    className="w-full"
+                    key={batteryData.model}
+                    value={batteryData.model}
+                  >
+                    {batteryData.model}
+                  </SelectItem>
+                ))
             )}
           </SelectGroup>
         </SelectContent>

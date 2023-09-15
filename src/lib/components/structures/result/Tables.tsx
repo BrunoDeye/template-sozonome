@@ -10,8 +10,10 @@ import {
 import { cva } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 import type { VariantProps } from 'class-variance-authority';
+import Image, { StaticImageData } from 'next/image';
+import InversorImg from '@/images/SUN-6K-SG04LP3-US-LV.png'
 
-const tableVariants = cva('', {
+const tableVariants = cva('flex items-center flex-wrap sm:flex-nowrap justify-center py-2 px-2', {
   variants: {
     variant: {
       default:
@@ -65,22 +67,26 @@ type TableData = {
 
 type TableProps = VariantProps<typeof tableVariants> & {
   data: TableData[];
-  description?: string;
+  srcImg?: string;
 };
 
-export default function Tables({
-  variant,
-  data = defaultData,
-  description = 'Esse Inversor só aceita Baterias do modelo: High Voltage(HV).',
-}: TableProps) {
+export default function Tables({ variant, data = defaultData, srcImg = '/images/SUN-6K-SG04LP3-US-LV.png' }: TableProps) {
   return (
-    <div className="w-full sm:p-4 trasition-all">
+    <div className="trasition-all w-full sm:p-4">
       <div className={cn(tableVariants({ variant }))}>
+        <div className='min-w-[210px] py-2 sm:py-0' >
+          <Image
+            className="clip-your-needful-style dark:[--shadow-inversor:#333132]"
+            height={222}
+            width={400}
+            alt="Deye logo"
+            src={
+              srcImg
+            }
+          />
+        </div>
+
         <Table>
-          {description === '' ? null :<TableCaption className="px-4 pb-2 text-[10px] text-gray-600 dark:text-gray-100">
-            {description}
-          </TableCaption>}
-          
           <TableHeader>
             <TableRow className="border-gray-200 dark:border-sky-300">
               <TableHead className="w-[100px] text-gray-600 dark:font-bold dark:text-sky-100">

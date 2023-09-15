@@ -39,7 +39,6 @@
 }
 
 @layer base {
-
   #loadingDiv {
     display: flex;
     top: 0;
@@ -86,7 +85,7 @@
   }
 
   .loaderAnim:before {
-    content: "";
+    content: '';
     width: 10px;
     height: 10px;
     position: absolute;
@@ -143,7 +142,6 @@
       transform: translate(-18px, -4px);
     }
   }
-
 
   :root {
     --background: 0 0% 100%;
@@ -216,5 +214,17 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .clip-your-needful-style {
+    max-width: 192px;
+    min-width: 192px;
+    min-height: 222px;
+    max-height: 222px;
+    object-fit: cover;
+    --shadow-inversor: gray;
+    filter: drop-shadow(15px 10px 4px var(--shadow-inversor));
   }
 }

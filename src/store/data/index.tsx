@@ -3,14 +3,27 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 
 type ActionsProps = {
   addGrid: (grid: string) => void;
+  addPlace: (place: string) => void;
   addTotalPower: (totalPower: number) => void;
   addTotalEnergy: (totalEnergy: number) => void;
   addFC: (FC: number) => void;
+  reset: () => void;
+};
+
+type StateProps = {
+  state: {
+    grid: string;
+    place: string;
+    totalEnergy: number;
+    totalPower: number;
+    FC: number;
+  };
 };
 
 type StoreProps = {
   state: {
     grid: string;
+    place: string;
     totalEnergy: number;
     totalPower: number;
     FC: number;
@@ -18,11 +31,16 @@ type StoreProps = {
   actions: ActionsProps;
 };
 
+const initialState: StateProps = {
+  state: { grid: '', place: '', totalEnergy: 0, totalPower: 0, FC: 94 },
+};
+
 export const useDataStore = create(
   persist<StoreProps>(
     (set, get) => ({
       state: {
         grid: '',
+        place: '',
         totalEnergy: 0,
         totalPower: 0,
         FC: 94,
@@ -31,6 +49,10 @@ export const useDataStore = create(
         addGrid: (grid) =>
           set((store) => ({
             state: { ...store.state, grid: grid },
+          })),
+        addPlace: (place) =>
+          set((store) => ({
+            state: { ...store.state, place: place },
           })),
         addTotalPower: (totalPower) =>
           set((store) => ({
@@ -44,6 +66,9 @@ export const useDataStore = create(
           set((store) => ({
             state: { ...store.state, FC: FC },
           })),
+        reset: () => {
+          set(initialState);
+        },
       },
     }),
     {
@@ -55,15 +80,18 @@ export const useDataStore = create(
           : {
               state: {
                 grid: (persistedState as StoreProps).state.grid,
+                place: (persistedState as StoreProps).state.place,
                 totalEnergy: currentState.state.totalEnergy,
                 totalPower: currentState.state.totalPower,
                 FC: (persistedState as StoreProps).state.FC,
               },
               actions: {
                 addGrid: currentState.actions.addGrid,
+                addPlace: currentState.actions.addPlace,
                 addTotalPower: currentState.actions.addTotalPower,
                 addTotalEnergy: currentState.actions.addTotalEnergy,
                 addFC: currentState.actions.addFC,
+                reset: currentState.actions.reset,
               },
             },
     }

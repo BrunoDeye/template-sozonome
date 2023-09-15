@@ -33,7 +33,7 @@ const initialState = [
 const DeviceCard = () => {
   const router = useRouter();
   const {
-    state: { FC, totalPower, totalEnergy },
+    state: { FC, totalPower, totalEnergy, place },
     actions: { addTotalEnergy, addTotalPower, addFC },
   } = useDataStore();
 
@@ -233,7 +233,7 @@ const DeviceCard = () => {
     <div id="start" className="isolate flex flex-col px-6 py-4 sm:py-6 lg:px-6">
       <div className="mx-auto max-w-4xl text-center">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Equipamentos em Sua Residência
+          Equipamentos em Sua {isClient ? place : null}
         </h2>
         <p className="mt-2 text-sm leading-8">
           Selecione o equipamento desejado a partir das opções do catálogo e
@@ -456,7 +456,7 @@ const DeviceCard = () => {
 
       <div className="space-y-2">
         <div className="grid w-full items-center gap-1.5">
-          <Label htmlFor="FC" className="flex items-start gap-1">
+          <Label htmlFor="FC" className="flex sm:w-auto sm:mx-auto items-start gap-1">
             FC (Fator de Correção)
             <TCDescription />
           </Label>
@@ -465,26 +465,26 @@ const DeviceCard = () => {
             placeholder="94"
             value={FC}
             onChange={(e) => addFC(parseFloat(e.target.value) || 0)}
-            className="focus:border-none"
+            className="focus:border-none sm:w-auto sm:mx-auto"
           />
         </div>
-        <div className="space-y-6">
+        <div className="space-y-6 text-center">
           <Button
             variant="gradientDarkBlue"
-            className="w-full"
+            className="w-full sm:w-auto sm:mx-auto"
             onClick={handleNewItem}
           >
             Adicionar
           </Button>
-          <Separator />
-          <div className="space-y-6">
+          <Separator className='sm:w-[400px] sm:mx-auto' />
+          <div className="space-y-6 text-center">
             <DisplayTotal />
 
             <Button
               disabled={totalEnergy === 0 || totalPower === 0}
               onClick={() => router.push('/result')}
               variant="gradientSky"
-              className="w-full"
+              className="w-full sm:w-auto sm:mx-auto"
             >
               Resultados
             </Button>

@@ -26,6 +26,7 @@ import {
 import { useState } from 'react';
 import { devices } from '@/utils/constants';
 import { removeAccents } from '@/utils/functions';
+import { useDataStore } from '@/store/data';
 
 type DeviceListProps = {
   handleEquipList: (
@@ -40,6 +41,9 @@ type DeviceListProps = {
 const DevicesList = ({ handleEquipList, id }: DeviceListProps) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('');
+  const {
+    state: { place },
+  } = useDataStore();
 
   const normalizedDevices = devices.map((device) => ({
     ...device,
@@ -72,11 +76,14 @@ const DevicesList = ({ handleEquipList, id }: DeviceListProps) => {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Catálogo de Dispositivos Domésticos</DialogTitle>
+          <DialogTitle>
+            Catálogo de Dispositivos{' '}
+            {place === 'Residência' ? 'Domésticos' : 'Industriais'}
+          </DialogTitle>
           <DialogDescription className="flex justify-center">
-            A seguir, destacamos os principais equipamentos comuns nas
-            residências brasileiras, acompanhados por estimativas de sua
-            Potência e Uso Diário.
+            A seguir, destacamos os principais equipamentos comuns nas{' '}
+            {place === 'Residência' ? 'residências' : 'industrias'} brasileiras,
+            acompanhados por estimativas de sua Potência e Uso Diário.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -89,12 +96,13 @@ const DevicesList = ({ handleEquipList, id }: DeviceListProps) => {
                 className="mx-auto w-full justify-between"
               >
                 {value
-                  ? normalizedDevices.find((device) =>
+                
+                  ? <span className='truncate max-[300px]:max-w-[60vw] max-[340px]:max-w-[65vw]  max-[450px]:max-w-[70vw] max-w-[75vw] sm:max-w-[80vw]'>{normalizedDevices.find((device) =>
                       device.value
                         .toLowerCase()
                         .replace(/\s+/g, '')
                         .includes(value.toLowerCase().replace(/\s+/g, ''))
-                    )?.label
+                    )?.label}</span>
                   : 'Escolha um equipamento...'}
                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
@@ -147,7 +155,7 @@ const DevicesList = ({ handleEquipList, id }: DeviceListProps) => {
               disabled={value === ''}
               onClick={handleClick}
               variant="gradientSky"
-              className="w-full"
+              className="w-auto mx-auto"
               type="submit"
             >
               Confirmar

@@ -3,6 +3,7 @@ import Tables from './Tables';
 import { useDataStore } from '@/store/data';
 import { useCalculateInvertersQuery } from '@/services/ReactQueryHooks/useCalculateInvertersQuery';
 import LoadingDeye from '../../Loading';
+import { useEffect } from 'react';
 
 export const inverters = [
   {
@@ -19,7 +20,7 @@ export const inverters = [
 
 export default function InvertersList() {
   const {
-    state: { grid, totalPower },
+    state: { grid, totalPower,place },
   } = useDataStore();
 
   const requestData = {
@@ -28,6 +29,8 @@ export default function InvertersList() {
   };
   const { invertersList, isLoading, isError } =
     useCalculateInvertersQuery(requestData);
+
+    
 
   return isError ? (
     <span className="mx-auto flex w-full flex-col text-center">
@@ -47,12 +50,7 @@ export default function InvertersList() {
       ) : (
         <Tables
           variant="sky"
-          data={formatInverter(invertersList![0])}
-          description={
-            invertersList![0].model.includes('LP')
-              ? 'Esse Inversor só aceita Baterias do modelo: Low Voltage(LV).'
-              : 'Esse Inversor só aceita Baterias do modelo: High Voltage(HV).'
-          }
+          data={formatInverter(invertersList!.filter((inverter) => place==='Indústria' ? inverter.model.includes('HP') : inverter.model.includes('LP') )[0])}
         />
       )}
 
@@ -62,21 +60,17 @@ export default function InvertersList() {
             <LoadingDeye />
           </div>
         </div>
-      ) : invertersList?.length === 1 ? null : (
+      ) : invertersList!.filter((inverter) => place==='Indústria' ? inverter.model.includes('HP'): inverter.model.includes('LP') ).length === 1 ? null : (
         <>
           <h4 className="text-center text-xl font-bold tracking-tight sm:text-2xl">
             Outras Opções de Inversores
           </h4>
-          {invertersList?.slice(1).map((inverter) => (
+          {invertersList!.filter((inverter) => place==='Indústria' ? inverter.model.includes('HP') : inverter.model.includes('LP') )?.slice(1).map((inverter) => (
             <div key={inverter.model}>
               <Tables
                 variant="darkBlue"
                 data={formatInverter(inverter)}
-                description={
-                  inverter.model.includes('LP')
-                    ? 'Esse Inversor só aceita Baterias do modelo: Low Voltage(LV).'
-                    : 'Esse Inversor só aceita Baterias do modelo: High Voltage(HV).'
-                }
+                // srcImg={`/images/${inverter.model.replace(/\//g, '')}.png`}
               />
             </div>
           ))}

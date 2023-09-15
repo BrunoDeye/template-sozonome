@@ -10,6 +10,9 @@ import { useCalculateBatteriesMutation } from '@/services/ReactQueryHooks/useCal
 import { useDataStore } from '@/store/data';
 import { useCalculateInvertersQuery } from '@/services/ReactQueryHooks/useCalculateInvertersQuery';
 import LoadingDeye from '../../Loading';
+import RecalculateButton from './RecalculateButton';
+import BatteryImg from '@/images/RW-M5.3.png';
+import BatteryImg2 from '@/images/BOS-G.png';
 
 export default function Body() {
   const [selectedBattery, setSelectedBattery] = useState<string | undefined>(
@@ -41,21 +44,23 @@ export default function Body() {
   }, []);
 
   useEffect(() => {
-    const requestData = {
-      model: selectedBattery as string,
-      tEnergy: totalEnergy || 1,
-      fc: FC / 100 || 0.94,
-    };
-
-    calculateBatteriesMutation.mutate(requestData, {
-      onSuccess: (data) => {
-        setBattery(data);
-        // console.log(data);
-      },
-      onError: (error, variables, context) => {
-        console.log(error);
-      },
-    });
+    if (selectedBattery) {
+      const requestData = {
+        model: selectedBattery as string,
+        tEnergy: totalEnergy || 1,
+        fc: FC / 100 || 0.94,
+      };
+      console.log(requestData);
+      calculateBatteriesMutation.mutate(requestData, {
+        onSuccess: (data) => {
+          setBattery(data);
+          // console.log(data);
+        },
+        onError: (error, variables, context) => {
+          console.log(error);
+        },
+      });
+    }
   }, [selectedBattery]);
 
   return (
@@ -74,24 +79,22 @@ export default function Body() {
             setSelectedBattery={setSelectedBattery}
           />
           {calculateBatteriesMutation.isLoading ? (
-            <div className="mx-auto my-auto flex justify-center items-center min-h-[377px] w-full text-center">
-              <div className="pb-12"><LoadingDeye /></div>
+            <div className="mx-auto my-auto flex min-h-[377px] w-full items-center justify-center text-center">
+              <div className="pb-12">
+                <LoadingDeye />
+              </div>
             </div>
-          ) : (
+          ) : battery.modelFullName !== '\u00A0' ? (
             <Tables
+              srcImg={`/images/${battery.modelFullName}.png`}
               data={formatBattery(battery)}
-              description={
-                !battery.modelFullName || battery.modelFullName === '\u00A0'
-                  ? ''
-                  : (invertersList![0].model.includes('LP') &&
-                      battery.modelFullName.includes('BOS')) ||
-                    (invertersList![0].model.includes('HP') &&
-                      !battery.modelFullName.includes('BOS'))
-                  ? '⚠️ Essa Bateria não é compatível com o seu Inversor Recomendado'
-                  : ''
-              }
             />
+          ) : (
+            null
           )}
+          <div className="text-center">
+            <RecalculateButton />
+          </div>
         </FadeIn>
       </div>
     </>

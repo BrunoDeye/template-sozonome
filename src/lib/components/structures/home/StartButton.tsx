@@ -2,32 +2,50 @@
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import { Button } from '../../ui/button';
 import Link from 'next/link';
+import { useDataStore } from '@/store/data';
+import { useEffect, useState } from 'react';
 
 const StartButton = () => {
   const [savedDevicesList, setSavedDevicesList, clearLocalStorage] =
     useLocalStorage('devices-list');
+  const {
+    actions: { reset },
+  } = useDataStore();
   function handleCleaning() {
     clearLocalStorage();
-    localStorage.removeItem('calculator-storage')
+    useDataStore.persist.clearStorage();
+    reset();
+    localStorage.removeItem('calculator-storage');
   }
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <div className="grid justify-items-center gap-2.5">
       <div className="flex items-center gap-2">
-        {savedDevicesList() ? (
-          <>
+        {isClient ? (
+          savedDevicesList() || localStorage.getItem('calculator-storage') ? (
+            <>
+              <Button asChild variant="gradientBlue">
+                <Link href="/ambiente">Continuar Onde Parou</Link>
+              </Button>
+              <Button
+                asChild
+                onClick={() => handleCleaning()}
+                variant="gradientSky"
+              >
+                <Link href="/ambiente">Começar De Novo</Link>
+              </Button>
+            </>
+          ) : (
             <Button asChild variant="gradientBlue">
-              <Link href="/grid">Continuar Onde Parou</Link>
+              <Link href="/ambiente">Começar</Link>
             </Button>
-            <Button asChild onClick={() => handleCleaning() } variant="gradientSky">
-              <Link href="/grid">Começar De Novo</Link>
-            </Button>
-          </>
-        ) : (
-          <Button asChild variant="gradientBlue">
-            <Link href="/grid">Começar</Link>
-          </Button>
-        )}
+          )
+        ) : null}
       </div>
     </div>
   );

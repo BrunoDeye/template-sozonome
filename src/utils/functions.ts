@@ -19,7 +19,24 @@ type Inverter = {
   quantity: number;
 };
 
-export const formatInverter = (inverter: Inverter) => [
+export const formatInverter = (inverter: Inverter) => !inverter.model || inverter.model === '\u00A0' ? [
+  {
+    attribute: 'Inversor',
+    value: '\u00A0',
+  },
+  {
+    attribute: 'Tipo',
+    value: '\u00A0',
+  },
+  {
+    attribute: 'Potência[W]',
+    value: '\u00A0',
+  },
+  {
+    attribute: 'Quantidade',
+    value: '\u00A0',
+  },
+] : [
   {
     attribute: 'Inversor',
     value: inverter.model,
