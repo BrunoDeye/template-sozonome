@@ -78,6 +78,7 @@ export default function Tables({ variant, data = defaultData, srcImg = '/images/
           <Image
             className="clip-your-needful-style dark:[--shadow-inversor:#333132]"
             height={222}
+            placeholder="blur"
             width={400}
             alt="Deye logo"
             src={
