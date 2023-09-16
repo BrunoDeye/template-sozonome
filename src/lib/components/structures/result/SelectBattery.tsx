@@ -73,7 +73,7 @@ export function SelectBattery({
                 )
                 .map((batteryData) => (
                   <SelectItem
-                    className="w-full"
+                    className="w-full z-50"
                     key={batteryData.model}
                     value={batteryData.model}
                   >
