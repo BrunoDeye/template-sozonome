@@ -70,7 +70,7 @@ type TableProps = VariantProps<typeof tableVariants> & {
   srcImg?: string;
 };
 
-export default function Tables({ variant, data = defaultData, srcImg = '/images/SUN-6K-SG04LP3-US-LV.png' }: TableProps) {
+export default function Tables({ variant, data = defaultData, srcImg = '/images/SUN-6K-SG04LP3-US.png' }: TableProps) {
   return (
     <div className="trasition-all w-full sm:p-4">
       <div className={cn(tableVariants({ variant }))}>
