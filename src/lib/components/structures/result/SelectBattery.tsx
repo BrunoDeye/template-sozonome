@@ -39,13 +39,16 @@ export function SelectBattery({
   console.log(invertersList);
   // console.log(batteriesData);
   // console.log(selectedBattery)
+  const handleClick = (e) => {
+    e.stopPropagation();
+  };
   return (
     <div className="p-0 sm:p-4">
       <Select onValueChange={setSelectedBattery} defaultValue={selectedBattery}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Selecione Uma Bateria" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent onClick={handleClick}>
           <SelectGroup>
             <SelectLabel>Baterias</SelectLabel>
             {batteriesDataIsLoading || isLoading || !invertersList ? (
