@@ -48,7 +48,7 @@ export function SelectBattery({
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Selecione Uma Bateria" />
         </SelectTrigger>
-        <SelectContent onClick={handleClick}>
+        <SelectContent onTouchStart={handleClick}>
           <SelectGroup>
             <SelectLabel>Baterias</SelectLabel>
             {batteriesDataIsLoading || isLoading || !invertersList ? (
