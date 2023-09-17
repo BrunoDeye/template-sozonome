@@ -39,7 +39,7 @@ export function SelectBattery({
   console.log(invertersList);
   // console.log(batteriesData);
   // console.log(selectedBattery)
-  const handleClick = (e) => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
   };
   return (
