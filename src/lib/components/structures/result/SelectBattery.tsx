@@ -39,7 +39,7 @@ export function SelectBattery({
   console.log(invertersList);
   // console.log(batteriesData);
   // console.log(selectedBattery)
-  const handleClick = (e: React.TouchEventHandler<HTMLDivElement>) => {
+  const handleClick = (e: React.TouchEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
   return (
