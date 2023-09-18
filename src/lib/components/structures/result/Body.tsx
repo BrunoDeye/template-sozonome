@@ -13,6 +13,7 @@ import LoadingDeye from '../../Loading';
 import RecalculateButton from './RecalculateButton';
 import BatteryImg from '@/images/RW-M5.3.png';
 import BatteryImg2 from '@/images/BOS-G.png';
+import { ImageModelName, mapImages } from '@/utils/constants';
 
 export default function Body() {
   const [selectedBattery, setSelectedBattery] = useState<string | undefined>(
@@ -86,11 +87,11 @@ export default function Body() {
             </div>
           ) : battery.modelFullName !== '\u00A0' ? (
             <Tables
-              srcImg={`/images/${battery.modelFullName}.png`}
+              srcImg={mapImages(battery.modelFullName as ImageModelName)}
               data={formatBattery(battery)}
             />
           ) : (
-            null
+            <div className='h-[100px]'>{'\u00A0'}</div>
           )}
           <div className="text-center">
             <RecalculateButton />

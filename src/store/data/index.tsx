@@ -81,8 +81,8 @@ export const useDataStore = create(
               state: {
                 grid: (persistedState as StoreProps).state.grid,
                 place: (persistedState as StoreProps).state.place,
-                totalEnergy: currentState.state.totalEnergy,
-                totalPower: currentState.state.totalPower,
+                totalEnergy: (persistedState as StoreProps).state.totalEnergy,
+                totalPower: (persistedState as StoreProps).state.totalPower,
                 FC: (persistedState as StoreProps).state.FC,
               },
               actions: {

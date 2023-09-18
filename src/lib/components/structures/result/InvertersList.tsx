@@ -4,6 +4,7 @@ import { useDataStore } from '@/store/data';
 import { useCalculateInvertersQuery } from '@/services/ReactQueryHooks/useCalculateInvertersQuery';
 import LoadingDeye from '../../Loading';
 import { useEffect } from 'react';
+import { ImageModelName, mapImages } from '@/utils/constants';
 
 export const inverters = [
   {
@@ -20,7 +21,7 @@ export const inverters = [
 
 export default function InvertersList() {
   const {
-    state: { grid, totalPower,place },
+    state: { grid, totalPower, place },
   } = useDataStore();
 
   const requestData = {
@@ -29,8 +30,6 @@ export default function InvertersList() {
   };
   const { invertersList, isLoading, isError } =
     useCalculateInvertersQuery(requestData);
-
-    
 
   return isError ? (
     <span className="mx-auto flex w-full flex-col text-center">
@@ -50,7 +49,18 @@ export default function InvertersList() {
       ) : (
         <Tables
           variant="sky"
-          data={formatInverter(invertersList!.filter((inverter) => place==='Indústria' ? inverter.model.includes('HP') : inverter.model.includes('LP') )[0])}
+          data={formatInverter(
+            invertersList!.filter((inverter) =>
+              invertersList![0].model.includes('HP')
+                ? inverter.model.includes('HP')
+                : inverter.model.includes('LP')
+            )[0]
+          )}
+          srcImg={mapImages(invertersList!.filter((inverter) =>
+            invertersList![0].model.includes('HP')
+              ? inverter.model.includes('HP')
+              : inverter.model.includes('LP')
+          )[0].model as ImageModelName)}
         />
       )}
 
@@ -60,20 +70,32 @@ export default function InvertersList() {
             <LoadingDeye />
           </div>
         </div>
-      ) : invertersList!.filter((inverter) => place==='Indústria' ? inverter.model.includes('HP'): inverter.model.includes('LP') ).length === 1 ? null : (
+      ) : invertersList!.filter((inverter) =>
+          invertersList![0].model.includes('HP')
+            ? inverter.model.includes('HP')
+            : inverter.model.includes('LP')
+        ).length === 1 ? null : (
         <>
           <h4 className="text-center text-xl font-bold tracking-tight sm:text-2xl">
             Outras Opções de Inversores
           </h4>
-          {invertersList!.filter((inverter) => place==='Indústria' ? inverter.model.includes('HP') : inverter.model.includes('LP') )?.slice(1).map((inverter) => (
-            <div key={inverter.model}>
-              <Tables
-                variant="darkBlue"
-                data={formatInverter(inverter)}
-                // srcImg={`/images/${inverter.model.replace(/\//g, '')}.png`}
-              />
-            </div>
-          ))}
+          {invertersList!
+            .filter((inverter) =>
+            invertersList![0].model.includes('HP')
+                ? inverter.model.includes('HP')
+                : inverter.model.includes('LP')
+            )
+            ?.slice(1)
+            .map((inverter) => (
+              <div key={inverter.model}>
+                <Tables
+                  variant="darkBlue"
+                  data={formatInverter(inverter)}
+                  // srcImg={`/images/${inverter.model.replace(/\//g, '')}.png`}
+                  srcImg={mapImages(inverter.model as ImageModelName)}
+                />
+              </div>
+            ))}
         </>
       )}
     </div>

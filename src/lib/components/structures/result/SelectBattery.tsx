@@ -58,20 +58,10 @@ export function SelectBattery({
                 ?.filter(
                   (battery) =>
                     (battery.model.includes('BOS') &&
-                      invertersList!
-                        .filter((inverter) =>
-                          place === 'Indústria'
-                            ? inverter.model.includes('HP')
-                            : inverter.model.includes('LP')
-                        )[0]
+                      invertersList![0]
                         .model.includes('HP')) ||
                     (!battery.model.includes('BOS') &&
-                      invertersList!
-                        .filter((inverter) =>
-                          place === 'Indústria'
-                            ? inverter.model.includes('HP')
-                            : inverter.model.includes('LP')
-                        )[0]
+                      invertersList![0]
                         .model.includes('LP'))
                 )
                 .map((batteryData) => (

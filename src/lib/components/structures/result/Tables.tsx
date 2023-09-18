@@ -1,3 +1,4 @@
+'use client'
 import {
   Table,
   TableBody,
@@ -12,15 +13,17 @@ import { cn } from '@/lib/utils';
 import type { VariantProps } from 'class-variance-authority';
 import Image, { StaticImageData } from 'next/image';
 import InversorImg from '@/images/SUN-6K-SG04LP3-US-LV.png'
+import { mapImages } from '@/utils/constants';
+import { useState } from 'react';
 
 const tableVariants = cva('flex items-center flex-wrap sm:flex-nowrap justify-center py-2 px-2', {
   variants: {
     variant: {
       default:
-        'rounded-lg border bg-gradient-to-br from-gray-100 to-blue-200 font-semibold text-sky-600 shadow-lg hover:from-gray-200 hover:to-sky-400 hover:text-sky-700 dark:border-sky-500 dark:from-blue-600 dark:to-blue-400 dark:!text-white dark:shadow-md dark:shadow-sky-600 dark:hover:from-blue-700 dark:hover:to-indigo-300 dark:hover:!text-sky-100',
-      sky: 'rounded-lg border bg-gradient-to-br from-gray-100 to-sky-200 font-semibold text-sky-600 shadow-lg hover:from-gray-200 hover:to-sky-400 hover:text-sky-700 dark:border-sky-500 dark:from-sky-600 dark:to-sky-400 dark:!text-white dark:shadow-md dark:shadow-sky-600 dark:hover:from-sky-700 dark:hover:to-blue-300 dark:hover:!text-sky-100',
+        'rounded-lg border-none bg-gradient-to-br from-gray-100 to-blue-200 font-semibold text-sky-600 shadow-xl hover:from-gray-200 hover:to-sky-400 hover:text-sky-700 dark:border-sky-500 dark:from-blue-600 dark:to-blue-400 dark:!text-white dark:shadow-lg dark:shadow-sky-700 dark:hover:from-blue-700 dark:hover:to-indigo-300 dark:hover:!text-sky-100',
+      sky: 'rounded-lg border-none bg-gradient-to-br from-gray-100 to-sky-200 font-semibold text-sky-600 shadow-xl hover:from-gray-200 hover:to-sky-400 hover:text-sky-700 dark:border-sky-500 dark:from-sky-600 dark:to-sky-400 dark:!text-white dark:shadow-lg dark:shadow-sky-700 dark:hover:from-sky-700 dark:hover:to-blue-300 dark:hover:!text-sky-100',
       darkBlue:
-        'rounded-lg border bg-gradient-to-br from-gray-100 to-blue-400 font-semibold text-blue-600 shadow-lg hover:from-gray-200 hover:to-blue-600 hover:!text-blue-800 hover:text-sky-700 dark:border-sky-500 dark:from-blue-800 dark:to-sky-600 dark:!text-white dark:shadow-md dark:shadow-sky-600 dark:hover:from-blue-700 dark:hover:to-blue-300 dark:hover:!text-sky-100',
+        'rounded-lg border-none bg-gradient-to-br from-gray-100 to-blue-400 font-semibold text-blue-600 shadow-xl hover:from-gray-200 hover:to-blue-600 hover:!text-blue-800 hover:text-sky-700 dark:border-sky-500 dark:from-blue-800 dark:to-sky-600 dark:!text-white dark:shadow-lg dark:shadow-sky-700 dark:hover:from-blue-700 dark:hover:to-blue-300 dark:hover:!text-sky-100',
     },
   },
   defaultVariants: {
@@ -67,23 +70,25 @@ type TableData = {
 
 type TableProps = VariantProps<typeof tableVariants> & {
   data: TableData[];
-  srcImg?: string;
+  srcImg?: StaticImageData;
 };
 
-export default function Tables({ variant, data = defaultData, srcImg = '/images/SUN-6K-SG0104LP3-US.png' }: TableProps) {
+export default function Tables({ variant, data = defaultData, srcImg = mapImages('SUN-6K-SG01/04LP3-US') }: TableProps) {
+  const [loaded, setLoaded] = useState(false);
+  
   return (
     <div className="trasition-all w-full sm:p-4">
       <div className={cn(tableVariants({ variant }))}>
-        <div className='min-w-[210px] py-2 sm:py-0' >
+        <div className='min-w-[210px] py-4' >
           <Image
-            className="clip-your-needful-style dark:[--shadow-inversor:#333132]"
+            className={`${loaded ? 'unblur' : ''} clip-your-needful-style dark:[--shadow-inversor:#333132] mx-auto`}
             height={222}
-            placeholder="blur"
             width={400}
             alt="Deye logo"
             src={
               srcImg
             }
+            onLoadingComplete={() => setLoaded(true)}
           />
         </div>
 

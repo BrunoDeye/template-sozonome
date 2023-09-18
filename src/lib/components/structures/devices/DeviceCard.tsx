@@ -115,7 +115,11 @@ const DeviceCard = () => {
   ) => {
     const updatedItems = items.map((item) => {
       if (item.id === id) {
-        return { ...item, [fieldName]: parseFloat(newValue) };
+        return {
+          ...item,
+          [fieldName]:
+            fieldName === 'equipName' ? newValue : parseFloat(newValue),
+        };
       }
       return item;
     });
@@ -240,7 +244,7 @@ const DeviceCard = () => {
           especifique a quantidade desejada, ou preencha manualmente se
           necessário.
         </p>
-        <p className="leading-2 mt-1 text-[11px] font-thin">
+        <p className="leading-2 mt-1 text-[12px] font-thin">
           Os valores de Potência e Uso Diário são estimativas baseadas no
           consumo médio brasileiro.
         </p>
@@ -269,20 +273,44 @@ const DeviceCard = () => {
                   {item.manual ? (
                     <div className="relative">
                       <Button
-                        className="absolute -right-6 top-5 z-50 origin-[0] -translate-y-[37px] scale-50 transform text-md rounded-md duration-300"
+                        className="text-md absolute -right-6 top-5 z-50 origin-[0] -translate-y-[37px] scale-50 transform rounded-md duration-300"
                         onClick={() => handleCleaning(item.id)}
                         variant="gradientRed"
                         size="sm"
                       >
                         X
                       </Button>
-                      <div className="grid w-full gap-1.5">
+                      <div className="grid w-full gap-[0.2rem]">
+                        <div className="relative">
+                          <Input
+                            id={`equipName-${item.id}`}
+                            type="text"
+                            placeholder=" "
+                            className="remove-arrow border-1 peer block h-5 w-full !appearance-none rounded-md border-gray-300 bg-transparent px-2.5 pb-2.5 pt-3.5 text-sm font-bold text-gray-900 focus:border-none focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
+                            onChange={(e) =>
+                              handleInputChange(
+                                item.id,
+                                e.target.value,
+                                'equipName'
+                              )
+                            }
+                            value={
+                              item.equipName === '' ? undefined : item.equipName
+                            }
+                          />
+                          <Label
+                            htmlFor={`equipName-${item.id}`}
+                            className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
+                          >
+                            Nome do Equipamento
+                          </Label>
+                        </div>
                         <div className="relative">
                           <Input
                             id={`power-${item.id}`}
                             type="number"
                             placeholder=" "
-                            className="remove-arrow border-1 peer block w-full !appearance-none rounded-md border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-none focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
+                            className="remove-arrow border-1 peer block h-5 w-full !appearance-none rounded-md border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-[12px] text-gray-900 focus:border-none focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
                             onChange={(e) =>
                               handleInputChange(
                                 item.id,
@@ -290,7 +318,11 @@ const DeviceCard = () => {
                                 'powerValue'
                               )
                             }
-                            value={item.powerValue === 0 ? undefined : item.powerValue}
+                            value={
+                              item.powerValue === 0
+                                ? undefined
+                                : item.powerValue
+                            }
                           />
                           <Label
                             htmlFor={`power-${item.id}`}
@@ -304,7 +336,7 @@ const DeviceCard = () => {
                             id={`hours-${item.id}`}
                             type="number"
                             placeholder=" "
-                            className="remove-arrow border-1 peer block w-full !appearance-none rounded-md border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-none focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
+                            className="remove-arrow border-1 peer block h-5 w-full !appearance-none rounded-md border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-gray-900 focus:border-none focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
                             onChange={(e) =>
                               handleInputChange(
                                 item.id,
@@ -328,7 +360,7 @@ const DeviceCard = () => {
                       {item.selected ? (
                         <div className="relative">
                           <Button
-                            className="absolute -right-6 top-5 z-50 origin-[0] -translate-y-[43px] scale-50 transform text-md rounded-md duration-300"
+                            className="text-md absolute -right-6 top-5 z-50 origin-[0] -translate-y-[43px] scale-50 transform rounded-md duration-300"
                             onClick={() => handleCleaning(item.id)}
                             variant="gradientRed"
                             size="sm"
@@ -345,7 +377,7 @@ const DeviceCard = () => {
                                   id={`power-${item.id}`}
                                   type="number"
                                   placeholder=" "
-                                  className="remove-arrow border-1 peer block h-5 w-full !appearance-none rounded-md border-gray-300 bg-transparent px-2.5 pb-3 pt-3.5 text-[11px] text-gray-900 focus:border-none focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
+                                  className="remove-arrow border-1 peer block h-5 w-full !appearance-none rounded-md border-gray-300 bg-transparent px-2.5 pb-3 pt-3.5 text-[12px] text-gray-900 focus:border-none focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
                                   onChange={(e) =>
                                     handleInputChange(
                                       item.id,
@@ -357,7 +389,7 @@ const DeviceCard = () => {
                                 />
                                 <Label
                                   htmlFor={`power-${item.id}`}
-                                  className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-[11px] text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
+                                  className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
                                 >
                                   Potência (W)
                                 </Label>
@@ -366,7 +398,7 @@ const DeviceCard = () => {
                           ) : (
                             <>
                               <div className="flex gap-1">
-                                <p className="text-[11px] max-[301px]:truncate max-[301px]:tracking-tight">
+                                <p className="text-[12px] max-[301px]:truncate max-[301px]:tracking-tight">
                                   Potência: {item.powerValue} Watts
                                 </p>
                                 <Button
@@ -393,7 +425,7 @@ const DeviceCard = () => {
                                   id={`hours-${item.id}`}
                                   type="number"
                                   placeholder=" "
-                                  className="remove-arrow border-1 peer block h-5 w-full !appearance-none rounded-md border-gray-300 bg-transparent px-2.5 pb-3 pt-3.5 text-[11px] text-gray-900 focus:border-none focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
+                                  className="remove-arrow border-1 peer mt-1 block h-5 w-full !appearance-none rounded-md border-gray-300 bg-transparent px-2.5 pb-3 pt-3.5 text-[12px] text-gray-900 focus:border-none focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
                                   onChange={(e) =>
                                     handleInputChange(
                                       item.id,
@@ -405,7 +437,7 @@ const DeviceCard = () => {
                                 />
                                 <Label
                                   htmlFor={`hours-${item.id}`}
-                                  className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-[11px] text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
+                                  className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
                                 >
                                   Uso Diário (h)
                                 </Label>
@@ -414,7 +446,7 @@ const DeviceCard = () => {
                           ) : (
                             <>
                               <div className="flex gap-1">
-                                <p className="text-[11px] max-[301px]:truncate max-[301px]:tracking-tight">
+                                <p className="text-[12px] max-[301px]:truncate max-[301px]:tracking-tight">
                                   Uso Diário: {item.hours} Hora(s)
                                 </p>
                                 <Button
@@ -456,7 +488,10 @@ const DeviceCard = () => {
 
       <div className="space-y-2">
         <div className="grid w-full items-center gap-1.5">
-          <Label htmlFor="FC" className="flex sm:w-auto sm:mx-auto items-start gap-1">
+          <Label
+            htmlFor="FC"
+            className="flex items-start gap-1 sm:mx-auto sm:w-auto"
+          >
             FC (Fator de Correção)
             <TCDescription />
           </Label>
@@ -465,29 +500,31 @@ const DeviceCard = () => {
             placeholder="94"
             value={FC}
             onChange={(e) => addFC(parseFloat(e.target.value) || 0)}
-            className="focus:border-none sm:w-auto sm:mx-auto"
+            className="focus:border-none sm:mx-auto sm:w-auto"
           />
         </div>
         <div className="space-y-6 text-center">
           <Button
             variant="gradientDarkBlue"
-            className="w-full sm:w-auto sm:mx-auto"
+            className="w-full sm:mx-auto sm:w-auto"
             onClick={handleNewItem}
           >
             Adicionar
           </Button>
-          <Separator className='sm:w-[400px] sm:mx-auto' />
+          <Separator className="sm:mx-auto sm:w-[400px]" />
           <div className="space-y-6 text-center">
             <DisplayTotal />
 
-            <Button
-              disabled={totalEnergy === 0 || totalPower === 0}
-              onClick={() => router.push('/result')}
-              variant="gradientSky"
-              className="w-full sm:w-auto sm:mx-auto"
-            >
-              Resultados
-            </Button>
+            {isClient ? (
+              <Button
+                disabled={totalEnergy === 0 || totalPower === 0}
+                onClick={() => router.push('/result')}
+                variant="gradientSky"
+                className="w-full sm:mx-auto sm:w-auto"
+              >
+                Resultados
+              </Button>
+            ) : null}
           </div>
         </div>
       </div>

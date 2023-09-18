@@ -1,3 +1,41 @@
+import sun6KSG0104LP3 from '@/images/inverters/SUN-6K-SG0104LP3-US.png'
+import sun5KSG0103LP1 from '@/images/inverters/SUN-5K-SG0103LP1-EU.png'
+import sun8KSG01LP1 from '@/images/inverters/SUN-8K-SG01LP1-EU.png'
+import sun35KSG0104HP3 from '@/images/inverters/SUN-35K-SG0104HP3-US.png'
+import BOSG from '@/images/batteries/Deye - BOS-G (100Ah).png'
+import RWM5_3 from '@/images/batteries/Deye - RW-M5.3 (104Ah).png'
+import RWM6_1 from '@/images/batteries/Deye - RW.M6.1 (120Ah).png'
+import SEG5_1 from '@/images/batteries/Deye - SE-G5.1 PRO (100Ah).png'
+import { StaticImageData } from 'next/image'
+
+export const imagesMap = {
+  'SUN-3K-SG01/03LP1-BR': sun5KSG0103LP1,
+  'SUN-3.6K-SG01/03LP1-EU': sun5KSG0103LP1,
+  'SUN-5K-SG01/03LP1-EU': sun5KSG0103LP1,
+  'SUN-5K-SG01LP1-US': sun8KSG01LP1,
+  'SUN-6K-SG01/04LP3-US': sun6KSG0104LP3,
+  'SUN-7K-SG01/04LP3-US': sun6KSG0104LP3,
+  'SUN-8K-SG01LP1-EU': sun8KSG01LP1,
+  'SUN-8K-SG01LP1-US': sun8KSG01LP1,
+  'SUN-10K-SG01/04LP3-EU': sun6KSG0104LP3,
+  'SUN-12K-SG01/04LP3-EU': sun6KSG0104LP3,
+  'SUN-18K-SG01/04HP3-US': sun35KSG0104HP3,
+  'SUN-25K-SG01/04HP3-US': sun35KSG0104HP3,
+  'SUN-30K-SG01/04HP3-EU': sun35KSG0104HP3,
+  'SUN-35K-SG01/04HP3-US': sun35KSG0104HP3,
+  'SUN-40K-SG01/04HP3-EU': sun35KSG0104HP3,
+  'SUN-50K-SG01/04HP3-EU': sun35KSG0104HP3,
+  'Deye - BOS-G (100Ah)': BOSG,
+  'Deye - RW-M5.3 (104Ah)': RWM5_3,
+  'Deye - RW.M6.1 (120Ah)': RWM6_1,
+  'Deye - SE-G5.1 PRO (100Ah)': SEG5_1
+}
+
+export type ImageModelName = keyof typeof imagesMap;
+
+export const mapImages = (imageModelName: ImageModelName): StaticImageData => imagesMap[imageModelName]
+
+
 export const queryClientOptions = {
   defaultOptions: {
     queries: {
