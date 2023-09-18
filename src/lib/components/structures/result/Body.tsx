@@ -51,7 +51,7 @@ export default function Body() {
         tEnergy: totalEnergy || 1,
         fc: FC / 100 || 0.94,
       };
-      console.log(requestData);
+      // console.log(requestData);
       calculateBatteriesMutation.mutate(requestData, {
         onSuccess: (data) => {
           setBattery(data);

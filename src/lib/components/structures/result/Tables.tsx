@@ -85,11 +85,13 @@ export default function Tables({ variant, data = defaultData, srcImg = mapImages
             height={222}
             width={400}
             priority
+            placeholder='blur'
             alt="Deye logo"
             src={
               srcImg
             }
             onLoadingComplete={() => setLoaded(true)}
+            
           />
         </div>
 
