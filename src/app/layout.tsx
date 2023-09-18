@@ -30,14 +30,10 @@ export const metadata: Metadata = {
   },
   themeColor: '#FFFFFF',
   openGraph: {
-    url: 'https://nextarter-tailwind.sznm.dev',
+    url: 'https://calculadora-deye.vercel.app',
     title: APP_NAME,
     description:
       'Explore nossa calculadora de inversores híbridos e baterias. Dimensione sistemas de energia solar com precisão, maximize o uso da energia solar e alcance eficiência sustentável. Saiba mais agora!',
-    images: {
-      url: 'https://og-image.sznm.dev/**nextarter-tailwind**.sznm.dev.png?theme=dark&md=1&fontSize=125px&images=https%3A%2F%2Fsznm.dev%2Favataaars.svg&widths=250',
-      alt: 'nextarter-tailwind.sznm.dev og-image',
-    },
   },
 };
 
