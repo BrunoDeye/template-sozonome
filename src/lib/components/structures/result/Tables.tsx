@@ -84,6 +84,7 @@ export default function Tables({ variant, data = defaultData, srcImg = mapImages
             className={`${loaded ? 'unblur' : ''} clip-your-needful-style dark:[--shadow-inversor:#333132] mx-auto`}
             height={222}
             width={400}
+            priority
             alt="Deye logo"
             src={
               srcImg
