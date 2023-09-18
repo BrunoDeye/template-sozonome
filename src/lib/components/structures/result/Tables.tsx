@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import {
   Table,
   TableBody,
@@ -12,24 +12,27 @@ import { cva } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 import type { VariantProps } from 'class-variance-authority';
 import Image, { StaticImageData } from 'next/image';
-import InversorImg from '@/images/SUN-6K-SG04LP3-US-LV.png'
+import InversorImg from '@/images/SUN-6K-SG04LP3-US-LV.png';
 import { mapImages } from '@/utils/constants';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const tableVariants = cva('flex items-center flex-wrap sm:flex-nowrap justify-center py-2 px-2', {
-  variants: {
-    variant: {
-      default:
-        'rounded-lg border-none bg-gradient-to-br from-gray-100 to-blue-200 font-semibold text-sky-600 shadow-xl hover:from-gray-200 hover:to-sky-400 hover:text-sky-700 dark:border-sky-500 dark:from-blue-600 dark:to-blue-400 dark:!text-white dark:shadow-lg dark:shadow-sky-700 dark:hover:from-blue-700 dark:hover:to-indigo-300 dark:hover:!text-sky-100',
-      sky: 'rounded-lg border-none bg-gradient-to-br from-gray-100 to-sky-200 font-semibold text-sky-600 shadow-xl hover:from-gray-200 hover:to-sky-400 hover:text-sky-700 dark:border-sky-500 dark:from-sky-600 dark:to-sky-400 dark:!text-white dark:shadow-lg dark:shadow-sky-700 dark:hover:from-sky-700 dark:hover:to-blue-300 dark:hover:!text-sky-100',
-      darkBlue:
-        'rounded-lg border-none bg-gradient-to-br from-gray-100 to-blue-400 font-semibold text-blue-600 shadow-xl hover:from-gray-200 hover:to-blue-600 hover:!text-blue-800 hover:text-sky-700 dark:border-sky-500 dark:from-blue-800 dark:to-sky-600 dark:!text-white dark:shadow-lg dark:shadow-sky-700 dark:hover:from-blue-700 dark:hover:to-blue-300 dark:hover:!text-sky-100',
+const tableVariants = cva(
+  'flex flex-wrap items-center justify-center px-2 py-2 sm:flex-nowrap',
+  {
+    variants: {
+      variant: {
+        default:
+          'rounded-lg border-none bg-gradient-to-br from-gray-100 to-blue-200 font-semibold text-sky-600 shadow-xl hover:from-gray-200 hover:to-sky-400 hover:text-sky-700 dark:border-sky-500 dark:from-blue-600 dark:to-blue-400 dark:!text-white dark:shadow-lg dark:shadow-sky-700 dark:hover:from-blue-700 dark:hover:to-indigo-300 dark:hover:!text-sky-100',
+        sky: 'rounded-lg border-none bg-gradient-to-br from-gray-100 to-sky-200 font-semibold text-sky-600 shadow-xl hover:from-gray-200 hover:to-sky-400 hover:text-sky-700 dark:border-sky-500 dark:from-sky-600 dark:to-sky-400 dark:!text-white dark:shadow-lg dark:shadow-sky-700 dark:hover:from-sky-700 dark:hover:to-blue-300 dark:hover:!text-sky-100',
+        darkBlue:
+          'rounded-lg border-none bg-gradient-to-br from-gray-100 to-blue-400 font-semibold text-blue-600 shadow-xl hover:from-gray-200 hover:to-blue-600 hover:!text-blue-800 hover:text-sky-700 dark:border-sky-500 dark:from-blue-800 dark:to-sky-600 dark:!text-white dark:shadow-lg dark:shadow-sky-700 dark:hover:from-blue-700 dark:hover:to-blue-300 dark:hover:!text-sky-100',
+      },
     },
-  },
-  defaultVariants: {
-    variant: 'default',
-  },
-});
+    defaultVariants: {
+      variant: 'default',
+    },
+  }
+);
 
 const inverters = [
   {
@@ -73,26 +76,36 @@ type TableProps = VariantProps<typeof tableVariants> & {
   srcImg?: StaticImageData;
 };
 
-export default function Tables({ variant, data = defaultData, srcImg = mapImages('SUN-6K-SG01/04LP3-US') }: TableProps) {
+export default function Tables({
+  variant,
+  data = defaultData,
+  srcImg = mapImages('SUN-6K-SG01/04LP3-US'),
+}: TableProps) {
   const [loaded, setLoaded] = useState(false);
-  
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <div className="trasition-all w-full sm:p-4">
       <div className={cn(tableVariants({ variant }))}>
-        <div className='min-w-[210px] py-4' >
-          <Image
-            className={`${loaded ? 'unblur' : ''} clip-your-needful-style dark:[--shadow-inversor:#333132] mx-auto`}
-            height={222}
-            width={400}
-            priority
-            placeholder='blur'
-            alt="Deye logo"
-            src={
-              srcImg
-            }
-            onLoadingComplete={() => setLoaded(true)}
-            
-          />
+        <div className="min-w-[210px] py-4">
+          {isClient ? (
+            <Image
+              className={`${
+                loaded ? 'unblur' : ''
+              } clip-your-needful-style mx-auto dark:[--shadow-inversor:#333132]`}
+              height={222}
+              width={400}
+              priority
+              placeholder="blur"
+              alt="Deye logo"
+              src={srcImg}
+              onLoadingComplete={() => setLoaded(true)}
+            />
+          ) : null}
         </div>
 
         <Table>
