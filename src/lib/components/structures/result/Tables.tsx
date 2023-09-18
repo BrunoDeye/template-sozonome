@@ -100,8 +100,8 @@ export default function Tables({
               height={222}
               width={400}
               priority
-              placeholder="blur"
-              alt="Deye logo"
+              placeholder="data:image/png;base64,..."
+              alt="Inversor/Bateria Deye"
               src={srcImg}
               onLoadingComplete={() => setLoaded(true)}
             />

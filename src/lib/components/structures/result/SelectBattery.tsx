@@ -36,9 +36,9 @@ export function SelectBattery({
   };
   const { invertersList, isLoading, isError } =
     useCalculateInvertersQuery(requestData);
-  console.log(invertersList);
+  // console.log(invertersList);
   // console.log(batteriesData);
-  // console.log(selectedBattery)
+  // console.log(selectedBattery);
   const handleClick = (e: React.TouchEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
