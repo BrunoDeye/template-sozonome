@@ -15,10 +15,10 @@ function PrintButton() {
     setTheme('light');
     setTimeout(() => {
       window.print();
-    }, 500);
+    }, 100);
     setTimeout(() => {
       setTheme(theme || systemTheme as string);
-    }, 500);
+    }, 100);
     
   };
 
