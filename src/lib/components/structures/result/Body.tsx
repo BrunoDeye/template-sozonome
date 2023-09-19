@@ -73,7 +73,7 @@ export default function Body() {
       <div className="space-y-6">
         <FadeIn className="w-full space-y-6" yMinus>
           <InvertersList />
-          <div className='invisible hidden h-[33vh] print-show'></div>
+          <div className='invisible hidden h-[37vh] print-show'></div>
           <h4 className="text-center text-xl font-bold tracking-tight sm:text-2xl">
             Baterias
           </h4>
