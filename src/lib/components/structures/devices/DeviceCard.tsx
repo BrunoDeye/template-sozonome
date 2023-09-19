@@ -499,7 +499,7 @@ const DeviceCard = () => {
               id="FC"
               placeholder="0.94"
               value={FC}
-              onChange={(e) => addFC(parseFloat(e.target.value) > 100 ? 99 : parseFloat(e.target.value) || 0)}
+              onChange={(e) => addFC(parseFloat(e.target.value) > 100 ? 99 : parseFloat(e.target.value.replace(/0+$/, '')) || 0)}
               className="pl-[25px] block !appearance-none focus:border-none sm:mx-auto sm:w-auto"
             />
             <Label
