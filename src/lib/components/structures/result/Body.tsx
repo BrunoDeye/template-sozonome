@@ -49,7 +49,7 @@ export default function Body() {
       const requestData = {
         model: selectedBattery as string,
         tEnergy: totalEnergy || 1,
-        fc: FC / 100 || 0.94,
+        fc: FC <= 100 ? FC / 100 : 0.94,
       };
       // console.log(requestData);
       calculateBatteriesMutation.mutate(requestData, {
