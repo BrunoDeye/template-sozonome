@@ -109,7 +109,7 @@ export default function Options() {
                         />
                       )}
                       {/* <a href="https://storyset.com/nature" className='text-[10px]'>Nature illustrations by Storyset</a> */}
-                      <h4>Residencial</h4>
+                      <h4>Residencial e Comercial</h4>
                     </FormLabel>
                   </FormItem>
 

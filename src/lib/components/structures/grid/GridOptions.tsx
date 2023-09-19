@@ -55,7 +55,9 @@ const GridOptions = () => {
 
   useEffect(() => {
     setIsClient(true);
-    form.setValue('grid', grid as any);
+    if (grid) {
+      form.setValue('grid', grid as any);
+    }
   }, []);
   return (
     <div className="isolate px-6 py-2 sm:py-4 lg:px-6">

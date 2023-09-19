@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import logoDeye from '@/images/logoDeye.png';
+import logoDeyeWhite from '@/images/logoDeyeWhite.png';
 
 const Hero = () => {
   return (
@@ -8,6 +9,7 @@ const Hero = () => {
           <Image
             className=""
             width={75}
+            quality={100}
             height={20}
             alt="Deye logo"
             src={logoDeye}

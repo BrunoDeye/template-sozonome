@@ -76,6 +76,11 @@ type TableProps = VariantProps<typeof tableVariants> & {
   srcImg?: StaticImageData;
 };
 
+const toBase64 = (str: string) =>
+  typeof window === 'undefined'
+    ? Buffer.from(str).toString('base64')
+    : window.btoa(str)
+
 export default function Tables({
   variant,
   data = defaultData,
@@ -100,7 +105,7 @@ export default function Tables({
               height={222}
               width={400}
               priority
-              placeholder="data:image/png;base64,..."
+              placeholder={`data:image/png;base64,${toBase64(srcImg as any)}`}
               alt="Inversor/Bateria Deye"
               src={srcImg}
               onLoadingComplete={() => setLoaded(true)}

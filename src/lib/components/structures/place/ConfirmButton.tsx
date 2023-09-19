@@ -1,10 +1,10 @@
-'use client'
-import { useRouter } from "next/navigation";
-import { Button } from "../../ui/button";
+import { Button } from '../../ui/button';
+import Link from 'next/link';
 
 export default function ConfirmButton() {
-
-  const router = useRouter()
-
-  return <Button variant="gradientSky" onClick={() => router.push('/grid')}>Confirmar</Button>
+  return (
+    <Button variant="gradientSky" asChild>
+      <Link href="/grid">Confirmar</Link>
+    </Button>
+  );
 }

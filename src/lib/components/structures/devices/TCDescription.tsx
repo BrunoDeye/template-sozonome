@@ -13,11 +13,10 @@ const TCDescription = () => {
         <TooltipTrigger>
           <LucideInfo height={18} />
         </TooltipTrigger>
-        <TooltipContent className='w-60 text-justify'>
+        <TooltipContent className="w-60 text-justify">
           <p>
-            Esse fator é empregado no cálculo em função dos diversos fatores
-            ligados ao fator de potência, harmônicas, corrente de fuga e outros.
-            O valor recomendado é 87%, mas pode variar na faixa de 85% a 93%.
+            Fator de correção destinado a corrigir as perdas no sistemas,
+            variando entre 0,87 a 0,94.
           </p>
         </TooltipContent>
       </Tooltip>

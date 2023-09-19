@@ -9,7 +9,8 @@ import { Providers } from '@/services/ReactQuery/Providers.client';
 import { Suspense } from 'react';
 import Loading from './loading';
 
-const APP_NAME = 'Deye ◌ Calculadora Solar';
+
+const APP_NAME = 'Deye - Calculadora Solar';
 
 export const metadata: Metadata = {
   title: APP_NAME,
@@ -50,9 +51,11 @@ const RootLayout = ({ children }: RootLayoutProps) => {
           fontSans.variable
         )}
       >
+            
         <Providers>
           <Layout>
-            <Suspense fallback={<Loading />}>
+          
+            <Suspense  fallback={ <Loading />}>
               <div className="flex-1">{children}</div>
             </Suspense>
             

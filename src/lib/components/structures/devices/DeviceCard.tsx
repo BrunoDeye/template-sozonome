@@ -495,13 +495,20 @@ const DeviceCard = () => {
             FC (Fator de Correção)
             <TCDescription />
           </Label>
-          <Input
-            id="FC"
-            placeholder="94"
-            value={FC}
-            onChange={(e) => addFC(parseFloat(e.target.value) || 0)}
-            className="focus:border-none sm:mx-auto sm:w-auto"
-          />
+            <Input
+              id="FC"
+              placeholder="0.94"
+              value={FC}
+              onChange={(e) => addFC(parseFloat(e.target.value) || 0)}
+              className="pl-[20px] block !appearance-none focus:border-none sm:mx-auto sm:w-auto"
+              step="0.01"
+            />
+            <Label
+              htmlFor="FC"
+              className="text-[17px] mx-auto z-10 origin-[0] -translate-y-[2.35rem] -translate-x-[43vw] max-[300px]:-translate-x-[34vw] max-[375px]:-translate-x-[38vw] max-[415px]:-translate-x-[39vw] max-[460px]:-translate-x-[40vw] max-[500px]:-translate-x-[41vw] max-[540px]:-translate-x-[42vw] sm:-translate-x-[4.9rem] scale-75"
+            >
+              0,
+            </Label>
         </div>
         <div className="space-y-6 text-center">
           <Button
@@ -517,12 +524,15 @@ const DeviceCard = () => {
 
             {isClient ? (
               <Button
-                disabled={totalEnergy === 0 || totalPower === 0}
-                onClick={() => router.push('/result')}
                 variant="gradientSky"
-                className="w-full sm:mx-auto sm:w-auto"
+                className={`${
+                  totalEnergy === 0 || totalPower === 0
+                    ? 'pointer-events-none opacity-50'
+                    : ''
+                } w-full sm:mx-auto sm:w-auto`}
+                asChild
               >
-                Resultados
+                <Link href="/result">Resultados</Link>
               </Button>
             ) : null}
           </div>

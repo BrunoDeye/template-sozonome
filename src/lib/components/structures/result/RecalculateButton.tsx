@@ -1,30 +1,30 @@
 'use client';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import { Button } from '../../ui/button';
-import { useRouter } from 'next/navigation';
 import { useDataStore } from '@/store/data';
+import Link from 'next/link';
 
 export default function RecalculateButton() {
-  const router = useRouter();
-  const { actions: { reset }} = useDataStore()
+  const {
+    actions: { reset },
+  } = useDataStore();
   const [savedDevicesList, setSavedDevicesList, clearLocalStorage] =
     useLocalStorage('devices-list');
   function handleCleaning() {
     clearLocalStorage();
-    useDataStore.persist.clearStorage()
+    useDataStore.persist.clearStorage();
     reset();
     localStorage.removeItem('calculator-storage');
-
-    router.push('/ambiente');
   }
 
   return (
     <Button
       onClick={() => handleCleaning()}
       variant="gradientSky"
-      className="w-full sm:w-auto sm:mx-auto"
+      className="w-full sm:mx-auto sm:w-auto"
+      asChild
     >
-      Recalcular do Início
+      <Link href="/ambiente">Recalcular do Início</Link>
     </Button>
   );
 }

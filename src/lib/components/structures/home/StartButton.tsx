@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 const StartButton = () => {
   const [savedDevicesList, setSavedDevicesList, clearLocalStorage] =
     useLocalStorage('devices-list');
+  const [starting, setStarting] = useState(false);
   const {
     actions: { reset },
   } = useDataStore();
@@ -16,6 +17,7 @@ const StartButton = () => {
     useDataStore.persist.clearStorage();
     reset();
     localStorage.removeItem('calculator-storage');
+    setStarting(true);
   }
   const [isClient, setIsClient] = useState(false);
 
@@ -27,7 +29,7 @@ const StartButton = () => {
     <div className="grid justify-items-center gap-2.5">
       <div className="flex items-center gap-2">
         {isClient ? (
-          savedDevicesList() || localStorage.getItem('calculator-storage') ? (
+          savedDevicesList() || localStorage.getItem('calculator-storage') || starting ? (
             <>
               <Button asChild variant="gradientBlue">
                 <Link href="/ambiente">Continuar Onde Parou</Link>
@@ -37,7 +39,7 @@ const StartButton = () => {
                 onClick={() => handleCleaning()}
                 variant="gradientSky"
               >
-                <Link href="/ambiente">Começar De Novo</Link>
+                <Link  href="/ambiente">Começar De Novo</Link>
               </Button>
             </>
           ) : (

@@ -107,7 +107,7 @@ const DevicesList = ({ handleEquipList, id }: DeviceListProps) => {
                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="!mx-0 h-[200px] w-[280px]">
+            <PopoverContent className="!mx-0 h-[200px] w-[280px] sm:w-[350px]">
               <Command>
                 <CommandInput
                   className="my-1 focus:border-none focus:ring-2 focus:ring-sky-200"
