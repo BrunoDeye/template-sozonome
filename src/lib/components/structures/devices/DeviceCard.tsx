@@ -244,7 +244,7 @@ const DeviceCard = () => {
           especifique a quantidade desejada, ou preencha manualmente se
           necessário.
         </p>
-        <p className="leading-2 mt-1 text-[12px] font-thin">
+        <p className="leading-2 mt-1 text-[13px] font-thin">
           Os valores de Potência e Uso Diário são estimativas baseadas no
           consumo médio brasileiro.
         </p>

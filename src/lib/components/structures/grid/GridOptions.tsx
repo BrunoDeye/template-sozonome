@@ -69,7 +69,7 @@ const GridOptions = () => {
           Sabendo a tensão de sua rede podemos separar para você somente os
           inversores hibrídos compatíveis.
         </p>
-        <p className="leading-2 mt-1 text-[11px] font-thin">
+        <p className="leading-2 mt-1 text-[13px] font-thin">
           Se tiver dúvidas ligue para sua concessionária.
         </p>
       </div>

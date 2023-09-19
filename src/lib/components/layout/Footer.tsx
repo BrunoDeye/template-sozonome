@@ -21,8 +21,8 @@ const Footer = () => {
           {theme === 'light' ? (
             <Image
               className=""
-              width={40}
-              height={20}
+              width={60}
+              height={40}
               alt="Deye logo"
               src={logoDeye}
               
@@ -30,8 +30,8 @@ const Footer = () => {
           ) : (
             <Image
               className=""
-              width={40}
-              height={20}
+              width={60}
+              height={40}
               alt="Deye logo"
               src={logoDeyeWhite}
             />

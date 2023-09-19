@@ -21,7 +21,7 @@ export default function Title() {
         Inversor(es) mais indicado(s) para sua rede{' '}
         <strong className="tracking-tight">{isClient ? grid : null}</strong> e escolha da Sua Bateria.
       </p>
-      <p className="leading-2 mt-1 text-[11px] font-thin">
+      <p className="leading-2 mt-1 text-[13px] font-thin">
         Uma seleção de Inversores e Baterias ideais para você.
       </p>
     </div>
