@@ -15,8 +15,8 @@ const TCDescription = () => {
         </TooltipTrigger>
         <TooltipContent className="w-60 text-justify">
           <p>
-            Fator de correção destinado a corrigir as perdas no sistemas,
-            variando entre 0,87 a 0,94.
+            O fator de correção é usado para compensar as perdas no sistema e
+            pode variar dentro da faixa de 0,87 a 0,94.
           </p>
         </TooltipContent>
       </Tooltip>
