@@ -504,7 +504,7 @@ const DeviceCard = () => {
             />
             <Label
               htmlFor="FC"
-              className="text-[17px] mx-auto z-10 origin-[0] -translate-y-[2.35rem] -translate-x-[42vw] max-[300px]:-translate-x-[34vw] max-[375px]:-translate-x-[38vw] max-[415px]:-translate-x-[39vw] max-[460px]:-translate-x-[39.5vw] max-[500px]:-translate-x-[40vw] max-[540px]:-translate-x-[41.5vw] max-[580px]:-translate-x-[41vw] sm:-translate-x-[5rem] scale-75"
+              className="text-[15px] sm:text-sm mx-auto z-10 origin-[0] -translate-y-[2.275rem] sm:-translate-y-[2.21rem] -translate-x-[43vw] max-[300px]:-translate-x-[34vw] max-[375px]:-translate-x-[38vw] max-[415px]:-translate-x-[39vw] max-[460px]:-translate-x-[39.5vw] max-[500px]:-translate-x-[41vw] max-[540px]:-translate-x-[41.5vw] max-[580px]:-translate-x-[42vw] sm:-translate-x-[5rem]"
             >
               0,
             </Label>
