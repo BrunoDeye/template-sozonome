@@ -75,7 +75,7 @@ export default function InvertersList() {
             ? inverter.model.includes('HP')
             : inverter.model.includes('LP')
         ).length === 1 ? null : (
-        <>
+        <div className='print-hidden space-y-6'>
           <h4 className="text-center text-xl font-bold tracking-tight sm:text-2xl">
             Outras Opções de Inversores
           </h4>
@@ -96,7 +96,7 @@ export default function InvertersList() {
                 />
               </div>
             ))}
-        </>
+        </div>
       )}
     </div>
   );

@@ -43,7 +43,7 @@ export function SelectBattery({
     e.stopPropagation();
   };
   return (
-    <div className="p-0 sm:p-4">
+    <div className="p-0 sm:p-4 print-hidden">
       <Select onValueChange={setSelectedBattery} defaultValue={selectedBattery}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Selecione Uma Bateria" />

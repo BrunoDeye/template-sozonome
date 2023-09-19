@@ -21,7 +21,7 @@ export default function RecalculateButton() {
     <Button
       onClick={() => handleCleaning()}
       variant="gradientSky"
-      className="w-full sm:mx-auto sm:w-auto"
+      className="w-full sm:mx-auto sm:w-auto print-hidden"
       asChild
     >
       <Link href="/ambiente">Recalcular do Início</Link>

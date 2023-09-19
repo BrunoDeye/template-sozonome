@@ -21,6 +21,7 @@ const buttonVariants = cva(
           'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
+        gradientDefault: "bg-gradient-to-br !text-white from-gray-300 to-black dark:from-gray-500 dark:to-white dark:!text-black dark:hover:from-gray-200 dark:hover:to-gray-600 dark:hover:text-gray-600 font-semibold text-gray-600 hover:from-gray-200 hover:to-gray-600 hover:text-gray-700",
         gradientBlue: "bg-gradient-to-br from-gray-100 to-blue-200 dark:from-blue-600 dark:to-blue-400 dark:text-white dark:hover:from-gray-200 dark:hover:to-blue-300 dark:hover:text-sky-600 font-semibold text-sky-600 hover:from-gray-200 hover:to-sky-400 hover:text-sky-700",
         gradientDarkBlue: "bg-gradient-to-br from-gray-100 to-blue-400 dark:from-blue-900 dark:to-blue-500 dark:text-white dark:hover:from-gray-200 dark:hover:to-sky-400 dark:hover:text-sky-800 font-semibold text-sky-700 hover:from-gray-200 hover:to-sky-600 hover:text-sky-800",
         gradientSky: "bg-gradient-to-br from-gray-100 to-sky-200 dark:from-sky-800 dark:to-sky-400 dark:text-white dark:hover:from-gray-200 dark:hover:to-cyan-400 dark:hover:text-cyan-800 font-semibold text-cyan-700 hover:from-gray-200 hover:to-cyan-400 hover:text-cyan-800",

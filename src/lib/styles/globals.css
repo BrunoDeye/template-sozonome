@@ -39,6 +39,20 @@
 }
 
 @layer base {
+  @media print {
+    header {
+      position: static !important;
+    }
+    .print-hidden {
+      display: none;
+      visibility: hidden;
+    }
+    .print-show {
+      display: block !important;
+      visibility: visible !important;
+    }
+  
+  }
   #loadingDiv {
     display: flex;
     top: 0;

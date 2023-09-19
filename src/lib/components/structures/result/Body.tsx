@@ -14,6 +14,7 @@ import RecalculateButton from './RecalculateButton';
 import BatteryImg from '@/images/RW-M5.3.png';
 import BatteryImg2 from '@/images/BOS-G.png';
 import { ImageModelName, mapImages } from '@/utils/constants';
+import PrintButton from './PrintButton';
 
 export default function Body() {
   const [selectedBattery, setSelectedBattery] = useState<string | undefined>(
@@ -72,6 +73,7 @@ export default function Body() {
       <div className="space-y-6">
         <FadeIn className="w-full space-y-6" yMinus>
           <InvertersList />
+          <div className='invisible hidden h-[30vh] print-show'></div>
           <h4 className="text-center text-xl font-bold tracking-tight sm:text-2xl">
             Baterias
           </h4>
@@ -91,8 +93,11 @@ export default function Body() {
               data={formatBattery(battery)}
             />
           ) : (
-            <div className='h-[100px]'>{'\u00A0'}</div>
+            <div className="h-[100px]">{'\u00A0'}</div>
           )}
+          <div className="text-center">
+            <PrintButton />
+          </div>
           <div className="text-center">
             <RecalculateButton />
           </div>
