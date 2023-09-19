@@ -360,7 +360,7 @@ const DeviceCard = () => {
                       {item.selected ? (
                         <div className="relative">
                           <Button
-                            className="text-md absolute -right-6 top-5 z-50 origin-[0] -translate-y-[43px] scale-50 transform rounded-md duration-300"
+                            className="text-md absolute max-[300px]:-right-3 -right-6 top-5 z-50 origin-[0] -translate-y-[43px] scale-50 transform rounded-md duration-300"
                             onClick={() => handleCleaning(item.id)}
                             variant="gradientRed"
                             size="sm"
@@ -500,12 +500,11 @@ const DeviceCard = () => {
               placeholder="0.94"
               value={FC}
               onChange={(e) => addFC(parseFloat(e.target.value) || 0)}
-              className="pl-[20px] block !appearance-none focus:border-none sm:mx-auto sm:w-auto"
-              step="0.01"
+              className="pl-[25px] block !appearance-none focus:border-none sm:mx-auto sm:w-auto"
             />
             <Label
               htmlFor="FC"
-              className="text-[17px] mx-auto z-10 origin-[0] -translate-y-[2.35rem] -translate-x-[43vw] max-[300px]:-translate-x-[34vw] max-[375px]:-translate-x-[38vw] max-[415px]:-translate-x-[39vw] max-[460px]:-translate-x-[40vw] max-[500px]:-translate-x-[41vw] max-[540px]:-translate-x-[42vw] sm:-translate-x-[4.9rem] scale-75"
+              className="text-[17px] mx-auto z-10 origin-[0] -translate-y-[2.35rem] -translate-x-[42vw] max-[300px]:-translate-x-[34vw] max-[375px]:-translate-x-[38vw] max-[415px]:-translate-x-[39vw] max-[460px]:-translate-x-[39.5vw] max-[500px]:-translate-x-[40vw] max-[540px]:-translate-x-[41.5vw] max-[580px]:-translate-x-[41vw] sm:-translate-x-[5rem] scale-75"
             >
               0,
             </Label>
