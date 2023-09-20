@@ -21,6 +21,7 @@ import HouseDark from '@/images/Cabin-bro_dark.svg';
 import Industry from '@/images/Farm_house.svg';
 import IndustryDark from '@/images/Farm_house_dark.svg';
 import { useTheme } from 'next-themes';
+import LoadingDeye from '../../Loading';
 
 const FormSchema = z.object({
   place: z.enum(['Residência', 'Indústria'], {
@@ -98,6 +99,8 @@ export default function Options() {
                           src={House}
                           height={200}
                           width={200}
+                          priority
+                          placeholder='blur'
                           alt="Casa na floresta"
                         />
                       ) : (
@@ -105,6 +108,8 @@ export default function Options() {
                           src={HouseDark}
                           height={200}
                           width={200}
+                          priority
+                          placeholder='blur'
                           alt="Casa na floresta"
                         />
                       )}
@@ -131,6 +136,8 @@ export default function Options() {
                           src={Industry}
                           height={200}
                           width={200}
+                          priority
+                          placeholder='blur'
                           alt="Casa na floresta"
                         />
                       ) : (
@@ -138,6 +145,8 @@ export default function Options() {
                           src={IndustryDark}
                           height={200}
                           width={200}
+                          priority
+                          placeholder='blur'
                           alt="Casa na floresta"
                         />
                       )}
@@ -146,7 +155,11 @@ export default function Options() {
                       <h4>Industrial</h4>
                     </FormLabel>
                   </FormItem> 
-                </RadioGroup> : null }
+                </RadioGroup> : <div className="mx-auto my-auto flex min-h-[377px] w-full items-center justify-center text-center">
+              <div className="pb-12">
+                <LoadingDeye />
+              </div>
+            </div> }
               </FormControl>
 
               <FormMessage className="text-md text-center font-bold" />
