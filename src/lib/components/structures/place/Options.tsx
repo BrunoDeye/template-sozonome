@@ -101,7 +101,7 @@ export default function Options() {
                           height={200}
                           width={200}
                           priority
-                          placeholder={`data:image/png;base64,${toBase64(House as any)}`}
+                          placeholder={`data:image/svg;base64,${toBase64(House as any)}`}
                           alt="Casa na floresta"
                         />
                       ) : (
@@ -110,7 +110,7 @@ export default function Options() {
                           height={200}
                           width={200}
                           priority
-                          placeholder={`data:image/png;base64,${toBase64(HouseDark as any)}`}
+                          placeholder={`data:image/svg;base64,${toBase64(HouseDark as any)}`}
                           alt="Casa na floresta"
                         />
                       )}
@@ -138,7 +138,7 @@ export default function Options() {
                           height={200}
                           width={200}
                           priority
-                          placeholder={`data:image/png;base64,${toBase64(Industry as any)}`}
+                          placeholder={`data:image/svg;base64,${toBase64(Industry as any)}`}
                           alt="Casa na floresta"
                         />
                       ) : (
@@ -147,7 +147,7 @@ export default function Options() {
                           height={200}
                           width={200}
                           priority
-                          placeholder={`data:image/png;base64,${toBase64(IndustryDark as any)}`}
+                          placeholder={`data:image/svg;base64,${toBase64(IndustryDark as any)}`}
                           alt="Casa na floresta"
                         />
                       )}

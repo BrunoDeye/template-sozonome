@@ -4,7 +4,7 @@
   "private": true,
   "author": "sozonome",
   "scripts": {
-    "dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 next dev",
+    "dev": "next dev",
     "build": "next build",
     "build:turbo": "npx turbo build",
     "postbuild": "next-sitemap --config next-sitemap.config.js",
@@ -41,7 +41,7 @@
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
     "lucide-react": "^0.274.0",
-    "next": "13.4.20-canary.26",
+    "next": "13.5.2-canary.2",
     "next-pwa": "^5.6.0",
     "next-seo": "^6.1.0",
     "next-themes": "^0.2.1",
