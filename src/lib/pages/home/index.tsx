@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 // import Hero from '@/lib/components/structures/home/Hero';
 // import StartButton from '@/lib/components/structures/home/StartButton';
 const  FadeIn = dynamic(() => import('@/lib/components/animations/FadeIn'))
-const  Hero = dynamic(() => import('@/lib/components/structures/home/Hero'))
+const  Hero = dynamic(() => import('@/lib/components/structures/home/Hero'), { ssr: false })
 const  StartButton = dynamic(() => import('@/lib/components/structures/home/StartButton'))
 
 const Home: NextPage = () => {

@@ -3,20 +3,17 @@ import Image from 'next/image';
 import logoDeye from '@/images/logoDeye.png';
 import logoDeyeWhite from '@/images/logoDeyeWhite.png';
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const Footer = () => {
   const { theme, setTheme, systemTheme } = useTheme();
-  const [isClient, setIsClient] = useState(false)
   useEffect(() => {
-    setTheme(systemTheme || 'light')
-    setIsClient(true)
-  }, [])
+    setTheme(systemTheme || 'light');
+  }, []);
 
   return (
     <footer className="wrapper mt-6">
       <div className="flex">
-      {isClient ?
         <p className="flex flex-col items-center justify-center gap-2 text-xs">
           {theme === 'light' ? (
             <Image
@@ -25,7 +22,6 @@ const Footer = () => {
               height={40}
               alt="Deye logo"
               src={logoDeye}
-              
             />
           ) : (
             <Image
@@ -37,7 +33,7 @@ const Footer = () => {
             />
           )}
           {new Date().getFullYear()}
-        </p>: null}
+        </p>
       </div>
     </footer>
   );

@@ -7,7 +7,7 @@ import { ThemeProvider } from '@/lib/components/theme-provider';
 // import Header from './Header';
 import dynamic from 'next/dynamic';
 const  Header = dynamic(() => import('./Header'))
-const  Footer = dynamic(() => import('./Footer'))
+const  Footer = dynamic(() => import('./Footer'), { ssr: false })
 
 type LayoutProps = {
   children: ReactNode;
