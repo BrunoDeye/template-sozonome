@@ -50,6 +50,7 @@
     .print-show {
       display: block !important;
       visibility: visible !important;
+      height: 37vh;
     }
   }
 

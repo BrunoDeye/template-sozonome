@@ -18,7 +18,7 @@ function PrintButton() {
     }, 100);
     setTimeout(() => {
       setTheme(theme || systemTheme as string);
-    }, 500);
+    }, 1000);
     
   };
 
