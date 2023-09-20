@@ -8,9 +8,8 @@ import { useEffect } from 'react';
 const Footer = () => {
   const { theme, setTheme, systemTheme } = useTheme();
   useEffect(() => {
-    setTheme(systemTheme || 'light');
+    setTheme(theme === 'system' ? systemTheme : theme as any);
   }, []);
-
   return (
     <footer className="wrapper mt-6">
       <div className="flex">
