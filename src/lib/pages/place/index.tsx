@@ -1,12 +1,12 @@
 import type { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 
-import FadeIn from '@/lib/components/animations/FadeIn';
-import Hero from '@/lib/components/structures/home/Hero';
-import StartButton from '@/lib/components/structures/home/StartButton';
-import Title from '@/lib/components/structures/place/Title';
-import { Button } from '@/lib/components/ui/button';
-import ConfirmButton from '@/lib/components/structures/place/ConfirmButton';
-import Options from '@/lib/components/structures/place/Options';
+// import FadeIn from '@/lib/components/animations/FadeIn';
+// import Title from '@/lib/components/structures/place/Title';
+// import Options from '@/lib/components/structures/place/Options';
+const  FadeIn = dynamic(() => import('@/lib/components/animations/FadeIn'))
+const  Title = dynamic(() => import('@/lib/components/structures/place/Title'))
+const  Options = dynamic(() => import('@/lib/components/structures/place/Options'))
 
 const Place: NextPage = () => {
 

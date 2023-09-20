@@ -1,8 +1,11 @@
 'use client';
-import FadeIn from '@/lib/components/animations/FadeIn';
-import GridOptions from '@/lib/components/structures/grid/GridOptions';
 import type { NextPage } from 'next';
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
+// import FadeIn from '@/lib/components/animations/FadeIn';
+// import GridOptions from '@/lib/components/structures/grid/GridOptions';
+const  FadeIn = dynamic(() => import('@/lib/components/animations/FadeIn'))
+const  GridOptions = dynamic(() => import('@/lib/components/structures/grid/GridOptions'))
 
 const Grid: NextPage = () => {
   useEffect(() => {

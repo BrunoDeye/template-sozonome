@@ -3,9 +3,11 @@ import { type ReactNode } from 'react';
 
 import { ThemeProvider } from '@/lib/components/theme-provider';
 
-import Footer from './Footer';
-import Header from './Header';
-import MoveAround from '../animations/MoveAround';
+// import Footer from './Footer';
+// import Header from './Header';
+import dynamic from 'next/dynamic';
+const  Header = dynamic(() => import('./Header'))
+const  Footer = dynamic(() => import('./Footer'))
 
 type LayoutProps = {
   children: ReactNode;

@@ -11,9 +11,7 @@ import TCDescription from './TCDescription';
 import DevicesList from './DevicesList';
 import { Edit3 } from 'lucide-react';
 import Link from 'next/link';
-import { Router } from 'next/router';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
-import { useRouter } from 'next/navigation';
 
 const initialState = [
   {
@@ -31,7 +29,6 @@ const initialState = [
 ];
 
 const DeviceCard = () => {
-  const router = useRouter();
   const {
     state: { FC, totalPower, totalEnergy, place },
     actions: { addTotalEnergy, addTotalPower, addFC },

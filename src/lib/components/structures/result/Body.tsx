@@ -1,20 +1,27 @@
 'use client';
+import dynamic from 'next/dynamic';
 import { formatBattery } from '@/utils/functions';
-import FadeIn from '../../animations/FadeIn';
-import { SelectBattery } from './SelectBattery';
-import Tables from './Tables';
-import Title from './Title';
-import InvertersList from './InvertersList';
+import { ImageModelName, mapImages } from '@/utils/constants';
 import { useEffect, useState } from 'react';
 import { useCalculateBatteriesMutation } from '@/services/ReactQueryHooks/useCalculateBatteriesMutation';
 import { useDataStore } from '@/store/data';
-import { useCalculateInvertersQuery } from '@/services/ReactQueryHooks/useCalculateInvertersQuery';
+// import FadeIn from '../../animations/FadeIn';
+// import { SelectBattery } from './SelectBattery';
+// import Tables from './Tables';
+// import Title from './Title';
+// import InvertersList from './InvertersList';
+// import RecalculateButton from './RecalculateButton';
+// import PrintButton from './PrintButton';
+
 import LoadingDeye from '../../Loading';
-import RecalculateButton from './RecalculateButton';
-import BatteryImg from '@/images/RW-M5.3.png';
-import BatteryImg2 from '@/images/BOS-G.png';
-import { ImageModelName, mapImages } from '@/utils/constants';
-import PrintButton from './PrintButton';
+
+const  FadeIn = dynamic(() => import('@/lib/components/animations/FadeIn'))
+const  SelectBattery = dynamic(() => import('./SelectBattery'))
+const  Tables = dynamic(() => import('./Tables'))
+const  Title = dynamic(() => import('./Title'))
+const  InvertersList = dynamic(() => import('./InvertersList'))
+const  RecalculateButton = dynamic(() => import('./RecalculateButton'))
+const  PrintButton = dynamic(() => import('./PrintButton'))
 
 export default function Body() {
   const [selectedBattery, setSelectedBattery] = useState<string | undefined>(
@@ -29,15 +36,8 @@ export default function Body() {
     quantity: '\u00A0',
   });
   const {
-    state: { FC, totalEnergy, grid, totalPower },
+    state: { FC, totalEnergy },
   } = useDataStore();
-
-  const requestData = {
-    gridVoltage: grid || '220V (Fase + Fase + Terra/Neutro)',
-    tPower: totalPower || 1,
-  };
-  const { invertersList, isLoading, isError } =
-    useCalculateInvertersQuery(requestData);
 
   const calculateBatteriesMutation = useCalculateBatteriesMutation();
 
@@ -73,7 +73,7 @@ export default function Body() {
       <div className="space-y-6">
         <FadeIn className="w-full space-y-6" yMinus>
           <InvertersList />
-          <div className='invisible hidden h-[37vh] print-show'></div>
+          <div className="print-show invisible hidden h-[38vh] sm:h-[35vh]"></div>
           <h4 className="text-center text-xl font-bold tracking-tight sm:text-2xl">
             Baterias
           </h4>

@@ -1,9 +1,11 @@
 'use client';
-import FadeIn from '@/lib/components/animations/FadeIn';
-import DeviceCard from '@/lib/components/structures/devices/DeviceCard';
-
 import type { NextPage } from 'next';
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
+// import FadeIn from '@/lib/components/animations/FadeIn';
+// import DeviceCard from '@/lib/components/structures/devices/DeviceCard';
+const  FadeIn = dynamic(() => import('@/lib/components/animations/FadeIn'))
+const  DeviceCard = dynamic(() => import('@/lib/components/structures/devices/DeviceCard'))
 
 const Devices: NextPage = () => {
   useEffect(() => {

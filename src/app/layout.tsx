@@ -1,14 +1,17 @@
 import type { Metadata } from 'next';
 
-import Layout from '@/lib/components/layout';
+import dynamic from 'next/dynamic';
+// import Layout from '@/lib/components/layout';
 import { fontSans } from '@/lib/styles/fonts';
 import { cn } from '@/lib/utils';
 
 import '@/lib/styles/globals.css';
-import { Providers } from '@/services/ReactQuery/Providers.client';
+// import Providers from '@/services/ReactQuery/Providers.client';
 import { Suspense } from 'react';
 import Loading from './loading';
 
+const  Layout = dynamic(() => import('@/lib/components/layout'), { loading: () => <Loading /> })
+const  Providers = dynamic(() => import('@/services/ReactQuery/Providers.client'))
 
 const APP_NAME = 'Deye - Calculadora Solar';
 
@@ -51,14 +54,13 @@ const RootLayout = ({ children }: RootLayoutProps) => {
           fontSans.variable
         )}
       >
-            
         <Providers>
           <Layout>
           
             <Suspense  fallback={ <Loading />}>
               <div className="flex-1">{children}</div>
             </Suspense>
-            
+  
           </Layout>
         </Providers>
       </body>

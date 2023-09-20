@@ -1,8 +1,12 @@
 import type { NextPage } from 'next';
+import dynamic from 'next/dynamic'
 
-import FadeIn from '@/lib/components/animations/FadeIn';
-import Hero from '@/lib/components/structures/home/Hero';
-import StartButton from '@/lib/components/structures/home/StartButton';
+// import FadeIn from '@/lib/components/animations/FadeIn';
+// import Hero from '@/lib/components/structures/home/Hero';
+// import StartButton from '@/lib/components/structures/home/StartButton';
+const  FadeIn = dynamic(() => import('@/lib/components/animations/FadeIn'))
+const  Hero = dynamic(() => import('@/lib/components/structures/home/Hero'))
+const  StartButton = dynamic(() => import('@/lib/components/structures/home/StartButton'))
 
 const Home: NextPage = () => {
   return (

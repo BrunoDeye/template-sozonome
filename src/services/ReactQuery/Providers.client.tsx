@@ -14,10 +14,12 @@ interface Props {
   children: ReactNode;
 }
 
-export const Providers = ({ children }: Props) => {
+const Providers = ({ children }: Props) => {
   return (
     <QueryClientInstanceProvider>
       <AppQueryClientInstanceWrapper>{children}</AppQueryClientInstanceWrapper>
     </QueryClientInstanceProvider>
   );
 };
+
+export default Providers;

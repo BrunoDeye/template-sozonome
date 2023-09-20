@@ -19,7 +19,7 @@ type SelectBatteryProps = {
   setSelectedBattery: React.Dispatch<React.SetStateAction<string | undefined>>;
 };
 
-export function SelectBattery({
+export default function SelectBattery({
   selectedBattery,
   setSelectedBattery,
 }: SelectBatteryProps) {

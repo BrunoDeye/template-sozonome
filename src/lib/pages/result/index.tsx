@@ -1,21 +1,13 @@
-
-
 import type { NextPage } from 'next';
 import { ReactQueryHydrate } from '@/services/ReactQuery/ReactQueryHydrate';
 import getQueryClient from '@/services/ReactQuery/getQueryClient';
 // import { getPostsQueryFn } from '@/queryFns/postsQueryFns';
 import { dehydrate } from '@tanstack/react-query';
 import { getBatteriesQueryFn } from '@/services/QueryFns/batteryQueryFns';
-import Body from '@/lib/components/structures/result/Body';
+import dynamic from 'next/dynamic';
+// import Body from '@/lib/components/structures/result/Body';
 
-const battery = {
-  modelFullName: 'Dyness - PowerBox F-10.0 (200Ah)',
-  nominalVoltage: '48V',
-  nominalEnergy: 9.6,
-  dod: 0.8,
-  lifespan: 15,
-  quantity: 4,
-};
+const  Body = dynamic(() => import('@/lib/components/structures/result/Body'))
 
 const Result: NextPage = async () => {
   const queryClient = getQueryClient();
