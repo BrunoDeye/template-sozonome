@@ -50,9 +50,16 @@
     .print-show {
       display: block !important;
       visibility: visible !important;
+      height: 35vh;
     }
-  
   }
+
+  @media (max-width: 640px) {
+    .print-show {
+      height: 37vh;
+    }
+  }
+
   #loadingDiv {
     display: flex;
     top: 0;
