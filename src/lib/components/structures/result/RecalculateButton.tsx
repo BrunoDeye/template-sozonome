@@ -14,7 +14,6 @@ export default function RecalculateButton() {
     clearLocalStorage();
     useDataStore.persist.clearStorage();
     reset();
-    localStorage.removeItem('calculator-storage');
   }
 
   return (

@@ -10,13 +10,13 @@ const StartButton = () => {
     useLocalStorage('devices-list');
   const [starting, setStarting] = useState(false);
   const {
+    state: { place },
     actions: { reset },
   } = useDataStore();
   function handleCleaning() {
     clearLocalStorage();
     useDataStore.persist.clearStorage();
     reset();
-    localStorage.removeItem('calculator-storage');
     setStarting(true);
   }
   const [isClient, setIsClient] = useState(false);
@@ -29,7 +29,7 @@ const StartButton = () => {
     <div className="grid justify-items-center gap-2.5">
       <div className="flex items-center gap-2">
         {isClient ? (
-          savedDevicesList() || localStorage.getItem('calculator-storage') || starting ? (
+          savedDevicesList() || place !== '' || starting ? (
             <>
               <Button asChild variant="gradientBlue">
                 <Link href="/ambiente">Continuar Onde Parou</Link>
