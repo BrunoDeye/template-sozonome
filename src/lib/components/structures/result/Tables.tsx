@@ -76,7 +76,7 @@ type TableProps = VariantProps<typeof tableVariants> & {
   srcImg?: StaticImageData;
 };
 
-const toBase64 = (str: string) =>
+export const toBase64 = (str: string) =>
   typeof window === 'undefined'
     ? Buffer.from(str).toString('base64')
     : window.btoa(str)

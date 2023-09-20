@@ -22,6 +22,7 @@ import Industry from '@/images/Farm_house.svg';
 import IndustryDark from '@/images/Farm_house_dark.svg';
 import { useTheme } from 'next-themes';
 import LoadingDeye from '../../Loading';
+import { toBase64 } from '../result/Tables';
 
 const FormSchema = z.object({
   place: z.enum(['Residência', 'Indústria'], {
@@ -100,7 +101,7 @@ export default function Options() {
                           height={200}
                           width={200}
                           priority
-                          placeholder='blur'
+                          placeholder={`data:image/png;base64,${toBase64(House as any)}`}
                           alt="Casa na floresta"
                         />
                       ) : (
@@ -109,7 +110,7 @@ export default function Options() {
                           height={200}
                           width={200}
                           priority
-                          placeholder='blur'
+                          placeholder={`data:image/png;base64,${toBase64(HouseDark as any)}`}
                           alt="Casa na floresta"
                         />
                       )}
@@ -137,7 +138,7 @@ export default function Options() {
                           height={200}
                           width={200}
                           priority
-                          placeholder='blur'
+                          placeholder={`data:image/png;base64,${toBase64(Industry as any)}`}
                           alt="Casa na floresta"
                         />
                       ) : (
@@ -146,7 +147,7 @@ export default function Options() {
                           height={200}
                           width={200}
                           priority
-                          placeholder='blur'
+                          placeholder={`data:image/png;base64,${toBase64(IndustryDark as any)}`}
                           alt="Casa na floresta"
                         />
                       )}
