@@ -6,6 +6,9 @@ import { ThemeProvider } from '@/lib/components/theme-provider';
 // import Footer from './Footer';
 // import Header from './Header';
 import dynamic from 'next/dynamic';
+import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
+import { useDataStore } from '@/store/data';
+import { usePathname } from 'next/navigation';
 const  Header = dynamic(() => import('./Header'))
 const  Footer = dynamic(() => import('./Footer'), { ssr: false })
 
@@ -16,6 +19,7 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => {
   
   return (
+
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <div className="flex min-h-screen flex-col">
         <Header />
