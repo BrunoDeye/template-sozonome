@@ -12,6 +12,10 @@ import DevicesList from './DevicesList';
 import { Edit3 } from 'lucide-react';
 import Link from 'next/link';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
+import dynamic from 'next/dynamic';
+
+const TCInput = dynamic(() => import("@/lib/components/structures/devices/TCInput"))
+const Title = dynamic(() => import("@/lib/components/structures/devices/Title"))
 
 const initialState = [
   {
@@ -142,7 +146,7 @@ const DeviceCard = () => {
       if (item.id === id) {
         return {
           ...item,
-          quantity: parseFloat(newValue),
+          quantity: parseInt(newValue) || 1,
         };
       }
       return item;
@@ -167,7 +171,7 @@ const DeviceCard = () => {
   const handleDecrement = (id: number) => {
     const updatedItems = items.map((item) => {
       if (item.id === id) {
-        return { ...item, quantity: Math.max(item.quantity - 1, 0) };
+        return { ...item, quantity: Math.max(item.quantity - 1, 1) };
       }
       return item;
     });
@@ -232,20 +236,7 @@ const DeviceCard = () => {
 
   return (
     <div id="start" className="isolate flex flex-col px-6 py-4 sm:py-6 lg:px-6">
-      <div className="mx-auto max-w-4xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Equipamentos em Sua {isClient ? place : null}
-        </h2>
-        <p className="mt-2 text-sm leading-8">
-          Selecione o equipamento desejado a partir das opções do catálogo e
-          especifique a quantidade desejada, ou preencha manualmente se
-          necessário.
-        </p>
-        <p className="leading-2 mt-1 text-[13px] font-thin">
-          Os valores de Potência e Uso Diário são estimativas baseadas no
-          consumo médio brasileiro.
-        </p>
-      </div>
+      <Title />
       <div className="mx-auto mt-12 flex flex-col items-center justify-center">
         {isClient
           ? items.map((item) => (
@@ -484,28 +475,7 @@ const DeviceCard = () => {
       </div>
 
       <div className="space-y-2">
-        <div className="grid w-full items-center gap-1.5">
-          <Label
-            htmlFor="FC"
-            className="flex items-start gap-1 sm:mx-auto sm:w-auto"
-          >
-            FC (Fator de Correção)
-            <TCDescription />
-          </Label>
-            <Input
-              id="FC"
-              placeholder="0.94"
-              value={FC}
-              onChange={(e) => addFC(parseFloat(e.target.value) > 100 ? 99 : parseFloat(e.target.value.replace(/0+$/, '')) || 0)}
-              className="pl-[25px] block !appearance-none focus:border-none sm:mx-auto sm:w-auto"
-            />
-            <Label
-              htmlFor="FC"
-              className="text-[15px] sm:text-sm mx-auto z-10 origin-[0] my-auto -translate-y-[2.282rem] sm:-translate-y-[2.28rem] md:-translate-y-[2.224rem] max-[300px]:-translate-x-[34vw] max-[375px]:-translate-x-[38vw] max-[415px]:-translate-x-[39vw] max-[460px]:-translate-x-[39.5vw] max-[500px]:-translate-x-[40vw] max-[540px]:-translate-x-[40.5vw] max-[580px]:-translate-x-[41vw] -translate-x-[42vw] sm:-translate-x-[5rem]"
-            >
-              0,
-            </Label>
-        </div>
+        <TCInput />
         <div className="space-y-6 text-center">
           <Button
             variant="gradientDarkBlue"

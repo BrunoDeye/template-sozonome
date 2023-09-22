@@ -1,10 +1,11 @@
-import { formatInverter } from '@/utils/functions';
+import { formatAllInOne, formatInverter } from '@/utils/functions';
 import Tables from './Tables';
 import { useDataStore } from '@/store/data';
 import { useCalculateInvertersQuery } from '@/services/ReactQueryHooks/useCalculateInvertersQuery';
 import LoadingDeye from '../../Loading';
 import { useEffect } from 'react';
 import { ImageModelName, mapImages } from '@/utils/constants';
+import { useGetAllInOnes } from '@/services/ReactQueryHooks/useGetAllInOnes';
 
 export const inverters = [
   {
@@ -19,17 +20,20 @@ export const inverters = [
   },
 ];
 
-export default function InvertersList() {
-  const {
-    state: { grid, totalPower, place,},
-  } = useDataStore();
+export default function AllInOnesList() {
+  // const {
+  //   state: { systemType},
+  // } = useDataStore();
 
-  const requestData = {
-    gridVoltage: grid || '220V (Fase + Fase + Terra/Neutro)',
-    tPower: totalPower || 1,
-  };
-  const { invertersList, isLoading, isError } =
-    useCalculateInvertersQuery(requestData);
+  // const requestData = {
+  //   gridVoltage: grid || '220V (Fase + Fase + Terra/Neutro)',
+  //   tPower: totalPower || 1,
+  // };
+  // const { allInOnesData, isLoading, isError } =
+  //   useCalculateInvertersQuery(requestData);
+
+  const { data: allInOnesData, isLoading, isError } =
+    useGetAllInOnes();
 
   return isError ? (
     <span className="mx-auto flex w-full flex-col text-center">
@@ -38,7 +42,7 @@ export default function InvertersList() {
   ) : (
     <div className="flex flex-col gap-6">
       <h4 className="text-center text-xl font-bold tracking-tight sm:text-2xl">
-        Inversor Recomendado
+        All In One Recomendado
       </h4>
       {isLoading ? (
         <div className="mx-auto my-auto flex min-h-[377px] w-full items-center justify-center text-center">
@@ -49,18 +53,10 @@ export default function InvertersList() {
       ) : (
         <Tables
           variant="sky"
-          data={formatInverter(
-            invertersList!.filter((inverter) =>
-              invertersList![0].model.includes('HP')
-                ? inverter.model.includes('HP')
-                : inverter.model.includes('LP')
-            )[0]
+          data={formatAllInOne(
+            allInOnesData![0]
           )}
-          srcImg={mapImages(invertersList!.filter((inverter) =>
-            invertersList![0].model.includes('HP')
-              ? inverter.model.includes('HP')
-              : inverter.model.includes('LP')
-          )[0].model as ImageModelName)}
+          srcImg={mapImages(allInOnesData![0].model as ImageModelName)}
         />
       )}
 
@@ -70,29 +66,19 @@ export default function InvertersList() {
             <LoadingDeye />
           </div>
         </div>
-      ) : invertersList!.filter((inverter) =>
-          invertersList![0].model.includes('HP')
-            ? inverter.model.includes('HP')
-            : inverter.model.includes('LP')
-        ).length === 1 ? null : (
+      ) : allInOnesData!.length === 1 ? null : (
         <div className='print-hidden space-y-6'>
           <h4 className="text-center text-xl font-bold tracking-tight sm:text-2xl">
-            Outras Opções de Inversores
+            Outras Opções de All In One
           </h4>
-          {invertersList!
-            .filter((inverter) =>
-            invertersList![0].model.includes('HP')
-                ? inverter.model.includes('HP')
-                : inverter.model.includes('LP')
-            )
-            ?.slice(1)
-            .map((inverter) => (
-              <div key={inverter.model}>
+          {allInOnesData!.slice(1)
+            .map((allInOne) => (
+              <div key={allInOne.model}>
                 <Tables
                   variant="darkBlue"
-                  data={formatInverter(inverter)}
+                  data={formatAllInOne(allInOne)}
                   // srcImg={`/images/${inverter.model.replace(/\//g, '')}.png`}
-                  srcImg={mapImages(inverter.model as ImageModelName)}
+                  srcImg={mapImages(allInOne.model as ImageModelName)}
                 />
               </div>
             ))}

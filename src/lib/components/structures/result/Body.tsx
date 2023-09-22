@@ -14,14 +14,16 @@ import { useDataStore } from '@/store/data';
 // import PrintButton from './PrintButton';
 
 import LoadingDeye from '../../Loading';
+import AllInOnesList from './AllInOnesList';
 
-const  FadeIn = dynamic(() => import('@/lib/components/animations/FadeIn'))
-const  SelectBattery = dynamic(() => import('./SelectBattery'))
-const  Tables = dynamic(() => import('./Tables'))
-const  Title = dynamic(() => import('./Title'))
-const  InvertersList = dynamic(() => import('./InvertersList'))
-const  RecalculateButton = dynamic(() => import('./RecalculateButton'))
-const  PrintButton = dynamic(() => import('./PrintButton'))
+const FadeIn = dynamic(() => import('@/lib/components/animations/FadeIn'));
+const SelectBattery = dynamic(() => import('./SelectBattery'));
+const Tables = dynamic(() => import('./Tables'));
+const Title = dynamic(() => import('./Title'));
+const InvertersList = dynamic(() => import('./InvertersList'));
+const RecalculateButton = dynamic(() => import('./RecalculateButton'));
+const PrintButton = dynamic(() => import('./PrintButton'));
+const Batteries = dynamic(() => import('./Batteries'));
 
 export default function Body() {
   const [selectedBattery, setSelectedBattery] = useState<string | undefined>(
@@ -36,7 +38,7 @@ export default function Body() {
     quantity: '\u00A0',
   });
   const {
-    state: { FC, totalEnergy },
+    state: { FC, totalEnergy, systemType },
   } = useDataStore();
 
   const calculateBatteriesMutation = useCalculateBatteriesMutation();
@@ -72,29 +74,14 @@ export default function Body() {
       </FadeIn>
       <div className="space-y-6">
         <FadeIn className="w-full space-y-6" yMinus>
-          <InvertersList />
-          <div className="print-show invisible hidden"></div>
-          <h4 className="text-center text-xl font-bold tracking-tight sm:text-2xl">
-            Baterias
-          </h4>
-          <SelectBattery
-            selectedBattery={selectedBattery}
-            setSelectedBattery={setSelectedBattery}
-          />
-          {calculateBatteriesMutation.isLoading ? (
-            <div className="mx-auto my-auto flex min-h-[377px] w-full items-center justify-center text-center">
-              <div className="pb-12">
-                <LoadingDeye />
-              </div>
-            </div>
-          ) : battery.modelFullName !== '\u00A0' ? (
-            <Tables
-              srcImg={mapImages(battery.modelFullName as ImageModelName)}
-              data={formatBattery(battery)}
-            />
-          ) : (
-            <div className="h-[100px]">{'\u00A0'}</div>
-          )}
+          {systemType === 'AllInOne' ? <AllInOnesList /> : <InvertersList />}
+          <div
+            className={`${
+              systemType !== 'AllInOne' ? 'print-show' : ''
+            } invisible hidden`}
+          ></div>
+
+          {systemType !== 'AllInOne' ? <Batteries /> : null}
           <div className="text-center">
             <PrintButton />
           </div>

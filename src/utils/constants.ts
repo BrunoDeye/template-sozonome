@@ -6,6 +6,8 @@ import BOSG from '@/images/batteries/Deye - BOS-G (100Ah).png'
 import RWM5_3 from '@/images/batteries/Deye - RW-M5.3 (104Ah).png'
 import RWM6_1 from '@/images/batteries/Deye - RW.M6.1 (120Ah).png'
 import SEG5_1 from '@/images/batteries/Deye - SE-G5.1 PRO (100Ah).png'
+import GEF60 from '@/images/allInOne/GE-F60.png'
+import MSG230 from '@/images/allInOne/MS-G230.png'
 import { StaticImageData } from 'next/image'
 
 export const imagesMap = {
@@ -25,6 +27,8 @@ export const imagesMap = {
   'SUN-35K-SG01/04HP3-US': sun35KSG0104HP3,
   'SUN-40K-SG01/04HP3-EU': sun35KSG0104HP3,
   'SUN-50K-SG01/04HP3-EU': sun35KSG0104HP3,
+  'GE-F60': GEF60,
+  'MS-G230': MSG230,
   'Deye - BOS-G (100Ah)': BOSG,
   'Deye - RW-M5.3 (104Ah)': RWM5_3,
   'Deye - RW.M6.1 (120Ah)': RWM6_1,

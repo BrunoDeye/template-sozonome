@@ -23,7 +23,7 @@ export default function RecalculateButton() {
       className="w-full sm:mx-auto sm:w-auto print-hidden"
       asChild
     >
-      <Link href="/ambiente">Recalcular do Início</Link>
+      <Link href="/">Recalcular do Início</Link>
     </Button>
   );
 }

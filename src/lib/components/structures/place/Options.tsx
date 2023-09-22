@@ -36,23 +36,29 @@ export default function Options() {
     actions: { addPlace },
     
   } = useDataStore();
+
   const router = useRouter();
   const { theme } = useTheme();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
 
+  
   const onSubmit: SubmitHandler<z.infer<typeof FormSchema>> = (
     data: z.infer<typeof FormSchema>
   ) => {
     addPlace(data.place);
-
-    router.push('/grid', { scroll: false });
+    if (data.place === "Residência") {
+      router.push('/grid', { scroll: false });
+    } else {
+      router.push('/tipo', { scroll: false });
+    }
   };
 
   const onError: SubmitErrorHandler<z.infer<typeof FormSchema>> = (errors) =>
     console.log(errors);
   const [isClient, setIsClient] = useState(false);
+
 
   useEffect(() => {
     setIsClient(true);
@@ -82,7 +88,7 @@ export default function Options() {
                   className="grid w-full"
                 >
                  
-                  <FormItem className="relative flex w-full items-center">
+                  <FormItem onClick={() => router.prefetch('/grid')} className="relative flex w-full items-center">
                     <FormControl>
                       <RadioGroupItem
                         className="peer hidden"
@@ -101,7 +107,7 @@ export default function Options() {
                           height={200}
                           width={200}
                           priority
-                          placeholder={`data:image/svg;base64,${toBase64(House as any)}`}
+                          placeholder={`data:image/svg+xml;base64,${toBase64(House as any)}`}
                           alt="Casa na floresta"
                         />
                       ) : (
@@ -110,16 +116,16 @@ export default function Options() {
                           height={200}
                           width={200}
                           priority
-                          placeholder={`data:image/svg;base64,${toBase64(HouseDark as any)}`}
+                          placeholder={`data:image/svg+xml;base64,${toBase64(HouseDark as any)}`}
                           alt="Casa na floresta"
                         />
                       )}
-                      {/* <a href="https://storyset.com/nature" className='text-[10px]'>Nature illustrations by Storyset</a> */}
+                      {/* <a href="https://storyset.com/nature" className='text-[8px]'>Nature illustrations by Storyset</a> */}
                       <h4>Residencial e Comercial</h4>
                     </FormLabel>
                   </FormItem>
 
-                  <FormItem className="relative flex w-full items-center">
+                  <FormItem onClick={() => router.prefetch('/tipo')} className="relative flex w-full items-center">
                     <FormControl>
                       <RadioGroupItem
                         className="peer hidden"
@@ -138,7 +144,7 @@ export default function Options() {
                           height={200}
                           width={200}
                           priority
-                          placeholder={`data:image/svg;base64,${toBase64(Industry as any)}`}
+                          placeholder={`data:image/svg+xml;base64,${toBase64(Industry as any)}`}
                           alt="Casa na floresta"
                         />
                       ) : (
@@ -147,12 +153,12 @@ export default function Options() {
                           height={200}
                           width={200}
                           priority
-                          placeholder={`data:image/svg;base64,${toBase64(IndustryDark as any)}`}
+                          placeholder={`data:image/svg+xml;base64,${toBase64(IndustryDark as any)}`}
                           alt="Casa na floresta"
                         />
                       )}
 
-                      {/* <a href="https://storyset.com/nature" className='text-[10px]'>Nature illustrations by Storyset</a> */}
+                      {/* <a href="https://storyset.com/nature" className='text-[8px]'>Nature illustrations by Storyset</a> */}
                       <h4>Industrial</h4>
                     </FormLabel>
                   </FormItem> 

@@ -44,8 +44,8 @@
       position: static !important;
     }
     .print-hidden {
-      display: none;
-      visibility: hidden;
+      display: none !important;
+      visibility: hidden !important;
     }
     .print-show {
       display: block !important;

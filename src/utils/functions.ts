@@ -1,3 +1,5 @@
+import { AllInOneData } from "@/services/types/AllInOneData";
+
 export function removeAccents(input: string) {
   const accents =
     'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ';
@@ -13,11 +15,40 @@ export function removeAccents(input: string) {
     .join('');
 }
 
+
+
+
+export const formatAllInOne = (allInOne: AllInOneData ) => [
+  {
+    attribute: 'Inversor',
+    value: allInOne.model,
+  },
+  {
+    attribute: 'Potência[W]',
+    value: allInOne.nominalPower,
+  },
+  {
+    attribute: 'Corrente (Bateria)',
+    value: `${allInOne.battery.current} A`,
+  },
+  {
+    attribute: 'Vida Útil / Dod (Bateria)',
+    value: `${allInOne.battery.lifespan} anos / ${allInOne.battery.dod}`,
+  },
+  {
+    attribute: 'Quantidade',
+    value: 1,
+  },
+  
+]
+
 type Inverter = {
   model: string;
   nominalPower: number;
   quantity: number;
 };
+
+
 
 export const formatInverter = (inverter: Inverter) => !inverter.model || inverter.model === '\u00A0' ? [
   {
