@@ -15,6 +15,7 @@ import Image, { StaticImageData } from 'next/image';
 import InversorImg from '@/images/SUN-6K-SG04LP3-US-LV.png';
 import { mapImages } from '@/utils/constants';
 import { useEffect, useState } from 'react';
+import SUN8kBLUR from '@/images/inverters/SUN-8K-SG01LP1-EU-blur.png'
 
 const tableVariants = cva(
   'flex flex-wrap items-center justify-center px-2 py-2 sm:flex-nowrap',
@@ -46,6 +47,9 @@ const inverters = [
     quantity: 2,
   },
 ];
+
+
+
 
 const defaultData = [
   {
@@ -105,7 +109,7 @@ export default function Tables({
               height={222}
               width={400}
               priority
-              placeholder={`data:image/png;base64,${toBase64(srcImg as any)}`}
+              placeholder='blur'
               alt="Inversor/Bateria Deye"
               src={srcImg}
               onLoadingComplete={() => setLoaded(true)}

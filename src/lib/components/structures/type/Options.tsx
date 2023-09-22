@@ -103,9 +103,7 @@ export default function Options() {
                             height={222}
                             width={400}
                             priority
-                            placeholder={`data:image/png;base64,${toBase64(
-                              sun5KSG0103LP1 as any
-                            )}`}
+                            placeholder="blur"
                             alt="Inversor/Bateria Deye"
                             src={sun5KSG0103LP1}
                             onLoadingComplete={() => setLoaded(true)}
@@ -142,9 +140,7 @@ export default function Options() {
                             height={222}
                             width={400}
                             priority
-                            placeholder={`data:image/png;base64,${toBase64(
-                              GEF60 as any
-                            )}`}
+                            placeholder="blur"
                             alt="Inversor/Bateria Deye"
                             src={GEF60}
                             onLoadingComplete={() => setLoaded(true)}

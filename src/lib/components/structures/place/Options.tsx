@@ -104,9 +104,7 @@ export default function Options() {
                             width={200}
                             priority
                             className="absolute duration-700 opacity-100 ease-linear transition-all dark:opacity-0"
-                            placeholder={`data:image/svg+xml;base64,${toBase64(
-                              House as any
-                            )}`}
+                            
                             alt="Casa na floresta"
                           />
                           <Image
@@ -115,9 +113,7 @@ export default function Options() {
                             width={200}
                             priority
                             className="opacity-0 duration-700 ease-linear transition-all dark:opacity-100"
-                            placeholder={`data:image/svg+xml;base64,${toBase64(
-                              HouseDark as any
-                            )}`}
+                            
                             alt="Casa na floresta"
                           />
                         </div>
@@ -150,9 +146,7 @@ export default function Options() {
                             width={200}
                             priority
                             className="absolute duration-700 opacity-100 ease-linear transition-all dark:opacity-0"
-                            placeholder={`data:image/svg+xml;base64,${toBase64(
-                              Industry as any
-                            )}`}
+                          
                             alt="Casa na floresta"
                           />
                           <Image
@@ -161,9 +155,6 @@ export default function Options() {
                             width={200}
                             priority
                             className="opacity-0 duration-700 transition-all ease-linear dark:opacity-100"
-                            placeholder={`data:image/svg+xml;base64,${toBase64(
-                              IndustryDark as any
-                            )}`}
                             alt="Casa na floresta"
                           />
                         </div>
