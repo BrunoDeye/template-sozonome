@@ -1,11 +1,8 @@
-'use client';
 import Image from 'next/image';
 import logoDeye from '@/images/logoDeye.png';
 import logoDeyeWhite from '@/images/logoDeyeWhite.png';
-import { useTheme } from 'next-themes';
 
 const Hero = () => {
-  const { theme } = useTheme();
 
   return (
     <div className="grid gap-2.5">
