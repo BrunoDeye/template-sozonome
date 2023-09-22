@@ -94,7 +94,7 @@ const GridOptions = () => {
                       {systemType !== 'AllInOne' ? (
                         <>
                           {place !== 'Indústria' ? (
-                            <FormItem className="relative flex w-full items-center">
+                            <FormItem onClick={() => router.prefetch('/devices')} className="relative flex w-full items-center">
                               <FormControl>
                                 <RadioGroupItem
                                   className="peer hidden"
@@ -126,7 +126,7 @@ const GridOptions = () => {
                             </FormItem>
                           ) : null}
 
-                          <FormItem className="relative flex w-full items-center">
+                          <FormItem onClick={() => router.prefetch('/devices')} className="relative flex w-full items-center">
                             <FormControl>
                               <RadioGroupItem
                                 className="peer hidden"
@@ -157,7 +157,7 @@ const GridOptions = () => {
                             </div>
                           </FormItem>
 
-                          <FormItem className="relative flex w-full items-center">
+                          <FormItem onClick={() => router.prefetch('/devices')} className="relative flex w-full items-center">
                             <FormControl>
                               <RadioGroupItem
                                 className="peer hidden"
@@ -188,7 +188,7 @@ const GridOptions = () => {
                             </div>
                           </FormItem>
 
-                          <FormItem className="relative flex w-full items-center">
+                          <FormItem onClick={() => router.prefetch('/devices')} className="relative flex w-full items-center">
                             <FormControl>
                               <RadioGroupItem
                                 className="peer hidden"
@@ -218,7 +218,7 @@ const GridOptions = () => {
                               </svg>
                             </div>
                           </FormItem>
-                          <FormItem className="relative flex w-full items-center">
+                          <FormItem onClick={() => router.prefetch('/devices')} className="relative flex w-full items-center">
                             <FormControl>
                               <RadioGroupItem
                                 className="peer hidden"
@@ -251,7 +251,7 @@ const GridOptions = () => {
                         </>
                       ) : (
                         <>
-                          <FormItem className="relative flex w-full items-center">
+                          <FormItem onClick={() => router.prefetch('/devices')} className="relative flex w-full items-center">
                             <FormControl>
                               <RadioGroupItem
                                 className="peer hidden"
@@ -281,7 +281,7 @@ const GridOptions = () => {
                               </svg>
                             </div>
                           </FormItem>
-                          <FormItem className="relative flex w-full items-center">
+                          <FormItem onClick={() => router.prefetch('/devices')} className="relative flex w-full items-center">
                             <FormControl>
                               <RadioGroupItem
                                 className="peer hidden"
