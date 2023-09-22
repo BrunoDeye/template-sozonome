@@ -10,7 +10,7 @@ const Hero = () => {
       <div className="relative">
 
         <Image
-          className="absolute translate-x-0 scale-100 transition-all dark:-translate-x-10 dark:scale-0"
+          className="absolute duration-700 opacity-100 ease-linear transition-all dark:opacity-0"
           width={75}
           quality={100}
           height={20}
@@ -18,7 +18,7 @@ const Hero = () => {
           src={logoDeye}
         />
         <Image
-          className="translate-x-10 scale-0 transition-all dark:translate-x-0 dark:scale-100"
+          className="opacity-0 duration-700 ease-linear transition-all dark:opacity-100"
           width={75}
           quality={100}
           height={20}
