@@ -107,7 +107,7 @@ export default function Tables({
                 loaded ? 'unblur' : ''
               } clip-your-needful-style mx-auto dark:[--shadow-inversor:#333132]`}
               height={222}
-              width={400}
+              width={202}
               priority
               placeholder='blur'
               alt="Inversor/Bateria Deye"
