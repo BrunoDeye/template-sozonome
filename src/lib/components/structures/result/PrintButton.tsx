@@ -15,7 +15,7 @@ function PrintButton() {
     setTheme('light');
     setTimeout(() => {
       window.print();
-    }, 100);
+    }, 600);
     setTimeout(() => {
       setTheme(theme || systemTheme as string);
     }, 1000);
