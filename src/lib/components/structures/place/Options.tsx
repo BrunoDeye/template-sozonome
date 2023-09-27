@@ -46,11 +46,12 @@ export default function Options() {
     data: z.infer<typeof FormSchema>
   ) => {
     addPlace(data.place);
-    if (data.place === 'Residência') {
-      router.push('/grid', { scroll: false });
-    } else {
-      router.push('/tipo', { scroll: false });
-    }
+    // if (data.place === 'Residência') {
+    //   router.push('/grid', { scroll: false });
+    // } else {
+    //   router.push('/tipo', { scroll: false });
+    // }
+    router.push('/grid', { scroll: false });
   };
 
   const onError: SubmitErrorHandler<z.infer<typeof FormSchema>> = (errors) =>
@@ -124,7 +125,7 @@ export default function Options() {
                     </FormItem>
 
                     <FormItem
-                      onClick={() => router.prefetch('/tipo')}
+                      onClick={() => router.prefetch('/grid')}
                       className="relative flex w-full items-center"
                     >
                       <FormControl>

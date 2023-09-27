@@ -16,9 +16,7 @@ import * as z from 'zod';
 import { Button } from '../../ui/button';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { useTheme } from 'next-themes';
 import LoadingDeye from '../../Loading';
-import { toBase64 } from '../result/Tables';
 import GEF60 from '@/images/allInOne/GE-F60.png';
 import sun5KSG0103LP1 from '@/images/inverters/SUN-5K-SG0103LP1-EU.png'
 
@@ -33,9 +31,11 @@ export default function Options() {
     state: { systemType },
     actions: { addSystemType },
   } = useDataStore();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const router = useRouter();
-  const { theme } = useTheme();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
