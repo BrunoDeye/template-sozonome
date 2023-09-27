@@ -475,7 +475,7 @@ const DeviceCard = () => {
       </div>
 
       <div className="space-y-2">
-        <TCInput />
+        
         <div className="space-y-6 text-center">
           <Button
             variant="gradientDarkBlue"
@@ -484,10 +484,12 @@ const DeviceCard = () => {
           >
             Adicionar
           </Button>
+         
           <Separator className="sm:mx-auto sm:w-[400px]" />
+          <TCInput />
           <div className="space-y-6 text-center">
             <DisplayTotal />
-
+                          
             {isClient ? (
               <Button
                 variant="gradientSky"

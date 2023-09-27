@@ -12,7 +12,7 @@ function TCInput() {
   } = useDataStore();
 
   return (
-    <div className="grid w-full items-center gap-1.5">
+    <div className="grid w-full items-center space-y-[0.4rem]">
       <Label
         htmlFor="FC"
         className="flex items-start gap-1 sm:mx-auto sm:w-auto"

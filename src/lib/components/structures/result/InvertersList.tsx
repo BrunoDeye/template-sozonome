@@ -37,7 +37,7 @@ export default function InvertersList() {
     </span>
   ) : (
     <div className="flex flex-col gap-6">
-      <h4 className="text-center text-xl font-bold tracking-tight sm:text-2xl">
+      <h4 className="text-center text-xl font-bold tracking-tight sm:text-2xl margin-print-fixer">
         Inversor Recomendado
       </h4>
       {isLoading ? (

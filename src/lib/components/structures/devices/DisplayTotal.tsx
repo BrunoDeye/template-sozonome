@@ -20,7 +20,7 @@ const DisplayTotal = () => {
     setIsClient(true);
   }, []);
   return (
-    <div className="leading-2 mx-auto flex items-start justify-between gap-2 sm:mx-auto sm:w-[400px]">
+    <div className="leading-2 -mt-6 mx-auto flex items-start justify-between gap-2 sm:mx-auto sm:w-[400px]">
       <div>
         <h6 className="text-[14px] font-thin">TOTAL:</h6>
       </div>

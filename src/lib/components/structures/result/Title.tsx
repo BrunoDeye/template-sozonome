@@ -13,16 +13,23 @@ export default function Title() {
   }, []);
 
   return (
-    <div className="mx-auto mb-12 max-w-4xl text-center">
-      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+    <div className="title-margin-print-fixer mx-auto mb-12 max-w-4xl text-center">
+      <h2 className="print-hidden text-3xl font-bold tracking-tight sm:text-4xl">
         Resultados
       </h2>
       <p className="mt-2 text-sm leading-8">
-        Inversor(es) mais indicado(s) para sua rede{' '}
-        <strong className="tracking-tight">{isClient ? grid : null}</strong> e
-        escolha da Sua Bateria.
+        <span className="print-hidden">
+          Inversor(es) mais indicado(s) para sua rede{' '}
+        </span>
+        <span className="truncate">
+          <span className="print-show-span invisible hidden print-grid">Sua rede: </span>
+          <strong className="tracking-tight print-grid">
+            {isClient ? grid : null}
+          </strong>{' '}
+          <span className="print-hidden"> e escolha da Sua Bateria.</span>
+        </span>
       </p>
-      <p className="leading-2 mt-1 text-[13px] font-thin">
+      <p className="leading-2 print-hidden mt-1 text-[13px] font-thin">
         Uma seleção de
         {isClient ? (
           systemType === 'AllInOne' ? (

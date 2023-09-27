@@ -15,6 +15,8 @@ import { useDataStore } from '@/store/data';
 
 import LoadingDeye from '../../Loading';
 import AllInOnesList from './AllInOnesList';
+import DisplayTotal from '../devices/DisplayTotal';
+import { Separator } from '../../ui/separator';
 
 const FadeIn = dynamic(() => import('@/lib/components/animations/FadeIn'));
 const SelectBattery = dynamic(() => import('./SelectBattery'));
@@ -38,7 +40,7 @@ export default function Body() {
     quantity: '\u00A0',
   });
   const {
-    state: { FC, totalEnergy, systemType },
+    state: { FC, totalEnergy, totalPower, systemType },
   } = useDataStore();
 
   const calculateBatteriesMutation = useCalculateBatteriesMutation();
@@ -67,11 +69,18 @@ export default function Body() {
     }
   }, [selectedBattery]);
 
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <>
       <FadeIn className="w-full" yMinus>
         <Title />
       </FadeIn>
+
       <div className="space-y-6">
         <FadeIn className="w-full space-y-6" yMinus>
           {systemType === 'AllInOne' ? <AllInOnesList /> : <InvertersList />}
@@ -89,6 +98,24 @@ export default function Body() {
             <RecalculateButton />
           </div>
         </FadeIn>
+        {isClient ? (
+          <div className="print-show invisible hidden -mb-4">
+            <hr className='mb-6 mt-0 !w-auto'/>
+            <p className="flex justify-between gap-4 text-2xl font-thin dark:text-white max-[317px]:text-xl">
+              {totalPower}
+              <span className="font-bold tracking-tight">
+                Potência Total [W]
+              </span>
+            </p>
+            <p className="flex justify-between gap-4 text-2xl font-thin dark:text-white max-[317px]:text-xl">
+              {totalEnergy}
+              <span className="font-bold tracking-tight">
+                {' '}
+                Consumo Total [Wh]
+              </span>
+            </p>
+          </div>
+        ) : null}
       </div>
     </>
   );

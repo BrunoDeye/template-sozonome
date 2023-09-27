@@ -29,7 +29,7 @@ const Footer = () => {
   }, [pathname, place]);
 
   return (
-    <footer className="wrapper mt-6">
+    <footer className="wrapper mt-6 print-hidden">
       <div className="flex">
         <p className="flex flex-col items-center justify-center gap-2 text-xs">
           <div className="relative">

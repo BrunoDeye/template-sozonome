@@ -58,6 +58,23 @@ const RootLayout = ({ children }: RootLayoutProps) => {
           <Layout>
           
             <Suspense  fallback={ <Loading />}>
+              <div className='watermark'></div>
+              <div className='watermark !hidden'></div>
+              <div className='watermark'></div>
+              <div className='watermark !hidden'></div>
+              <div className='watermark'></div>
+              <div className='watermark'></div>
+              <div className='watermark !hidden'></div>
+              <div className='watermark'></div>
+              <div className='watermark !hidden'></div>
+              <div className='watermark'></div>
+              <div className='watermark !hidden'></div>
+              <div className='watermark'></div>
+              <div className='watermark !hidden'></div>
+              <div className='watermark'></div>
+              <div className='watermark !hidden'></div>
+              <div className='watermark'></div>
+             
               <div className="flex-1">{children}</div>
             </Suspense>
   

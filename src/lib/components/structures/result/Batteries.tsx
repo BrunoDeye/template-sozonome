@@ -49,7 +49,7 @@ function Batteries() {
 
   return (
     <>
-      <h4 className="text-center text-xl font-bold tracking-tight sm:text-2xl">
+      <h4 className="margin-print-fixer text-center text-xl font-bold tracking-tight sm:text-2xl">
         Baterias
       </h4>
       <SelectBattery
