@@ -6,6 +6,7 @@ function Watermark() {
   return (
     <>
       <Image
+        priority
         className="watermark"
         height={100}
         width={219}
@@ -14,6 +15,7 @@ function Watermark() {
       />
 
       <Image
+        priority
         className="watermark"
         height={100}
         width={219}
@@ -22,6 +24,7 @@ function Watermark() {
       />
 
       <Image
+        priority
         className="watermark"
         height={100}
         width={219}
@@ -30,6 +33,7 @@ function Watermark() {
       />
 
       <Image
+        priority
         className="watermark"
         height={100}
         width={219}
@@ -38,6 +42,7 @@ function Watermark() {
       />
 
       <Image
+        priority
         className="watermark"
         height={100}
         width={219}
@@ -45,6 +50,7 @@ function Watermark() {
         alt="watermark"
       />
       <Image
+        priority
         className="watermark"
         height={100}
         width={219}
@@ -52,6 +58,7 @@ function Watermark() {
         alt="watermark"
       />
       <Image
+        priority
         className="watermark"
         height={100}
         width={219}
@@ -59,6 +66,7 @@ function Watermark() {
         alt="watermark"
       />
       <Image
+        priority
         className="watermark"
         height={100}
         width={219}
@@ -66,6 +74,7 @@ function Watermark() {
         alt="watermark"
       />
       <Image
+        priority
         className="watermark"
         height={100}
         width={219}
@@ -73,6 +82,7 @@ function Watermark() {
         alt="watermark"
       />
       <Image
+        priority
         className="watermark"
         height={100}
         width={219}
@@ -80,6 +90,7 @@ function Watermark() {
         alt="watermark"
       />
       <Image
+        priority
         className="watermark"
         height={100}
         width={219}
@@ -87,6 +98,7 @@ function Watermark() {
         alt="watermark"
       />
       <Image
+        priority
         className="watermark"
         height={100}
         width={219}
@@ -94,6 +106,7 @@ function Watermark() {
         alt="watermark"
       />
       <Image
+        priority
         className="watermark"
         height={100}
         width={219}
