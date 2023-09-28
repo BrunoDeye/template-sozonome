@@ -1,73 +1,105 @@
+import Image from 'next/image';
 import React from 'react';
-// import logoDeye from '@/images/logo-deye-min.png';
+import logoDeye from '@/images/logo-deye-min.png';
 
 function Watermark() {
   return (
     <>
-      <div
-        // style={{ backgroundImage: `url(${logoDeye.src})` }}
+      <Image
         className="watermark"
-      ></div>
-      <div
-        // style={{ backgroundImage: `url(${logoDeye.src})` }}
-        className="watermark !hidden"
-      ></div>
-      <div
-        // style={{ backgroundImage: `url(${logoDeye.src})` }}
+        height={100}
+        width={219}
+        src={logoDeye}
+        alt="watermark"
+      />
+
+      <Image
         className="watermark"
-      ></div>
-      <div
-        // style={{ backgroundImage: `url(${logoDeye.src})` }}
-        className="watermark !hidden"
-      ></div>
-      <div
-        // style={{ backgroundImage: `url(${logoDeye.src})` }}
+        height={100}
+        width={219}
+        src={logoDeye}
+        alt="watermark"
+      />
+
+      <Image
         className="watermark"
-      ></div>
-      <div
-        // style={{ backgroundImage: `url(${logoDeye.src})` }}
+        height={100}
+        width={219}
+        src={logoDeye}
+        alt="watermark"
+      />
+
+      <Image
         className="watermark"
-      ></div>
-      <div
-        // style={{ backgroundImage: `url(${logoDeye.src})` }}
-        className="watermark !hidden"
-      ></div>
-      <div
-        // style={{ backgroundImage: `url(${logoDeye.src})` }}
+        height={100}
+        width={219}
+        src={logoDeye}
+        alt="watermark"
+      />
+
+      <Image
         className="watermark"
-      ></div>
-      <div
-        // style={{ backgroundImage: `url(${logoDeye.src})` }}
-        className="watermark !hidden"
-      ></div>
-      <div
-        // style={{ backgroundImage: `url(${logoDeye.src})` }}
+        height={100}
+        width={219}
+        src={logoDeye}
+        alt="watermark"
+      />
+      <Image
         className="watermark"
-      ></div>
-      <div
-        // style={{ backgroundImage: `url(${logoDeye.src})` }}
-        className="watermark !hidden"
-      ></div>
-      <div
-        // style={{ backgroundImage: `url(${logoDeye.src})` }}
+        height={100}
+        width={219}
+        src={logoDeye}
+        alt="watermark"
+      />
+      <Image
         className="watermark"
-      ></div>
-      <div
-        // style={{ backgroundImage: `url(${logoDeye.src})` }}
-        className="watermark !hidden"
-      ></div>
-      <div
-        // style={{ backgroundImage: `url(${logoDeye.src})` }}
+        height={100}
+        width={219}
+        src={logoDeye}
+        alt="watermark"
+      />
+      <Image
         className="watermark"
-      ></div>
-      <div
-        // style={{ backgroundImage: `url(${logoDeye.src})` }}
-        className="watermark !hidden"
-      ></div>
-      <div
-        // style={{ backgroundImage: `url(${logoDeye.src})` }}
+        height={100}
+        width={219}
+        src={logoDeye}
+        alt="watermark"
+      />
+       <Image
         className="watermark"
-      ></div>
+        height={100}
+        width={219}
+        src={logoDeye}
+        alt="watermark"
+      />
+       <Image
+        className="watermark"
+        height={100}
+        width={219}
+        src={logoDeye}
+        alt="watermark"
+      />
+       <Image
+        className="watermark"
+        height={100}
+        width={219}
+        src={logoDeye}
+        alt="watermark"
+      />
+      <Image
+        className="watermark"
+        height={100}
+        width={219}
+        src={logoDeye}
+        alt="watermark"
+      />
+      <Image
+        className="watermark"
+        height={100}
+        width={219}
+        src={logoDeye}
+        alt="watermark"
+      />
     </>
   );
 }

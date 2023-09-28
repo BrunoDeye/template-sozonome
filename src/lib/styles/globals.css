@@ -27,8 +27,8 @@
     @apply mx-auto px-1 py-6 sm:p-6;
     max-width: 100vw;
     -webkit-print-color-adjust: exact !important;
-    color-adjust: exact !important;                 /* Firefox 48 – 96 */
-    print-color-adjust: exact !important; 
+    color-adjust: exact !important; /* Firefox 48 – 96 */
+    print-color-adjust: exact !important;
   }
 
   .remove-arrow::-webkit-inner-spin-button,
@@ -45,73 +45,64 @@
     position: fixed;
     top: 0;
     left: 0;
-    min-width: 100vw;
-    min-height: 100vh;
-    background-image: url('../../images/logo-deye-min.png');
-    background-repeat: no-repeat;
-    background-size: 219px 100px;
+    min-width: 219px;
+    min-height: 100px;
+    /* background-image: url('../../images/logo-deye-min.png'); */
     opacity: 0.1;
     pointer-events: none; /* Impede que a marca d'água seja clicável */
-    transform: rotate(-30deg);
     z-index: 9999;
   }
 
   .watermark:nth-of-type(1) {
-    background-position: 260px 0; /* Position of the first repetition */
+    transform: rotate(-30deg) translate(25px, 30px); 
   }
-  
+
   .watermark:nth-of-type(2) {
-    background-position: 260px 200px; /* Position of the second repetition */
+    transform: rotate(-30deg) translate(300px, 200px); 
   }
-  
+
   .watermark:nth-of-type(3) {
-    background-position: 260px 400px; /* Position of the third repetition */
+    transform: rotate(-30deg) translate(25px, 350px); 
   }
+
   .watermark:nth-of-type(4) {
-    background-position: 260px 600px; /* Position of the third repetition */
+    transform: rotate(-30deg) translate(25px, 650px); 
   }
+
   .watermark:nth-of-type(5) {
-    background-position: 260px 800px; /* Position of the third repetition */
+    transform: rotate(-30deg) translate(25px, 950px); 
   }
-
   .watermark:nth-of-type(6) {
-    background-position: 500px 200px; /* Position of the first repetition */
+    transform: rotate(-30deg) translate(300px, 500px); 
   }
-  
+
   .watermark:nth-of-type(7) {
-    background-position: 500px 400px; /* Position of the second repetition */
+    transform: rotate(-30deg) translate(300px, 800px); 
+  }
+
+  .watermark:nth-of-type(8) {
+    transform: rotate(-30deg) translate(-250px, 200px); 
+  }
+
+  .watermark:nth-of-type(9) {
+    transform: rotate(-30deg) translate(-250px, 500px); 
+  }
+
+  .watermark:nth-of-type(10) {
+    transform: rotate(-30deg) translate(-250px, 800px); 
   }
   
-  .watermark:nth-of-type(8) {
-    background-position: 500px 600px; /* Position of the third repetition */
-  }
-  .watermark:nth-of-type(9) {
-    background-position: 500px 800px; /* Position of the third repetition */
-  }
-  .watermark:nth-of-type(10) {
-    background-position: 500px 1000px; /* Position of the third repetition */
-  }
-
-
   .watermark:nth-of-type(11) {
-    background-position: 0 0; /* Position of the third repetition */
+    transform: rotate(-30deg) translate(-250px, 1100px); 
   }
 
   .watermark:nth-of-type(12) {
-    background-position: 0 200px; /* Position of the first repetition */
+    transform: rotate(-30deg) translate(-500px, 650px); 
   }
   
   .watermark:nth-of-type(13) {
-    background-position: 0 400px; /* Position of the second repetition */
+    transform: rotate(-30deg) translate(550px, 350px); 
   }
-  
-  .watermark:nth-of-type(14) {
-    background-position: 0 600px; /* Position of the third repetition */
-  }
-  .watermark:nth-of-type(15) {
-    background-position: 0 800px; /* Position of the third repetition */
-  }
-
 
 }
 
@@ -126,7 +117,6 @@
     body {
       font-size: xx-small !important;
       overflow: auto;
-     
     }
     .print-hidden {
       display: none !important;
@@ -343,7 +333,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    
   }
 }
 

@@ -2,7 +2,7 @@
 import dynamic from 'next/dynamic';
 import { formatBattery } from '@/utils/functions';
 import { ImageModelName, mapImages } from '@/utils/constants';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useCalculateBatteriesMutation } from '@/services/ReactQueryHooks/useCalculateBatteriesMutation';
 import { useDataStore } from '@/store/data';
 // import FadeIn from '../../animations/FadeIn';
@@ -26,6 +26,7 @@ const InvertersList = dynamic(() => import('./InvertersList'));
 const RecalculateButton = dynamic(() => import('./RecalculateButton'));
 const PrintButton = dynamic(() => import('./PrintButton'));
 const Batteries = dynamic(() => import('./Batteries'));
+import { useReactToPrint } from 'react-to-print';
 
 export default function Body() {
   const [selectedBattery, setSelectedBattery] = useState<string | undefined>(
@@ -75,6 +76,7 @@ export default function Body() {
     setIsClient(true);
   }, []);
 
+
   return (
     <>
       <FadeIn className="w-full" yMinus>
@@ -91,31 +93,9 @@ export default function Body() {
           ></div>
 
           {systemType !== 'AllInOne' ? <Batteries /> : null}
-          <div className="text-center">
-            <PrintButton />
-          </div>
-          <div className="text-center">
-            <RecalculateButton />
-          </div>
+          
         </FadeIn>
-        {isClient ? (
-          <div className="print-show invisible hidden -mb-4">
-            <hr className='mb-6 mt-0 !w-auto'/>
-            <p className="flex justify-between gap-4 text-2xl font-thin dark:text-white max-[317px]:text-xl">
-              {totalPower}
-              <span className="font-bold tracking-tight">
-                Potência Total [W]
-              </span>
-            </p>
-            <p className="flex justify-between gap-4 text-2xl font-thin dark:text-white max-[317px]:text-xl">
-              {totalEnergy}
-              <span className="font-bold tracking-tight">
-                {' '}
-                Consumo Total [Wh]
-              </span>
-            </p>
-          </div>
-        ) : null}
+        
       </div>
     </>
   );
