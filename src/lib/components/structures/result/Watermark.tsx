@@ -1,5 +1,5 @@
 import React from 'react';
-import logoDeye from '@/images/logo-deye-min.png';
+// import logoDeye from '@/images/logo-deye-min.png';
 
 function Watermark() {
   return (
