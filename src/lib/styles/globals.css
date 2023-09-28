@@ -47,7 +47,7 @@
     left: 0;
     min-width: 100vw;
     min-height: 100vh;
-    background-image: url('../../images/logoDeye.png');
+    /* background-image: url('../../images/logo-deye-min.png'); */
     background-repeat: no-repeat;
     background-size: 219px 100px;
     opacity: 0.1;
