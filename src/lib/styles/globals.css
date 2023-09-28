@@ -104,13 +104,26 @@
     transform: rotate(-30deg) translate(550px, 350px); 
   }
 
+  .watermark:nth-of-type(14) {
+    transform: rotate(-30deg) translate(-500px, 925px); 
+  }
+
+  .watermark:nth-of-type(15) {
+    transform: rotate(-30deg) translate(25px, 1250px); 
+  }
 }
 
 @layer base {
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+
   @media print {
 
     html, body {
-      height:100% !important; 
+      width: 100% !important;
+      height: 100% !important;
       margin: 0 !important; 
       padding: 0 !important;
       overflow: hidden !important;

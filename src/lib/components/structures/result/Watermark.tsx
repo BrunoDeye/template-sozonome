@@ -113,6 +113,22 @@ function Watermark() {
         src={logoDeye}
         alt="watermark"
       />
+      <Image
+        priority
+        className="watermark"
+        height={100}
+        width={219}
+        src={logoDeye}
+        alt="watermark"
+      />
+      <Image
+        priority
+        className="watermark"
+        height={100}
+        width={219}
+        src={logoDeye}
+        alt="watermark"
+      />
     </>
   );
 }
