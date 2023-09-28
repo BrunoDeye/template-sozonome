@@ -26,7 +26,6 @@ const InvertersList = dynamic(() => import('./InvertersList'));
 const RecalculateButton = dynamic(() => import('./RecalculateButton'));
 const PrintButton = dynamic(() => import('./PrintButton'));
 const Batteries = dynamic(() => import('./Batteries'));
-import { useReactToPrint } from 'react-to-print';
 
 export default function Body() {
   const [selectedBattery, setSelectedBattery] = useState<string | undefined>(
