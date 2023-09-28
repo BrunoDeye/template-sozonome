@@ -16,7 +16,7 @@ function PrintTotalPower() {
 
   return (
     isClient ? (
-      <div className="print-show invisible hidden -mb-4">
+      <div className="print-show invisible hidden mt-6">
         <hr className='mb-6 mt-0 !w-auto'/>
         <p className="flex justify-between gap-4 text-2xl font-thin dark:text-white max-[317px]:text-xl">
           {totalPower}
