@@ -339,8 +339,6 @@
 @layer utilities {
   .clip-your-needful-style {
     max-width: 202px;
-    min-width: 202px;
-    min-height: 222px;
     max-height: 222px;
     object-fit: contain;
     --shadow-inversor: #808080;

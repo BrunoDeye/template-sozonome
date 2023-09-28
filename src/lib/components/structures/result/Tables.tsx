@@ -106,8 +106,8 @@ export default function Tables({
               className={`${
                 loaded ? 'unblur' : ''
               } clip-your-needful-style mx-auto dark:[--shadow-inversor:#333132]`}
-              height={222}
-              width={202}
+              height={srcImg.height}
+              width={srcImg.width}
               priority
               placeholder='blur'
               alt="Inversor/Bateria Deye"

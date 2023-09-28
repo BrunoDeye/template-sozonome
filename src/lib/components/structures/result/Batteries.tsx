@@ -50,7 +50,7 @@ function Batteries() {
   return (
     <>
       <h4 className="margin-print-fixer text-center text-xl font-bold tracking-tight sm:text-2xl">
-        Baterias
+        Bateria<span className='print-hidden'>s</span>
       </h4>
       <SelectBattery
         selectedBattery={selectedBattery}
