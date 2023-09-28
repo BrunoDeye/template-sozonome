@@ -25,7 +25,7 @@ export function NavigateBack() {
       addGrid('');
     }
 
-    if (pathname === '/ambiente') {
+    if (pathname === '/termos-de-uso') {
       router.prefetch('/');
       router.push('/');
     } else {

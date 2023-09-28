@@ -32,19 +32,19 @@ const StartButton = () => {
           savedDevicesList() || place !== '' || starting ? (
             <>
               <Button asChild variant="gradientBlue">
-                <Link href="/ambiente">Continuar Onde Parou</Link>
+                <Link href="/termos-de-uso">Continuar Onde Parou</Link>
               </Button>
               <Button
                 asChild
                 onClick={() => handleCleaning()}
                 variant="gradientSky"
               >
-                <Link  href="/ambiente">Começar De Novo</Link>
+                <Link  href="/termos-de-uso">Começar De Novo</Link>
               </Button>
             </>
           ) : (
             <Button asChild variant="gradientBlue">
-              <Link href="/ambiente">Começar</Link>
+              <Link href="/termos-de-uso">Começar</Link>
             </Button>
           )
         ) : null}

@@ -12,7 +12,7 @@ const Footer = () => {
   const { theme, setTheme, systemTheme } = useTheme();
   const router = useRouter();
   const {
-    state: { place },
+    state: { grid },
   } = useDataStore();
   const pathname = usePathname();
 
@@ -21,12 +21,12 @@ const Footer = () => {
   }, []);
 
   useEffect(() => {
-    if (pathname !== '/' && pathname !== '/ambiente' && place === '') {
+    if (pathname !== '/' && pathname !== '/termos-de-uso' && pathname !== '/grid' && grid === '') {
       router.prefetch('/');
       router.replace('/');
       router.refresh();
     }
-  }, [pathname, place]);
+  }, [pathname, grid]);
 
   return (
     <footer className="wrapper mt-6 print-hidden">
