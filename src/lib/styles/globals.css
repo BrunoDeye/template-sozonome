@@ -124,9 +124,16 @@
     html, body {
       width: 210mm !important;
       height: 297mm !important;
+      min-height: 297mm !important;
       margin: 0 !important; 
       padding: 0 !important;
       overflow: hidden !important;
+    }
+
+    .wrapper {
+      max-width: 210mm !important;
+      min-height: 277mm !important;
+      margin-bottom: 0 !important;
     }
 
     header {
