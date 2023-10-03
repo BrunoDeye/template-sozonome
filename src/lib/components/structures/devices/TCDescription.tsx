@@ -1,11 +1,5 @@
 'use client';
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/lib/components/ui/tooltip';
-import {
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -42,12 +36,15 @@ const TCDescription = () => {
       <PopoverContent
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="w-60 p-3 text-justify "
+        className="w-40 sm:w-80 p-3 text-justify "
       >
         <p>
-          O fator de correção é usado para compensar as perdas no sistema e pode
-          variar dentro da faixa de 0,87 a 0,94.
+          Fator de correção recomendado para mitigar perdas no sistema, é
+          essencial contar com um engenheiro projetista para dimensionar com
+          precisão esse fator.
         </p>
+        <br/>
+        <p>Recomendação: Entre 0,94 e 0,87</p>
       </PopoverContent>
     </Popover>
   ) : null;

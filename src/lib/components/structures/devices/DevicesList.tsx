@@ -81,7 +81,7 @@ const DevicesList = ({ handleEquipList, id }: DeviceListProps) => {
           </DialogTitle>
           <DialogDescription className="flex justify-center">
             A seguir, destacamos os principais equipamentos comuns nas residências brasileiras,
-            acompanhados por estimativas de sua Potência e Autonomia em Horas.
+            acompanhados por estimativas de sua Potência [W] e Autonomia [h].
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>

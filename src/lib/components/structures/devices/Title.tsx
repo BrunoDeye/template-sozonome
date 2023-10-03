@@ -24,9 +24,9 @@ function Title() {
         necessário.
       </p>
       <p className="leading-2 mt-1 text-[13px] font-thin">
-        Os valores de <strong className="dark:text-indigo-100">Potência</strong>{' '}
-        e <strong className="dark:text-indigo-100">Autonomia em Horas</strong> são
-        estimativas baseadas no consumo médio brasileiro.
+        Os valores de <strong className="dark:text-indigo-100">Potência [W]</strong>{' '}
+        e <strong className="dark:text-indigo-100">Autonomia [h]</strong>{' '}
+        são estimativas baseadas no consumo médio brasileiro. (Fonte: PROCEL)
       </p>
     </div>
   );

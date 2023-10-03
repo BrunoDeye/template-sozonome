@@ -316,7 +316,7 @@ const DeviceCard = () => {
                             htmlFor={`power-${item.id}`}
                             className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-sm text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
                           >
-                            Potência (W)
+                            Potência [W]
                           </Label>
                         </div>
                         <div className="relative">
@@ -338,7 +338,7 @@ const DeviceCard = () => {
                             htmlFor={`hours-${item.id}`}
                             className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-sm text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
                           >
-                            Autonomia em Horas
+                            Autonomia [h]
                           </Label>
                         </div>
                       </div>
@@ -387,7 +387,7 @@ const DeviceCard = () => {
                             <>
                               <div className="flex gap-1">
                                 <p className="text-[12px] max-[301px]:truncate max-[301px]:tracking-tight">
-                                  Potência: {item.powerValue} Watts
+                                  Potência [W]: {item.powerValue} Watts
                                 </p>
                                 <Button
                                   onClick={() =>
@@ -427,7 +427,7 @@ const DeviceCard = () => {
                                   htmlFor={`hours-${item.id}`}
                                   className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
                                 >
-                                  Autonomia em Horas
+                                  Autonomia [h]
                                 </Label>
                               </div>
                             </>
@@ -435,7 +435,7 @@ const DeviceCard = () => {
                             <>
                               <div className="flex gap-1">
                                 <p className="text-[12px] max-[301px]:truncate max-[301px]:tracking-tight">
-                                  Autonomia em Horas: {item.hours} Hora(s)
+                                  Autonomia [h]: {item.hours} Hora(s)
                                 </p>
                                 <Button
                                   onClick={() =>

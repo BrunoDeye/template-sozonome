@@ -66,11 +66,11 @@ const GridOptions = () => {
           Tensão da Rede
         </h2>
         <p className="mt-2 text-sm leading-8">
-          Sabendo a tensão de sua rede podemos separar para você somente os
-          inversores hibrídos compatíveis.
+          Nesta etapa, você irá escolher o modelo do inversor híbrido.
         </p>
         <p className="leading-2 mt-1 text-[13px] font-thin">
-          Se tiver dúvidas ligue para sua concessionária.
+          Selecione a rede desejada, geralmente correspondendo à rede pública.
+          Caso tenha alguma dúvida entre em contato com concessionária
         </p>
       </div>
       {isClient ? (
