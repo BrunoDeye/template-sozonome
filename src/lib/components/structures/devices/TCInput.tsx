@@ -35,7 +35,7 @@ function TCInput() {
       />
       <Label
         htmlFor="FC"
-        className="z-10 mx-auto my-auto origin-[0] -translate-x-[42vw] -translate-y-[2.282rem] text-[15px] max-[580px]:-translate-x-[41vw] max-[540px]:-translate-x-[40.5vw] max-[500px]:-translate-x-[40vw] max-[460px]:-translate-x-[39.5vw] max-[415px]:-translate-x-[39vw] max-[375px]:-translate-x-[38vw] max-[300px]:-translate-x-[34vw] sm:-translate-x-[5rem] sm:-translate-y-[2.28rem] sm:text-sm md:-translate-y-[2.224rem]"
+        className="z-10 mx-auto my-auto origin-[0] -translate-x-[42vw] -translate-y-[2.282rem] text-[15px] max-[580px]:-translate-x-[43vw] max-[540px]:-translate-x-[41vw] max-[500px]:-translate-x-[40vw] max-[460px]:-translate-x-[39.5vw] max-[415px]:-translate-x-[39vw] max-[375px]:-translate-x-[37.5vw] max-[302px]:-translate-x-[41.5vw] sm:-translate-x-[5rem] sm:-translate-y-[2.28rem] sm:text-sm md:-translate-y-[2.224rem]"
       >
         0,
       </Label>

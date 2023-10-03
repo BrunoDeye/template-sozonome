@@ -235,9 +235,9 @@ const DeviceCard = () => {
   }, []);
 
   return (
-    <div id="start" className="isolate flex flex-col px-6 py-4 sm:py-6 lg:px-6">
+    <div id="start" className="isolate flex flex-col max-[302px]:px-1 px-6 py-4 sm:py-6 lg:px-6">
       <Title />
-      <div className="mx-auto mt-12 flex flex-col items-center justify-center">
+      <div className="mx-auto max-[302px]:!max-w-[92vw] mt-12 flex flex-col items-center justify-center">
         {isClient
           ? items.map((item) => (
               <div className="mb-6 flex w-full gap-2 " key={item.id}>
