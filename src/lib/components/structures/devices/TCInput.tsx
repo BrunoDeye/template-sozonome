@@ -12,10 +12,12 @@ function TCInput() {
   } = useDataStore();
 
   return (
-    <div className="grid w-full items-center space-y-[0.4rem]">
+    <div className="grid w-full items-center  space-y-[0.4rem]">
+      <div className='relative mx-0 sm:mx-auto mb-6'>
+
       <Label
         htmlFor="FC"
-        className="flex items-start gap-1 sm:mx-auto sm:w-auto"
+        className="flex items-start mb-2 sm:mx-auto sm:w-auto"
       >
         FC (Fator de Correção)
         <TCDescription />
@@ -35,10 +37,11 @@ function TCInput() {
       />
       <Label
         htmlFor="FC"
-        className="z-10 mx-auto my-auto origin-[0] -translate-x-[42vw] -translate-y-[2.282rem] text-[15px] max-[580px]:-translate-x-[43vw] max-[540px]:-translate-x-[41vw] max-[500px]:-translate-x-[40vw] max-[460px]:-translate-x-[39.5vw] max-[415px]:-translate-x-[39vw] max-[375px]:-translate-x-[37.5vw] max-[302px]:-translate-x-[41.5vw] sm:-translate-x-[5rem] sm:-translate-y-[2.28rem] sm:text-sm md:-translate-y-[2.224rem]"
+        className="z-10 mx-auto my-auto absolute left-[10px] top-[39px]"
       >
         0,
       </Label>
+      </div>
     </div>
   );
 }
