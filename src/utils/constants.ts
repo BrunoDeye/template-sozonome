@@ -30,7 +30,7 @@ export const imagesMap = {
   'GE-F60': GEF60,
   'MS-G230': MSG230,
   'Deye - BOS-G (100Ah)': BOSG,
-  'Deye - RW-M5.3 (104Ah)': RWM5_3,
+  'Deye - SE-G5.3 (104Ah)': SEG5_1,
   'Deye - RW.M6.1 (120Ah)': RWM6_1,
   'Deye - SE-G5.1 PRO (100Ah)': SEG5_1
 }

@@ -111,6 +111,10 @@ export const formatBattery = (battery: Battery) =>
           value: '\u00A0',
         },
         {
+          attribute: 'Energia Disponível[kWh]',
+          value: '\u00A0',
+        },
+        {
           attribute: 'Ciclos',
           value: '\u00A0',
         },
@@ -143,6 +147,15 @@ export const formatBattery = (battery: Battery) =>
               : battery.nominalEnergy === 0
               ? '\u00A0'
               : battery.nominalEnergy.toFixed(2),
+        },
+        {
+          attribute: 'Energia Disponível[kWh]',
+          value:
+            typeof battery.nominalEnergy === 'string'
+              ? '\u00A0'
+              : battery.nominalEnergy === 0
+              ? '\u00A0'
+              : (battery.dod as any * battery.nominalEnergy).toFixed(2),
         },
         {
           attribute: 'Ciclos',

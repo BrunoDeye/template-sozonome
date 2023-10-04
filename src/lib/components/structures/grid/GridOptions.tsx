@@ -70,7 +70,7 @@ const GridOptions = () => {
         </p>
         <p className="leading-2 mt-1 text-[13px] font-thin">
           Selecione a rede desejada, geralmente correspondendo à rede pública.
-          Caso tenha alguma dúvida entre em contato com concessionária
+          Caso tenha alguma dúvida entre em contato com concessionária.
         </p>
       </div>
       {isClient ? (

@@ -33,7 +33,7 @@ const Hero = () => {
         </h1>
       </div>
       <p className="text-xs text-gray-500 dark:text-white md:text-sm">
-        Maximize Seus Benefícios Solares com Confiança.
+      Conquiste sua independência energética
       </p>
     </div>
   );
