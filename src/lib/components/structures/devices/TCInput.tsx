@@ -19,7 +19,7 @@ function TCInput() {
         htmlFor="FC"
         className="flex items-start mb-2 sm:mx-auto sm:w-auto"
       >
-        FC (Fator de Correção)
+        <span className='mr-2'>FC (Fator de Correção)</span>
         <TCDescription />
       </Label>
       <Input
