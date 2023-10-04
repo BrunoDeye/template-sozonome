@@ -1,9 +1,10 @@
+'use client';
 import { formatInverter } from '@/utils/functions';
 import Tables from './Tables';
 import { useDataStore } from '@/store/data';
 import { useCalculateInvertersQuery } from '@/services/ReactQueryHooks/useCalculateInvertersQuery';
 import LoadingDeye from '../../Loading';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ImageModelName, mapImages } from '@/utils/constants';
 
 export const inverters = [
@@ -21,7 +22,7 @@ export const inverters = [
 
 export default function InvertersList() {
   const {
-    state: { grid, totalPower, place,},
+    state: { grid, totalPower, place },
   } = useDataStore();
 
   const requestData = {
@@ -31,15 +32,30 @@ export default function InvertersList() {
   const { invertersList, isLoading, isError } =
     useCalculateInvertersQuery(requestData);
 
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return isError ? (
     <span className="mx-auto flex w-full flex-col text-center">
       Ops algo deu errado...
     </span>
   ) : (
     <div className="flex flex-col gap-6">
-      <h4 className="text-center text-xl font-bold tracking-tight sm:text-2xl margin-print-fixer">
-        Inversor Recomendado
-      </h4>
+      <div>
+        <h4 className="margin-print-fixer text-center text-xl font-bold tracking-tight sm:text-2xl">
+          Inversor Recomendado
+        </h4>
+        <p className="leading-2 print-hidden mt-1 text-center text-[13px] font-thin">
+          Para sua rede{' '}
+          <strong className="print-grid tracking-tight">
+            {isClient ? grid : null}
+          </strong>
+        </p>
+      </div>
+
       {isLoading ? (
         <div className="mx-auto my-auto flex min-h-[377px] w-full items-center justify-center text-center">
           <div className="pb-12">
@@ -56,11 +72,13 @@ export default function InvertersList() {
                 : inverter.model.includes('LP')
             )[0]
           )}
-          srcImg={mapImages(invertersList!.filter((inverter) =>
-            invertersList![0].model.includes('HP')
-              ? inverter.model.includes('HP')
-              : inverter.model.includes('LP')
-          )[0].model as ImageModelName)}
+          srcImg={mapImages(
+            invertersList!.filter((inverter) =>
+              invertersList![0].model.includes('HP')
+                ? inverter.model.includes('HP')
+                : inverter.model.includes('LP')
+            )[0].model as ImageModelName
+          )}
         />
       )}
 
@@ -75,13 +93,13 @@ export default function InvertersList() {
             ? inverter.model.includes('HP')
             : inverter.model.includes('LP')
         ).length === 1 ? null : (
-        <div className='print-hidden space-y-6'>
+        <div className="print-hidden space-y-6">
           <h4 className="text-center text-xl font-bold tracking-tight sm:text-2xl">
             Outras Opções de Inversores
           </h4>
           {invertersList!
             .filter((inverter) =>
-            invertersList![0].model.includes('HP')
+              invertersList![0].model.includes('HP')
                 ? inverter.model.includes('HP')
                 : inverter.model.includes('LP')
             )

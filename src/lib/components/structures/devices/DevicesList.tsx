@@ -80,7 +80,7 @@ const DevicesList = ({ handleEquipList, id }: DeviceListProps) => {
             Catálogo de Dispositivos Domésticos
           </DialogTitle>
           <DialogDescription className="flex justify-center">
-            A seguir, destacamos os principais equipamentos comuns nas residências brasileiras,
+            A seguir, destacamos os principais equipamentos nas residências brasileiras,
             acompanhados por estimativas de sua Potência [W] e Autonomia [h].
           </DialogDescription>
         </DialogHeader>
