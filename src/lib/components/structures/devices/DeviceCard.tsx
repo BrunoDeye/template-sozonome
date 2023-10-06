@@ -254,7 +254,7 @@ const DeviceCard = () => {
                     variant="gradientRed"
                     onClick={() => handleDelete(item.id)}
                   >
-                    Remover
+                    Excluir
                   </Button>
                 </div>
                 <div className="flex w-full flex-col justify-center gap-[0.11rem]">
