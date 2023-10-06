@@ -19,7 +19,7 @@ function TCInput() {
         htmlFor="FC"
         className="flex items-start mb-2 sm:mx-auto sm:w-auto"
       >
-        <span className='mr-2'>FC (Fator de Correção)</span>
+        <span className='mr-2'>ES (Eficiência do Sistema)</span>
         <TCDescription />
       </Label>
       <Input

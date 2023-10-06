@@ -39,9 +39,9 @@ const TCDescription = () => {
         className="w-40 sm:w-80 p-3 text-justify "
       >
         <p>
-          Fator de correção recomendado para mitigar perdas no sistema, é
-          essencial contar com um engenheiro projetista para dimensionar com
-          precisão esse fator.
+          Valor recomendado para mitigar perdas no sistema, sendo
+          essencial contactar um engenheiro projetista para dimensionar com
+          precisão este valor.
         </p>
         <br/>
         <p>Recomendação: Entre 0,94 e 0,87</p>
