@@ -1,0 +1,101 @@
+{
+  "Index": {
+    "title": "calculator",
+    "subtitle": "Achieve your energy independence",
+    "keepGoingButton": "Resume",
+    "RestartButton": "Start Fresh",
+    "StartButton": "Start"
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, pt {Portuguese} en {English} it {Italian} es {Spanish} other {Unknown}}"
+  },
+  "BackButton": {
+    "label": "Back"
+  },
+  "Terms": {
+    "title": "Terms of Use",
+    "content": "Welcome to the Deye Hybrid Systems Calculator, a tool developed by our engineers with the <important>educational purpose</important> of assisting you in sizing a backup system. It's important to note that Deye <important>does not assume</important> responsibility for the sizing resulting from the use of this calculator. We recommend that a design engineer or a responsible professional assess the feasibility of sizing to ensure that your specific needs are adequately met. Hybrid backup systems are a strategic decision to ensure that in your home, business, or industry, unexpected interruptions in the power supply do not occur, providing comfort and confidence for you.",
+    "confirmButton": "I accept the Terms"
+  },
+  "Grid": {
+    "title": "Grid Voltage",
+    "subtitle": "In this step, you will choose the hybrid inverter model.",
+    "content": "Select the desired grid, typically corresponding to the public grid. If you have any questions, please contact the utility company.",
+    "optionMonoTitle": "Single-Phase",
+    "optionBiTitle": "Split-Phase",
+    "optionTriTitle": "Three-Phase",
+    "option127VMonoSubtitle": "127V (Phase + Neutral/Ground)",
+    "option220VMonoSubtitle": "220V (Phase + Neutral + Ground)",
+    "option220VBiSubtitle": "220V (Phase + Phase + Neutral/Ground)",
+    "option220VTriSubtitle": "220V (Phase + Phase + Phase + Neutral + Ground)",
+    "option380VTriSubtitle": "380V (Phase + Phase + Phase + Neutral + Ground)",
+    "confirmButton": "Confirm",
+    "errorMsg": "You need to choose a Grid Voltage."
+  },
+  "Devices": {
+    "title": "Load Table",
+    "subtitle": "Select the desired equipment from the options in the catalog and specify the quantity, or enter it manually if necessary.",
+    "content": "The values of <important>Power [W]</important> and <important>Autonomy [h]</important> in the catalog are estimates based on average residential consumption.",
+    "rmvButton": "Remove",
+    "catalogueButton": "Catalog",
+    "manualButton": "Manually",
+    "addButton": "Add",
+    "TCLabel": "ES (System Efficiency)",
+    "TCDescription": "Recommended value to mitigate losses in the system, it is essential to contact a design engineer to accurately size this value.<br></br><br></br>Recommendation: Between 0.94 and 0.87",
+    "powerLabel": "Power [W]",
+    "autonomyLabel": "Autonomy [h]",
+    "autonomyHours": "{count, plural, =1 {# hour} other {# hours}}",
+    "deviceNameLabel": "Equipment Name",
+    "total": "TOTAL:",
+    "totalPower": "Total Power [W]",
+    "totalConsumption": "Total Consumption [Wh]",
+    "resultButton": "Results",
+    "modalTitle": "Residential Device Catalog",
+    "modalDescription": "Below, we highlight the main devices in residential homes, along with estimates of their Power [W] and Autonomy [h].",
+    "modalSelectLabel": "Choose a device...",
+    "modalSelectPlaceholder": "Search the list or select...",
+    "modalSelectEmpty": "Not found.",
+    "modalConfirmButton": "Confirm"
+  },
+  "Batteries": {
+    "title": "<show>Battery</show><hidden>Batteries</hidden>",
+    "batteryAtr": "Battery",
+    "dodLifespanAtr": "DoD/Lifespan",
+    "energyAtr": "Energy [kWh]",
+    "availEnergyAtr": "Available Energy [kWh]",
+    "ciclesAtr": "Cycles",
+    "modelAtr": "Model",
+    "qntAtr": "Quantity",
+    "yearsUnit": "{count, plural, =1 {# year} other {# years}}"
+  },
+  "Inverters": {
+    "recommendationTitle": "Recommended Inverter",
+    "errorMsg": "Oops, something went wrong...",
+    "othersTitle": "Other Inverter Options",
+    "inverterAtr": "Inverter",
+    "typeAtr": "Type",
+    "powerAtr": "Power [W]",
+    "qntAtr": "Quantity"
+  },
+  "Grids": {
+    "yourGrid": "For your grid",
+    "mono127": "127V (Phase + Neutral/Ground)",
+    "mono220": "220V (Phase + Neutral + Ground)",
+    "bi220": "220V (Phase + Phase + Neutral/Ground)",
+    "tri220": "220V (Phase + Phase + Phase + Neutral + Ground)",
+    "tri380": "380V (Phase + Phase + Phase + Neutral + Ground)"
+  },
+  "Result": {
+    "title": "Results",
+    "subtitle": "Next, some recommendations for <important>Inverters</important> and <important>Batteries</important> options will be presented."
+  },
+  "SelectBattery": {
+    "placeholder": "Select a Battery",
+    "label": "Batteries"
+  },
+  "ResultButtons": {
+    "printButton": "Print Result",
+    "recalcButton": "Recalculate Result"
+  }
+}

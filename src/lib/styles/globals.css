@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+
+ 
+
   h1 {
     @apply text-4xl font-bold md:text-5xl;
   }
@@ -366,7 +369,7 @@
     --shadow-inversor: #808080;
     filter: drop-shadow(15px 10px 4px var(--shadow-inversor));
   }
-
+  .select__item { user-select: none !important; }
   .unblur {
     animation: unblur 0.6s linear;
   }

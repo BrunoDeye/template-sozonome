@@ -8,14 +8,21 @@ import { Label } from '../../ui/label';
 import DisplayTotal from './DisplayTotal';
 import { Separator } from '../../ui/separator';
 import TCDescription from './TCDescription';
+import { devices } from '@/utils/constants';
 import DevicesList from './DevicesList';
 import { Edit3 } from 'lucide-react';
-import Link from 'next/link';
+import Link from 'next-intl/link';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import dynamic from 'next/dynamic';
+import { useLocale, useTranslations } from 'next-intl';
+import { removeAccents } from '@/utils/functions';
 
-const TCInput = dynamic(() => import("@/lib/components/structures/devices/TCInput"))
-const Title = dynamic(() => import("@/lib/components/structures/devices/Title"))
+const TCInput = dynamic(
+  () => import('@/lib/components/structures/devices/TCInput')
+);
+const Title = dynamic(
+  () => import('@/lib/components/structures/devices/Title')
+);
 
 const initialState = [
   {
@@ -33,6 +40,9 @@ const initialState = [
 ];
 
 const DeviceCard = () => {
+  const t = useTranslations('Devices');
+  const locale = useLocale() as 'en' | 'pt-BR' | 'es-ES' | 'it-IT';
+
   const {
     state: { FC, totalPower, totalEnergy, place },
     actions: { addTotalEnergy, addTotalPower, addFC },
@@ -234,10 +244,32 @@ const DeviceCard = () => {
     setIsClient(true);
   }, []);
 
+  const handleLocaleChange = () => {
+    const updatedItems = items.map((item) => ({
+      ...item,
+      equipName:
+        item.equipName === ''
+          ? ''
+          : devices.find(
+              (device) =>
+                Object.values(device.value).includes(item.equipName)
+            )?.value[locale] || item.equipName,
+    }));
+    setItems(updatedItems);
+    setTriggerUpdate(triggerUpdate + 1);
+  };
+
+  useEffect(() => {
+    handleLocaleChange();
+  }, [locale])
+
   return (
-    <div id="start" className="isolate flex flex-col max-[302px]:px-1 px-6 py-4 sm:py-6 lg:px-6">
+    <div
+      id="start"
+      className="isolate flex flex-col px-6 py-4 max-[302px]:px-1 sm:py-6 lg:px-6"
+    >
       <Title />
-      <div className="mx-auto max-[302px]:!max-w-[92vw] mt-12 flex flex-col items-center justify-center">
+      <div className="mx-auto mt-12 flex flex-col items-center justify-center max-[302px]:!max-w-[92vw]">
         {isClient
           ? items.map((item) => (
               <div className="mb-6 flex w-full gap-2 " key={item.id}>
@@ -254,7 +286,7 @@ const DeviceCard = () => {
                     variant="gradientRed"
                     onClick={() => handleDelete(item.id)}
                   >
-                    Excluir
+                    {t('rmvButton')}
                   </Button>
                 </div>
                 <div className="flex w-full flex-col justify-center gap-[0.11rem]">
@@ -290,7 +322,7 @@ const DeviceCard = () => {
                             htmlFor={`equipName-${item.id}`}
                             className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
                           >
-                            Nome do Equipamento
+                            {t('deviceNameLabel')}
                           </Label>
                         </div>
                         <div className="relative">
@@ -316,7 +348,7 @@ const DeviceCard = () => {
                             htmlFor={`power-${item.id}`}
                             className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-sm text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
                           >
-                            Potência [W]
+                            {t('powerLabel')}
                           </Label>
                         </div>
                         <div className="relative">
@@ -338,7 +370,7 @@ const DeviceCard = () => {
                             htmlFor={`hours-${item.id}`}
                             className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-sm text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
                           >
-                            Autonomia [h]
+                            {t('autonomyLabel')}
                           </Label>
                         </div>
                       </div>
@@ -348,7 +380,7 @@ const DeviceCard = () => {
                       {item.selected ? (
                         <div className="relative">
                           <Button
-                            className="text-md absolute max-[300px]:-right-3 -right-6 top-5 z-50 origin-[0] -translate-y-[43px] scale-50 transform rounded-md duration-300"
+                            className="text-md absolute -right-6 top-5 z-50 origin-[0] -translate-y-[43px] scale-50 transform rounded-md duration-300 max-[300px]:-right-3"
                             onClick={() => handleCleaning(item.id)}
                             variant="gradientRed"
                             size="sm"
@@ -379,7 +411,7 @@ const DeviceCard = () => {
                                   htmlFor={`power-${item.id}`}
                                   className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
                                 >
-                                  Potência [W]
+                                  {t('powerLabel')}
                                 </Label>
                               </div>
                             </>
@@ -387,7 +419,7 @@ const DeviceCard = () => {
                             <>
                               <div className="flex gap-1">
                                 <p className="text-[12px] max-[301px]:truncate max-[301px]:tracking-tight">
-                                  Potência [W]: {item.powerValue} Watts
+                                  {t('powerLabel')}: {item.powerValue} Watts
                                 </p>
                                 <Button
                                   onClick={() =>
@@ -427,7 +459,7 @@ const DeviceCard = () => {
                                   htmlFor={`hours-${item.id}`}
                                   className="bg-base-100/80 absolute left-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform rounded-md px-2 text-gray-500 backdrop-blur-md duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500"
                                 >
-                                  Autonomia [h]
+                                  {t('autonomyLabel')}
                                 </Label>
                               </div>
                             </>
@@ -435,7 +467,8 @@ const DeviceCard = () => {
                             <>
                               <div className="flex gap-1">
                                 <p className="text-[12px] max-[301px]:truncate max-[301px]:tracking-tight">
-                                  Autonomia [h]: {item.hours} Hora(s)
+                                  {t('autonomyLabel')}:{' '}
+                                  {t('autonomyHours', { count: item.hours })}
                                 </p>
                                 <Button
                                   onClick={() =>
@@ -462,7 +495,7 @@ const DeviceCard = () => {
                             variant="gradientGhost"
                             className="mt-[0.45rem] w-full"
                           >
-                            Manualmente
+                            {t('manualButton')}
                           </Button>
                         </>
                       )}
@@ -475,21 +508,20 @@ const DeviceCard = () => {
       </div>
 
       <div className="space-y-2">
-        
         <div className="space-y-6 text-center">
           <Button
             variant="gradientDarkBlue"
             className="w-full sm:mx-auto sm:w-auto"
             onClick={handleNewItem}
           >
-            Adicionar
+            {t('addButton')}
           </Button>
-         
+
           <Separator className="sm:mx-auto sm:w-[400px]" />
           <TCInput />
           <div className="space-y-6 text-center">
             <DisplayTotal />
-                          
+
             {isClient ? (
               <Button
                 variant="gradientSky"
@@ -500,7 +532,7 @@ const DeviceCard = () => {
                 } w-full sm:mx-auto sm:w-auto`}
                 asChild
               >
-                <Link href="/result">Resultados</Link>
+                <Link href="/result">{t('resultButton')}</Link>
               </Button>
             ) : null}
           </div>

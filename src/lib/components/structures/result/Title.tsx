@@ -1,10 +1,14 @@
 'use client';
 import { useDataStore } from '@/store/data';
+import { mapGridKeys } from '@/utils/functions';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 export default function Title() {
+  const t = useTranslations('Result');
+  const tYourGrid = useTranslations('Grids');
   const {
-    state: { grid, systemType },
+    state: { grid },
   } = useDataStore();
   const [isClient, setIsClient] = useState(false);
 
@@ -15,21 +19,20 @@ export default function Title() {
   return (
     <div className="title-margin-print-fixer mx-auto mb-8 max-w-4xl text-center">
       <h2 className="print-hidden text-3xl font-bold tracking-tight sm:text-4xl">
-        Resultados
+        {t('title')}
       </h2>
       <p className="mt-2 text-sm leading-8">
         <span className="print-hidden">
-          Em seguida, serão apresentadas algumas recomendações de{' '}
-          <strong className="dark:text-indigo-100"> Inversores </strong> e
-          opções de <strong className="dark:text-indigo-100"> Baterias</strong>
-          .
+          {t.rich('subtitle', {
+            important: (chunck) => <strong className="dark:text-indigo-100">{chunck}</strong>
+          })}
         </span>
         <span className="truncate">
           <span className="print-show-span print-grid invisible hidden">
-            Sua rede:{' '}
+            {tYourGrid('yourGrid')}{' '}
           </span>
           <strong className="print-grid tracking-tight print-show-span print-grid invisible hidden">
-            {isClient ? grid : null}
+            {isClient ? tYourGrid(mapGridKeys(grid as any) as any)  : null}
           </strong>
         </span>
       </p>

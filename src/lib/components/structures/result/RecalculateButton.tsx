@@ -2,9 +2,11 @@
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import { Button } from '../../ui/button';
 import { useDataStore } from '@/store/data';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import Link from 'next-intl/link';
 
 export default function RecalculateButton() {
+  const t = useTranslations('ResultButtons');
   const {
     actions: { reset },
   } = useDataStore();
@@ -20,10 +22,10 @@ export default function RecalculateButton() {
     <Button
       onClick={() => handleCleaning()}
       variant="gradientSky"
-      className="w-full sm:mx-auto sm:w-auto print-hidden"
+      className="w-full -z-10 sm:mx-auto sm:w-auto print-hidden"
       asChild
     >
-      <Link href="/">Recalcular do Início</Link>
+      <Link href="/">{t('recalcButton')}</Link>
     </Button>
   );
 }

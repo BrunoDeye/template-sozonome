@@ -1,0 +1,101 @@
+{
+  "Index": {
+    "title": "calculadora",
+    "subtitle": "Alcanza tu independencia energética",
+    "keepGoingButton": "Continuar",
+    "RestartButton": "Empezar De Nuevo",
+    "StartButton": "Comenzar"
+  },
+  "LocaleSwitcher": {
+    "label": "Cambiar idioma",
+    "locale": "{locale, select, pt {Portugués} en {Inglés} it {Italiano} es {Español} other {Desconocido}}"
+  },
+  "BackButton": {
+    "label": "Volver"
+  },
+  "Terms": {
+    "title": "Términos de uso",
+    "content": "Bienvenido a la Calculadora de Sistemas Híbridos Deye, una herramienta desarrollada por nuestros ingenieros con el <important>propósito educativo</important> de ayudarte a dimensionar un sistema de respaldo. Es importante recordar que Deye <important>no asume</important> la responsabilidad de los dimensionamientos resultantes del uso de esta calculadora. Recomendamos que un ingeniero de diseño o un profesional responsable evalúe la viabilidad del dimensionamiento para asegurarse de que sus necesidades específicas sean atendidas de manera adecuada. Los sistemas híbridos de respaldo son una decisión estratégica para garantizar que en su hogar, comercio o industria no ocurran interrupciones inesperadas en el suministro de energía eléctrica, lo que garantiza comodidad y confianza para usted.",
+    "confirmButton": "Acepto los Términos"
+  },
+  "Grid": {
+    "title": "Tensión de Red",
+    "subtitle": "En esta etapa, seleccionarás el modelo del inversor híbrido.",
+    "content": "Selecciona la red deseada, que generalmente corresponde a la red pública. Si tienes alguna duda, ponte en contacto con la compañía eléctrica.",
+    "optionMonoTitle": "Monofásico",
+    "optionBiTitle": "Bifásico",
+    "optionTriTitle": "Trifásico",
+    "option127VMonoSubtitle": "127V (Fase + Neutro/Tierra)",
+    "option220VMonoSubtitle": "220V (Fase + Neutro + Tierra)",
+    "option220VBiSubtitle": "220V (Fase + Fase + Neutro/Tierra)",
+    "option220VTriSubtitle": "220V (Fase + Fase + Fase + Neutro + Tierra)",
+    "option380VTriSubtitle": "380V (Fase + Fase + Fase + Neutro + Tierra)",
+    "confirmButton": "Confirmar",
+    "errorMsg": "Debes elegir una Tensión de Red."
+  },
+  "Devices": {
+    "title": "Tabla de Cargas",
+    "subtitle": "Selecciona el equipo deseado de las opciones en el catálogo y especifica la cantidad, o introdúcelo manualmente si es necesario.",
+    "content": "Los valores de <important>Potencia [W]</important> y <important>Autonomía [h]</important> en el catálogo son estimaciones basadas en el consumo medio residencial.",
+    "rmvButton": "Eliminar",
+    "catalogueButton": "Catálogo",
+    "manualButton": "Manualmente",
+    "addButton": "Agregar",
+    "TCLabel": "ES (Eficiencia del Sistema)",
+    "TCDescription": "Valor recomendado para mitigar pérdidas en el sistema, es esencial contactar a un ingeniero de diseño para dimensionar con precisión este valor.<br></br><br></br>Recomendación: Entre 0,94 y 0,87",
+    "powerLabel": "Potencia [W]",
+    "autonomyLabel": "Autonomía [h]",
+    "autonomyHours": "{count, plural, =1 {# hora} other {# horas}}",
+    "deviceNameLabel": "Nombre del Equipo",
+    "total": "TOTAL:",
+    "totalPower": "Potencia Total [W]",
+    "totalConsumption": "Consumo Total [Wh]",
+    "resultButton": "Resultados",
+    "modalTitle": "Catálogo de Dispositivos Residenciales",
+    "modalDescription": "A continuación, destacamos los principales dispositivos en las residencias, acompañados de estimaciones de su Potencia [W] y Autonomía [h].",
+    "modalSelectLabel": "Elige un dispositivo...",
+    "modalSelectPlaceholder": "Buscar en la lista o seleccionar...",
+    "modalSelectEmpty": "No encontrado.",
+    "modalConfirmButton": "Confirmar"
+  },
+  "Batteries": {
+    "title": "<show>Batería</show><hidden>Baterías</hidden>",
+    "batteryAtr": "Batería",
+    "dodLifespanAtr": "DoD/Vida Útil",
+    "energyAtr": "Energía [kWh]",
+    "availEnergyAtr": "Energía Disponible [kWh]",
+    "ciclesAtr": "Ciclos",
+    "modelAtr": "Modelo",
+    "qntAtr": "Cantidad",
+    "yearsUnit": "{count, plural, =1 {# año} other {# años}}"
+  },
+  "Inverters": {
+    "recommendationTitle": "Inversor Recomendado",
+    "errorMsg": "¡Ups, algo salió mal...",
+    "othersTitle": "Otras Opciones de Inversores",
+    "inverterAtr": "Inversor",
+    "typeAtr": "Tipo",
+    "powerAtr": "Potencia [W]",
+    "qntAtr": "Cantidad"
+  },
+  "Grids": {
+    "yourGrid": "Para tu red",
+    "mono127": "127V (Fase + Neutro/Tierra)",
+    "mono220": "220V (Fase + Neutro + Tierra)",
+    "bi220": "220V (Fase + Fase + Neutro/Tierra)",
+    "tri220": "220V (Fase + Fase + Fase + Neutro + Tierra)",
+    "tri380": "380V (Fase + Fase + Fase + Neutro + Tierra)"
+  },
+  "Result": {
+    "title": "Resultados",
+    "subtitle": "A continuación, se presentarán algunas recomendaciones de <important>Inversores</important> y opciones de <important>Baterías</important>."
+  },
+  "SelectBattery": {
+    "placeholder": "Seleccionar una Batería",
+    "label": "Baterías"
+  },
+  "ResultButtons": {
+    "printButton": "Imprimir Resultado",
+    "recalcButton": "Recalcular Resultado"
+  }
+}

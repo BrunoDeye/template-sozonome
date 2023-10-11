@@ -7,8 +7,10 @@ import LoadingDeye from '../../Loading';
 import Tables from './Tables';
 import { ImageModelName, mapImages } from '@/utils/constants';
 import { formatBattery } from '@/utils/functions';
+import { useTranslations } from 'next-intl';
 
 function Batteries() {
+  const t = useTranslations('Batteries');
   const [selectedBattery, setSelectedBattery] = useState<string | undefined>(
     undefined
   );
@@ -50,7 +52,10 @@ function Batteries() {
   return (
     <>
       <h4 className="margin-print-fixer text-center text-xl font-bold tracking-tight sm:text-2xl">
-        Bateria<span className='print-hidden'>s</span>
+        {t.rich('title', {
+          show: (chunck) => <span className="print-show invisible hidden">{chunck}</span>,
+          hidden: (chunck) => <span className="print-hidden">{chunck}</span>,
+        })}
       </h4>
       <SelectBattery
         selectedBattery={selectedBattery}
@@ -65,7 +70,17 @@ function Batteries() {
       ) : selectedBattery ? (
         <Tables
           srcImg={mapImages(battery.modelFullName as ImageModelName)}
-          data={formatBattery(battery)}
+          data={formatBattery(
+            battery,
+            t('batteryAtr'),
+            t('dodLifespanAtr'),
+            t('energyAtr'),
+            t('availEnergyAtr'),
+            t('ciclesAtr'),
+            t('modelAtr'),
+            t('qntAtr'),
+            t('yearsUnit', { count: battery.lifespan })
+          )}
         />
       ) : (
         <div className="h-[100px]">{'\u00A0'}</div>

@@ -6,6 +6,8 @@ import { useCalculateInvertersQuery } from '@/services/ReactQueryHooks/useCalcul
 import LoadingDeye from '../../Loading';
 import { useEffect, useState } from 'react';
 import { ImageModelName, mapImages } from '@/utils/constants';
+import { useTranslations } from 'next-intl';
+import YourGrid from './YourGrid';
 
 export const inverters = [
   {
@@ -21,6 +23,7 @@ export const inverters = [
 ];
 
 export default function InvertersList() {
+  const t = useTranslations('Inverters');
   const {
     state: { grid, totalPower, place },
   } = useDataStore();
@@ -40,20 +43,17 @@ export default function InvertersList() {
 
   return isError ? (
     <span className="mx-auto flex w-full flex-col text-center">
-      Ops algo deu errado...
+      {t('errorMsg')}
     </span>
   ) : (
     <div className="flex flex-col gap-6">
       <div>
         <h4 className="margin-print-fixer text-center text-xl font-bold tracking-tight sm:text-2xl">
-          Inversor Recomendado
+          {t('recommendationTitle')}
         </h4>
-        <p className="leading-2 print-hidden mt-1 text-center text-[13px] font-thin">
-          Para sua rede{' '}
-          <strong className="print-grid tracking-tight">
-            {isClient ? grid : null}
-          </strong>
-        </p>
+
+        {isClient ?  <YourGrid /> : null}
+          
       </div>
 
       {isLoading ? (
@@ -70,7 +70,11 @@ export default function InvertersList() {
               invertersList![0].model.includes('HP')
                 ? inverter.model.includes('HP')
                 : inverter.model.includes('LP')
-            )[0]
+            )[0],
+            t('inverterAtr'),
+            t('typeAtr'),
+            t('powerAtr'),
+            t('qntAtr')
           )}
           srcImg={mapImages(
             invertersList!.filter((inverter) =>
@@ -95,7 +99,7 @@ export default function InvertersList() {
         ).length === 1 ? null : (
         <div className="print-hidden space-y-6">
           <h4 className="text-center text-xl font-bold tracking-tight sm:text-2xl">
-            Outras Opções de Inversores
+            {t('othersTitle')}
           </h4>
           {invertersList!
             .filter((inverter) =>
@@ -108,7 +112,13 @@ export default function InvertersList() {
               <div key={inverter.model}>
                 <Tables
                   variant="darkBlue"
-                  data={formatInverter(inverter)}
+                  data={formatInverter(
+                    inverter,
+                    t('inverterAtr'),
+                    t('typeAtr'),
+                    t('powerAtr'),
+                    t('qntAtr')
+                  )}
                   // srcImg={`/images/${inverter.model.replace(/\//g, '')}.png`}
                   srcImg={mapImages(inverter.model as ImageModelName)}
                 />

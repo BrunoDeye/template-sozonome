@@ -2,7 +2,6 @@ import ConfirmButton from '@/lib/components/structures/terms/ConfirmButton';
 import { Button } from '@/lib/components/ui/button';
 import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 
 // import FadeIn from '@/lib/components/animations/FadeIn';
 // import Title from '@/lib/components/structures/place/Title';

@@ -1,4 +1,4 @@
-import { AllInOneData } from "@/services/types/AllInOneData";
+import { AllInOneData } from '@/services/types/AllInOneData';
 
 export function removeAccents(input: string) {
   const accents =
@@ -15,10 +15,7 @@ export function removeAccents(input: string) {
     .join('');
 }
 
-
-
-
-export const formatAllInOne = (allInOne: AllInOneData ) => [
+export const formatAllInOne = (allInOne: AllInOneData) => [
   {
     attribute: 'Inversor',
     value: allInOne.model,
@@ -39,8 +36,7 @@ export const formatAllInOne = (allInOne: AllInOneData ) => [
     attribute: 'Quantidade',
     value: 1,
   },
-  
-]
+];
 
 type Inverter = {
   model: string;
@@ -48,43 +44,53 @@ type Inverter = {
   quantity: number;
 };
 
+// inverterAtr = 'Inversor', typeAtr = 'Tipo', powerAtr = 'Potência[W]'
+// qntAtr = 'Quantidade'
 
-
-export const formatInverter = (inverter: Inverter) => !inverter.model || inverter.model === '\u00A0' ? [
-  {
-    attribute: 'Inversor',
-    value: '\u00A0',
-  },
-  {
-    attribute: 'Tipo',
-    value: '\u00A0',
-  },
-  {
-    attribute: 'Potência[W]',
-    value: '\u00A0',
-  },
-  {
-    attribute: 'Quantidade',
-    value: '\u00A0',
-  },
-] : [
-  {
-    attribute: 'Inversor',
-    value: inverter.model,
-  },
-  {
-    attribute: 'Tipo',
-    value: inverter.model.slice(-2),
-  },
-  {
-    attribute: 'Potência[W]',
-    value: inverter.nominalPower,
-  },
-  {
-    attribute: 'Quantidade',
-    value: inverter.quantity,
-  },
-];
+export const formatInverter = (
+  inverter: Inverter,
+  inverterAtr = 'Inversor',
+  typeAtr = 'Tipo',
+  powerAtr = 'Potência[W]',
+  qntAtr = 'Quantidade'
+) =>
+  !inverter.model || inverter.model === '\u00A0'
+    ? [
+        {
+          attribute: inverterAtr,
+          value: '\u00A0',
+        },
+        {
+          attribute: typeAtr,
+          value: '\u00A0',
+        },
+        {
+          attribute: powerAtr,
+          value: '\u00A0',
+        },
+        {
+          attribute: qntAtr,
+          value: '\u00A0',
+        },
+      ]
+    : [
+        {
+          attribute: inverterAtr,
+          value: inverter.model,
+        },
+        {
+          attribute: typeAtr,
+          value: inverter.model.slice(-2),
+        },
+        {
+          attribute: powerAtr,
+          value: inverter.nominalPower,
+        },
+        {
+          attribute: qntAtr,
+          value: inverter.quantity,
+        },
+      ];
 
 type Battery = {
   modelFullName: string;
@@ -94,53 +100,65 @@ type Battery = {
   lifespan: number | string;
   quantity: number | string;
 };
+// , bateriaAtr: string, dodLifespanAtr: string, energyAtr: string,
+//  availEnergyAtr: string, ciclesAtr: string, modelAtr: string, qntAtr: string
 
-export const formatBattery = (battery: Battery) =>
+export const formatBattery = (
+  battery: Battery,
+  batteryAtr = 'Bateria',
+  dodLifespanAtr = 'Dod/Vida Útil',
+  energyAtr = 'Energia[kWh]',
+  availEnergyAtr = 'Energia Disponível[kWh]',
+  ciclesAtr = 'Ciclos',
+  modelAtr = 'Modelo',
+  qntAtr = 'Quantidade',
+  yearsUnit = 'anos'
+) =>
   !battery.modelFullName || battery.modelFullName === '\u00A0'
     ? [
         {
-          attribute: 'Bateria',
+          attribute: batteryAtr,
           value: '\u00A0',
         },
         {
-          attribute: 'Dod/Vida Útil',
+          attribute: dodLifespanAtr,
           value: '\u00A0',
         },
         {
-          attribute: 'Energia[kWh]',
+          attribute: energyAtr,
           value: '\u00A0',
         },
         {
-          attribute: 'Energia Disponível[kWh]',
+          attribute: availEnergyAtr,
           value: '\u00A0',
         },
         {
-          attribute: 'Ciclos',
+          attribute: ciclesAtr,
           value: '\u00A0',
         },
         {
-          attribute: 'Modelo',
+          attribute: modelAtr,
           value: '\u00A0',
         },
         {
-          attribute: 'Quantidade',
+          attribute: qntAtr,
           value: '\u00A0',
         },
       ]
     : [
         {
-          attribute: 'Bateria',
+          attribute: batteryAtr,
           value: battery.modelFullName || '\u00A0',
         },
         {
-          attribute: 'Dod/Vida Útil',
+          attribute: dodLifespanAtr,
           value:
             battery.dod !== '\u00A0'
-              ? `${battery.dod} / ${battery.lifespan} anos`
+              ? `${battery.dod} / ${yearsUnit}`
               : '\u00A0',
         },
         {
-          attribute: 'Energia[kWh]',
+          attribute: energyAtr,
           value:
             typeof battery.nominalEnergy === 'string'
               ? '\u00A0'
@@ -149,26 +167,45 @@ export const formatBattery = (battery: Battery) =>
               : battery.nominalEnergy.toFixed(2),
         },
         {
-          attribute: 'Energia Disponível[kWh]',
+          attribute: availEnergyAtr,
           value:
             typeof battery.nominalEnergy === 'string'
               ? '\u00A0'
               : battery.nominalEnergy === 0
               ? '\u00A0'
-              : (battery.dod as any * battery.nominalEnergy).toFixed(2),
+              : ((battery.dod as any) * battery.nominalEnergy).toFixed(2),
         },
         {
-          attribute: 'Ciclos',
+          attribute: ciclesAtr,
           value: battery.nominalEnergy === 0 ? '\u00A0' : 6000,
         },
         {
-          attribute: 'Modelo',
+          attribute: modelAtr,
           value: battery.modelFullName.includes('BOS')
             ? 'High Voltage(HV)'
             : 'Low Voltage(LV)',
         },
         {
-          attribute: 'Quantidade',
+          attribute: qntAtr,
           value: battery.quantity,
         },
       ];
+
+type Grid =
+  | '220V (Fase + Fase + Terra/Neutro)'
+  | '127V (Fase + Neutro/Terra)'
+  | '220V (Fase + Neutro + Terra)'
+  | '220V (Fase + Fase + Fase + Terra + Neutro)'
+  | '380V (Fase + Fase + Fase + Terra + Neutro)';
+
+
+const gridKeysMap = {
+  ['127V (Fase + Neutro/Terra)']: 'mono127',
+  ['220V (Fase + Neutro + Terra)']: 'mono220',
+  ['220V (Fase + Fase + Terra/Neutro)']: 'bi220',
+  ['220V (Fase + Fase + Fase + Terra + Neutro)']: 'tri220',
+  ['380V (Fase + Fase + Fase + Terra + Neutro)']: 'tri380',
+}
+
+export const mapGridKeys = (grid: Grid) => gridKeysMap[grid || '127V (Fase + Neutro/Terra)']
+

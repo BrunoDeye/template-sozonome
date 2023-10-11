@@ -27,6 +27,7 @@ import { useState } from 'react';
 import { devices } from '@/utils/constants';
 import { removeAccents } from '@/utils/functions';
 import { useDataStore } from '@/store/data';
+import { useLocale, useTranslations } from 'next-intl';
 
 type DeviceListProps = {
   handleEquipList: (
@@ -39,6 +40,8 @@ type DeviceListProps = {
 };
 
 const DevicesList = ({ handleEquipList, id }: DeviceListProps) => {
+  const locale = useLocale() as 'en' | 'pt-BR' | 'es-ES' | 'it-IT';
+  const t = useTranslations("Devices");
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('');
   const {
@@ -47,9 +50,9 @@ const DevicesList = ({ handleEquipList, id }: DeviceListProps) => {
 
   const normalizedDevices = devices.map((device) => ({
     ...device,
-    value: removeAccents(device.value),
-    label: device.value,
-  }));
+    value: removeAccents(device.value[locale]),
+    label: device.value[locale],
+  })).sort((a, b) => a.value.localeCompare(b.value));
 
   const handleClick = () => {
     const selectedDevice = normalizedDevices.find((device) =>
@@ -71,17 +74,16 @@ const DevicesList = ({ handleEquipList, id }: DeviceListProps) => {
     <Dialog>
       <DialogTrigger asChild>
         <Button className="w-full" variant="gradientBlue">
-          Catálogo
+          {t('catalogueButton')}
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            Catálogo de Dispositivos Domésticos
+            {t('modalTitle')}
           </DialogTitle>
           <DialogDescription className="flex justify-center">
-            A seguir, destacamos os principais equipamentos nas residências brasileiras,
-            acompanhados por estimativas de sua Potência [W] e Autonomia [h].
+            {t('modalDescription')}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -101,7 +103,7 @@ const DevicesList = ({ handleEquipList, id }: DeviceListProps) => {
                         .replace(/\s+/g, '')
                         .includes(value.toLowerCase().replace(/\s+/g, ''))
                     )?.label}</span>
-                  : 'Escolha um equipamento...'}
+                  : t('modalSelectLabel')}
                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
             </PopoverTrigger>
@@ -109,9 +111,9 @@ const DevicesList = ({ handleEquipList, id }: DeviceListProps) => {
               <Command>
                 <CommandInput
                   className="my-1 focus:border-none focus:ring-2 focus:ring-sky-200"
-                  placeholder="Buscar na lista ou selecionar..."
+                  placeholder={t('modalSelectPlaceholder')}
                 />
-                <CommandEmpty>Não encontrado.</CommandEmpty>
+                <CommandEmpty>{t('modalSelectEmpty')}</CommandEmpty>
                 <CommandGroup className="overflow-y-scroll">
                   {normalizedDevices.map((device) => (
                     <CommandItem
@@ -156,7 +158,7 @@ const DevicesList = ({ handleEquipList, id }: DeviceListProps) => {
               className="w-auto mx-auto"
               type="submit"
             >
-              Confirmar
+              {t('modalConfirmButton')}
             </Button>
           </DialogTrigger>
         </DialogFooter>

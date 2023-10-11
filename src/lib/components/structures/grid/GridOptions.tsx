@@ -1,5 +1,5 @@
 'use client';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-intl/client';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import { RadioGroup, RadioGroupItem } from '@/lib/components/ui/radio-group';
 import { useDataStore } from '@/store/data';
@@ -14,24 +14,28 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button } from '../../ui/button';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
+import { useTranslations } from 'next-intl';
 
-const FormSchema = z.object({
-  grid: z.enum(
-    [
-      '220V (Fase + Fase + Terra/Neutro)',
-      '127V (Fase + Neutro/Terra)',
-      '220V (Fase + Neutro + Terra)',
-      '220V (Fase + Fase + Fase + Terra + Neutro)',
-      '380V (Fase + Fase + Fase + Terra + Neutro)',
-    ],
-    {
-      required_error: '\u24D8 Você precisa escolher uma Tensão de Rede.',
-    }
-  ),
-});
+
 
 const GridOptions = () => {
+  const [isPending, startTransition] = useTransition();
+  const t = useTranslations("Grid");
+  const FormSchema = z.object({
+    grid: z.enum(
+      [
+        '220V (Fase + Fase + Terra/Neutro)',
+        '127V (Fase + Neutro/Terra)',
+        '220V (Fase + Neutro + Terra)',
+        '220V (Fase + Fase + Fase + Terra + Neutro)',
+        '380V (Fase + Fase + Fase + Terra + Neutro)',
+      ],
+      {
+        required_error: `\u24D8 ${t('errorMsg')}`,
+      }
+    ),
+  });
   const {
     state: { grid, place, systemType },
     actions: { addGrid },
@@ -46,7 +50,9 @@ const GridOptions = () => {
   ) => {
     addGrid(data.grid);
 
+    startTransition(() => {
     router.push('/devices', { scroll: false });
+    });
   };
 
   const onError: SubmitErrorHandler<z.infer<typeof FormSchema>> = (errors) =>
@@ -63,14 +69,13 @@ const GridOptions = () => {
     <div className="isolate min-h-[60vh] px-6 py-2 sm:py-4 lg:px-6">
       <div className="mx-auto max-w-4xl text-center">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Tensão da Rede
+          {t('title')}
         </h2>
         <p className="mt-2 text-sm leading-8">
-          Nesta etapa, você irá escolher o modelo do inversor híbrido.
+          {t('subtitle')}
         </p>
         <p className="leading-2 mt-1 text-[13px] font-thin">
-          Selecione a rede desejada, geralmente correspondendo à rede pública.
-          Caso tenha alguma dúvida entre em contato com concessionária.
+          {t('content')}
         </p>
       </div>
       {isClient ? (
@@ -107,9 +112,9 @@ const GridOptions = () => {
                             className="flex w-full cursor-pointer flex-col items-start gap-1 rounded-xl bg-opacity-90 p-4 text-sm shadow-xl backdrop-blur-2xl transition ease-out hover:bg-opacity-75 peer-aria-checked:bg-gradient-to-br peer-aria-checked:from-gray-100 peer-aria-checked:to-blue-200 peer-aria-checked:text-sky-700 dark:shadow-lg dark:shadow-sky-700 dark:peer-aria-checked:from-blue-800 dark:peer-aria-checked:to-blue-400 dark:peer-aria-checked:text-white"
                             htmlFor="r2"
                           >
-                            <h4>Monofásico</h4>
+                            <h4>{t("optionMonoTitle")}</h4>
                             <p className="pr-[2rem]">
-                              127V (Fase + Neutro/Terra)
+                            {t("option127VMonoSubtitle")}
                             </p>
                             <p>BR</p>
                           </FormLabel>
@@ -142,9 +147,9 @@ const GridOptions = () => {
                           className="flex w-full cursor-pointer flex-col items-start gap-1 rounded-xl bg-opacity-90 p-4 text-sm shadow-xl backdrop-blur-2xl transition ease-out hover:bg-opacity-75 peer-aria-checked:bg-gradient-to-br peer-aria-checked:from-gray-100 peer-aria-checked:to-blue-200 peer-aria-checked:text-sky-700 dark:shadow-lg dark:shadow-sky-700 dark:peer-aria-checked:from-blue-800 dark:peer-aria-checked:to-blue-400 dark:peer-aria-checked:text-white"
                           htmlFor="r3"
                         >
-                          <h4>Monofásico</h4>
+                          <h4>{t("optionMonoTitle")}</h4>
                           <p className="pr-[2rem]">
-                            220V (Fase + Neutro + Terra)
+                          {t("option220VMonoSubtitle")}
                           </p>
                           <p>EU</p>
                         </FormLabel>
@@ -176,9 +181,9 @@ const GridOptions = () => {
                           className="flex w-full cursor-pointer flex-col items-start gap-1 rounded-xl bg-opacity-90 p-4 text-sm shadow-xl backdrop-blur-2xl transition ease-out hover:bg-opacity-75 peer-aria-checked:bg-gradient-to-br peer-aria-checked:from-gray-100 peer-aria-checked:to-blue-200 peer-aria-checked:text-sky-700 dark:shadow-lg dark:shadow-sky-700 dark:peer-aria-checked:from-blue-800 dark:peer-aria-checked:to-blue-400 dark:peer-aria-checked:text-white"
                           htmlFor="r1"
                         >
-                          <h4>Bifásico</h4>
+                          <h4>{t("optionBiTitle")}</h4>
                           <p className="pr-[1.5rem]">
-                            220V (Fase + Fase + Terra/Neutro)
+                          {t("option220VBiSubtitle")}
                           </p>
                           <p>US</p>
                         </FormLabel>
@@ -210,9 +215,9 @@ const GridOptions = () => {
                           className="flex w-full cursor-pointer flex-col items-start gap-1 rounded-xl bg-opacity-90 p-4 text-sm shadow-xl backdrop-blur-2xl transition ease-out hover:bg-opacity-75 peer-aria-checked:bg-gradient-to-br peer-aria-checked:from-gray-100 peer-aria-checked:to-blue-200 peer-aria-checked:text-sky-700 dark:shadow-lg dark:shadow-sky-700 dark:peer-aria-checked:from-blue-800 dark:peer-aria-checked:to-blue-400 dark:peer-aria-checked:text-white"
                           htmlFor="r4"
                         >
-                          <h4>Trifásico</h4>
+                          <h4>{t("optionTriTitle")}</h4>
                           <p className="pr-[2rem]">
-                            220V (Fase + Fase + Fase + Terra + Neutro)
+                          {t("option220VTriSubtitle")}
                           </p>
                           <p>US</p>
                         </FormLabel>
@@ -243,9 +248,9 @@ const GridOptions = () => {
                           className="flex w-full cursor-pointer flex-col items-start gap-1 rounded-xl bg-opacity-90 p-4 text-sm shadow-xl backdrop-blur-2xl transition ease-out hover:bg-opacity-75 peer-aria-checked:bg-gradient-to-br peer-aria-checked:from-gray-100 peer-aria-checked:to-blue-200 peer-aria-checked:text-sky-700 dark:shadow-lg dark:shadow-sky-700 dark:peer-aria-checked:from-blue-800 dark:peer-aria-checked:to-blue-400 dark:peer-aria-checked:text-white"
                           htmlFor="r5"
                         >
-                          <h4>Trifásico</h4>
+                          <h4>{t("optionTriTitle")}</h4>
                           <p className="pr-[2rem]">
-                            380V (Fase + Fase + Fase + Terra + Neutro)
+                            {t("option380VTriSubtitle")}
                           </p>
                           <p>EU</p>
                         </FormLabel>
@@ -263,7 +268,7 @@ const GridOptions = () => {
                     </RadioGroup>
                   </FormControl>
 
-                  <FormMessage className="text-md text-center font-bold" />
+                  <FormMessage className="!mt-8 text-md text-center font-bold" />
                 </FormItem>
               )}
             />
@@ -273,7 +278,7 @@ const GridOptions = () => {
               className="mt-10 block w-full rounded-md sm:mx-auto sm:w-auto"
               variant="gradientBlue"
             >
-              Confirmar
+              {t('confirmButton')}
             </Button>
           </form>
         </Form>

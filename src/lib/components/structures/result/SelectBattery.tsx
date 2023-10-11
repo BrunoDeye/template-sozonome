@@ -13,6 +13,8 @@ import {
 import { useGetBatteries } from '@/services/ReactQueryHooks/useGetBatteries';
 import { useDataStore } from '@/store/data';
 import { useCalculateInvertersQuery } from '@/services/ReactQueryHooks/useCalculateInvertersQuery';
+import LoadingDeye from '../../Loading';
+import { useTranslations } from 'next-intl';
 
 type SelectBatteryProps = {
   selectedBattery: string | undefined;
@@ -23,6 +25,7 @@ export default function SelectBattery({
   selectedBattery,
   setSelectedBattery,
 }: SelectBatteryProps) {
+  const t = useTranslations('SelectBattery');
   const { data: batteriesData, isLoading: batteriesDataIsLoading } =
     useGetBatteries();
 
@@ -46,13 +49,13 @@ export default function SelectBattery({
     <div className="p-0 sm:p-4 print-hidden">
       <Select onValueChange={setSelectedBattery} defaultValue={selectedBattery}>
         <SelectTrigger className="w-full">
-          <SelectValue placeholder="Selecione Uma Bateria" />
+          <SelectValue placeholder={t('placeholder')} />
         </SelectTrigger>
         <SelectContent onTouchStart={handleClick}>
           <SelectGroup>
-            <SelectLabel>Baterias</SelectLabel>
+            <SelectLabel>{t('label')}</SelectLabel>
             {batteriesDataIsLoading || isLoading || !invertersList ? (
-              <span>Carregando...</span>
+              <LoadingDeye />
             ) : (
               batteriesData
                 ?.filter(

@@ -5,9 +5,11 @@ import {
   PopoverTrigger,
 } from '@/lib/components/ui/popover';
 import { LucideInfo } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 const TCDescription = () => {
+  const t = useTranslations("Devices");
   const [open, setOpen] = useState(false);
 
   const handleMouseEnter = () => {
@@ -38,13 +40,9 @@ const TCDescription = () => {
         onMouseLeave={handleMouseLeave}
         className="w-40 sm:w-80 p-3 text-justify "
       >
-        <p>
-          Valor recomendado para mitigar perdas no sistema, sendo
-          essencial contactar um engenheiro projetista para dimensionar com
-          precisão este valor.
-        </p>
-        <br/>
-        <p>Recomendação: Entre 0,94 e 0,87</p>
+        {t.rich('TCDescription',{
+          br: () => <br />,
+        })}
       </PopoverContent>
     </Popover>
   ) : null;

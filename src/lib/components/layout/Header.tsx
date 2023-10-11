@@ -1,5 +1,6 @@
 import { ThemeToggle } from '@/lib/components/theme-toggle';
 import { NavigateBack } from '../navigate-back';
+import LocaleSwitcher from '../LocaleSwitcher';
 
 const Header = () => {
   
@@ -9,7 +10,11 @@ const Header = () => {
         <div className="mr-auto">
           <NavigateBack />
         </div>
-        <div className="ml-auto">
+        
+        <div className="ml-auto flex items-center gap-8">
+          <div className="invisible hidden sm:visible sm:block">
+            <LocaleSwitcher />
+          </div>
           <ThemeToggle />
         </div>
       </section>

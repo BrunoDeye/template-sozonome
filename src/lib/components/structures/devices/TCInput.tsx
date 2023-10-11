@@ -4,8 +4,10 @@ import { Label } from '../../ui/label';
 import TCDescription from './TCDescription';
 import { Input } from '../../ui/input';
 import { useDataStore } from '@/store/data';
+import { useTranslations } from 'next-intl';
 
 function TCInput() {
+  const t = useTranslations("Devices");
   const {
     state: { FC },
     actions: { addFC },
@@ -19,7 +21,7 @@ function TCInput() {
         htmlFor="FC"
         className="flex items-start mb-2 sm:mx-auto sm:w-auto"
       >
-        <span className='mr-2'>ES (Eficiência do Sistema)</span>
+        <span className='mr-2'>{t('TCLabel')}</span>
         <TCDescription />
       </Label>
       <Input

@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { NextIntlClientProvider } from 'next-intl';
+import { notFound } from 'next/navigation';
 
 import dynamic from 'next/dynamic';
 // import Layout from '@/lib/components/layout';
@@ -10,8 +12,12 @@ import '@/lib/styles/globals.css';
 import { Suspense } from 'react';
 import Loading from './loading';
 
-const  Layout = dynamic(() => import('@/lib/components/layout'), { loading: () => <Loading /> })
-const  Providers = dynamic(() => import('@/services/ReactQuery/Providers.client'))
+const Layout = dynamic(() => import('@/lib/components/layout'), {
+  loading: () => <Loading />,
+});
+const Providers = dynamic(
+  () => import('@/services/ReactQuery/Providers.client')
+);
 
 const APP_NAME = 'Deye - Calculadora Solar';
 
@@ -41,30 +47,52 @@ export const metadata: Metadata = {
   },
 };
 
-interface RootLayoutProps {
-  children: React.ReactNode;
+export function generateStaticParams() {
+  return [
+    { locale: 'en' },
+    { locale: 'pt-BR' },
+    { locale: 'it-IT' },
+    { locale: 'es-ES' },
+  ];
 }
 
-const RootLayout = ({ children }: RootLayoutProps) => {
+interface RootLayoutProps {
+  children: React.ReactNode;
+  params: any;
+}
+
+const RootLayout = async ({
+  children,
+  params: { locale },
+}: RootLayoutProps) => {
+  let messages;
+  try {
+    messages = (await import(`../../messages/${locale}.json`)).default;
+  } catch (error) {
+    notFound();
+  }
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={cn(
           'min-h-screen bg-background font-sans antialiased',
           fontSans.variable
         )}
+        
       >
-        <Providers>
-          <Layout>
-          
-            <Suspense  fallback={ <Loading />}>
-              
-             
-              <div className="flex-1">{children}</div>
-            </Suspense>
-  
-          </Layout>
-        </Providers>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <Providers>
+            <div id="__next">
+              <Layout>
+              <Suspense fallback={<Loading />}>
+                <div  className="flex-1">{children}</div>
+              </Suspense>
+            </Layout>
+            </div>
+            
+          </Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
