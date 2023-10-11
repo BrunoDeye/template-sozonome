@@ -62,8 +62,8 @@
     "title": "<show>Batería</show><hidden>Baterías</hidden>",
     "batteryAtr": "Batería",
     "dodLifespanAtr": "DoD/Vida Útil",
-    "energyAtr": "Energía [kWh]",
-    "availEnergyAtr": "Energía Disponible [kWh]",
+    "energyAtr": "Energía[kWh]",
+    "availEnergyAtr": "Energía Disponible[kWh]",
     "ciclesAtr": "Ciclos",
     "modelAtr": "Modelo",
     "qntAtr": "Cantidad",
@@ -75,7 +75,7 @@
     "othersTitle": "Otras Opciones de Inversores",
     "inverterAtr": "Inversor",
     "typeAtr": "Tipo",
-    "powerAtr": "Potencia [W]",
+    "powerAtr": "Potencia[W]",
     "qntAtr": "Cantidad"
   },
   "Grids": {
