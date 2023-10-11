@@ -8,20 +8,23 @@ import { ThemeProvider } from '@/lib/components/theme-provider';
 import dynamic from 'next/dynamic';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import { useDataStore } from '@/store/data';
-import { usePathname } from 'next/navigation';
+import { motion , AnimatePresence, delay } from 'framer-motion';
 const  Header = dynamic(() => import('./Header'))
 const  Footer = dynamic(() => import('./Footer'), { ssr: false })
+import { usePathname } from 'next-intl/client';
 
 type LayoutProps = {
   children: ReactNode;
 };
 
 const Layout = ({ children }: LayoutProps) => {
+  const pathname = usePathname()
   
   return (
-
+    
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <div className="flex min-h-screen flex-col">
+      <AnimatePresence mode='wait' >
+      <motion.div key={pathname} className="flex min-h-screen flex-col">
         <Header />
           <div
             className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
@@ -38,7 +41,8 @@ const Layout = ({ children }: LayoutProps) => {
 
         <main className="wrapper">{children}</main>
         <Footer />
-      </div>
+      </motion.div>
+      </AnimatePresence>
     </ThemeProvider>
   );
 };
