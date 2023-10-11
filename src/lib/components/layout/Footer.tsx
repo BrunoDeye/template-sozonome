@@ -38,7 +38,7 @@ const Footer = () => {
 
   return (
     <footer className="wrapper print-hidden mt-6 z-[9999]">
-      <div className="flex flex-col justify-center gap-6">
+      <div className="flex flex-col justify-center gap-8">
         <div className="mx-auto flex flex-col gap-2 text-xs items-center justify-center">
           <div className="relative ">
             <Image
