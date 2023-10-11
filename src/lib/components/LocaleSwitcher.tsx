@@ -68,8 +68,8 @@ export default function LocaleSwitcher() {
   if (!mounted) return <></>;
 
   return (
-    isPending ? <div className='min-w-[205px]'></div>  :
     <div className="z-[9999] max-w-[205px] min-w-[205px] min-h-[50px] h-[50px] w-[205px] transition-all">
+      {isPending ? <div className='min-w-[205px] scale-50'><LoadingDeye /></div>  :
       <Select
         onOpenChange={handleOpenChange}
         onValueChange={onSelectChange}
@@ -110,7 +110,7 @@ export default function LocaleSwitcher() {
             ))}
           </SelectGroup>
         </SelectContent>
-      </Select>
+      </Select>}
     </div>
   );
 }
