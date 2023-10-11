@@ -63,7 +63,7 @@
     "batteryAtr": "Batteria",
     "dodLifespanAtr": "DoD/Durata",
     "energyAtr": "Energia[kWh]",
-    "availEnergyAtr": "Energia Disponibile [kWh]",
+    "availEnergyAtr": "Energia Disponibile[kWh]",
     "ciclesAtr": "Cicli",
     "modelAtr": "Modello",
     "qntAtr": "Quantità",
