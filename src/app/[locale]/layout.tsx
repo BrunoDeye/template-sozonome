@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 // import Layout from '@/lib/components/layout';
 import { fontSans } from '@/lib/styles/fonts';
 import { cn } from '@/lib/utils';
+import { Analytics } from '@vercel/analytics/react';
 
 import '@/lib/styles/globals.css';
 // import Providers from '@/services/ReactQuery/Providers.client';
@@ -86,7 +87,7 @@ const RootLayout = async ({
             <div id="__next">
               <Layout>
               <Suspense fallback={<Loading />}>
-                <div  className="flex-1">{children}</div>
+                <div  className="flex-1">{children}<Analytics /></div>
               </Suspense>
             </Layout>
             </div>
