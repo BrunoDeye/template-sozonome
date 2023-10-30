@@ -14,7 +14,7 @@ const Footer = () => {
   const router = useRouter();
   const locale = useLocale();
   const {
-    state: { grid },
+    state: { grid, batteryModel, batteryQty },
   } = useDataStore();
   const pathname = usePathname();
 
@@ -23,11 +23,14 @@ const Footer = () => {
   }, []);
 
   useEffect(() => {
+    console.log((grid === '' || batteryModel === ''));
     if (
       pathname !== '/' &&
       pathname !== `/termos-de-uso` &&
       pathname !== `/grid` &&
-      grid === ''
+      pathname !== `/devices` &&
+      pathname !== `/baterias` &&
+     (grid === '' || batteryModel === '')
     ) {
 
       startTransition(() => {

@@ -209,3 +209,91 @@ const gridKeysMap = {
 
 export const mapGridKeys = (grid: Grid) => gridKeysMap[grid || '127V (Fase + Neutro/Terra)']
 
+
+type BatteryOptions = {
+  model: string;
+  voltage: number;
+  nominalEnergy: number | string;
+  dod: number | string;
+  lifespan: number | string;
+};
+
+
+export const formatBatteryOptions = (
+  battery: BatteryOptions,
+  batteryAtr = 'Bateria',
+  dodLifespanAtr = 'Dod/Vida Útil',
+  energyAtr = 'Energia[kWh]',
+  availEnergyAtr = 'Energia Disponível[kWh]',
+  ciclesAtr = 'Ciclos',
+  modelAtr = 'Modelo',
+  yearsUnit = 'anos'
+) =>
+  !battery.model || battery.model === '\u00A0'
+    ? [
+        {
+          attribute: batteryAtr,
+          value: '\u00A0',
+        },
+        {
+          attribute: dodLifespanAtr,
+          value: '\u00A0',
+        },
+        {
+          attribute: energyAtr,
+          value: '\u00A0',
+        },
+        {
+          attribute: availEnergyAtr,
+          value: '\u00A0',
+        },
+        {
+          attribute: ciclesAtr,
+          value: '\u00A0',
+        },
+        {
+          attribute: modelAtr,
+          value: '\u00A0',
+        },
+      ]
+    : [
+        {
+          attribute: batteryAtr,
+          value: battery.model || '\u00A0',
+        },
+        {
+          attribute: dodLifespanAtr,
+          value:
+            battery.dod !== '\u00A0'
+              ? `${battery.dod} / ${yearsUnit}`
+              : '\u00A0',
+        },
+        {
+          attribute: energyAtr,
+          value:
+            typeof battery.nominalEnergy === 'string'
+              ? '\u00A0'
+              : battery.nominalEnergy === 0
+              ? '\u00A0'
+              : battery.nominalEnergy.toFixed(2),
+        },
+        {
+          attribute: availEnergyAtr,
+          value:
+            typeof battery.nominalEnergy === 'string'
+              ? '\u00A0'
+              : battery.nominalEnergy === 0
+              ? '\u00A0'
+              : ((battery.dod as any) * battery.nominalEnergy).toFixed(2),
+        },
+        {
+          attribute: ciclesAtr,
+          value: battery.nominalEnergy === 0 ? '\u00A0' : 6000,
+        },
+        {
+          attribute: modelAtr,
+          value: battery.model.includes('BOS')
+            ? 'High Voltage(HV)'
+            : 'Low Voltage(LV)',
+        }
+      ];

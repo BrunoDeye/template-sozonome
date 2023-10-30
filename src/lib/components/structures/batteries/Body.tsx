@@ -1,13 +1,15 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import SelectBattery from './SelectBattery';
+import SelectBattery from '@/lib/components/structures/batteries/SelectBattery';
 import { useCalculateBatteriesMutation } from '@/services/ReactQueryHooks/useCalculateBatteriesMutation';
 import { useDataStore } from '@/store/data';
 import LoadingDeye from '../../Loading';
-import Tables from './Tables';
+import Tables from '@/lib/components/structures/result/Tables';
 import { ImageModelName, mapImages } from '@/utils/constants';
 import { formatBattery } from '@/utils/functions';
 import { useTranslations } from 'next-intl';
+import Title from './Title';
+import { Button } from '../../ui/button';
 
 function Batteries() {
   const t = useTranslations('Batteries');
@@ -26,21 +28,20 @@ function Batteries() {
   const calculateBatteriesMutation = useCalculateBatteriesMutation();
 
   const {
-    state: { FC, totalEnergy, systemType, batteryModel }, actions: { addBatteryQty}
+    state: { FC, totalEnergy, systemType },
   } = useDataStore();
 
   useEffect(() => {
-    if (batteryModel) {
+    if (selectedBattery) {
       const requestData = {
-        model: batteryModel as string,
+        model: selectedBattery as string,
         tEnergy: totalEnergy || 1,
         fc: FC <= 100 ? FC / 100 : 0.94,
       };
       // console.log(requestData);
       calculateBatteriesMutation.mutate(requestData, {
         onSuccess: (data) => {
-          addBatteryQty(data.quantity);
-          setBattery(data);
+          setBattery(data.quantity);
           // console.log(data);
         },
         onError: (error, variables, context) => {
@@ -48,20 +49,22 @@ function Batteries() {
         },
       });
     }
-  }, []);
-  console.log(batteryModel)
+  }, [selectedBattery]);
+
   return (
     <>
-      <h4 className="margin-print-fixer text-center text-xl font-bold tracking-tight sm:text-2xl">
-        {t('title')}
-      </h4>
-      {calculateBatteriesMutation.isLoading ? (
+      <Title />
+      <SelectBattery
+        selectedBattery={selectedBattery}
+        setSelectedBattery={setSelectedBattery}
+      />
+      {/* {calculateBatteriesMutation.isLoading ? (
         <div className="mx-auto my-auto flex min-h-[377px] w-full items-center justify-center text-center">
           <div className="pb-12">
             <LoadingDeye />
           </div>
         </div>
-      ) : batteryModel ? (
+      ) : selectedBattery ? (
         <Tables
           srcImg={mapImages(battery.modelFullName as ImageModelName)}
           data={formatBattery(
@@ -78,7 +81,12 @@ function Batteries() {
         />
       ) : (
         <div className="h-[100px]">{'\u00A0'}</div>
-      )}
+      )} */}
+      {/* <div className="mt-auto space-y-6">
+        <div className="text-center">
+          <Button disabled={battery.modelFullName === '\u00A0'} variant="gradientSky">Resultado</Button>
+        </div>
+      </div> */}
     </>
   );
 }

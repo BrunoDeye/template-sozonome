@@ -8,7 +8,6 @@ import { useRouter, usePathname } from 'next-intl/client';
 import { useEffect, useState, useTransition } from 'react';
 
 export function NavigateBack() {
-  
   const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();
@@ -17,7 +16,7 @@ export function NavigateBack() {
   const t = useTranslations('BackButton');
 
   const {
-    actions: { addSystemType, addGrid },
+    actions: { addSystemType, addGrid, addBatteryModel },
     state: { grid },
   } = useDataStore();
 
@@ -31,8 +30,11 @@ export function NavigateBack() {
       addGrid('');
     }
 
+    if (pathname === `/baterias`) {
+      addBatteryModel('');
+    }
+
     if (pathname === `/termos-de-uso`) {
-    
       startTransition(() => {
         router.replace('/', { locale: locale });
       });
@@ -44,24 +46,32 @@ export function NavigateBack() {
       startTransition(() => {
         router.replace('/grid', { locale: locale });
       });
-    } else {
+    } else if (pathname === `/baterias`) {
       startTransition(() => {
         router.replace('/devices', { locale: locale });
+      });
+    } else {
+      startTransition(() => {
+        router.replace('/baterias', { locale: locale });
       });
     }
   };
 
   useEffect(() => {
-      if (locale !== tempLocale){
-        router.replace(pathname, { locale: tempLocale });
-      }
-    
-  }, [tempLocale])
+    if (locale !== tempLocale) {
+      router.replace(pathname, { locale: tempLocale });
+    }
+  }, [tempLocale]);
 
   return pathname === `/${locale}` || pathname === '/' ? (
     <div>&nbsp;</div>
   ) : (
-    <Button className={isPending ? 'transition-opacity [&:disabled]:opacity-30' : ''} variant="ghost" size="sm" onClick={handleClick}>
+    <Button
+      className={isPending ? 'transition-opacity [&:disabled]:opacity-30' : ''}
+      variant="ghost"
+      size="sm"
+      onClick={handleClick}
+    >
       <ArrowBigLeft /> {t('label')}
     </Button>
   );

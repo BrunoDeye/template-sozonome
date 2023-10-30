@@ -91,7 +91,7 @@ export default function Body() {
             } invisible hidden`}
           ></div>
 
-          {systemType !== 'AllInOne' ? <Batteries /> : null}
+          {<Batteries />}
           
         </FadeIn>
         

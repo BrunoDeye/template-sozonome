@@ -25,12 +25,14 @@ export const inverters = [
 export default function InvertersList() {
   const t = useTranslations('Inverters');
   const {
-    state: { grid, totalPower, place },
+    state: { grid, totalPower, batteryModel, batteryQty },
   } = useDataStore();
 
   const requestData = {
     gridVoltage: grid || '220V (Fase + Fase + Terra/Neutro)',
     tPower: totalPower || 1,
+    batteryModel,
+    batteryQty,
   };
   const { invertersList, isLoading, isError } =
     useCalculateInvertersQuery(requestData);

@@ -22,9 +22,10 @@ export const imagesMap = {
   'SUN-10K-SG01/04LP3-EU': sun6KSG0104LP3,
   'SUN-12K-SG01/04LP3-EU': sun6KSG0104LP3,
   'SUN-18K-SG01/04HP3-US': sun35KSG0104HP3,
+  'SUN-20K-SG01HP3-EU': sun35KSG0104HP3,
   'SUN-25K-SG01/04HP3-US': sun35KSG0104HP3,
   'SUN-30K-SG01/04HP3-EU': sun35KSG0104HP3,
-  'SUN-35K-SG01/04HP3-US': sun35KSG0104HP3,
+  'SUN-30K-SG01/04HP3-US': sun35KSG0104HP3,
   'SUN-40K-SG01/04HP3-EU': sun35KSG0104HP3,
   'SUN-50K-SG01/04HP3-EU': sun35KSG0104HP3,
   'GE-F60': GEF60,
@@ -32,7 +33,11 @@ export const imagesMap = {
   'Deye - BOS-G (100Ah)': BOSG,
   'Deye - SE-G5.3 (104Ah)': SEG5_1,
   'Deye - RW.M6.1 (120Ah)': RWM6_1,
-  'Deye - SE-G5.1 PRO (100Ah)': SEG5_1
+  'Deye - SE-G5.1 PRO (100Ah)': SEG5_1,
+  'BOS-G (100Ah)': BOSG,
+  'SE-G5.3 (104Ah)': SEG5_1,
+  'RW.M6.1 (120Ah)': RWM6_1,
+  'SE-G5.1 PRO (100Ah)': SEG5_1
 }
 
 export type ImageModelName = keyof typeof imagesMap;

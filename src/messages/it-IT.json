@@ -50,7 +50,7 @@
     "total": "TOTALE:",
     "totalPower": "Potenza Totale [W]",
     "totalConsumption": "Consumo Totale [Wh]",
-    "resultButton": "Risultati",
+    "batteryButton": "Scegli una Batteria",
     "modalTitle": "Catalogo dei Dispositivi Residenziali",
     "modalDescription": "Di seguito, sono evidenziati i principali dispositivi presenti nelle residenze, con stime di Potenza [W] e Autonomia [o].",
     "modalSelectLabel": "Scegli un dispositivo...",
@@ -59,7 +59,7 @@
     "modalConfirmButton": "Conferma"
   },
   "Batteries": {
-    "title": "<show>Batteria</show><hidden>Batterie</hidden>",
+    "title": "Batteria",
     "batteryAtr": "Batteria",
     "dodLifespanAtr": "DoD/Durata",
     "energyAtr": "Energia[kWh]",
@@ -88,7 +88,7 @@
   },
   "Result": {
     "title": "Risultati",
-    "subtitle": "Successivamente saranno presentate alcune raccomandazioni di <important>Inverter</important> e opzioni di <important>Batterie</important>."
+    "subtitle": "Successivamente, verranno presentate alcune raccomandazioni per gli <important>Inverter</important> e la <important>Batteria</important> scelta."
   },
   "SelectBattery": {
     "placeholder": "Seleziona una Batteria",
@@ -97,5 +97,11 @@
   "ResultButtons": {
     "printButton": "Stampa Risultato",
     "recalcButton": "Ricalcola Risultato"
+  },
+  "BatteriesPage": {
+    "title": "Batterie",
+    "subtitle": "Seleziona una batteria tra le opzioni nella lista.",
+    "resultButton": "Risultato",
+    "label1": "Energia [kWh]"
   }
 }

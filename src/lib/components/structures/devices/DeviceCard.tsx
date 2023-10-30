@@ -532,7 +532,7 @@ const DeviceCard = () => {
                 } w-full sm:mx-auto sm:w-auto`}
                 asChild
               >
-                <Link href="/result">{t('resultButton')}</Link>
+                <Link href="/baterias">{t('batteryButton')}</Link>
               </Button>
             ) : null}
           </div>
