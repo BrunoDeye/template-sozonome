@@ -8,6 +8,7 @@ import Tables from './Tables';
 import { ImageModelName, mapImages } from '@/utils/constants';
 import { formatBattery } from '@/utils/functions';
 import { useTranslations } from 'next-intl';
+import { useCalculateInvertersQuery } from '@/services/ReactQueryHooks/useCalculateInvertersQuery';
 
 function Batteries() {
   const t = useTranslations('Batteries');
@@ -26,8 +27,18 @@ function Batteries() {
   const calculateBatteriesMutation = useCalculateBatteriesMutation();
 
   const {
-    state: { FC, totalEnergy, systemType, batteryModel }, actions: { addBatteryQty}
+    state: { FC, totalEnergy, grid, totalPower, batteryModel, batteryQty },
+    actions: { addBatteryQty },
   } = useDataStore();
+
+  const requestData = {
+    gridVoltage: grid || '220V (Fase + Fase + Terra/Neutro)',
+    tPower: totalPower || 1,
+    batteryModel,
+    batteryQty,
+  };
+  const { invertersList, isLoading, isError } =
+    useCalculateInvertersQuery(requestData);
 
   useEffect(() => {
     if (batteryModel) {
@@ -35,6 +46,11 @@ function Batteries() {
         model: batteryModel as string,
         tEnergy: totalEnergy || 1,
         fc: FC <= 100 ? FC / 100 : 0.94,
+        // coef: invertersList!.filter((inverter) =>
+        //   invertersList![0].model.includes('HP')
+        //     ? inverter.model.includes('HP')
+        //     : inverter.model.includes('LP')
+        // )[0].coef,
       };
       // console.log(requestData);
       calculateBatteriesMutation.mutate(requestData, {
@@ -49,13 +65,12 @@ function Batteries() {
       });
     }
   }, []);
-  console.log(batteryModel)
   return (
     <>
       <h4 className="margin-print-fixer text-center text-xl font-bold tracking-tight sm:text-2xl">
         {t('title')}
       </h4>
-      {calculateBatteriesMutation.isLoading ? (
+      {calculateBatteriesMutation.isLoading || isLoading ? (
         <div className="mx-auto my-auto flex min-h-[377px] w-full items-center justify-center text-center">
           <div className="pb-12">
             <LoadingDeye />
@@ -73,7 +88,12 @@ function Batteries() {
             t('ciclesAtr'),
             t('modelAtr'),
             t('qntAtr'),
-            t('yearsUnit', { count: battery.lifespan })
+            t('yearsUnit', { count: battery.lifespan }),
+            invertersList!.filter((inverter) =>
+              invertersList![0].model.includes('HP')
+                ? inverter.model.includes('HP')
+                : inverter.model.includes('LP')
+            )[0].coef
           )}
         />
       ) : (

@@ -76,7 +76,13 @@
     "inverterAtr": "Inversor",
     "typeAtr": "Tipo",
     "powerAtr": "Potencia[W]",
-    "qntAtr": "Cantidad"
+    "qntAtr": "Cantidad",
+    "coefAlert": "Tiempo de carga máximo para el conjunto de baterías",
+    "h": " hora",
+    "hs": " horas",
+    "min": " minuto",
+    "mins": " minutos",
+    "and": "y"
   },
   "Grids": {
     "yourGrid": "Para tu red",
@@ -103,5 +109,8 @@
     "subtitle": "Seleccione una batería de las opciones en la lista.",
     "resultButton": "Resultado",
     "label1": "Energía [kWh]"
+  },
+  "Coef": {
+    "description": "El tiempo necesario es una estimación aproximada y puede variar según la configuración de carga y descarga del inversor, así como las particularidades de cada sistema."
   }
 }

@@ -15,7 +15,9 @@ import Image, { StaticImageData } from 'next/image';
 import InversorImg from '@/images/SUN-6K-SG04LP3-US-LV.png';
 import { mapImages } from '@/utils/constants';
 import { useEffect, useState } from 'react';
-import SUN8kBLUR from '@/images/inverters/SUN-8K-SG01LP1-EU-blur.png'
+import SUN8kBLUR from '@/images/inverters/SUN-8K-SG01LP1-EU-blur.png';
+import { decimalToHoursMinutes } from '../../../../utils/functions';
+import { LucideAlertCircle, LucideAlertTriangle, LucideInfo } from 'lucide-react';
 
 const tableVariants = cva(
   'flex flex-wrap items-center justify-center px-2 py-2 sm:flex-nowrap',
@@ -48,9 +50,6 @@ const inverters = [
   },
 ];
 
-
-
-
 const defaultData = [
   {
     attribute: 'Inversor',
@@ -78,17 +77,19 @@ type TableData = {
 type TableProps = VariantProps<typeof tableVariants> & {
   data: TableData[];
   srcImg?: StaticImageData;
+  coef?: number;
 };
 
 export const toBase64 = (str: string) =>
   typeof window === 'undefined'
     ? Buffer.from(str).toString('base64')
-    : window.btoa(str)
+    : window.btoa(str);
 
 export default function Tables({
   variant,
   data = defaultData,
   srcImg = mapImages('SUN-6K-SG01/04LP3-US'),
+  coef,
 }: TableProps) {
   const [loaded, setLoaded] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -96,20 +97,20 @@ export default function Tables({
   useEffect(() => {
     setIsClient(true);
   }, []);
-
+  console.log(coef);
   return (
-    <div className="trasition-all w-full sm:p-4">
+    <div className="trasition-all w-full -z-1 sm:p-4">
       <div className={cn(tableVariants({ variant }))}>
         <div className="min-w-[210px] py-4">
           {isClient ? (
             <Image
               className={`${
                 loaded ? 'unblur' : ''
-              } clip-your-needful-style mx-auto dark:[--shadow-inversor:#333132]`}
+              } clip-your-needful-style mx-auto -z-1 dark:[--shadow-inversor:#333132]`}
               height={srcImg.height}
               width={srcImg.width}
               priority
-              placeholder='blur'
+              placeholder="blur"
               alt="Inversor/Bateria Deye"
               src={srcImg}
               onLoadingComplete={() => setLoaded(true)}
@@ -143,6 +144,14 @@ export default function Tables({
               </TableRow>
             ))}
           </TableBody>
+          {/* {coef ? (
+            <TableCaption className="mb-2 align-middle font-bold text-yellow-600 ">
+              {' '}
+              <LucideAlertTriangle className="inline" height={18} width={18} /> Tempo de
+              carregamento máximo do conjunto de Baterias:{' '}
+              {decimalToHoursMinutes(coef)}
+            </TableCaption>
+          ) : null} */}
         </Table>
       </div>
     </div>

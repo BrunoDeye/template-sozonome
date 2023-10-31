@@ -136,7 +136,7 @@
     .wrapper {
       max-width: 210mm !important;
       min-height: 277mm !important;
-      margin-bottom: 0 !important;
+      margin-bottom: 0 !important; 
     }
 
     header {
@@ -173,6 +173,11 @@
     }
     .title-margin-print-fixer {
       margin-bottom: 25px !important;
+      margin-top: -10px !important;
+    }
+
+    .alert-margin-print-fixer {
+      margin-bottom: 10px !important;
       margin-top: -10px !important;
     }
 
@@ -368,6 +373,7 @@
     object-fit: contain;
     --shadow-inversor: #808080;
     filter: drop-shadow(15px 10px 4px var(--shadow-inversor));
+    z-index: -1;
   }
   .select__item { user-select: none !important; }
   .unblur {

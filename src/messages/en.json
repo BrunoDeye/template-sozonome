@@ -76,7 +76,13 @@
     "inverterAtr": "Inverter",
     "typeAtr": "Type",
     "powerAtr": "Power[W]",
-    "qntAtr": "Quantity"
+    "qntAtr": "Quantity",
+    "coefAlert": "Maximum Charging Time for the Battery Set",
+    "h": " hour",
+    "hs": " hours",
+    "min": " minute",
+    "mins": " minutes",
+    "and": "and"
   },
   "Grids": {
     "yourGrid": "For your grid",
@@ -103,5 +109,8 @@
     "subtitle": "Select a battery from the options in the list.",
     "resultButton": "Result",
     "label1": "Energy [kWh]"
+  },
+  "Coef": {
+    "description": "The required time is an approximate estimate and may vary depending on the charge and discharge settings of the inverter, as well as the specifics of each system."
   }
 }

@@ -76,7 +76,13 @@
     "inverterAtr": "Inverter",
     "typeAtr": "Tipo",
     "powerAtr": "Potenza[W]",
-    "qntAtr": "Quantità"
+    "qntAtr": "Quantità",
+    "coefAlert": "Tempo di ricarica massimo per il set di batterie",
+    "h": " ora",
+    "hs": " ore",
+    "min": " minuto",
+    "mins": " minuti",
+    "and": "e"
   },
   "Grids": {
     "yourGrid": "Per la tua rete",
@@ -103,5 +109,9 @@
     "subtitle": "Seleziona una batteria tra le opzioni nella lista.",
     "resultButton": "Risultato",
     "label1": "Energia [kWh]"
+  },
+
+  "Coef": {
+    "description": "Il tempo necessario è una stima approssimativa e può variare in base alle impostazioni di carica e scarica dell'inverter, nonché alle particolarità di ciascun sistema."
   }
 }

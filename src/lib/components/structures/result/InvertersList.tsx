@@ -1,5 +1,5 @@
 'use client';
-import { formatInverter } from '@/utils/functions';
+import { decimalToHoursMinutes, formatInverter } from '@/utils/functions';
 import Tables from './Tables';
 import { useDataStore } from '@/store/data';
 import { useCalculateInvertersQuery } from '@/services/ReactQueryHooks/useCalculateInvertersQuery';
@@ -8,6 +8,10 @@ import { useEffect, useState } from 'react';
 import { ImageModelName, mapImages } from '@/utils/constants';
 import { useTranslations } from 'next-intl';
 import YourGrid from './YourGrid';
+import { Alert, AlertDescription, AlertTitle } from '@/lib/components/ui/alert';
+import { Terminal } from 'lucide-react';
+import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
+import CoefDescription from './CoefDescription';
 
 export const inverters = [
   {
@@ -54,8 +58,7 @@ export default function InvertersList() {
           {t('recommendationTitle')}
         </h4>
 
-        {isClient ?  <YourGrid /> : null}
-          
+        {isClient ? <YourGrid /> : null}
       </div>
 
       {isLoading ? (
@@ -65,27 +68,55 @@ export default function InvertersList() {
           </div>
         </div>
       ) : (
-        <Tables
-          variant="sky"
-          data={formatInverter(
-            invertersList!.filter((inverter) =>
-              invertersList![0].model.includes('HP')
-                ? inverter.model.includes('HP')
-                : inverter.model.includes('LP')
-            )[0],
-            t('inverterAtr'),
-            t('typeAtr'),
-            t('powerAtr'),
-            t('qntAtr')
-          )}
-          srcImg={mapImages(
-            invertersList!.filter((inverter) =>
-              invertersList![0].model.includes('HP')
-                ? inverter.model.includes('HP')
-                : inverter.model.includes('LP')
-            )[0].model as ImageModelName
-          )}
-        />
+        <>
+          <Tables
+            variant="sky"
+            data={formatInverter(
+              invertersList!.filter((inverter) =>
+                invertersList![0].model.includes('HP')
+                  ? inverter.model.includes('HP')
+                  : inverter.model.includes('LP')
+              )[0],
+              t('inverterAtr'),
+              t('typeAtr'),
+              t('powerAtr'),
+              t('qntAtr')
+            )}
+            srcImg={mapImages(
+              invertersList!.filter((inverter) =>
+                invertersList![0].model.includes('HP')
+                  ? inverter.model.includes('HP')
+                  : inverter.model.includes('LP')
+              )[0].model as ImageModelName
+            )}
+          />
+          <Alert className="alert-margin-print-fixer mx-auto w-full text-justify sm:w-[94%] sm:text-center">
+            <ExclamationTriangleIcon className="h-4 w-4" />
+
+            <AlertDescription className="font-bold">
+              {t('coefAlert')}:{' '}
+              {decimalToHoursMinutes(
+                invertersList!.filter((inverter) =>
+                  invertersList![0].model.includes('HP')
+                    ? inverter.model.includes('HP')
+                    : inverter.model.includes('LP')
+                )[0].coef < 1
+                  ? 1
+                  : invertersList!.filter((inverter) =>
+                      invertersList![0].model.includes('HP')
+                        ? inverter.model.includes('HP')
+                        : inverter.model.includes('LP')
+                    )[0].coef,
+                t('h'),
+                t('hs'),
+                t('min'),
+                t('mins'),
+                t('and')
+              )}{' '}
+              <CoefDescription />
+            </AlertDescription>
+          </Alert>
+        </>
       )}
 
       {isLoading ? (
