@@ -51,10 +51,15 @@ export async function POST(request: NextRequest) {
       html: `<p>Confirme seu email clicando no link abaixo e comece a utilizar nossa calculadora:</p></br><a href="${server}/auth/email?token=${token}">Link de Ativação</a>`,
     };
 
-    transponder.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        return NextResponse.json({ error: 'Algo deu errado' }, { status: 500 });
-      }
+    await new Promise((resolve, reject) => {
+      transponder.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          reject(error);
+          return NextResponse.json({ error: 'Algo deu errado' }, { status: 500 });
+        } else {
+          resolve(info);
+        }
+      });
     });
 
     const { password: _, ...result } = newUser;
