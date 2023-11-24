@@ -113,6 +113,10 @@ export const authOptions: NextAuthOptions = {
               console.log(res as any);
               throw new Error(t('defaultError'));
             }
+            if (res.status !== 200) {
+              console.log(res as any);
+              throw new Error(t('defaultError'));
+            }
           } catch (error: any) {
             console.log({ error });
             throw new Error(t('defaultError'));

@@ -31,5 +31,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Ativação inválida' }, { status: 400 });
   } catch (error: any) {
     console.log({ error });
+    return NextResponse.json({ error: 'Ativação inválida' }, { status: 400 });
   }
 }
