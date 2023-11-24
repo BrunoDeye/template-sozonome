@@ -44,6 +44,10 @@ export default function TermsDialog({
   const locale = useLocale();
   const [checked, setChecked] = useState<CheckedState>(false);
   const t = useTranslations('TermsAndPrivacy');
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => setIsClient(true), [])
+
   useEffect(() => {
     if (open) {
       setChecked(false);
@@ -51,6 +55,7 @@ export default function TermsDialog({
   }, [open]);
 
   return (
+    !isClient ? null :
     <Dialog modal open={open} onOpenChange={setOpen}>
       <DialogContent className="flex max-w-[99vw] flex-col items-center justify-around p-5 py-10 sm:min-h-[325px] sm:max-w-[625px] sm:p-10">
         <div className="flex flex-col space-y-1.5 text-center sm:text-left">
