@@ -50,10 +50,15 @@ export async function POST(request: NextRequest) {
       <a href="${url}auth/mudar-senha?token=${token}&id=${user.id}">Link para mudar a senha</a>`,
     };
 
-    transponder.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        return NextResponse.json({ error: 'Algo deu errado' }, { status: 500 });
-      }
+    await new Promise((resolve, reject) => {
+      transponder.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          reject(error);
+          return NextResponse.json({ error: 'Algo deu errado' }, { status: 500 });
+        } else {
+          resolve(info);
+        }
+      });
     });
 
     const { password: _, ...result } = user;
