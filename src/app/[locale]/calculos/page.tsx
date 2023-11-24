@@ -18,6 +18,7 @@ type Props = {
 }
 
 async function CalculationsList({params: {locale}}: Props) {
+  'use server';
   const Headers = headers();
   const t = await getTranslations({locale, namespace: 'Calculations'});
   const result  = await fetch(server + '/api/calculations', {
