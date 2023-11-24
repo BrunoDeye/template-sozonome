@@ -241,7 +241,7 @@
     "emptyError": "Por favor preencher todos campos para mudança de senha",
     "confirmError": "Senha de Confirmação não coincide",
     "defaultError": "Algo deu errado",
-    "updateSucces": "Atualizado com sucesso!"
+    "updateSuccess": "Atualizado com sucesso!"
   },
   "ConfirmEmail": {
     "title": "Confirmar Email",
