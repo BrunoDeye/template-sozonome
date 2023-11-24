@@ -9,10 +9,11 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/authOptions';
 import { AuthOptions, Session } from 'next-auth';
 import { Calculation } from '@/app/client/prisma';
-import { z } from 'zod';
+
 import { headers } from 'next/headers';
 import nodemailer from 'nodemailer';
 import prisma from '@/app/client/prisma';
+import { CalcBody, DeleteCalcBody } from './(types)/body';
 
 export async function GET(
   req: NextRequest
@@ -34,24 +35,6 @@ export async function GET(
     console.log({ error });
   }
 }
-
-export const CalcBody = z.object({
-  id: z.number()
-  .positive()
-  .nullable().optional(),
-  batteryQty: z.number(),
-  devicesList: z.string(),
-  grid: z.string(),
-  inverterQty: z.number(),
-  recommendedInverter: z.string(),
-  selectedBattery: z.string(),
-  title: z.string(),
-  totalEnergy: z.number(),
-  totalPower: z.number(),
-  description: z.string().optional(),
-});
-
-export type CalcBody = z.infer<typeof CalcBody>;
 
 export async function POST(
   req: NextRequest
@@ -106,9 +89,7 @@ export async function POST(
   }
 }
 
-export const DeleteCalcBody = z.object({
-  id: z.number(),
-});
+
 
 export async function DELETE(
   req: NextRequest

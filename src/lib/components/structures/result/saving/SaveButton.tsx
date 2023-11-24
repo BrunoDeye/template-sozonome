@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { Button } from '../../../ui/button';
-import { CalcBody } from '@/app/api/calculations/route';
+import { CalcBody } from '@/app/api/calculations/(types)/body';
 import { useDataStore } from '@/store/data';
 import SaveModal from './SaveModal';
 

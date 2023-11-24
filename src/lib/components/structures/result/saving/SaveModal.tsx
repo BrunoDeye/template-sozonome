@@ -1,6 +1,6 @@
 'use client';
 
-import { CalcBody } from '@/app/api/calculations/route';
+import { CalcBodyType } from '@/app/api/calculations/(types)/body';
 import { Button } from '@/lib/components/ui/button';
 import {
   Dialog,
@@ -69,7 +69,7 @@ export default function SaveModal({
   } = useDataStore();
   const pathname = usePathname()
   const router = useRouter();
-  const [saveData, setSaveData] = useState<CalcBody>();
+  const [saveData, setSaveData] = useState<CalcBodyType>();
   const [isClient, setIsClient] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
