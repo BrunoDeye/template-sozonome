@@ -62,13 +62,15 @@ export async function POST(
           html: `<p>A potência total foi de ${body.totalPower}W, esses são os dados para contatar o usuário:</p></br><p>Nome: ${session.user.name}</p><p>Email: ${session.user.email}</p><p>Telefone: ${session.user.phoneNumber}</p>`,
         };
 
-        transponder.sendMail(mailOptions, (error, info) => {
-          if (error) {
-            return NextResponse.json(
-              { error: 'Algo deu errado' },
-              { status: 500 }
-            );
-          }
+        await new Promise((resolve, reject) => {
+          transponder.sendMail(mailOptions, (error, info) => {
+            if (error) {
+              reject(error);
+              return NextResponse.json({ error: 'Algo deu errado' }, { status: 500 });
+            } else {
+              resolve(info);
+            }
+          });
         });
       }
 
