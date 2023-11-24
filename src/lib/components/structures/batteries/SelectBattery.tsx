@@ -96,7 +96,7 @@ export default function SelectBattery({
   ) => {
     addBatteryModel(data.model);
 
-    router.push('/result', { scroll: false });
+    router.push('/result');
   };
 
   const onError: SubmitErrorHandler<z.infer<typeof FormSchema>> = (errors) =>

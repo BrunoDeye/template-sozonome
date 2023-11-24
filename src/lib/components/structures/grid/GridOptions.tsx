@@ -51,7 +51,7 @@ const GridOptions = () => {
     addGrid(data.grid);
 
     startTransition(() => {
-    router.push('/devices', { scroll: false });
+    router.push('/devices');
     });
   };
 
