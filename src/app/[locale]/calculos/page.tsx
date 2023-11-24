@@ -18,14 +18,20 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
-async function CalculationsList({params: {  locale }, searchParams,}: Props) {
-  'use server';
+const getData = async () => {
   const Headers = headers();
-  const t = await getTranslations({locale: locale || "pt-BR", namespace: 'Calculations'});
-  const result  = await fetch(server + '/api/calculations', {
+  const res = await fetch(server + '/api/calculations', {
     method: 'GET',
     headers: Headers,
   });
+
+  return res;
+}
+
+async function CalculationsList({params: {  locale }, searchParams,}: Props) {
+  const Headers = headers();
+  const t = await getTranslations({locale: locale || "pt-BR", namespace: 'Calculations'});
+  const result  = await  getData()
   const { result: data} = await result.json()
 
 //   const data = [{
