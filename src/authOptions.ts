@@ -111,21 +111,21 @@ export const authOptions: NextAuthOptions = {
 
             if (res.status === 400) {
               console.log(res as any);
-              throw new Error(t('defaultError'));
+              throw new Error(t('defaultError') + 1);
             }
             if (res.status !== 200) {
               console.log(res as any);
-              throw new Error(t('defaultError'));
+              throw new Error(t('defaultError') + res.json);
             }
           } catch (error: any) {
             console.log({ error });
-            throw new Error(t('defaultError'));
+            throw new Error(t('defaultError') + 3);
           }
 
           return user as any;
         } catch (ignored: any) {
           console.log(ignored.message);
-          throw new Error(t('defaultError'));
+          throw new Error(t('defaultError') );
         }
       },
     }),
