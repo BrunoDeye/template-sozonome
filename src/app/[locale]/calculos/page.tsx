@@ -13,14 +13,15 @@ import { Calculation } from '@/app/client/prisma';
 
 type Props = {
   params: {
-    locale: string
-  }
+    locale?: string
+  },
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
-async function CalculationsList({params: {locale}}: Props) {
+async function CalculationsList({params: {  locale }, searchParams,}: Props) {
   'use server';
   const Headers = headers();
-  const t = await getTranslations({locale, namespace: 'Calculations'});
+  const t = await getTranslations({locale: locale || "pt-BR", namespace: 'Calculations'});
   const result  = await fetch(server + '/api/calculations', {
     method: 'GET',
     headers: Headers,
