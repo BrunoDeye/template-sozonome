@@ -20,27 +20,27 @@ type Props = {
 async function CalculationsList({params: {locale}}: Props) {
   const Headers = headers();
   const t = await getTranslations({locale, namespace: 'Calculations'});
-  const result = (await fetch(server + '/api/calculations', {
+  const result = await fetch(server + '/api/calculations', {
     method: 'GET',
     headers: Headers,
-  }));
-  // const data = await result.json() as Calculation[]
+  });
+  const data = await result.json() as Calculation[]
 
-  const data = [{
-      id: 0,
-      userId: 0,
-      grid: "string",
-      devicesList: "string",
-      title: "string",
-      description: "string",
-      totalPower: 0,
-      totalEnergy: 0,
-      recommendedInverter: "string",
-      selectedBattery: "string",
-      inverterQty: 0,
-      batteryQty: 0,
-  }
-] as Calculation[];
+//   const data = [{
+//       id: 0,
+//       userId: 0,
+//       grid: "string",
+//       devicesList: "string",
+//       title: "string",
+//       description: "string",
+//       totalPower: 0,
+//       totalEnergy: 0,
+//       recommendedInverter: "string",
+//       selectedBattery: "string",
+//       inverterQty: 0,
+//       batteryQty: 0,
+//   }
+// ] as Calculation[];
   return (
     <div className="z-10  flex min-h-[60vh] flex-col items-center justify-center gap-8 text-center">
       <div className="z-10 m-3 flex flex-col items-center justify-center gap-8 max-[330px]:px-3  rounded-lg bg-white/40 p-10 pb-20 text-center shadow-lg backdrop-blur-3xl dark:bg-blue-200/10 dark:shadow-blue-400  sm:px-20">

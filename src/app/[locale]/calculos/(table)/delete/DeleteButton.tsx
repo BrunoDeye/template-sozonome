@@ -12,7 +12,7 @@ type Props = {
 function DeleteButton({ id, headers }: Props) {
   const router = useRouter();
   const handleDelete = async () => {
-    const result = (await fetch(server + '/api/calculations', {
+    const result = (await fetch(server + '/api/calculations/delete', {
       method: 'DELETE',
       body: JSON.stringify({ id }),
       headers: headers,

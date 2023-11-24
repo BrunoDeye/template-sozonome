@@ -135,7 +135,7 @@ export default function SaveModal({
         router.refresh()
         router.push(`/calculos?previous=${pathname}`)
       } else {
-        const result = await fetch('/api/calculations', {
+        const result = await fetch('/api/calculations/create', {
           method: 'POST',
           body: JSON.stringify({ ...saveData, title, description }),
           headers,
