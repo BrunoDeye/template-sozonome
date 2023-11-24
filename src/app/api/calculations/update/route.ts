@@ -19,7 +19,7 @@ export async function PATCH(
 ): Promise<NextResponse<Calculation | { error: string }> | undefined> {
   try {
     const session = await getServerSession<AuthOptions, Session>(authOptions);
-    console.log(session)
+    // console.log(session)
     const body: Omit<Calculation, 'userId'> = await req.json();
     const { success: isValid } = CalcBody.safeParse(body);
     console.log(isValid)
