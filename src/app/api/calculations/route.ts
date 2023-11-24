@@ -12,6 +12,7 @@ import { Calculation } from '@prisma/client';
 import { z } from 'zod';
 import { headers } from 'next/headers';
 import nodemailer from 'nodemailer';
+import prisma from '@/app/client/prisma';
 
 export async function GET(
   req: NextRequest

@@ -12,6 +12,7 @@ import { Calculation } from '@prisma/client';
 import { z } from 'zod';
 import { CalcBody } from '../route';
 import nodemailer from 'nodemailer';
+import prisma from '@/app/client/prisma';
 
 export async function PATCH(
   req: NextRequest
