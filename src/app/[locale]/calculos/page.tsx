@@ -20,11 +20,11 @@ type Props = {
 async function CalculationsList({params: {locale}}: Props) {
   const Headers = headers();
   const t = await getTranslations({locale, namespace: 'Calculations'});
-  const result = await fetch(server + '/api/calculations', {
+  const result  = await fetch(server + '/api/calculations', {
     method: 'GET',
     headers: Headers,
   });
-  const data = await result.json() as Calculation[]
+  const { result: data} = await result.json()
 
 //   const data = [{
 //       id: 0,

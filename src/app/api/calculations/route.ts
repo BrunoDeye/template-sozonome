@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic'
 
 export async function GET(
   req: NextRequest
-): Promise<NextResponse<Calculation[] | { error: string }> | undefined> {
+): Promise<NextResponse< { result:Calculation[] } | { error: string }> | undefined> {
   try {
     const session = await getServerSession<AuthOptions, Session>(authOptions);
 
@@ -21,7 +21,7 @@ export async function GET(
           userId: session.user.id
         }
       });
-      return NextResponse.json(calculations);
+      return NextResponse.json({ result: calculations }, { status: 200});
     } else {
       return NextResponse.json({ error: 'Session empty' }, { status: 404 });
     }
