@@ -19,10 +19,10 @@ type Props = {
 
 const getData = async () => {
   try {
-    const Headers = headers();
+    const header = headers();
     const res = await fetch(server + '/api/calculations', {
       method: 'GET',
-      headers: Headers,
+      headers: new Headers(header),
     });
     return res;
   } catch (error) {
@@ -78,7 +78,6 @@ async function CalculationsList({ params: { locale }, searchParams }: Props) {
         </h2>
         <div className="z-10 !max-w-[964px]">
          { <RenderTable headers={Headers} data={data} />}
-         {(result as any).error}
         </div>
       </div>
     </div>
