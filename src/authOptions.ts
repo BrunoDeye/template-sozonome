@@ -62,7 +62,7 @@ export const authOptions: NextAuthOptions = {
             }
           } else {
             console.log(ignored.message);
-            throw new Error(t('defaultError'));
+            throw new Error(ignored.message || t('defaultError'));
           }
         }
       },
