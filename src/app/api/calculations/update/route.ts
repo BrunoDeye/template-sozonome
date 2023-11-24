@@ -10,9 +10,9 @@ import { authOptions } from '@/authOptions';
 import { AuthOptions, Session } from 'next-auth';
 import { Calculation } from '@/app/client/prisma';
 import { z } from 'zod';
-import { CalcBody } from '../route';
 import nodemailer from 'nodemailer';
 import prisma from '@/app/client/prisma';
+import { CalcBody } from '../(types)/body';
 
 export async function PATCH(
   req: NextRequest
