@@ -14,6 +14,7 @@ import { headers } from 'next/headers';
 import nodemailer from 'nodemailer';
 import prisma from '@/app/client/prisma';
 import { CalcBody, DeleteCalcBody } from './(types)/body';
+export const dynamic = 'force-dynamic'
 
 export async function GET(
   req: NextRequest

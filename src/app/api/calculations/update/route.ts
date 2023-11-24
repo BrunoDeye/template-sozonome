@@ -13,6 +13,7 @@ import { z } from 'zod';
 import nodemailer from 'nodemailer';
 import prisma from '@/app/client/prisma';
 import { CalcBody } from '../(types)/body';
+export const dynamic = 'force-dynamic'
 
 export async function PATCH(
   req: NextRequest
