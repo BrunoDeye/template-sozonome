@@ -3,12 +3,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { hash } from 'bcrypt';
 import nodemailer from 'nodemailer';
 import jwt from 'jsonwebtoken';
+import { server } from '@/url';
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const url = request.nextUrl.clone();
-    url.pathname = '';
+    // const url = request.nextUrl.clone();
+    // url.pathname = '';
     const { name, email, password, phoneNumber } = body;
     const user = await prisma.user.findUnique({
       where: {
@@ -46,8 +47,8 @@ export async function POST(request: NextRequest) {
       from: process.env.EMAIL,
       to: newUser.email,
       subject: 'Confirme seu email',
-      text: `${url}auth/email?token=${token}`,
-      html: `<p>Confirme seu email clicando no link abaixo e comece a utilizar nossa calculadora:</p></br><a href="${url}auth/email?token=${token}">Link de Ativação</a>`,
+      text: `${server}/auth/email?token=${token}`,
+      html: `<p>Confirme seu email clicando no link abaixo e comece a utilizar nossa calculadora:</p></br><a href="${server}/auth/email?token=${token}">Link de Ativação</a>`,
     };
 
     transponder.sendMail(mailOptions, (error, info) => {
