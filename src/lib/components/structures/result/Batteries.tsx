@@ -9,7 +9,7 @@ import { ImageModelName, mapImages } from '@/utils/constants';
 import { formatBattery } from '@/utils/functions';
 import { useTranslations } from 'next-intl';
 import { useCalculateInvertersQuery } from '@/services/ReactQueryHooks/useCalculateInvertersQuery';
-import { Calculation } from '@prisma/client';
+import { Calculation } from '@/app/client/prisma';
 
 type Props = {
   printData: Calculation | null;

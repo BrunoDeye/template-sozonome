@@ -1,6 +1,6 @@
 import { AlertDialogAction } from '@/lib/components/ui/alert-dialog';
 import { server } from '@/url';
-import { Calculation } from '@prisma/client';
+import { Calculation } from '@/app/client/prisma';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 

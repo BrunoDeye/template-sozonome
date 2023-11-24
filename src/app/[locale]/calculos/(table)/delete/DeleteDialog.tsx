@@ -11,7 +11,7 @@ import {
 } from '@/lib/components/ui/alert-dialog';
 import { useRouter } from '@/navigation';
 import { server } from '@/url';
-import { Calculation } from '@prisma/client';
+import { Calculation } from '@/app/client/prisma';
 import DeleteButton from './DeleteButton';
 
 

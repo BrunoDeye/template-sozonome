@@ -1,4 +1,4 @@
-import { Calculation } from '@prisma/client';
+import { Calculation } from '@/app/client/prisma';
 
 type DeviceList = {
   id: number;

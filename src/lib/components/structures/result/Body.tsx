@@ -17,7 +17,7 @@ import LoadingDeye from '../../Loading';
 import AllInOnesList from './AllInOnesList';
 import DisplayTotal from '../devices/DisplayTotal';
 import { Separator } from '../../ui/separator';
-import { Calculation } from '@prisma/client';
+import { Calculation } from '@/app/client/prisma';
 
 const FadeIn = dynamic(() => import('@/lib/components/animations/FadeIn'));
 const SelectBattery = dynamic(() => import('./SelectBattery'));

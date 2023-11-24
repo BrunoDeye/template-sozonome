@@ -1,6 +1,6 @@
 'use client';
 import CalcsTableColumnHeader from './CalcsHeaderTable';
-import { Calculation } from '@prisma/client';
+import { Calculation } from '@/app/client/prisma';
 import CalcsToggleTable from './CalcsToggleTable';
 import { CellContext, ColumnDef, HeaderContext } from '@tanstack/react-table';
 import { Button } from '@/lib/components/ui/button';

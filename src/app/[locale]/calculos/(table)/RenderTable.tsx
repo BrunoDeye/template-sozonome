@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import CalcsTable from './CalcsTable'
 import { columns } from './columns'
-import { Calculation } from '@prisma/client'
+import { Calculation } from '@/app/client/prisma';
 import { mobileColumns } from './mobileColumns'
 import { useRouter } from '@/navigation'
 

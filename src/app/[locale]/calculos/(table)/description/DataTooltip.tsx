@@ -4,7 +4,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/lib/components/ui/popover';
-import { Calculation } from '@prisma/client';
+import { Calculation } from '@/app/client/prisma';
 import { ChevronDown, Info, InfoIcon, LucideInfo } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';

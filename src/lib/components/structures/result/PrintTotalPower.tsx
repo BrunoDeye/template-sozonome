@@ -1,6 +1,6 @@
 'use client'
 import { useDataStore } from '@/store/data';
-import { Calculation } from '@prisma/client';
+import { Calculation } from '@/app/client/prisma';
 import { useTranslations } from 'next-intl';
 import React, { useEffect, useState } from 'react'
 

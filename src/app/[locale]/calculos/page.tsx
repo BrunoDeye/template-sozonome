@@ -1,6 +1,5 @@
 'use server';
 import { server } from '@/url';
-// import { Calculation } from '@prisma/client';
 import { cookies, headers } from 'next/headers';
 import React, { useEffect, useMemo } from 'react';
 import CalcsTableColumnHeader from './(table)/CalcsHeaderTable';
@@ -9,6 +8,8 @@ import { columns } from './(table)/columns';
 import CalcsToggleTable from './(table)/CalcsToggleTable';
 import RenderTable from './(table)/RenderTable';
 import { getTranslations } from 'next-intl/server';
+import { Calculation } from '@/app/client/prisma';
+
 
 type Props = {
   params: {
@@ -24,7 +25,7 @@ async function CalculationsList({params: {locale}}: Props) {
     headers: Headers,
   })
     .then((data) => data.json())
-    .then((data) => data)) as any;
+    .then((data) => data)) as Calculation[];
 
   return (
     <div className="z-10  flex min-h-[60vh] flex-col items-center justify-center gap-8 text-center">

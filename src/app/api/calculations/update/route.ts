@@ -8,7 +8,7 @@ import jwt from 'jsonwebtoken';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/authOptions';
 import { AuthOptions, Session } from 'next-auth';
-import { Calculation } from '@prisma/client';
+import { Calculation } from '@/app/client/prisma';
 import { z } from 'zod';
 import { CalcBody } from '../route';
 import nodemailer from 'nodemailer';

@@ -5,7 +5,7 @@ import { Button } from '../ui/button';
 import { getSession, signOut, useSession } from 'next-auth/react';
 import ProfileButton from './ProfileButton';
 import { useEffect, useState } from 'react';
-import { Calculation } from '@prisma/client';
+import { Calculation } from '@/app/client/prisma';
 
 const Header = () => {
   // const { status } = useSession()

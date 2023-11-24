@@ -13,7 +13,7 @@ import { Terminal } from 'lucide-react';
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import CoefDescription from './CoefDescription';
 import { Select, SelectTrigger, SelectValue } from '../../ui/select';
-import { Calculation } from '@prisma/client';
+import { Calculation } from '@/app/client/prisma';
 
 export const inverters = [
   {
