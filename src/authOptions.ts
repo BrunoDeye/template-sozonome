@@ -119,7 +119,7 @@ export const authOptions: NextAuthOptions = {
             }
           } catch (error: any) {
             console.log({ error });
-            throw new Error(t('defaultError') + 3);
+            throw new Error(t('defaultError') + error.message);
           }
 
           return user as any;
