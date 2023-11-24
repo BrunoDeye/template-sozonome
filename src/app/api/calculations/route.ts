@@ -1,16 +1,9 @@
-import type {
-  GetServerSidePropsContext,
-  NextApiRequest,
-  NextApiResponse,
-} from 'next';
+
 import { NextRequest, NextResponse } from 'next/server';
-import jwt from 'jsonwebtoken';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/authOptions';
 import { AuthOptions, Session } from 'next-auth';
 import { Calculation } from '@/app/client/prisma';
-
-import { headers } from 'next/headers';
 import nodemailer from 'nodemailer';
 import prisma from '@/app/client/prisma';
 import { CalcBody, DeleteCalcBody } from './(types)/body';
@@ -42,8 +35,6 @@ export async function POST(
 ): Promise<NextResponse<Calculation | { error: string }> | undefined> {
   try {
     const session = await getServerSession<AuthOptions, Session>(authOptions);
-    const url = req.nextUrl.clone();
-    url.pathname = '';
     const body: Omit<Calculation, 'userId'> = await req.json();
    
     const { success: isValid } = CalcBody.safeParse(body);
