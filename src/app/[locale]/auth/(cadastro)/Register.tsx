@@ -10,7 +10,6 @@ import { Checkbox } from '@/lib/components/ui/checkbox';
 import TermsDialog from './TermsDialog';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useHookFormMask } from 'use-mask-input';
 import * as z from 'zod';
 import {
   Form,
@@ -90,7 +89,6 @@ function RegisterPageContent({ setAuthPage }: Props) {
     },
   });
   const [country, setCountry] = useState('BR');
-  const registerWithMask = useHookFormMask(form.register);
   const [openTerms, setOpenTerms] = useState(false);
   const [open, setOpen] = useState(false);
 
