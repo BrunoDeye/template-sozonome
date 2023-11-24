@@ -125,7 +125,7 @@ export const authOptions: NextAuthOptions = {
           return user as any;
         } catch (ignored: any) {
           console.log(ignored.message);
-          throw new Error(t('defaultError'));
+          throw new Error( ignored.message || t('defaultError'));
         }
       },
     }),
@@ -183,7 +183,7 @@ export const authOptions: NextAuthOptions = {
           return user as any;
         } catch (ignored) {
           console.log({ ignored });
-          throw new Error(t('defaultError'));
+          throw new Error((ignored as any).message || t('defaultError'));
         }
       },
     }),
