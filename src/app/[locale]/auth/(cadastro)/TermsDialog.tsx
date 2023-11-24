@@ -46,7 +46,7 @@ export default function TermsDialog({
   const t = useTranslations('TermsAndPrivacy');
   const [isClient, setIsClient] = useState(false);
 
-  useEffect(() => setIsClient(true), [])
+  useEffect(() => setIsClient(true), []);
 
   useEffect(() => {
     if (open) {
@@ -54,8 +54,7 @@ export default function TermsDialog({
     }
   }, [open]);
 
-  return (
-    !isClient ? null :
+  return !isClient ? null : (
     <Dialog modal open={open} onOpenChange={setOpen}>
       <DialogContent className="flex max-w-[99vw] flex-col items-center justify-around p-5 py-10 sm:min-h-[325px] sm:max-w-[625px] sm:p-10">
         <div className="flex flex-col space-y-1.5 text-center sm:text-left">
@@ -218,9 +217,9 @@ export default function TermsDialog({
 
             <ol className="list-inside">
               <li
-                className={`mb-3 before:text-[15px] before:font-extrabold before:content-['${t(
+                className={`mb-3 before:text-[15px] before:font-extrabold ${t(
                   'section'
-                )}_'_counter(list-item,_decimal)_'_-']`}
+                )}`}
               >
                 <h5 className="text-[15px]">{t('section1Title')}</h5>
                 {t.rich('section1Content', {
@@ -272,9 +271,9 @@ export default function TermsDialog({
               </li>
 
               <li
-                className={`mb-3 before:text-[15px] before:font-extrabold before:content-['${t(
+                className={`mb-3 before:text-[15px] before:font-extrabold ${t(
                   'section'
-                )}_'_counter(list-item,_decimal)_'_-']`}
+                )}`}
               >
                 <h5 className="text-[15px]">{t('section2Title')}</h5>
                 {t.rich('section2Content', {
@@ -292,9 +291,9 @@ export default function TermsDialog({
               </li>
 
               <li
-                className={`mb-3 before:text-[15px] before:font-extrabold before:content-['${t(
+                className={`mb-3 before:text-[15px] before:font-extrabold ${t(
                   'section'
-                )}_'_counter(list-item,_decimal)_'_-']`}
+                )}`}
               >
                 <h5 className="text-[15px]">{t('section3Title')}</h5>
                 {t.rich('section3Content', {
@@ -312,9 +311,9 @@ export default function TermsDialog({
               </li>
 
               <li
-                className={`mb-3 before:text-[15px] before:font-extrabold before:content-['${t(
+                className={`mb-3 before:text-[15px] before:font-extrabold ${t(
                   'section'
-                )}_'_counter(list-item,_decimal)_'_-']`}
+                )}`}
               >
                 <h5 className="text-[15px]">{t('section4Title')}</h5>
                 {t.rich('section4Content', {
@@ -332,9 +331,9 @@ export default function TermsDialog({
               </li>
 
               <li
-                className={`mb-3 before:text-[15px] before:font-extrabold before:content-['${t(
+                className={`mb-3 before:text-[15px] before:font-extrabold ${t(
                   'section'
-                )}_'_counter(list-item,_decimal)_'_-']`}
+                )}`}
               >
                 <h5 className="text-[15px]">{t('section5Title')}</h5>
                 {t.rich('section5Content', {
@@ -381,33 +380,28 @@ export default function TermsDialog({
               </li>
 
               <li
-                className={`mb-3 mt-6 before:text-[15px] before:font-extrabold before:content-['${t(
+                className={`mb-3 mt-6 before:text-[15px] before:font-extrabold ${t(
                   'section'
-                )}_'_counter(list-item,_decimal)_'_-']`}
+                )}`}
               >
-                <h5 className="text-[15px]">
-                  {t('section6Title')}
-                </h5>
+                <h5 className="text-[15px]">{t('section6Title')}</h5>
                 {t.rich('section6Content', {
                   p: (chunks) => <p>{chunks}</p>,
                 })}
-                
               </li>
 
               <li
-                className={`mb-3 before:text-[15px] before:font-extrabold before:content-['${t(
+                className={`mb-3 before:text-[15px] before:font-extrabold ${t(
                   'section'
-                )}_'_counter(list-item,_decimal)_'_-']`}
+                )}`}
               >
-                <h5 className="text-[15px]">
-                  {t('section7Title')}
-                </h5>
+                <h5 className="text-[15px]">{t('section7Title')}</h5>
                 <p>{t('section7Content')}</p>
               </li>
               <li
-                className={`mb-3 before:text-[15px] before:font-extrabold before:content-['${t(
+                className={`mb-3 before:text-[15px] before:font-extrabold ${t(
                   'section'
-                )}_'_counter(list-item,_decimal)_'_-']`}
+                )}`}
               >
                 <h5 className="text-[15px]">{t('section8Title')}</h5>
                 {t.rich('section8Content', {
@@ -415,12 +409,12 @@ export default function TermsDialog({
                   strong: (chunks) => (
                     <span className="font-bold tracking-tight">{chunks}</span>
                   ),
-                })}          
+                })}
               </li>
               <li
-                className={`mb-3 before:text-[15px] before:font-extrabold before:content-['${t(
+                className={`mb-3 before:text-[15px] before:font-extrabold ${t(
                   'section'
-                )}_'_counter(list-item,_decimal)_'_-']`}
+                )}`}
               >
                 <h5 className="text-[15px]">{t('section9Title')}</h5>
                 {t.rich('section9Content', {
@@ -428,30 +422,26 @@ export default function TermsDialog({
                   strong: (chunks) => (
                     <span className="font-bold tracking-tight">{chunks}</span>
                   ),
-                })} 
+                })}
               </li>
               <li
-                className={`mb-3 before:text-[15px] before:font-extrabold before:content-['${t(
+                className={`mb-3 before:text-[15px] before:font-extrabold ${t(
                   'section'
-                )}_'_counter(list-item,_decimal)_'_-']`}
+                )}`}
               >
-                <h5 className="text-[15px]">
-                  {t('section10Title')}
-                </h5>
+                <h5 className="text-[15px]">{t('section10Title')}</h5>
                 {t.rich('section10Content', {
                   p: (chunks) => <p>{chunks}</p>,
-                })} 
+                })}
               </li>
               <li
-                className={`mb-3 before:text-[15px] before:font-extrabold before:content-['${t(
+                className={`mb-3 before:text-[15px] before:font-extrabold ${t(
                   'section'
-                )}_'_counter(list-item,_decimal)_'_-']`}
+                )}`}
               >
-                <h5 className="text-[15px]">
-                  {t('section11Title')}
-                </h5>
+                <h5 className="text-[15px]">{t('section11Title')}</h5>
                 {t.rich('section11Content', {
-                    p: (chunks) => <p>{chunks}</p>,
+                  p: (chunks) => <p>{chunks}</p>,
                 })}
               </li>
             </ol>
