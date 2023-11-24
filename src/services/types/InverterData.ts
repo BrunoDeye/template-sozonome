@@ -2,5 +2,6 @@ export type InverterData = {
   model: string,
   nominalPower: number,
   quantity: number,
-  coef: number, 
+  coef: number,
+  adjustedCoef: number, 
 }

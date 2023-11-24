@@ -1,7 +1,7 @@
 'use client';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import { Button } from '../../ui/button';
-import Link from 'next-intl/link';
+import { Link } from '@/navigation';
 import { useDataStore } from '@/store/data';
 import { useEffect, useState } from 'react';
 import { useLocale } from 'next-intl';
@@ -39,23 +39,35 @@ const StartButton = ({
 
   return (
     <div className="grid justify-items-center gap-2.5">
-      <div className="flex items-center gap-2">
+      <div className="flex w-full flex-col items-center gap-2">
         {isClient ? (
           savedDevicesList() || place !== '' || starting ? (
             <>
-              <Button asChild variant="gradientBlue">
+              <Button
+                size="large"
+                className="!w-full"
+                asChild
+                variant="gradientBlue"
+              >
                 <Link href={`/termos-de-uso`}>{keepGoingButtonTxt}</Link>
               </Button>
               <Button
                 asChild
                 onClick={() => handleCleaning()}
                 variant="gradientSky"
+                className="!w-full"
+                size="large"
               >
                 <Link href={`/termos-de-uso`}>{RestartButtonTxt}</Link>
               </Button>
             </>
           ) : (
-            <Button asChild variant="gradientBlue">
+            <Button
+              className="w-full"
+              size="large"
+              asChild
+              variant="gradientBlue"
+            >
               <Link href={`/termos-de-uso`}>{StartButtonTxt}</Link>
             </Button>
           )

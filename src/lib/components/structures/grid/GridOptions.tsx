@@ -1,5 +1,5 @@
 'use client';
-import { useRouter } from 'next-intl/client';
+import {Link,usePathname, useRouter } from '@/navigation';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import { RadioGroup, RadioGroupItem } from '@/lib/components/ui/radio-group';
 import { useDataStore } from '@/store/data';
@@ -275,6 +275,7 @@ const GridOptions = () => {
 
             <Button
               type="submit"
+              size="large"
               className="mt-10 block w-full rounded-md sm:mx-auto sm:w-auto"
               variant="gradientBlue"
             >

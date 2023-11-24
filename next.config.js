@@ -11,7 +11,9 @@ const withPWA = require('next-pwa')({
   
 });
 
+const withNextIntl = require('next-intl/plugin')();
+
 /** @type {import('next').NextConfig} */
-module.exports = withPWA({
+module.exports = withNextIntl(withPWA({
   reactStrictMode: true,
-});
+}));

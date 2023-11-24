@@ -16,7 +16,7 @@ import { useCalculateInvertersQuery } from '@/services/ReactQueryHooks/useCalcul
 import LoadingDeye from '../../Loading';
 import { useTranslations } from 'next-intl';
 import * as z from 'zod';
-import { useRouter } from 'next-intl/client';
+import {Link,usePathname, useRouter } from '@/navigation';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { RadioGroup, RadioGroupItem } from '@/lib/components/ui/radio-group';

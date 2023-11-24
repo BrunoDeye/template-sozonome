@@ -9,12 +9,18 @@ import { ImageModelName, mapImages } from '@/utils/constants';
 import { formatBattery } from '@/utils/functions';
 import { useTranslations } from 'next-intl';
 import { useCalculateInvertersQuery } from '@/services/ReactQueryHooks/useCalculateInvertersQuery';
+import { Calculation } from '@prisma/client';
 
-function Batteries() {
+type Props = {
+  printData: Calculation | null;
+}
+
+function Batteries({ printData }: Props) {
   const t = useTranslations('Batteries');
   const [selectedBattery, setSelectedBattery] = useState<string | undefined>(
     undefined
   );
+  const [coefValue, setCoefValue] = useState(1)
   const [battery, setBattery] = useState({
     modelFullName: '\u00A0',
     nominalVoltage: '\u00A0',
@@ -32,10 +38,10 @@ function Batteries() {
   } = useDataStore();
 
   const requestData = {
-    gridVoltage: grid || '220V (Fase + Fase + Terra/Neutro)',
-    tPower: totalPower || 1,
-    batteryModel,
-    batteryQty,
+    gridVoltage: printData ? printData.grid :( grid || '220V (Fase + Fase + Terra/Neutro)'),
+    tPower:  printData? printData.totalPower : (totalPower || 1),
+    batteryModel: printData? printData.selectedBattery : batteryModel,
+    batteryQty : printData? printData.batteryQty : batteryQty,
   };
   const { invertersList, isLoading, isError } =
     useCalculateInvertersQuery(requestData);
@@ -43,14 +49,10 @@ function Batteries() {
   useEffect(() => {
     if (batteryModel) {
       const requestData = {
-        model: batteryModel as string,
-        tEnergy: totalEnergy || 1,
+        model: printData? printData.selectedBattery : batteryModel as string,
+        tEnergy: printData? printData.totalEnergy : (totalEnergy || 1) || 1,
         fc: FC <= 100 ? FC / 100 : 0.94,
-        // coef: invertersList!.filter((inverter) =>
-        //   invertersList![0].model.includes('HP')
-        //     ? inverter.model.includes('HP')
-        //     : inverter.model.includes('LP')
-        // )[0].coef,
+        // coef: coefValue,
       };
       // console.log(requestData);
       calculateBatteriesMutation.mutate(requestData, {
@@ -64,7 +66,7 @@ function Batteries() {
         },
       });
     }
-  }, []);
+  }, [coefValue]);
   return (
     <>
       <h4 className="margin-print-fixer text-center text-xl font-bold tracking-tight sm:text-2xl">

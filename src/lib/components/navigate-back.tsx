@@ -4,13 +4,16 @@ import { Button } from '@/lib/components/ui/button';
 import { useDataStore } from '@/store/data';
 import { ArrowBigLeft } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
-import { useRouter, usePathname } from 'next-intl/client';
+import {Link,usePathname, useRouter } from '@/navigation';
 import { useEffect, useState, useTransition } from 'react';
+import { useSession } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
 
 export function NavigateBack() {
   const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();
+  const params = useSearchParams();
   const [tempLocale, setTempLocale] = useState(locale);
   const [isPending, startTransition] = useTransition();
   const t = useTranslations('BackButton');
@@ -19,7 +22,7 @@ export function NavigateBack() {
     actions: { addSystemType, addGrid, addBatteryModel },
     state: { grid },
   } = useDataStore();
-
+  const previous = params.get('previous');
   const handleClick = () => {
     if (pathname === `/tipo`) {
       router.prefetch(`/${locale}/ambiente`);
@@ -34,7 +37,12 @@ export function NavigateBack() {
       addBatteryModel('');
     }
 
-    if (pathname === `/termos-de-uso`) {
+    console.log("test")
+    if (pathname === `/editar-perfil` ||  pathname === `/calculos`) {
+      startTransition(() => {
+        router.replace(previous || '/', { locale: locale });
+      });
+    } else if (pathname === `/termos-de-uso`) {
       startTransition(() => {
         router.replace('/', { locale: locale });
       });
@@ -50,9 +58,13 @@ export function NavigateBack() {
       startTransition(() => {
         router.replace('/devices', { locale: locale });
       });
-    } else {
+    } else if (pathname === `/result`) {
       startTransition(() => {
         router.replace('/baterias', { locale: locale });
+      });
+    } else {
+      startTransition(() => {
+        router.replace('/', { locale: locale });
       });
     }
   };
@@ -62,8 +74,8 @@ export function NavigateBack() {
       router.replace(pathname, { locale: tempLocale });
     }
   }, [tempLocale]);
-
-  return pathname === `/${locale}` || pathname === '/' ? (
+  const { status } = useSession()
+  return pathname === `/${locale}` || pathname === '/' || status !== 'authenticated' ? (
     <div>&nbsp;</div>
   ) : (
     <Button

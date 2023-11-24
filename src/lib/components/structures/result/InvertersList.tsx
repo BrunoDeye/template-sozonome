@@ -12,6 +12,8 @@ import { Alert, AlertDescription, AlertTitle } from '@/lib/components/ui/alert';
 import { Terminal } from 'lucide-react';
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import CoefDescription from './CoefDescription';
+import { Select, SelectTrigger, SelectValue } from '../../ui/select';
+import { Calculation } from '@prisma/client';
 
 export const inverters = [
   {
@@ -26,26 +28,49 @@ export const inverters = [
   },
 ];
 
-export default function InvertersList() {
+type Props = {
+  printData: Calculation | null;
+}
+
+export default function InvertersList({ printData }: Props) {
   const t = useTranslations('Inverters');
   const {
     state: { grid, totalPower, batteryModel, batteryQty },
+
+    actions: { addRecommendedInverter, addInverterQty },
   } = useDataStore();
 
   const requestData = {
-    gridVoltage: grid || '220V (Fase + Fase + Terra/Neutro)',
-    tPower: totalPower || 1,
-    batteryModel,
-    batteryQty,
+    gridVoltage: printData ? printData.grid : (grid || '220V (Fase + Fase + Terra/Neutro)'),
+    tPower: printData ? printData.totalPower : (totalPower || 1),
+    batteryModel: printData ? printData.selectedBattery : batteryModel,
+    batteryQty: printData ? printData.batteryQty : batteryQty,
   };
   const { invertersList, isLoading, isError } =
     useCalculateInvertersQuery(requestData);
-
+  
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  
+
+  useEffect(() => {
+    
+    if (invertersList?.length !== 0 && invertersList !== undefined) {
+      const recommendedInverter = invertersList!.filter((inverter) =>
+        invertersList![0].model.includes('HP')
+          ? inverter.model.includes('HP')
+          : inverter.model.includes('LP')
+      )[0];
+      console.log(recommendedInverter)
+
+      addRecommendedInverter(recommendedInverter.model);
+      addInverterQty(recommendedInverter.quantity);
+    }
+  }, [invertersList]);
 
   return isError ? (
     <span className="mx-auto flex w-full flex-col text-center">
@@ -90,32 +115,59 @@ export default function InvertersList() {
               )[0].model as ImageModelName
             )}
           />
-          <Alert className="alert-margin-print-fixer mx-auto w-full text-justify sm:w-[94%] sm:text-center">
-            <ExclamationTriangleIcon className="h-4 w-4" />
+          <div className="sm:px-4">
+            <Alert
+              variant="accent"
+              className="print-hidden alert-margin-print-fixer mx-auto w-full"
+            >
+              <AlertDescription className="flex flex-col items-center justify-start gap-2">
+                <div className="flex">
+                  <ExclamationTriangleIcon className="!mr-2 h-10 w-10 font-bold" />
+                  <AlertTitle className="text-2xl font-bold uppercase">
+                    Atenção
+                  </AlertTitle>
+                </div>
+                <div className="text-center sm:w-[70%]">
+                  {t('coefAlert')}: 
+                </div>
+                <div className='flex items-baseline'>
 
-            <AlertDescription className="font-bold">
-              {t('coefAlert')}:{' '}
-              {decimalToHoursMinutes(
-                invertersList!.filter((inverter) =>
-                  invertersList![0].model.includes('HP')
-                    ? inverter.model.includes('HP')
-                    : inverter.model.includes('LP')
-                )[0].coef < 1
-                  ? 1
-                  : invertersList!.filter((inverter) =>
-                      invertersList![0].model.includes('HP')
-                        ? inverter.model.includes('HP')
-                        : inverter.model.includes('LP')
-                    )[0].coef,
-                t('h'),
-                t('hs'),
-                t('min'),
-                t('mins'),
-                t('and')
-              )}{' '}
-              <CoefDescription />
-            </AlertDescription>
-          </Alert>
+                <span className="font-bold">
+                {decimalToHoursMinutes(
+                          invertersList!.filter((inverter) =>
+                            invertersList![0].model.includes('HP')
+                              ? inverter.model.includes('HP')
+                              : inverter.model.includes('LP')
+                          )[0].adjustedCoef,
+                          t('h'),
+                          t('hs'),
+                          t('min'),
+                          t('mins'),
+                          t('and')
+                        )}
+                  {/* <Select>
+                    <SelectTrigger className="mt-2 h-full w-[100px] border-none bg-amber-300 shadow-inner shadow-yellow-600 backdrop-blur-md dark:bg-amber-200 dark:shadow-yellow-700">
+                      <SelectValue
+                        placeholder={decimalToHoursMinutes(
+                          invertersList!.filter((inverter) =>
+                            invertersList![0].model.includes('HP')
+                              ? inverter.model.includes('HP')
+                              : inverter.model.includes('LP')
+                          )[0].adjustedCoef,
+                          t('h'),
+                          t('hs'),
+                          t('min'),
+                          t('mins'),
+                          t('and')
+                        )}
+                      />
+                    </SelectTrigger>
+                  </Select> */}
+                </span>{' '}<CoefDescription />
+                </div>
+              </AlertDescription>
+            </Alert>
+          </div>
         </>
       )}
 

@@ -11,11 +11,13 @@ import TCDescription from './TCDescription';
 import { devices } from '@/utils/constants';
 import DevicesList from './DevicesList';
 import { Edit3 } from 'lucide-react';
-import Link from 'next-intl/link';
+import {Link,usePathname, useRouter } from '@/navigation';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import dynamic from 'next/dynamic';
 import { useLocale, useTranslations } from 'next-intl';
 import { removeAccents } from '@/utils/functions';
+import { useSearchParams } from 'next/navigation';
+import { useEditStorage } from '@/lib/hooks/useEditStorage';
 
 const TCInput = dynamic(
   () => import('@/lib/components/structures/devices/TCInput')
@@ -42,21 +44,39 @@ const initialState = [
 const DeviceCard = () => {
   const t = useTranslations('Devices');
   const locale = useLocale() as 'en' | 'pt-BR' | 'es-ES' | 'it-IT';
-
+  const search = useSearchParams();
+  const isEdit = search.get('edit')
   const {
     state: { FC, totalPower, totalEnergy, place },
-    actions: { addTotalEnergy, addTotalPower, addFC },
+    actions: { addTotalEnergy, addTotalPower, addFC, addGrid },
   } = useDataStore();
 
   const [savedDevicesList, setSavedDevicesList, clearLocalStorage] =
     useLocalStorage('devices-list');
+  const [savedDevicesListToEdit, savedCalculation, clearEditStorage] = useEditStorage();
   const [items, setItems] = useState<typeof initialState>(
-    savedDevicesList() || initialState
+    savedDevicesListToEdit() ? savedDevicesListToEdit() : (savedDevicesList() || initialState)
   );
+  const [triggerUpdate, setTriggerUpdate] = useState(0);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    if (savedCalculation() !== null) {
+      addGrid(savedCalculation()!.grid)
+      clearEditStorage()
+    }
+  }, [isClient])
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+
   useEffect(() => {
     setSavedDevicesList(items);
   }, [setSavedDevicesList, items]);
-  const [triggerUpdate, setTriggerUpdate] = useState(0);
+
+  
 
   const handleCleaning = (id: number) => {
     const itemCleared = items.map((item) => {
@@ -238,11 +258,7 @@ const DeviceCard = () => {
       setTriggerUpdate(0);
     };
   }, [triggerUpdate]);
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+ 
 
   const handleLocaleChange = () => {
     const updatedItems = items.map((item) => ({
@@ -511,6 +527,7 @@ const DeviceCard = () => {
         <div className="space-y-6 text-center">
           <Button
             variant="gradientDarkBlue"
+            size="large"
             className="w-full sm:mx-auto sm:w-auto"
             onClick={handleNewItem}
           >
@@ -525,6 +542,7 @@ const DeviceCard = () => {
             {isClient ? (
               <Button
                 variant="gradientSky"
+                size="large"
                 className={`${
                   totalEnergy === 0 || totalPower === 0
                     ? 'pointer-events-none opacity-50'

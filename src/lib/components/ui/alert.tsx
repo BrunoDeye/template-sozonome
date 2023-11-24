@@ -11,6 +11,8 @@ const alertVariants = cva(
         default: "bg-background text-foreground",
         destructive:
           "border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive",
+        accent:
+          "bg-gradient-to-br from-gray-100 to-amber-400 text-yellow-600 shadow-xl hover:from-gray-100 hover:to-yellow-400 dark:border-sky-500 dark:from-yellow-400 dark:to-amber-100 dark:!text-black dark:shadow-lg dark:shadow-yellow-400 dark:hover:from-yellow-500 dark:hover:to-amber-200 dark:[&>svg]:hover:!text-amber-50 dark:hover:!text-amber-950 border-none text-yellow-950 dark:border-sky-950 [&>svg]:text-yellow-950 dark:[&>svg]:text-white",
       },
     },
     defaultVariants: {

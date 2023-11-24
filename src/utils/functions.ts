@@ -306,8 +306,13 @@ export function decimalToHoursMinutes(
   mins: string,
   and: string
 ) {
-  const hours = Math.floor(decimal);
-  const minutes = Math.round((decimal - hours) * 60);
+  let time = decimal
+  if (decimal >= 0.99 && decimal < 1) {
+    time = 1;
+  }
+  const hours = Math.floor(time);
+
+  const minutes = Math.round((time - hours) * 60);
 
   const hoursStr = hours > 0 ? hours + (hours > 1 ? hs : h ) : '';
   const minutesStr =
@@ -322,4 +327,30 @@ export function decimalToHoursMinutes(
   } else {
     return '0h';
   }
+}
+
+export function areVariablesEmpty(var1: string, var2: string, var3: string) {
+  // Check if both variables are empty or contain only whitespaces
+  const isEmptyVar1 = var1.trim() === "";
+  const isEmptyVar2 = var2.trim() === "";
+  const isEmptyVar3 = var3.trim() === "";
+  return isEmptyVar1 || isEmptyVar2 || isEmptyVar3;
+}
+
+export function getFirstAndLastWords(phrase: string) {
+  // Split the phrase into an array of words
+  const words = (phrase || "").split(/\s+/);
+
+  // Get the first and last words
+  const firstWord = words[0];
+  const lastWord = words[words.length - 1];
+
+  // Return an object with the first and last words
+  return firstWord + " " + lastWord;
+}
+
+
+export function getLocaleString(pathname: any) {
+  const match = pathname.match(/\/([^\/]+)/);
+  return match ? match[1] : null;
 }

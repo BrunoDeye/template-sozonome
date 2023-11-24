@@ -17,6 +17,7 @@ import LoadingDeye from '../../Loading';
 import AllInOnesList from './AllInOnesList';
 import DisplayTotal from '../devices/DisplayTotal';
 import { Separator } from '../../ui/separator';
+import { Calculation } from '@prisma/client';
 
 const FadeIn = dynamic(() => import('@/lib/components/animations/FadeIn'));
 const SelectBattery = dynamic(() => import('./SelectBattery'));
@@ -31,6 +32,7 @@ export default function Body() {
   const [selectedBattery, setSelectedBattery] = useState<string | undefined>(
     undefined
   );
+  const [printData, setPrintData] = useState<Calculation | null>(null);
   const [battery, setBattery] = useState({
     modelFullName: '\u00A0',
     nominalVoltage: '\u00A0',
@@ -75,6 +77,14 @@ export default function Body() {
     setIsClient(true);
   }, []);
 
+  useEffect(() => {
+    const localPrintData = localStorage.getItem('my-print-calculation')
+    if (localPrintData !== null){
+      const parsedPrintData = JSON.parse(localPrintData) as Calculation;
+      setPrintData(parsedPrintData)
+    }
+  }, [isClient])
+
 
   return (
     <>
@@ -84,14 +94,14 @@ export default function Body() {
 
       <div className="space-y-6">
         <FadeIn className="w-full space-y-6" yMinus>
-          {systemType === 'AllInOne' ? <AllInOnesList /> : <InvertersList />}
+          {systemType === 'AllInOne' ? <AllInOnesList /> : <InvertersList printData={printData} />}
           <div
             className={`${
               systemType !== 'AllInOne' ? 'print-show' : ''
             } invisible hidden`}
           ></div>
 
-          {<Batteries />}
+          {<Batteries printData={printData} />}
           
         </FadeIn>
         

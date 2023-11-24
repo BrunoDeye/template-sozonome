@@ -97,7 +97,7 @@ export default function Tables({
   useEffect(() => {
     setIsClient(true);
   }, []);
-  console.log(coef);
+  // console.log(coef);
   return (
     <div className="trasition-all w-full -z-1 sm:p-4">
       <div className={cn(tableVariants({ variant }))}>
@@ -106,14 +106,14 @@ export default function Tables({
             <Image
               className={`${
                 loaded ? 'unblur' : ''
-              } clip-your-needful-style mx-auto -z-1 dark:[--shadow-inversor:#333132]`}
+              } clip-your-needful-style mx-auto to- -z-1 dark:[--shadow-inversor:#333132]`}
               height={srcImg.height}
               width={srcImg.width}
               priority
               placeholder="blur"
               alt="Inversor/Bateria Deye"
               src={srcImg}
-              onLoadingComplete={() => setLoaded(true)}
+              onLoad={() => setLoaded(true)}
             />
           ) : null}
         </div>
