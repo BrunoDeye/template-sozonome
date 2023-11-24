@@ -8,7 +8,9 @@ import { columns } from './(table)/columns';
 import CalcsToggleTable from './(table)/CalcsToggleTable';
 import RenderTable from './(table)/RenderTable';
 import { getTranslations } from 'next-intl/server';
-import { Calculation } from '@/app/client/prisma';
+import prisma, { Calculation } from '@/app/client/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/authOptions';
 
 type Props = {
   params: {
@@ -19,15 +21,19 @@ type Props = {
 
 const getData = async () => {
   try {
-    const header = headers();
-    const res = await fetch(server + '/api/calculations', {
-      method: 'GET',
-      headers: new Headers(header),
-    });
-    return res;
+    const session = await getServerSession(authOptions)
+    if (session) {
+      const calculations = await prisma.calculation.findMany({
+        where:{
+          userId: session.user.id
+        }
+      });
+
+    return calculations;
+    } else return null
   } catch (error) {
     console.log(error)
-    return{ isError: true, error};
+    return null;
   }
 };
 
@@ -38,8 +44,7 @@ async function CalculationsList({ params: { locale }, searchParams }: Props) {
     namespace: 'Calculations',
   });
   const result = await getData();
-  console.log((result as any).error)
-  const { result: data } = !(result as any).isError ? await (result as any).json() : { result: [{
+  const data = result !== null ? result : [{
     id: 0,
     userId: 0,
     grid: "string",
@@ -52,8 +57,7 @@ async function CalculationsList({ params: { locale }, searchParams }: Props) {
     selectedBattery: "string",
     inverterQty: 0,
     batteryQty: 0,
-}
-] as Calculation[] };
+    }] as Calculation[];
 
   //   const data = [{
   //       id: 0,
