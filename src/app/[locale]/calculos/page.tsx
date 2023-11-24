@@ -27,7 +27,7 @@ const getData = async () => {
     return res;
   } catch (error) {
     console.log(error)
-    return null;
+    return{ isError: true, error};
   }
 };
 
@@ -38,7 +38,8 @@ async function CalculationsList({ params: { locale }, searchParams }: Props) {
     namespace: 'Calculations',
   });
   const result = await getData();
-  const { result: data } = result ? await result.json() : { result: [{
+  console.log((result as any).error)
+  const { result: data } = !(result as any).isError ? await (result as any).json() : { result: [{
     id: 0,
     userId: 0,
     grid: "string",
@@ -77,6 +78,7 @@ async function CalculationsList({ params: { locale }, searchParams }: Props) {
         </h2>
         <div className="z-10 !max-w-[964px]">
          { <RenderTable headers={Headers} data={data} />}
+         {(result as any).error}
         </div>
       </div>
     </div>
