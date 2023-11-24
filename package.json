@@ -17,7 +17,9 @@
     "up-interactive": "pnpm up -i",
     "up-latest": "pnpm up-interactive -L",
     "release": "cross-env HUSKY=0 standard-version",
-    "push-release": "git push --follow-tags origin main"
+    "push-release": "git push --follow-tags origin main",
+    "postinstall": "prisma generate"
+
   },
   "dependencies": {
     "@commitlint/load": "^18.2.0",
