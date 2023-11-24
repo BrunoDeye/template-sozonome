@@ -26,6 +26,7 @@ const getData = async () => {
     });
     return res;
   } catch (error) {
+    console.log(error)
     return null;
   }
 };
