@@ -30,7 +30,7 @@ model Calculation {
   id                  Int     @id @default(autoincrement())
   userId              Int
   grid                String
-  devicesList         String
+  devicesList         String  @db.Text
   title               String
   description         String?
   totalPower          Int
