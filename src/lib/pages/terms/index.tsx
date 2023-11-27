@@ -17,8 +17,6 @@ const Terms: NextPage = () => {
     <div className="flex min-h-[60vh] flex-col items-center justify-center gap-8 px-6 text-center">
       <FadeIn className="max-w-3xl" yMinus>
         <Title />
-        
-        
       </FadeIn>
     </div>
   );

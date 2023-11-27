@@ -250,5 +250,15 @@
     "title": "Registro completado con éxito",
     "content": "Se ha enviado un correo de activación a tu bandeja de entrada. Accede al enlace de activación de la cuenta cuando lo recibas. <p>Si no recibes el correo de activación en unos minutos, revisa tu carpeta de spam o ponte en contacto con nosotros en <strong>calculadora.deye@gmail.com</strong>.</p>",
     "confirm": "Confirmar"
+  },
+  "ForgotPage": {
+    "title": "Cambiar Contraseña",
+    "labelNew": "Nueva Contraseña",
+    "labelConfirm": "Confirmar Nueva Contraseña",
+    "changeButton": "Cambiar",
+    "successMsg": "Cambio exitoso",
+    "errorMsg": "Ups, algo salió mal...",
+    "errorPassword": "La nueva contraseña debe tener al menos 6 caracteres.",
+    "errorConfirm": "Las contraseñas no coinciden."
   }
 }

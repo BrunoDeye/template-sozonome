@@ -255,5 +255,15 @@
     "title": "Cadastro Concluído com Sucesso!",
     "content": "Um e-mail de ativação foi enviado para sua caixa de entrada. Por favor acesse o Link de ativação da conta quando recebê-lo. <p>Se você não receber o e-mail de ativação em alguns minutos, verifique sua pasta de spam ou entre em contato conosco em <strong>calculadora.deye@gmail.com</strong>.</p>",
     "confirm": "Confirmar"
+  },
+  "ForgotPage": {
+    "title": "Mudar Senha",
+    "labelNew": "Nova Senha",
+    "labelConfirm": "Cofirmar Nova Senha",
+    "changeButton": "Mudar",
+    "successMsg": "Alteração bem sucedida",
+    "errorMsg": "Ops algo deu errado...",
+    "errorPassword": "A Nova Senha deve conter pelo menos 6 caracteres.",
+    "errorConfirm": "As senhas não coincidem."
   }
 }

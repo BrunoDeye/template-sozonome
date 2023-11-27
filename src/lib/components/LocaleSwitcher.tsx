@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import { useLocale, useTranslations } from 'next-intl';
-import {Link,usePathname, useRouter } from '@/navigation';
+import { Link, usePathname, useRouter } from '@/navigation';
 
 import {
   Select,
@@ -63,19 +63,24 @@ export default function LocaleSwitcher() {
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
   const handleOpenChange = useSelectInteractionFix('#__next');
-  
-  const searchParams  = useSearchParams()
-  const token = searchParams.get('token')
+
+  const searchParams = useSearchParams();
+  const token = searchParams.get('token');
+  const id = searchParams.get('id');
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const onSelectChange = (nextLocale: string) => {
     startTransition(() => {
-      if(token) {
-        router.replace(`${pathname}?token=${token}`, { locale: nextLocale  });
+      if (token && id) {
+        router.replace(`${pathname}?token=${token}&id=${id}`, {
+          locale: nextLocale,
+        });
+      } else if (token) {
+        router.replace(`${pathname}?token=${token}`, { locale: nextLocale });
       } else router.replace(pathname, { locale: nextLocale });
-      router.refresh()
+      router.refresh();
     });
   };
 
@@ -107,25 +112,29 @@ export default function LocaleSwitcher() {
                 <p className="sr-only px-0">{t('label')}</p>
               </SelectLabel>
               {languages.map((cur) => (
-                <Link as='div' prefetch={false} key={cur.locale} href={pathname} locale={cur.locale as any}>
-                <SelectItem
-                  className="z-[9999] w-full"
-                  
-                  value={cur.locale}
+                <Link
+                  as="div"
+                  prefetch={false}
+                  key={cur.locale}
+                  href={pathname}
+                  locale={cur.locale as any}
                 >
-                  <div className="flex h-[50px] w-[50px] items-center gap-3">
-                    <Image
-                      className="px-0 transition-all"
-                      height={40}
-                      width={40}
-                      src={cur.svg}
-                      alt={cur.alt}
-                    />
-                    <p className="">
-                      {t('locale', { locale: cur.locale.replace(/-.*$/, '') })}
-                    </p>
-                  </div>
-                </SelectItem>
+                  <SelectItem className="z-[9999] w-full" value={cur.locale}>
+                    <div className="flex h-[50px] w-[50px] items-center gap-3">
+                      <Image
+                        className="px-0 transition-all"
+                        height={40}
+                        width={40}
+                        src={cur.svg}
+                        alt={cur.alt}
+                      />
+                      <p className="">
+                        {t('locale', {
+                          locale: cur.locale.replace(/-.*$/, ''),
+                        })}
+                      </p>
+                    </div>
+                  </SelectItem>
                 </Link>
               ))}
             </SelectGroup>

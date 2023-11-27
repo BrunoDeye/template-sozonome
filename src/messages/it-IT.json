@@ -252,5 +252,15 @@
     "title": "Registrazione completata con successo!",
     "content": "È stata inviata una email di attivazione alla tua casella di posta. Accedi al link di attivazione dell'account quando lo ricevi. <p>Se non ricevi l'email di attivazione entro alcuni minuti, controlla la tua cartella dello spam o contattaci a <strong>calculadora.deye@gmail.com</strong>.</p>",
     "confirm": "Conferma"
+  },
+  "ForgotPage": {
+    "title": "Cambia Password",
+    "labelNew": "Nuova Password",
+    "labelConfirm": "Conferma Nuova Password",
+    "changeButton": "Cambia",
+    "successMsg": "Cambio avvenuto con successo",
+    "errorMsg": "Ops, qualcosa è andato storto...",
+    "errorPassword": "La nuova password deve contenere almeno 6 caratteri.",
+    "errorConfirm": "Le password non coincidono."
   }
 }
