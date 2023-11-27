@@ -15,7 +15,7 @@ import { Input } from '@/lib/components/ui/input';
 import { Label } from '@/lib/components/ui/label';
 import { useDataStore } from '@/store/data';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import {
@@ -28,6 +28,7 @@ import {
   FormMessage,
 } from '@/lib/components/ui/form';
 import { useRouter, usePathname } from '@/navigation';
+import LoadingDeye from '@/lib/components/Loading';
 
 const formSchema = z.object({
   title: z
@@ -67,7 +68,8 @@ export default function SaveModal({
       inverterQty,
     },
   } = useDataStore();
-  const pathname = usePathname()
+  const pathname = usePathname();
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const [saveData, setSaveData] = useState<CalcBodyType>();
   const [isClient, setIsClient] = useState(false);
@@ -123,25 +125,29 @@ export default function SaveModal({
     try {
       const { title, description } = values;
       if (isEdit) {
-        const result = await fetch('/api/calculations/update', {
-          method: 'PATCH',
-          body: JSON.stringify({ ...saveData, title, description }),
-          headers,
+        startTransition(async () => {
+          const result = await fetch('/api/calculations/update', {
+            method: 'PATCH',
+            body: JSON.stringify({ ...saveData, title, description }),
+            headers,
+          });
+          localStorage.removeItem('my-calculation');
+          setIsEdit(false);
+          setOpen(false);
+          router.prefetch(`/calculos?previous=${pathname}`);
+          router.refresh();
+          router.push(`/calculos?previous=${pathname}`);
         });
-        localStorage.removeItem('my-calculation');
-        setIsEdit(false);
-        setOpen(false);
-        router.prefetch(`/calculos?previous=${pathname}`)
-        router.refresh()
-        router.push(`/calculos?previous=${pathname}`)
       } else {
-        const result = await fetch('/api/calculations/create', {
-          method: 'POST',
-          body: JSON.stringify({ ...saveData, title, description }),
-          headers,
+        startTransition(async () => {
+          const result = await fetch('/api/calculations/create', {
+            method: 'POST',
+            body: JSON.stringify({ ...saveData, title, description }),
+            headers,
+          });
+          setOpen(false);
+          router.refresh();
         });
-        setOpen(false);
-        router.refresh();
       }
     } catch (error: any) {
       console.log({ error });
@@ -157,54 +163,60 @@ export default function SaveModal({
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-8 sm:px-9"
           >
-            <DialogHeader className="">
-              <DialogTitle className="mb-6 text-center">
-                Salvar Cálculo
-              </DialogTitle>
-              <DialogDescription className="text-center">
-                Para salvar defina um <span className="font-bold">título</span>{' '}
-                e uma <span className="font-bold">descrição</span> para o seu
-                cálculo, a descrição é{' '}
-                <span className="font-bold">opcional</span>.
-              </DialogDescription>
-            </DialogHeader>
-
-            <FormField
-              control={form.control}
-              name="title"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Título</FormLabel>
-                  <FormControl>
-                    <Input placeholder="" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Descrição</FormLabel>
-                  <FormControl>
-                    <Input placeholder="" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <DialogFooter className="flex justify-center">
-              <Button
-                variant="gradientGreen"
-                className="w-full sm:mx-auto sm:w-auto"
-                type="submit"
-                size="large"
-              >
-                {isEdit ? 'Atualizar Cálculo' : 'Salvar Cálculo'}
-              </Button>
-            </DialogFooter>
+            {isPending ? (
+              <LoadingDeye />
+            ) : (
+              <>
+                <DialogHeader className="">
+                  <DialogTitle className="mb-6 text-center">
+                    Salvar Cálculo
+                  </DialogTitle>
+                  <DialogDescription className="text-center">
+                    Para salvar defina um{' '}
+                    <span className="font-bold">título</span> e uma{' '}
+                    <span className="font-bold">descrição</span> para o seu
+                    cálculo, a descrição é{' '}
+                    <span className="font-bold">opcional</span>.
+                  </DialogDescription>
+                </DialogHeader>
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Título</FormLabel>
+                      <FormControl>
+                        <Input placeholder="" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Descrição</FormLabel>
+                      <FormControl>
+                        <Input placeholder="" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <DialogFooter className="flex justify-center">
+                  <Button
+                    variant="gradientGreen"
+                    className="w-full sm:mx-auto sm:w-auto"
+                    type="submit"
+                    size="large"
+                  >
+                    {isEdit ? 'Atualizar Cálculo' : 'Salvar Cálculo'}
+                  </Button>
+                </DialogFooter>{' '}
+              </>
+            )}
           </form>
         </Form>
       </DialogContent>
