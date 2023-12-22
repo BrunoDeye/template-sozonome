@@ -4,12 +4,13 @@ import { Input } from '@/lib/components/ui/input';
 import { Label } from '@/lib/components/ui/label';
 import { Link, usePathname, useRouter } from '@/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useTransition } from 'react';
 import { NextPage } from 'next';
 import useOutsideAlerter from '@/lib/components/hooks/useOutsideAlerter';
 import { useDataStore } from '@/store/data';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import { useTranslations } from 'next-intl';
+import LoginDialog from './LoginDialog';
 const { persist } = useDataStore;
 interface Props {
   setAuthPage: React.Dispatch<
@@ -26,7 +27,9 @@ const LoginPageContent = ({ setAuthPage }: Props) => {
     actions: { reset },
   } = useDataStore();
   const { data: session, status, update } = useSession();
-
+  const [open,  setOpen] = useState(false);
+  // const [isLoading, setIsloading] = useState(true)
+  const [isLoading, startTransition] = useTransition();
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -51,6 +54,8 @@ const LoginPageContent = ({ setAuthPage }: Props) => {
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+    setOpen(true);
+    startTransition(async () => {
     try {
       const result = await signIn('credentials', {
         ...loginData,
@@ -69,7 +74,7 @@ const LoginPageContent = ({ setAuthPage }: Props) => {
         status: 'error',
         message: error.message || 'Algo deu errado',
       });
-    }
+    }})
   };
 
   useEffect(() => {
@@ -89,6 +94,12 @@ const LoginPageContent = ({ setAuthPage }: Props) => {
       <h3 className="bg-gradient-to-br from-gray-200 to-blue-700 bg-clip-text text-3xl font-bold text-transparent md:text-3xl">
         {t('enter')}
       </h3>
+      <LoginDialog
+        isLoading={isLoading}
+        alert={alert}
+        open={open}
+        setOpen={setOpen}
+      />
       {alert.message && (
         <div
           style={{

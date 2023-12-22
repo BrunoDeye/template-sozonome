@@ -23,7 +23,7 @@ type Props = {
   isLoading: boolean;
 };
 
-export default function SuccessDialog({
+export default function LoginDialog({
   open = true,
   setOpen,
   alert,
@@ -74,21 +74,14 @@ export default function SuccessDialog({
           </DialogHeader>
         ) : loadedStatus === 'success' || isLoaded ? (
           <DialogHeader className="">
-            <DialogTitle className="mb-8 text-center">{t('title')}</DialogTitle>
-
-            <DialogDescription className="text-justify">
-              {t.rich('content', {
-                p: (chunks) => <p className="mt-6">{chunks}</p>,
-                strong: (chunks) => (
-                  <span className="font-bold tracking-tight">{chunks}</span>
-                ),
-              })}
-            </DialogDescription>
+            <DialogTitle className="mb-8 text-center">
+              {alert.message}
+            </DialogTitle>
           </DialogHeader>
         ) : (
           <LoadingDeye />
         )}
-        {!isLoaded ? null : (
+         {!isLoaded ? null : (
           <DialogFooter className="mt-auto">
             <DialogClose asChild>
               <Button>{t('confirm')}</Button>

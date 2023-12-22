@@ -74,25 +74,22 @@ export default function VerifyDialog({
           </DialogHeader>
         ) : loadedStatus === 'success' || isLoaded ? (
           <DialogHeader className="">
-            <DialogTitle className="mb-8 text-center">{t('title')}</DialogTitle>
+            <DialogTitle className="mb-8 text-center">Email Verificado</DialogTitle>
 
             <DialogDescription className="text-justify">
-              {t.rich('content', {
-                p: (chunks) => <p className="mt-6">{chunks}</p>,
-                strong: (chunks) => (
-                  <span className="font-bold tracking-tight">{chunks}</span>
-                ),
-              })}
+              Tudo certo, aproveite o site
             </DialogDescription>
           </DialogHeader>
         ) : (
           <LoadingDeye />
         )}
-        <DialogFooter className="mt-auto">
-          <DialogClose asChild>
-            <Button>{t('confirm')}</Button>
-          </DialogClose>
-        </DialogFooter>
+         {!isLoaded ? null : (
+          <DialogFooter className="mt-auto">
+            <DialogClose asChild>
+              <Button>{t('confirm')}</Button>
+            </DialogClose>
+          </DialogFooter>
+        )}
       </DialogContent>
     </Dialog>
   );
