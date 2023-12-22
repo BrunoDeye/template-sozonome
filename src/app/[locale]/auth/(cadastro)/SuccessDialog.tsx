@@ -31,10 +31,17 @@ export default function SuccessDialog({
 }: Props) {
   const t = useTranslations('SuccessDialog');
   const [isLoaded, setIsloaded] = useState(false);
+  const [loadedStatus, setLoadedStatus] = useState("")
 
   useEffect(() => {
     if (!isLoading && !isLoaded) {
       setIsloaded(true);
+    }
+
+    if (alert.status === 'success') {
+      setLoadedStatus('success')
+    } else if (alert.status === 'error') {
+      setLoadedStatus('error')
     }
 
     return () => setIsloaded(false);
@@ -42,28 +49,30 @@ export default function SuccessDialog({
 
   return (
     <Dialog modal open={open} onOpenChange={setOpen}>
-      <DialogContent className="flex  flex-col items-center justify-around sm:min-h-[325px] sm:max-w-[525px]">
-        {(isLoading || alert.status === '') && !isLoaded ? (
+      <DialogContent className="flex  flex-col items-center justify-around sm:max-w-[525px]">
+        {(isLoading || loadedStatus === '') && !isLoaded ? (
           <DialogHeader className="">
             <DialogTitle className="mb-8 text-center">
               Processando...
             </DialogTitle>
 
-            <DialogDescription className="text-justify">
-              <LoadingDeye />
+            <DialogDescription className="my-auto text-justify">
+              <p className="m-5">
+                <LoadingDeye />
+              </p>
             </DialogDescription>
           </DialogHeader>
-        ) : alert.status === 'error' ? (
+        ) : loadedStatus === 'error' ? (
           <DialogHeader className="">
             <DialogTitle className="mb-8 text-center">
               Algo deu Errado
             </DialogTitle>
 
             <DialogDescription className="text-justify">
-              {alert.message}
+              <p className="mb-5">{alert.message}</p>
             </DialogDescription>
           </DialogHeader>
-        ) : alert.status === 'success' || isLoaded ? (
+        ) : loadedStatus === 'success' || isLoaded ? (
           <DialogHeader className="">
             <DialogTitle className="mb-8 text-center">{t('title')}</DialogTitle>
 
@@ -79,7 +88,7 @@ export default function SuccessDialog({
         ) : (
           <LoadingDeye />
         )}
-        <DialogFooter className='mt-auto'>
+        <DialogFooter className="mt-auto">
           <DialogClose asChild>
             <Button>{t('confirm')}</Button>
           </DialogClose>
