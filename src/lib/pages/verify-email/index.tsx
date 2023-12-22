@@ -4,14 +4,15 @@ import { Input } from '@/lib/components/ui/input';
 import { Label } from '@/lib/components/ui/label';
 import { Link, usePathname, useRouter } from '@/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { NextPage } from 'next';
 import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import VerifyDialog from './(dialog)/VerifyDialog';
 
 const VerifyEmailPage: NextPage = () => {
   const router = useRouter();
-  const t = useTranslations('ConfirmEmail')
+  const t = useTranslations('ConfirmEmail');
   const { data: session, status, update } = useSession();
 
   const [loginData, setLoginData] = useState({
@@ -27,23 +28,33 @@ const VerifyEmailPage: NextPage = () => {
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
-  const searchParams  = useSearchParams()
-  const token = searchParams.get('token')
+  const searchParams = useSearchParams();
+  const [open, setOpen] = useState(false);
+  const [isLoading, startTransition] = useTransition();
+  const token = searchParams.get('token');
   const onSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    try {
-      const result = await signIn('confirm', {
-        ...loginData,
-        redirect: false,
-      }, { token: `${token}` });
-      if (result?.ok)
-        setAlert({ status: 'success', message: t('successMsg') });
-      if (result?.error) setAlert({ status: 'error', message: result.error });
-      setLoginData({ email: '', password: '' });
-    } catch (error: any) {
-      console.log({ error });
-      setAlert({ status: 'error', message: t('defaultError') });
-    }
+    setOpen(true);
+
+    startTransition(async () => {
+      try {
+        const result = await signIn(
+          'confirm',
+          {
+            ...loginData,
+            redirect: false,
+          },
+          { token: `${token}` }
+        );
+        if (result?.ok)
+          setAlert({ status: 'success', message: t('successMsg') });
+        if (result?.error) setAlert({ status: 'error', message: result.error });
+        setLoginData({ email: '', password: '' });
+      } catch (error: any) {
+        console.log({ error });
+        setAlert({ status: 'error', message: t('defaultError') });
+      }
+    });
   };
 
   useEffect(() => {
@@ -54,13 +65,18 @@ const VerifyEmailPage: NextPage = () => {
       router.push('/');
     }
   }, [session, status]);
-  
 
   return (
     <>
       <h3 className="bg-gradient-to-br from-gray-200 to-blue-700 bg-clip-text text-3xl font-bold text-transparent md:text-3xl">
         {t('title')}
       </h3>
+      <VerifyDialog
+        isLoading={isLoading}
+        alert={alert}
+        open={open}
+        setOpen={setOpen}
+      />
       {alert.message && (
         <div
           style={{
