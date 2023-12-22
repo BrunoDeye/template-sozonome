@@ -63,7 +63,7 @@ export default function SuccessDialog({
               {alert.message}
             </DialogDescription>
           </DialogHeader>
-        ) : alert.status === 'success' && isLoaded ? (
+        ) : alert.status === 'success' || isLoaded ? (
           <DialogHeader className="">
             <DialogTitle className="mb-8 text-center">{t('title')}</DialogTitle>
 
@@ -79,7 +79,7 @@ export default function SuccessDialog({
         ) : (
           <LoadingDeye />
         )}
-        <DialogFooter>
+        <DialogFooter className='mt-auto'>
           <DialogClose asChild>
             <Button>{t('confirm')}</Button>
           </DialogClose>
