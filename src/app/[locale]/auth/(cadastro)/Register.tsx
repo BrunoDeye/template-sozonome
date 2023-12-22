@@ -1,10 +1,10 @@
 'use client';
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useTransition } from 'react';
 import { Button } from '@/lib/components/ui/button';
 import { Input } from '@/lib/components/ui/input';
 import { NextPage } from 'next';
 import { Link } from '@/navigation';
-import { useState } from 'react';
+import { useState, startTransition } from 'react';
 import SuccessDialog from './SuccessDialog';
 import { Checkbox } from '@/lib/components/ui/checkbox';
 import TermsDialog from './TermsDialog';
@@ -91,7 +91,8 @@ function RegisterPageContent({ setAuthPage }: Props) {
   const [country, setCountry] = useState('BR');
   const [openTerms, setOpenTerms] = useState(false);
   const [open, setOpen] = useState(false);
-
+  // const [isLoading, setIsloading] = useState(true)
+  const [isLoading, startTransition] = useTransition();
   const [alert, setAlert] = useState({
     status: '',
     message: '',
@@ -107,29 +108,32 @@ function RegisterPageContent({ setAuthPage }: Props) {
       password: values.password,
     };
     console.log(values);
+    setOpen(true);
+
     if (!values.terms) {
       setAlert({
         status: 'error',
         message: 'Você precisa aceitar os termos',
       });
     } else {
-      try {
-        const result = await fetch('/api/auth/signup', {
-          method: 'POST',
-          body: JSON.stringify(registerZodData),
-        });
-        console.log(result);
-        form.reset();
-        if (result.status === 409) {
-          setAlert({ status: 'error', message: 'Email já cadastrado' });
-        } else {
-          setAlert({ status: 'success', message: 'Cadastrado com sucesso!' });
-          setOpen(true);
+      startTransition(async () => {
+        try {
+          const result = await fetch('/api/auth/signup', {
+            method: 'POST',
+            body: JSON.stringify(registerZodData),
+          });
+          console.log(result);
+          form.reset();
+          if (result.status === 409) {
+            setAlert({ status: 'error', message: 'Email já cadastrado' });
+          } else {
+            setAlert({ status: 'success', message: 'Cadastrado com sucesso!' });
+          }
+        } catch (error: any) {
+          console.log({ error });
+          setAlert({ status: 'error', message: 'Algo deu errado' });
         }
-      } catch (error: any) {
-        console.log({ error });
-        setAlert({ status: 'error', message: 'Algo deu errado' });
-      }
+      });
     }
 
     console.log(values);
@@ -140,6 +144,12 @@ function RegisterPageContent({ setAuthPage }: Props) {
         {t('title')}
       </h3>
 
+      <SuccessDialog
+        isLoading={isLoading}
+        alert={alert}
+        open={open}
+        setOpen={setOpen}
+      />
       {alert.message && (
         <div
           style={{
@@ -148,7 +158,6 @@ function RegisterPageContent({ setAuthPage }: Props) {
           }}
           ref={wrapperRef}
         >
-          <SuccessDialog open={open} setOpen={setOpen} />
           {alert.status === 'success' ? '✅' : '❌'} {alert.message}
         </div>
       )}
