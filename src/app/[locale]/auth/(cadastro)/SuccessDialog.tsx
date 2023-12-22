@@ -30,18 +30,20 @@ export default function SuccessDialog({
   isLoading,
 }: Props) {
   const t = useTranslations('SuccessDialog');
-  const [isLoaded, setIsloaded] = useState(false)
+  const [isLoaded, setIsloaded] = useState(false);
 
   useEffect(() => {
-    if(!isLoading && !isLoaded) {
-      setIsloaded(true)
+    if (!isLoading && !isLoaded) {
+      setIsloaded(true);
     }
-  }, [isLoading])
+
+    return () => setIsloaded(false);
+  }, [isLoading]);
 
   return (
     <Dialog modal open={open} onOpenChange={setOpen}>
       <DialogContent className="flex  flex-col items-center justify-around sm:min-h-[325px] sm:max-w-[525px]">
-        {isLoading || alert.status === '' || !isLoaded ? (
+        {(isLoading || alert.status === '') && !isLoaded ? (
           <DialogHeader className="">
             <DialogTitle className="mb-8 text-center">
               Processando...
@@ -61,7 +63,7 @@ export default function SuccessDialog({
               {alert.message}
             </DialogDescription>
           </DialogHeader>
-        ) : alert.status === 'success' ? (
+        ) : alert.status === 'success' && isLoaded ? (
           <DialogHeader className="">
             <DialogTitle className="mb-8 text-center">{t('title')}</DialogTitle>
 
