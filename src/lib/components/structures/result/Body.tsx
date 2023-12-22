@@ -18,12 +18,12 @@ import AllInOnesList from './AllInOnesList';
 import DisplayTotal from '../devices/DisplayTotal';
 import { Separator } from '../../ui/separator';
 import { Calculation } from '@/app/client/prisma';
+import InvertersList from './InvertersList';
 
 const FadeIn = dynamic(() => import('@/lib/components/animations/FadeIn'));
 const SelectBattery = dynamic(() => import('./SelectBattery'));
 const Tables = dynamic(() => import('./Tables'));
 const Title = dynamic(() => import('./Title'));
-const InvertersList = dynamic(() => import('./InvertersList'));
 const RecalculateButton = dynamic(() => import('./RecalculateButton'));
 const PrintButton = dynamic(() => import('./PrintButton'));
 const Batteries = dynamic(() => import('./Batteries'));
@@ -50,7 +50,7 @@ export default function Body() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
+  const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     if (selectedBattery) {
       const requestData = {
@@ -69,9 +69,9 @@ export default function Body() {
         },
       });
     }
-  }, [selectedBattery]);
+  }, [selectedBattery, isClient]);
 
-  const [isClient, setIsClient] = useState(false);
+  
 
   useEffect(() => {
     setIsClient(true);

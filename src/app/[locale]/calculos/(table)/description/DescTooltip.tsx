@@ -30,6 +30,7 @@ const DescTooltip = ({description}: Props) => {
   }, []);
 
   return isClient ? (
+    !description ? null :
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
         onMouseEnter={handleMouseEnter}

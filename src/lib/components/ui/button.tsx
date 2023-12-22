@@ -26,7 +26,7 @@ const buttonVariants = cva(
         gradientDarkBlue: "bg-gradient-to-br from-gray-100 to-blue-400 dark:from-blue-900 dark:to-blue-500 dark:text-white dark:hover:from-gray-200 dark:hover:to-sky-400 dark:hover:text-sky-800 font-semibold text-sky-700 hover:from-gray-200 hover:to-sky-600 hover:text-sky-800",
         gradientSky: "bg-gradient-to-br from-gray-100 to-sky-200 dark:from-sky-800 dark:to-sky-400 dark:text-white dark:hover:from-gray-200 dark:hover:to-cyan-400 dark:hover:text-cyan-800 font-semibold text-cyan-700 hover:from-gray-200 hover:to-cyan-400 hover:text-cyan-800",
         gradientGreen: "bg-gradient-to-br from-gray-100 to-green-200 dark:from-green-800 dark:to-green-400 dark:text-white dark:hover:from-gray-200 dark:hover:to-emerald-400 dark:hover:text-emerald-800 font-semibold text-emerald-700 hover:from-gray-200 hover:to-emerald-400 hover:text-emerald-800",
-        gradientRed: "bg-gradient-to-br from-gray-100 to-red-200 dark:from-red-800 dark:to-red-400 dark:text-white font-semibold text-orange-700 dark:hover:from-gray-200 dark:hover:to-orange-400 dark:hover:text-orange-800 hover:from-gray-200 hover:to-orange-400 hover:text-orange-800",
+        gradientRed: "bg-gradient-to-br from-gray-100 to-red-400 dark:from-red-800 dark:to-red-400 dark:text-white font-semibold text-orange-700 dark:hover:from-gray-200 dark:hover:to-red-500 dark:hover:text-orange-800 hover:from-red-400 hover:to-gray-200 hover:text-orange-800",
         gradientGhost: "bg-gradient-to-br from-gray-100 to-slate-200 dark:from-slate-800 dark:to-slate-400 dark:text-white font-semibold text-stone-700 dark:hover:from-gray-200 dark:hover:to-stone-400 dark:hover:text-stone-800 hover:from-gray-200 hover:to-stone-400 hover:text-stone-800"
       },
       size: {

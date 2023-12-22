@@ -17,7 +17,12 @@ import { mapImages } from '@/utils/constants';
 import { useEffect, useState } from 'react';
 import SUN8kBLUR from '@/images/inverters/SUN-8K-SG01LP1-EU-blur.png';
 import { decimalToHoursMinutes } from '../../../../utils/functions';
-import { LucideAlertCircle, LucideAlertTriangle, LucideInfo } from 'lucide-react';
+import {
+  LucideAlertCircle,
+  LucideAlertTriangle,
+  LucideInfo,
+} from 'lucide-react';
+import CoefDescription from './CoefDescription';
 
 const tableVariants = cva(
   'flex flex-wrap items-center justify-center px-2 py-2 sm:flex-nowrap',
@@ -77,7 +82,7 @@ type TableData = {
 type TableProps = VariantProps<typeof tableVariants> & {
   data: TableData[];
   srcImg?: StaticImageData;
-  coef?: number;
+  coef?: boolean;
 };
 
 export const toBase64 = (str: string) =>
@@ -89,7 +94,7 @@ export default function Tables({
   variant,
   data = defaultData,
   srcImg = mapImages('SUN-6K-SG01/04LP3-US'),
-  coef,
+  coef = false,
 }: TableProps) {
   const [loaded, setLoaded] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -99,14 +104,14 @@ export default function Tables({
   }, []);
   // console.log(coef);
   return (
-    <div className="trasition-all w-full -z-1 sm:p-4">
+    <div className="trasition-all -z-1 w-full sm:p-4">
       <div className={cn(tableVariants({ variant }))}>
         <div className="min-w-[210px] py-4">
           {isClient ? (
             <Image
               className={`${
                 loaded ? 'unblur' : ''
-              } clip-your-needful-style mx-auto to- -z-1 dark:[--shadow-inversor:#333132]`}
+              } clip-your-needful-style to- -z-1 mx-auto dark:[--shadow-inversor:#333132]`}
               height={srcImg.height}
               width={srcImg.width}
               priority
@@ -115,6 +120,38 @@ export default function Tables({
               src={srcImg}
               onLoad={() => setLoaded(true)}
             />
+          ) : null}
+          {coef ? (
+            <TableCaption className="mb-2 print-hidden max-sm:hidden sm:pl-5 mt-10  flex flex-col items-start justify-start gap-5 align-middle font-bold text-sky-600 dark:text-sky-100">
+              <div className="flex items-center">
+                <LucideAlertTriangle
+                  className="ml-1 mr-2 inline min-w-[18px]"
+                  height={18}
+                  width={18}
+                />
+                <span className=" whitespace-nowrap">Informações extras:</span>
+              </div>
+              
+              {}{' '}
+              <div className=" flex flex-col gap-3">
+              <div className="flex items-baseline mr-auto">
+                  <CoefDescription message="(OPCIONAL) 1x para cada 4 racks de baterias, basicamente tem que ser feito um barramento, este equipamento apenas irá facilitar" />
+                  <span className="ml-2 leading-none  whitespace-nowrap">Combiner Box</span>
+                </div>
+                <div className="flex items-baseline mr-auto">
+                  <CoefDescription message="(OPCIONAL) Apenas quando a comunicação entre inversor-bateria e bateria-bateria for maior que 50m" />
+                  <span className="ml-2 leading-none whitespace-nowrap">Can Bridge</span>
+                </div>
+                <div className="flex items-baseline mr-auto">
+                  <CoefDescription message="Saiba que cada inversor que está conectado em paralelo deverá ter a mesma quantidade de baterias, exemplo 2 inversores de 50k, em cada inversor haverá 1 banco de baterias de 12 unidades" />
+                  <span className="ml-2 leading-none  whitespace-nowrap">Paralelo</span>
+                </div>
+                <div className="flex items-baseline mr-auto">
+                  <CoefDescription message="(ESSENCIAL) 1x para até 12 baterias" />
+                  <span className="ml-2 leading-none  whitespace-nowrap">BMU</span>
+                </div>
+              </div>
+            </TableCaption>
           ) : null}
         </div>
 
@@ -144,14 +181,37 @@ export default function Tables({
               </TableRow>
             ))}
           </TableBody>
-          {/* {coef ? (
-            <TableCaption className="mb-2 align-middle font-bold text-yellow-600 ">
-              {' '}
-              <LucideAlertTriangle className="inline" height={18} width={18} /> Tempo de
-              carregamento máximo do conjunto de Baterias:{' '}
-              {decimalToHoursMinutes(coef)}
+          {coef ? (
+            <TableCaption className="mb-2 pl-3 pb-3 print-hidden sm:hidden sm:pl-5  flex flex-col items-start justify-start gap-5 align-middle font-bold text-sky-600 dark:text-sky-100">
+              <div className="flex items-center">
+                <LucideAlertTriangle
+                  className="ml-1 mr-2 inline"
+                  height={18}
+                  width={18}
+                />
+                <span className="whitespace-nowrap">Informações extras:</span>
+              </div>
+              {}{' '}
+              <div className=" flex flex-col gap-3">
+                <div className="flex items-baseline mr-auto">
+                  <CoefDescription message="A Combiner Box é de uso opcional, servindo apenas para padronizar a interligação entre as baterias e evitar barramentos manuais." />
+                  <span className="ml-2 leading-none  whitespace-nowrap">Combiner Box</span>
+                </div>
+                <div className="flex items-baseline mr-auto">
+                  <CoefDescription message="Sendo opcional, deve-se ter apenas quando a comunicação entre inversores em paralelo for superior a 50 metros." />
+                  <span className="ml-2 leading-none whitespace-nowrap">Can Bridge</span>
+                </div>
+                <div className="flex items-baseline mr-auto">
+                  <CoefDescription message="Para uso de inversores e baterias HV, saiba que caso haja o paralelo entre os inversores, é obrigatório que a quantidade de baterias seja exatamente igual em cada inversor." />
+                  <span className="ml-2 leading-none  whitespace-nowrap">Paralelo</span>
+                </div>
+                <div className="flex items-baseline mr-auto">
+                  <CoefDescription message="O Gerenciador Unitário de Bateria (BMU) é um controlador de carga responsável por controlar o uso das baterias. Cada unidade de BMU é projetada para suportar até 12 baterias." />
+                  <span className="ml-2 leading-none  whitespace-nowrap">BMU</span>
+                </div>
+              </div>
             </TableCaption>
-          ) : null} */}
+          ) : null}
         </Table>
       </div>
     </div>

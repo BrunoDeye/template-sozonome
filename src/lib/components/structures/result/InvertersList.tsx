@@ -1,5 +1,10 @@
 'use client';
-import { decimalToHoursMinutes, formatInverter } from '@/utils/functions';
+import {
+  decimalToHoursMinutes,
+  formatInverter,
+  inverterGridLimit,
+  isInverterGridUnderLimit,
+} from '@/utils/functions';
 import Tables from './Tables';
 import { useDataStore } from '@/store/data';
 import { useCalculateInvertersQuery } from '@/services/ReactQueryHooks/useCalculateInvertersQuery';
@@ -12,8 +17,17 @@ import { Alert, AlertDescription, AlertTitle } from '@/lib/components/ui/alert';
 import { Terminal } from 'lucide-react';
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import CoefDescription from './CoefDescription';
-import { Select, SelectTrigger, SelectValue } from '../../ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../../ui/select';
 import { Calculation } from '@/app/client/prisma';
+import Warning from './Warning';
+import Danger from './Danger';
+import { usePathname } from '@/navigation';
 
 export const inverters = [
   {
@@ -30,54 +44,123 @@ export const inverters = [
 
 type Props = {
   printData: Calculation | null;
-}
+};
 
 export default function InvertersList({ printData }: Props) {
   const t = useTranslations('Inverters');
-  const {
-    state: { grid, totalPower, batteryModel, batteryQty },
+  const [
+    grid,
+    totalPower,
+    totalEnergy,
+    batteryModel,
+    batteryQty,
+    inverterQty,
+    addRecommendedInverter,
+    addInverterQty,
+  ] = useDataStore((state) => [
+    state.state.grid,
+    state.state.totalPower,
+    state.state.totalEnergy,
+    state.state.batteryModel,
+    state.state.batteryQty,
+    state.state.inverterQty,
+    state.actions.addRecommendedInverter,
+    state.actions.addInverterQty,
+  ]);
 
-    actions: { addRecommendedInverter, addInverterQty },
-  } = useDataStore();
+  const [minCoef, setMinCoef] = useState(0);
+  const [selectedCoef, setSelectedCoef] = useState(``);
 
   const requestData = {
-    gridVoltage: printData ? printData.grid : (grid || '220V (Fase + Fase + Terra/Neutro)'),
-    tPower: printData ? printData.totalPower : (totalPower || 1),
+    gridVoltage: printData
+      ? printData.grid
+      : grid || '220V (Fase + Fase + Terra/Neutro)',
+    tPower: printData ? printData.totalPower : totalPower || 1,
     batteryModel: printData ? printData.selectedBattery : batteryModel,
     batteryQty: printData ? printData.batteryQty : batteryQty,
   };
   const { invertersList, isLoading, isError } =
     useCalculateInvertersQuery(requestData);
-  
+
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  
-
   useEffect(() => {
-    
     if (invertersList?.length !== 0 && invertersList !== undefined) {
       const recommendedInverter = invertersList!.filter((inverter) =>
         invertersList![0].model.includes('HP')
           ? inverter.model.includes('HP')
           : inverter.model.includes('LP')
       )[0];
-      console.log(recommendedInverter)
+      console.log(recommendedInverter);
 
       addRecommendedInverter(recommendedInverter.model);
       addInverterQty(recommendedInverter.quantity);
     }
-  }, [invertersList]);
+  }, [invertersList, inverterQty]);
+  useEffect(() => {
+    if (invertersList) {
+      if (invertersList.length !== 0) {
+        const tempMinCoef = Math.ceil(
+          invertersList!.filter((inverter) =>
+            invertersList![0].model.includes('HP')
+              ? inverter.model.includes('HP')
+              : inverter.model.includes('LP')
+          )[0].adjustedCoef
+        );
 
+        const filteredArray = [tempMinCoef, 1, 2, 4, 6, 8, 10].filter(
+          (value, index, array) => {
+            for (let j = 0; j < array.length; j += 1) {
+              if (index !== j) {
+                const resultI: number = Math.ceil(
+                  (tempMinCoef * inverterQty) / value
+                );
+                const resultJ: number = Math.ceil(
+                  (tempMinCoef * inverterQty) / array[j]
+                );
+
+                if (resultI === resultJ && array[j] < value) {
+                  return false; // Exclude value if it has the same result as another
+                }
+              }
+            }
+
+            if (
+              !isInverterGridUnderLimit(
+                grid as any,
+                Math.ceil((tempMinCoef * inverterQty) / value)
+              )
+            )
+              return false;
+
+            return true; // Include value if it has a unique result
+          }
+        );
+
+        setMinCoef(tempMinCoef);
+        setSelectedCoef(
+          `${Math.min(
+            ...new Set(
+              filteredArray.length === 0 ? [tempMinCoef] : filteredArray
+            )
+          )}`
+        );
+      }
+    }
+  }, [invertersList, inverterQty]);
+  // console.log(minCoef + "aqui");
+  // console.log(selectedCoef+ "selecionado");
   return isError ? (
     <span className="mx-auto flex w-full flex-col text-center">
       {t('errorMsg')}
     </span>
   ) : (
     <div className="flex flex-col gap-6">
+      <p className="print-show -mt-6 hidden px-4 text-center text-lg">{`Tempo de carregamento máximo das baterias: ${selectedCoef} horas`}</p>
       <div>
         <h4 className="margin-print-fixer text-center text-xl font-bold tracking-tight sm:text-2xl">
           {t('recommendationTitle')}
@@ -105,7 +188,9 @@ export default function InvertersList({ printData }: Props) {
               t('inverterAtr'),
               t('typeAtr'),
               t('powerAtr'),
-              t('qntAtr')
+              t('qntAtr'),
+              minCoef,
+              +selectedCoef
             )}
             srcImg={mapImages(
               invertersList!.filter((inverter) =>
@@ -115,25 +200,49 @@ export default function InvertersList({ printData }: Props) {
               )[0].model as ImageModelName
             )}
           />
-          <div className="sm:px-4">
-            <Alert
-              variant="accent"
-              className="print-hidden alert-margin-print-fixer mx-auto w-full"
-            >
-              <AlertDescription className="flex flex-col items-center justify-start gap-2">
-                <div className="flex">
-                  <ExclamationTriangleIcon className="!mr-2 h-10 w-10 font-bold" />
-                  <AlertTitle className="text-2xl font-bold uppercase">
-                    Atenção
-                  </AlertTitle>
-                </div>
-                <div className="text-center sm:w-[70%]">
-                  {t('coefAlert')}: 
-                </div>
-                <div className='flex items-baseline'>
 
-                <span className="font-bold">
-                {decimalToHoursMinutes(
+          <div className="sm:px-4">
+            {[Math.ceil(minCoef), 1, 2, 4, 6, 8, 10].filter(
+              (value, index, array) => {
+                for (let j = 0; j < array.length; j++) {
+                  if (index !== j) {
+                    const resultI: number = Math.ceil(
+                      (minCoef * inverterQty) / value
+                    );
+                    const resultJ: number = Math.ceil(
+                      (minCoef * inverterQty) / array[j]
+                    );
+
+                    if (resultI === resultJ && array[j] < value) {
+                      return false; // Exclude value if it has the same result as another
+                    }
+                  }
+                }
+
+                if (
+                  !isInverterGridUnderLimit(
+                    grid as any,
+                    Math.ceil((minCoef * inverterQty) / value)
+                  )
+                )
+                  return false;
+                return true; // Include value if it has a unique result
+              }
+            ).length === 0 ? (
+              <Danger
+                hasButton
+                message={t('AlertInverter', {
+                  inverterModel: invertersList!.filter((inverter) =>
+                    invertersList![0].model.includes('HP')
+                      ? inverter.model.includes('HP')
+                      : inverter.model.includes('LP')
+                  )[0].model,
+                  inverterModelLimit: inverterGridLimit(grid as any),
+                })}
+              />
+            ) : (
+              <Warning>
+                {/* {decimalToHoursMinutes(
                           invertersList!.filter((inverter) =>
                             invertersList![0].model.includes('HP')
                               ? inverter.model.includes('HP')
@@ -144,29 +253,141 @@ export default function InvertersList({ printData }: Props) {
                           t('min'),
                           t('mins'),
                           t('and')
-                        )}
-                  {/* <Select>
-                    <SelectTrigger className="mt-2 h-full w-[100px] border-none bg-amber-300 shadow-inner shadow-yellow-600 backdrop-blur-md dark:bg-amber-200 dark:shadow-yellow-700">
-                      <SelectValue
-                        placeholder={decimalToHoursMinutes(
-                          invertersList!.filter((inverter) =>
-                            invertersList![0].model.includes('HP')
-                              ? inverter.model.includes('HP')
-                              : inverter.model.includes('LP')
-                          )[0].adjustedCoef,
-                          t('h'),
-                          t('hs'),
-                          t('min'),
-                          t('mins'),
-                          t('and')
-                        )}
-                      />
-                    </SelectTrigger>
-                  </Select> */}
-                </span>{' '}<CoefDescription />
-                </div>
-              </AlertDescription>
-            </Alert>
+                        )} */}
+                <Select
+                  onValueChange={setSelectedCoef}
+                  defaultValue={`${Math.min(
+                    ...new Set(
+                      [Math.ceil(minCoef), 1, 2, 4, 6, 8, 10].filter(
+                        (value, index, array) => {
+                          for (let j = 0; j < array.length; j++) {
+                            if (index !== j) {
+                              const resultI: number = Math.ceil(
+                                (minCoef * inverterQty) / value
+                              );
+                              const resultJ: number = Math.ceil(
+                                (minCoef * inverterQty) / array[j]
+                              );
+
+                              if (resultI === resultJ && array[j] < value) {
+                                return false; // Exclude value if it has the same result as another
+                              }
+                            }
+                          }
+
+                          if (
+                            !isInverterGridUnderLimit(
+                              grid as any,
+                              Math.ceil((minCoef * inverterQty) / value)
+                            )
+                          )
+                            return false;
+                          return true; // Include value if it has a unique result
+                        }
+                      )
+                    )
+                  )}`}
+                  value={selectedCoef}
+                >
+                  <SelectTrigger className="mt-2 h-full w-[100px] border-none bg-amber-300 shadow-inner shadow-yellow-600 backdrop-blur-md dark:bg-amber-200 dark:shadow-yellow-700">
+                    <SelectValue
+                      // defaultValue={`${Math.ceil(minCoef)}`}
+                      placeholder={Math.min(
+                        ...new Set(
+                          [Math.ceil(minCoef), 1, 2, 4, 6, 8, 10].filter(
+                            (value, index, array) => {
+                              for (let j = 0; j < array.length; j++) {
+                                if (index !== j) {
+                                  const resultI: number = Math.ceil(
+                                    (minCoef * inverterQty) / value
+                                  );
+                                  const resultJ: number = Math.ceil(
+                                    (minCoef * inverterQty) / array[j]
+                                  );
+
+                                  if (resultI === resultJ && array[j] < value) {
+                                    return false; // Exclude value if it has the same result as another
+                                  }
+                                }
+                              }
+
+                              if (
+                                !isInverterGridUnderLimit(
+                                  grid as any,
+                                  Math.ceil((minCoef * inverterQty) / value)
+                                )
+                              )
+                                return false;
+                              return true; // Include value if it has a unique result
+                            }
+                          )
+                        )
+                      )}
+                    />
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    {[...new Set([Math.ceil(minCoef), 1, 2, 4, 6, 8, 10])]
+                      .sort((a, b) => a - b)
+                      .filter((value, index, array) => {
+                        for (let j = 0; j < array.length; j++) {
+                          if (index !== j) {
+                            const resultI: number = Math.ceil(
+                              (minCoef * inverterQty) / value
+                            );
+                            const resultJ: number = Math.ceil(
+                              (minCoef * inverterQty) / array[j]
+                            );
+
+                            if (resultI === resultJ && array[j] < value) {
+                              // console.log(value + 'same');
+                              return false; // Exclude value if it has the same result as another
+                            }
+                          }
+                        }
+
+                        if (
+                          !isInverterGridUnderLimit(
+                            grid as any,
+                            Math.ceil((minCoef * inverterQty) / value)
+                          )
+                        )
+                          return false;
+
+                        return true; // Include value if it has a unique result
+                      })
+                      .map((value, i, array) => {
+                        if (value === Math.min(...array)) {
+                          return (
+                            <SelectItem
+                              key={`${value}-horas`}
+                              defaultChecked
+                              value={`${value}`}
+                            >
+                              {`${value} ${value === 1 ? 'hora' : 'horas'}`}
+                            </SelectItem>
+                          );
+                        }
+
+                        if (
+                          Math.ceil((minCoef * inverterQty) / value) ===
+                            inverterQty &&
+                          value !== minCoef
+                        )
+                          return;
+
+                        if ((minCoef * inverterQty) / value < 1) return;
+                        return (
+                          <SelectItem key={`${value}-horas`} value={`${value}`}>
+                            {value} horas
+                          </SelectItem>
+                        );
+                      })
+                      .sort()}
+                  </SelectContent>
+                </Select>
+              </Warning>
+            )}
           </div>
         </>
       )}
@@ -202,11 +423,25 @@ export default function InvertersList({ printData }: Props) {
                     t('inverterAtr'),
                     t('typeAtr'),
                     t('powerAtr'),
-                    t('qntAtr')
+                    t('qntAtr'),
+                    minCoef,
+                    +selectedCoef
                   )}
                   // srcImg={`/images/${inverter.model.replace(/\//g, '')}.png`}
                   srcImg={mapImages(inverter.model as ImageModelName)}
                 />
+                {Math.ceil((minCoef * inverter.quantity) / +selectedCoef) >
+                inverterGridLimit(grid as any) ? (
+                  <div className="pt-6 sm:px-4">
+                    {' '}
+                    <Danger
+                      message={t('AlertOtherInverters', {
+                        inverterModel: inverter.model,
+                        inverterModelLimit: inverterGridLimit(grid as any),
+                      })}
+                    />
+                  </div>
+                ) : null}
               </div>
             ))}
         </div>

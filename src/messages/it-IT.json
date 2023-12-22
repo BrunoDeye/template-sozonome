@@ -68,7 +68,8 @@
     "ciclesAtr": "Cicli",
     "modelAtr": "Modello",
     "qntAtr": "Quantità",
-    "yearsUnit": "{count, plural, =1 {# anno} other {# anni}}"
+    "yearsUnit": "{count, plural, =1 {# anno} other {# anni}}",
+    "dangerBattery": "La batteria {batteryModel} ha superato la quantità consentita di {batteryModelLimit} unità come indicato dal BMS per questo modello."
   },
   "Inverters": {
     "recommendationTitle": "Inverter Consigliato",
@@ -78,12 +79,16 @@
     "typeAtr": "Tipo",
     "powerAtr": "Potenza[W]",
     "qntAtr": "Quantità",
-    "coefAlert": "Tempo di ricarica massimo per il set di batterie",
+    "coefAlert": "Seleziona il tempo massimo di carica e scarica."
+,
     "h": " ora",
     "hs": " ore",
     "min": " minuto",
     "mins": " minuti",
-    "and": "e"
+    "and": "e",
+    "AlertOtherInverters": "Il numero massimo consentito di inverter in parallelo per questo modello {inverterModel} è di {inverterModelLimit} unità.",
+"AlertInverter": "Il numero massimo consentito di inverter in parallelo per questo modello {inverterModel} è di {inverterModelLimit} unità. Si consiglia di ricalcolare o considerare una modifica nella configurazione della rete."
+
   },
   "Grids": {
     "yourGrid": "Per la tua rete",
@@ -113,7 +118,8 @@
   },
 
   "Coef": {
-    "description": "Il tempo necessario è una stima approssimativa e può variare in base alle impostazioni di carica e scarica dell'inverter, nonché alle particolarità di ciascun sistema."
+    "description": "Il tempo massimo di carica e scarica è una stima approssimativa e può variare in base alle impostazioni di carica e scarica dell'inverter, nonché alle particolarità di ciascun sistema. Modificando il valore, cambierà anche la quantità di inverter."
+
   },
   "Login": {
     "enter": "Accedi",

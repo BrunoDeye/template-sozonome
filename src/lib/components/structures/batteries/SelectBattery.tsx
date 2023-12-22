@@ -126,7 +126,7 @@ export default function SelectBattery({
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
-                      className="flex flex-col sm:flex-row justify-around w-full"
+                      className="flex flex-col xl:flex-row justify-around w-full"
                     >
                       {batteriesDataIsLoading || isLoading || !invertersList ? (
                         <LoadingDeye />
@@ -175,7 +175,7 @@ export default function SelectBattery({
                                 </div>
                                 {/* <a href="https://storyset.com/nature" className='text-[10px]'>Nature illustrations by Storyset</a> */}
                                 <h4> {battery.model}</h4>
-                                <h6> {tPage("label1")}: {(battery.correctedEnergy/1000).toFixed(2)}</h6>
+                                {/* <h6> {tPage("label1")}: {(battery.correctedEnergy/1000).toFixed(2)}</h6> */}
                                 {/* <a href="https://storyset.com/nature" className='text-[10px]'>Nature illustrations by Storyset</a> */}
                               </FormLabel>
                             </FormItem>

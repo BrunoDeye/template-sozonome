@@ -6,21 +6,26 @@ import { useDataStore } from '@/store/data';
 import LoadingDeye from '../../Loading';
 import Tables from './Tables';
 import { ImageModelName, mapImages } from '@/utils/constants';
-import { formatBattery } from '@/utils/functions';
+import {
+  batteryModelLimit,
+  formatBattery,
+  isBatteryModelUnderLimit,
+} from '@/utils/functions';
 import { useTranslations } from 'next-intl';
 import { useCalculateInvertersQuery } from '@/services/ReactQueryHooks/useCalculateInvertersQuery';
 import { Calculation } from '@/app/client/prisma';
+import Danger from './Danger';
 
 type Props = {
   printData: Calculation | null;
-}
+};
 
 function Batteries({ printData }: Props) {
   const t = useTranslations('Batteries');
   const [selectedBattery, setSelectedBattery] = useState<string | undefined>(
     undefined
   );
-  const [coefValue, setCoefValue] = useState(1)
+  const [coefValue, setCoefValue] = useState(1);
   const [battery, setBattery] = useState({
     modelFullName: '\u00A0',
     nominalVoltage: '\u00A0',
@@ -38,10 +43,12 @@ function Batteries({ printData }: Props) {
   } = useDataStore();
 
   const requestData = {
-    gridVoltage: printData ? printData.grid :( grid || '220V (Fase + Fase + Terra/Neutro)'),
-    tPower:  printData? printData.totalPower : (totalPower || 1),
-    batteryModel: printData? printData.selectedBattery : batteryModel,
-    batteryQty : printData? printData.batteryQty : batteryQty,
+    gridVoltage: printData
+      ? printData.grid
+      : grid || '220V (Fase + Fase + Terra/Neutro)',
+    tPower: printData ? printData.totalPower : totalPower || 1,
+    batteryModel: printData ? printData.selectedBattery : batteryModel,
+    batteryQty: printData ? printData.batteryQty : batteryQty,
   };
   const { invertersList, isLoading, isError } =
     useCalculateInvertersQuery(requestData);
@@ -49,8 +56,8 @@ function Batteries({ printData }: Props) {
   useEffect(() => {
     if (batteryModel) {
       const requestData = {
-        model: printData? printData.selectedBattery : batteryModel as string,
-        tEnergy: printData? printData.totalEnergy : (totalEnergy || 1) || 1,
+        model: printData ? printData.selectedBattery : (batteryModel as string),
+        tEnergy: printData ? printData.totalEnergy : totalEnergy || 1 || 1,
         fc: FC <= 100 ? FC / 100 : 0.94,
         // coef: coefValue,
       };
@@ -79,25 +86,41 @@ function Batteries({ printData }: Props) {
           </div>
         </div>
       ) : batteryModel ? (
-        <Tables
-          srcImg={mapImages(battery.modelFullName as ImageModelName)}
-          data={formatBattery(
-            battery,
-            t('batteryAtr'),
-            t('dodLifespanAtr'),
-            t('energyAtr'),
-            t('availEnergyAtr'),
-            t('ciclesAtr'),
-            t('modelAtr'),
-            t('qntAtr'),
-            t('yearsUnit', { count: battery.lifespan }),
-            invertersList!.filter((inverter) =>
-              invertersList![0].model.includes('HP')
-                ? inverter.model.includes('HP')
-                : inverter.model.includes('LP')
-            )[0].coef
+        <>
+          <Tables
+            coef={battery.modelFullName.includes('BOS') ? true : false}
+            srcImg={mapImages(battery.modelFullName as ImageModelName)}
+            data={formatBattery(
+              battery,
+              t('batteryAtr'),
+              t('dodLifespanAtr'),
+              t('energyAtr'),
+              t('availEnergyAtr'),
+              t('ciclesAtr'),
+              t('modelAtr'),
+              t('qntAtr'),
+              t('yearsUnit', { count: battery.lifespan }),
+              invertersList!.filter((inverter) =>
+                invertersList![0].model.includes('HP')
+                  ? inverter.model.includes('HP')
+                  : inverter.model.includes('LP')
+              )[0].coef
+            )}
+          />
+          {isBatteryModelUnderLimit(
+            batteryModel as any,
+            +battery.quantity
+          ) ? null : (
+            <div className="sm:mx-4">
+              <Danger
+                message={t('dangerBattery', {
+                  batteryModel: batteryModel,
+                  batteryModelLimit: batteryModelLimit(batteryModel as any),
+                })}
+              />
+            </div>
           )}
-        />
+        </>
       ) : (
         <div className="h-[100px]">{'\u00A0'}</div>
       )}

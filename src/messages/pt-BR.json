@@ -67,7 +67,8 @@
     "ciclesAtr": "Ciclos",
     "modelAtr": "Modelo",
     "qntAtr": "Quantidade",
-    "yearsUnit": "{count, plural, =1 {# ano} other {# anos}}"
+    "yearsUnit": "{count, plural, =1 {# ano} other {# anos}}",
+    "dangerBattery": "A bateria {batteryModel} excedeu a quantidade de {batteryModelLimit} unidades permitida pelo BMS para esse modelo."
   },
   "Inverters": {
     "recommendationTitle": "Inversor Recomendado",
@@ -77,12 +78,14 @@
     "typeAtr": "Tipo",
     "powerAtr": "Potência[W]",
     "qntAtr": "Quantidade",
-    "coefAlert": "Ajustamos a quantidade de inversores para corresponder ao tempo de carregamento máximo das baterias de",
+    "coefAlert": "Selecione o tempo de carregamento e descarregamento máximo",
     "h": " hora",
     "hs": " horas",
     "min": " minuto",
     "mins": " minutos",
-    "and": "e"
+    "and": "e",
+    "AlertOtherInverters": "O número máximo permitido de inversores em paralelo para o modelo {inverterModel} é de {inverterModelLimit} unidades.",
+    "AlertInverter": "O número máximo permitido de inversores em paralelo para o modelo {inverterModel} é de {inverterModelLimit} unidades. Recomenda-se recalcular ou considerar a alteração na configuração da rede."
   },
   "Grids": {
     "yourGrid": "Para sua rede",
@@ -112,7 +115,7 @@
   },
 
   "Coef": {
-    "description": "O tempo necessário é uma estimativa aproximada e pode variar de acordo com as configurações de carga e descarga do inversor, bem como as particularidades de cada sistema."
+    "description": "O tempo de carregamento e descarregamento máximo é uma estimativa aproximada e pode variar de acordo com as configurações de carga e descarga do inversor, bem como as particularidades de cada sistema. Alterando o valor, a quantidade de inversores também será alterada."
   },
   "Login": {
     "enter": "Entrar",

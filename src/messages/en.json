@@ -67,7 +67,8 @@
     "ciclesAtr": "Cycles",
     "modelAtr": "Model",
     "qntAtr": "Quantity",
-    "yearsUnit": "{count, plural, =1 {# year} other {# years}}"
+    "yearsUnit": "{count, plural, =1 {# year} other {# years}}",
+    "dangerBattery": "The {batteryModel} battery has exceeded the allowed quantity of {batteryModelLimit} units as per the BMS for this model."
   },
   "Inverters": {
     "recommendationTitle": "Recommended Inverter",
@@ -77,12 +78,16 @@
     "typeAtr": "Type",
     "powerAtr": "Power[W]",
     "qntAtr": "Quantity",
-    "coefAlert": "Maximum Charging Time for the Battery Set",
+    "coefAlert": "Select the maximum charging and discharging time.",
+
     "h": " hour",
     "hs": " hours",
     "min": " minute",
     "mins": " minutes",
-    "and": "and"
+    "and": "and",
+    "AlertOtherInverters": "The maximum allowed number of parallel inverters for the {inverterModel} model is {inverterModelLimit} units.",
+    "AlertInverter": "The maximum allowed number of parallel inverters for the {inverterModel} model is {inverterModelLimit} units. It is recommended to recalculate or consider a change in the network configuration."
+
   },
   "Grids": {
     "yourGrid": "For your grid",
@@ -111,7 +116,8 @@
     "label1": "Available Energy[kWh]"
   },
   "Coef": {
-    "description": "The required time is an approximate estimate and may vary depending on the charge and discharge settings of the inverter, as well as the specifics of each system."
+    "description": "The maximum charging and discharging time is an approximate estimate and may vary based on the inverter's charging and discharging settings, as well as the peculiarities of each system. Changing the value will also affect the number of inverters."
+
   },
   "Login": {
     "enter": "Enter",

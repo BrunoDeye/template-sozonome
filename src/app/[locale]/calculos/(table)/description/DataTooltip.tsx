@@ -68,7 +68,7 @@ const DataTooltip = ({ data }: Props) => {
           {info2.map((item) => (
             <div
               className="z-50 flex w-[250px] min-w-[250px] max-w-[250px] items-center justify-between gap-10 rounded-lg border bg-gradient-to-br from-gray-200 to-blue-700 p-3 dark:from-blue-600 dark:to-blue-400"
-              key={item.value}
+              key={`${item.attribute}-${item.value}`}
             >
               <div className="text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] dark:text-sky-100 dark:drop-shadow-[0_1.2px_1.2px_rgba(100,100,100,0.8)] ">
                 {item.attribute}

@@ -8,7 +8,12 @@ import { LucideInfo } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
-const CoefDescription = () => {
+type Props = {
+  message: string
+}
+
+
+const CoefDescription = ({ message }: Props) => {
   const t = useTranslations('Coef');
   const [open, setOpen] = useState(false);
 
@@ -41,7 +46,8 @@ const CoefDescription = () => {
         side="top"
         className="w-40 p-3 text-justify sm:w-80 "
       >
-        {t('description')}
+        { message }
+        
       </PopoverContent>
     </Popover>
   ) : null;

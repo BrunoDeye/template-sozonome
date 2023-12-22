@@ -10,7 +10,7 @@ const alertVariants = cva(
       variant: {
         default: "bg-background text-foreground",
         destructive:
-          "border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive",
+        "bg-gradient-to-br from-red-300 to-red-600 shadow-xl hover:from-red-200 hover:to-red-600 dark:border-sky-500 dark:from-red-600 dark:to-red-300 dark:!text-black dark:shadow-lg dark:shadow-red-400 dark:hover:from-red-500 dark:hover:to-red-200 dark:[&>svg]:hover:!text-red-50 dark:hover:!text-red-950 border-none !text-black dark:border-sky-950 [&>svg]:text-black dark:[&>svg]:text-white",
         accent:
           "bg-gradient-to-br from-gray-100 to-amber-400 text-yellow-600 shadow-xl hover:from-gray-100 hover:to-yellow-400 dark:border-sky-500 dark:from-yellow-400 dark:to-amber-100 dark:!text-black dark:shadow-lg dark:shadow-yellow-400 dark:hover:from-yellow-500 dark:hover:to-amber-200 dark:[&>svg]:hover:!text-amber-50 dark:hover:!text-amber-950 border-none text-yellow-950 dark:border-sky-950 [&>svg]:text-yellow-950 dark:[&>svg]:text-white",
       },

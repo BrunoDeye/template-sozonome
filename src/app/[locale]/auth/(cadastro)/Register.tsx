@@ -43,7 +43,7 @@ function RegisterPageContent({ setAuthPage }: Props) {
     () =>
       z
         .object({
-          name: z.string().min(6, {
+          name: z.string().min(2, {
             message: t('errorName'),
           }),
           email: z.string().email({ message: t('errorEmail') }),
