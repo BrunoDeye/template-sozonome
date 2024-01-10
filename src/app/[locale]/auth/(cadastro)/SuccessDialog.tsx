@@ -63,7 +63,7 @@ export default function SuccessDialog({
             </DialogDescription>
           </DialogHeader>
         ) : loadedStatus === 'error' ? (
-          <DialogHeader className="">
+          <DialogHeader className="min-h-[100px]">
             <DialogTitle className="mb-8 text-center">
               Algo deu Errado
             </DialogTitle>

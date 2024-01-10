@@ -8,6 +8,7 @@ import { useDataStore } from '@/store/data';
 import {Link,usePathname, useRouter } from '@/navigation';
 import { useLocale } from 'next-intl';
 import LocaleSwitcher from '../LocaleSwitcher';
+import { useSession } from 'next-auth/react';
 
 const Footer = () => {
   const { theme, setTheme, systemTheme } = useTheme();
@@ -18,6 +19,8 @@ const Footer = () => {
   } = useDataStore();
   const pathname = usePathname();
 
+  const { status } = useSession()
+
   useEffect(() => {
     setTheme(theme === 'system' ? systemTheme : (theme as any));
   }, []);
@@ -25,7 +28,7 @@ const Footer = () => {
   useEffect(() => {
     // console.log((grid === '' || batteryModel === ''));
     if (
-      pathname === '/result' &&
+      pathname === '/result' && status !== 'loading' &&
      (grid === '' || batteryModel === '')
     ) {
 
@@ -33,6 +36,8 @@ const Footer = () => {
         router.replace(`/`, { locale: locale });
       });
     }
+
+    
   }, [pathname, grid]);
 
   return (

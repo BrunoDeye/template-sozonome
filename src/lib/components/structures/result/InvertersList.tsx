@@ -114,20 +114,7 @@ export default function InvertersList({ printData }: Props) {
 
         const filteredArray = [tempMinCoef, 1, 2, 4, 6, 8, 10].filter(
           (value, index, array) => {
-            for (let j = 0; j < array.length; j += 1) {
-              if (index !== j) {
-                const resultI: number = Math.ceil(
-                  (tempMinCoef * inverterQty) / value
-                );
-                const resultJ: number = Math.ceil(
-                  (tempMinCoef * inverterQty) / array[j]
-                );
-
-                if (resultI === resultJ && array[j] < value) {
-                  return false; // Exclude value if it has the same result as another
-                }
-              }
-            }
+            
 
             if (
               !isInverterGridUnderLimit(
@@ -204,20 +191,7 @@ export default function InvertersList({ printData }: Props) {
           <div className="sm:px-4">
             {[Math.ceil(minCoef), 1, 2, 4, 6, 8, 10].filter(
               (value, index, array) => {
-                for (let j = 0; j < array.length; j++) {
-                  if (index !== j) {
-                    const resultI: number = Math.ceil(
-                      (minCoef * inverterQty) / value
-                    );
-                    const resultJ: number = Math.ceil(
-                      (minCoef * inverterQty) / array[j]
-                    );
-
-                    if (resultI === resultJ && array[j] < value) {
-                      return false; // Exclude value if it has the same result as another
-                    }
-                  }
-                }
+                
 
                 if (
                   !isInverterGridUnderLimit(
@@ -260,20 +234,7 @@ export default function InvertersList({ printData }: Props) {
                     ...new Set(
                       [Math.ceil(minCoef), 1, 2, 4, 6, 8, 10].filter(
                         (value, index, array) => {
-                          for (let j = 0; j < array.length; j++) {
-                            if (index !== j) {
-                              const resultI: number = Math.ceil(
-                                (minCoef * inverterQty) / value
-                              );
-                              const resultJ: number = Math.ceil(
-                                (minCoef * inverterQty) / array[j]
-                              );
-
-                              if (resultI === resultJ && array[j] < value) {
-                                return false; // Exclude value if it has the same result as another
-                              }
-                            }
-                          }
+                          
 
                           if (
                             !isInverterGridUnderLimit(
@@ -296,20 +257,7 @@ export default function InvertersList({ printData }: Props) {
                         ...new Set(
                           [Math.ceil(minCoef), 1, 2, 4, 6, 8, 10].filter(
                             (value, index, array) => {
-                              for (let j = 0; j < array.length; j++) {
-                                if (index !== j) {
-                                  const resultI: number = Math.ceil(
-                                    (minCoef * inverterQty) / value
-                                  );
-                                  const resultJ: number = Math.ceil(
-                                    (minCoef * inverterQty) / array[j]
-                                  );
-
-                                  if (resultI === resultJ && array[j] < value) {
-                                    return false; // Exclude value if it has the same result as another
-                                  }
-                                }
-                              }
+                              
 
                               if (
                                 !isInverterGridUnderLimit(
@@ -330,22 +278,7 @@ export default function InvertersList({ printData }: Props) {
                     {[...new Set([Math.ceil(minCoef), 1, 2, 4, 6, 8, 10])]
                       .sort((a, b) => a - b)
                       .filter((value, index, array) => {
-                        for (let j = 0; j < array.length; j++) {
-                          if (index !== j) {
-                            const resultI: number = Math.ceil(
-                              (minCoef * inverterQty) / value
-                            );
-                            const resultJ: number = Math.ceil(
-                              (minCoef * inverterQty) / array[j]
-                            );
-
-                            if (resultI === resultJ && array[j] < value) {
-                              // console.log(value + 'same');
-                              return false; // Exclude value if it has the same result as another
-                            }
-                          }
-                        }
-
+                        
                         if (
                           !isInverterGridUnderLimit(
                             grid as any,
@@ -369,14 +302,14 @@ export default function InvertersList({ printData }: Props) {
                           );
                         }
 
-                        if (
-                          Math.ceil((minCoef * inverterQty) / value) ===
-                            inverterQty &&
-                          value !== minCoef
-                        )
-                          return;
+                        // if (
+                        //   Math.ceil((minCoef * inverterQty) / value) ===
+                        //     inverterQty &&
+                        //   value !== minCoef
+                        // )
+                        //   return;
 
-                        if ((minCoef * inverterQty) / value < 1) return;
+                        // if ((minCoef * inverterQty) / value < 1) return;
                         return (
                           <SelectItem key={`${value}-horas`} value={`${value}`}>
                             {value} horas

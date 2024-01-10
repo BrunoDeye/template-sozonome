@@ -13,8 +13,8 @@ const DashBoardLayout = (props: Props) => {
   const t = useTranslations('Index')
 
   return (
-    <div className="grid min-h-[60vh] w-[90vw] 2xl:w-[80vw] grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 items-center justify-center gap-20 sm:gap-0">
-      <div className="min-h-[15vh] lg:col-span-1 2xl:col-span-2 space-y-3">
+    <div className="grid min-h-[60vh] w-[90vw] 2xl:w-[80vw] grid-cols-1 lg:grid-cols-2 2xl:grid-cols-5 items-center justify-center gap-20 sm:gap-0">
+      <div className="min-h-[15vh] lg:col-span-1 2xl:col-span-3 space-y-3">
         <div className="mx-auto mt-10 flex items-center justify-center gap-2">
           <div className="relative">
             <Image
@@ -44,7 +44,7 @@ const DashBoardLayout = (props: Props) => {
           {t('subtitle')}
         </p>
       </div>
-      <div className="flex mx-auto w-full gap-8 col-span-1 min-h-[60vh] flex-col items-center justify-center rounded-lg bg-white/40 py-10 px-5 sm:p-10 text-center shadow-lg backdrop-blur-3xl dark:bg-blue-200/10 dark:shadow-blue-400 sm:m-3 sm:w-[70vw] sm:mx-auto sm:px-20 lg:w-full">
+      <div className="flex mx-auto w-full gap-8 col-span-1 2xl:col-span-2 min-h-[60vh] flex-col items-center justify-center rounded-lg bg-white/40 py-10 px-5 sm:p-10 text-center shadow-lg backdrop-blur-3xl dark:bg-blue-200/10 dark:shadow-blue-400 sm:m-3 sm:w-[70vw] sm:mx-auto sm:px-20 lg:w-full">
         {props.children}
       </div>
     </div>

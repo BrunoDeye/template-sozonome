@@ -41,7 +41,7 @@ const Header = () => {
             Editando Cálculo: {printData?.title}
           </h5>
         </span>: null}
-        <div className="ml-auto flex items-center gap-0 sm:gap-8">
+        <div className="ml-auto flex items-center gap-2 sm:gap-8">
           <div className="invisible hidden sm:visible sm:block">
             <LocaleSwitcher />
           </div>

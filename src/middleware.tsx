@@ -32,7 +32,7 @@ export default async function middleware(req: NextRequest) {
 
   // console.log(req)
   const publicPathnameRegex = RegExp(
-    `^\/(${locales.join("|")})\/auth\/(login|cadastro)|\/auth\/(login|email|mudar-senha)$`,
+    `^\/(${locales.join("|")})\/auth\/(login|cadastro|termos-de-uso)|\/auth\/(login|email|mudar-senha)|\/(${locales.join("|")})\/(termos-de-uso|grid|devices|result|baterias)|\/(${locales.join("|")})(?!\/)|\/(?!\/)$`,
     'i'
   );
   const isPublicPage = publicPathnameRegex.test(req.nextUrl.pathname);
@@ -47,4 +47,5 @@ export default async function middleware(req: NextRequest) {
 export const config = {
   // matcher: ['/', '/auth/(email|login)', '/(en|it-IT|pt-BR|es-ES)/:path*']
   matcher: ['/((?!api|_next|.*\\..*).*)']
+  // matcher: ['/(en|it-IT|pt-BR|es-ES)/:path*' ,'/']
 };

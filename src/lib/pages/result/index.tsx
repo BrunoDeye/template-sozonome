@@ -7,6 +7,7 @@ import { getBatteriesQueryFn } from '@/services/QueryFns/batteryQueryFns';
 import { getAllInOnesQueryFn } from '@/services/QueryFns/allInOneQueryFns';
 import dynamic from 'next/dynamic';
 import ResultPage from '@/lib/components/structures/result/ResultPage';
+import { headers } from 'next/headers';
 
 const Body = dynamic(() => import('@/lib/components/structures/result/Body'));
 
@@ -20,7 +21,7 @@ const Result: NextPage = async () => {
 
   return (
     <ReactQueryHydrate state={dehydratedState}>
-      <ResultPage />
+      <ResultPage headers={headers()} />
     </ReactQueryHydrate>
   );
 };

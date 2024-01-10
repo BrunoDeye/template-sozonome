@@ -166,123 +166,131 @@ function RegisterPageContent({ setAuthPage }: Props) {
           onSubmit={form.handleSubmit(onSubmit)}
           className="w-full space-y-6 text-left"
         >
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel htmlFor="name">{t('name')}</FormLabel>
-                <FormControl>
-                  <Input
-                    autoComplete="on"
-                    id="name"
-                    type={'text'}
-                    required
-                    aria-required
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel htmlFor="email">{t('email')}</FormLabel>
-                <FormControl>
-                  <Input
-                    autoComplete="on"
-                    id="email"
-                    type={'email'}
-                    required
-                    aria-required
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="phoneNumber"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel htmlFor="phoneNumber">{t('phone')}</FormLabel>
-                <div className="flex gap-3 max-[340px]:flex-col">
-                  <div className="">
-                    <CountrySelect
-                      labels={br}
-                      value={country}
-                      onChange={setCountry}
+          <div className="w-full max-lg:space-y-6 lg:grid lg:grid-cols-2 lg:gap-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="name">{t('name')}</FormLabel>
+                  <FormControl>
+                    <Input
+                      autoComplete="on"
+                      id="name"
+                      type={'text'}
+                      required
+                      aria-required
+                      {...field}
                     />
-                  </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-                  <div className="w-full">
-                    <FormControl>
-                      <PhoneInput
-                        autoComplete="on"
-                        id="phoneNumber"
-                        type={'text'}
-                        inputComponent={Input}
-                        required
-                        country={country as any}
-                        aria-required
-                        {...field}
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="email">{t('email')}</FormLabel>
+                  <FormControl>
+                    <Input
+                      autoComplete="on"
+                      id="email"
+                      type={'email'}
+                      required
+                      aria-required
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className='lg:col-span-full'>
+                <FormField
+              control={form.control}
+              name="phoneNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="phoneNumber">{t('phone')}</FormLabel>
+                  <div className="flex gap-3 max-[340px]:flex-col">
+                    <div className="">
+                      <CountrySelect
+                        labels={br}
+                        value={country}
+                        onChange={setCountry}
                       />
-                    </FormControl>
+                    </div>
+
+                    <div className="w-full">
+                      <FormControl>
+                        <PhoneInput
+                          autoComplete="on"
+                          id="phoneNumber"
+                          type={'text'}
+                          inputComponent={Input}
+                          required
+                          country={country as any}
+                          aria-required
+                          {...field}
+                        />
+                      </FormControl>
+                    </div>
                   </div>
-                </div>
 
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            </div>
+          
 
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel htmlFor="password">{t('password')}</FormLabel>
-                <FormControl>
-                  <Input
-                    autoComplete="off"
-                    id="password"
-                    type={'password'}
-                    required
-                    aria-required
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel htmlFor="confirmPassword">{t('confirm')}</FormLabel>
-                <FormControl>
-                  <Input
-                    autoComplete="off"
-                    id="confirmPassword"
-                    type={'password'}
-                    required
-                    aria-required
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="password">{t('password')}</FormLabel>
+                  <FormControl>
+                    <Input
+                      autoComplete="off"
+                      id="password"
+                      type={'password'}
+                      required
+                      aria-required
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="confirmPassword">
+                    {t('confirm')}
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      autoComplete="off"
+                      id="confirmPassword"
+                      type={'password'}
+                      required
+                      aria-required
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
           <div>
             <TermsDialog
               open={openTerms}

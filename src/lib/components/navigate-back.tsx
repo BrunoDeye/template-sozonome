@@ -75,7 +75,7 @@ export function NavigateBack() {
     }
   }, [tempLocale]);
   const { status } = useSession()
-  return pathname === `/${locale}` || pathname === '/' || status !== 'authenticated' ? (
+  return pathname === `/${locale}` || pathname === '/' ? (
     <div>&nbsp;</div>
   ) : (
     <Button

@@ -48,27 +48,27 @@ export default function LoginDialog({
   }, [isLoading]);
 
   return (
-    <Dialog modal open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="flex  flex-col items-center justify-around sm:max-w-[525px]">
-        {(isLoading || loadedStatus === '') && !isLoaded ? (
+        {!isLoaded ? (
           <DialogHeader className="">
             <DialogTitle className="mb-8 text-center">
               Processando...
             </DialogTitle>
 
-            <DialogDescription className="my-auto text-justify">
+            <DialogDescription className="my-auto text-center">
               <p className="m-5">
                 <LoadingDeye />
               </p>
             </DialogDescription>
           </DialogHeader>
         ) : loadedStatus === 'error' ? (
-          <DialogHeader className="">
+          <DialogHeader className="min-h-[100px]">
             <DialogTitle className="mb-8 text-center">
               Algo deu Errado
             </DialogTitle>
 
-            <DialogDescription className="text-justify">
+            <DialogDescription className="text-center">
               <p className="mb-5">{alert.message}</p>
             </DialogDescription>
           </DialogHeader>

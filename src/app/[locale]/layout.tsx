@@ -1,20 +1,21 @@
 import type { Metadata } from 'next';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { notFound } from 'next/navigation';
-import { Viewport } from 'next'
+import { Viewport } from 'next';
 import dynamic from 'next/dynamic';
 import { headers } from 'next/headers';
 // import Layout from '@/lib/components/layout';
 import { fontSans } from '@/lib/styles/fonts';
 import { cn } from '@/lib/utils';
 import { Analytics } from '@vercel/analytics/react';
-import {unstable_setRequestLocale} from 'next-intl/server';
+import { unstable_setRequestLocale } from 'next-intl/server';
 import '../../lib/styles/globals.css';
 // import Providers from '@/services/ReactQuery/Providers.client';
 import { Suspense } from 'react';
 import Loading from './loading';
 import SessionProviders from '@/lib/components/providers/SessionProvider';
-import {useLocale} from 'next-intl';
+import { useLocale } from 'next-intl';
+
 const Layout = dynamic(() => import('@/lib/components/layout'), {
   loading: () => <Loading />,
 });
@@ -50,13 +51,13 @@ export const viewport: Viewport = {
   themeColor: '#FFFFFF',
   width: 'device-width',
   initialScale: 1,
-}
+};
 
 const locales = ['en', 'it-IT', 'pt-BR', 'es-ES'];
 const timeZone = 'America/Sao_Paulo';
- 
+
 export function generateStaticParams() {
-  return locales.map((locale) => ({locale}));
+  return locales.map((locale) => ({ locale }));
 }
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -65,7 +66,7 @@ interface RootLayoutProps {
 
 const RootLayout = async ({
   children,
-  params: { locale},
+  params: { locale },
 }: RootLayoutProps) => {
   let messages;
   try {
@@ -82,21 +83,25 @@ const RootLayout = async ({
           fontSans.variable
         )}
       >
-        <NextIntlClientProvider timeZone={timeZone} locale={locale} messages={messages}>
-          <SessionProviders>
-            <Providers>
-              <div id="__next">
-                <Layout>
-                  <Suspense fallback={<Loading />}>
-                    <div className="flex-1">
-                      {children}
-                      <Analytics />
-                    </div>
-                  </Suspense>
-                </Layout>
-              </div>
-            </Providers>
-          </SessionProviders>
+        <NextIntlClientProvider
+          timeZone={timeZone}
+          locale={locale}
+          messages={messages}
+        >
+            <SessionProviders>
+              <Providers>
+                <div id="__next">
+                  <Layout>
+                    <Suspense fallback={<Loading />}>
+                      <div className="flex-1">
+                        {children}
+                        <Analytics />
+                      </div>
+                    </Suspense>
+                  </Layout>
+                </div>
+              </Providers>
+            </SessionProviders>
         </NextIntlClientProvider>
       </body>
     </html>

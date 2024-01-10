@@ -2,6 +2,8 @@
 import {
   CalculatorIcon,
   Home,
+  Lock,
+  LogIn,
   LogOut,
   User,
   UserCircle2Icon,
@@ -18,32 +20,40 @@ import {
   DropdownMenuTrigger,
 } from '@/lib/components/ui/dropdown-menu';
 import { signOut, useSession } from 'next-auth/react';
-import { Link, usePathname } from '@/navigation';
+import { Link, usePathname, useRouter } from '@/navigation';
 import { getFirstAndLastWords } from '../../../utils/functions';
 import LoadingDeye from '../Loading';
 import { useDataStore } from '@/store/data';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
 const { persist } = useDataStore;
 
 export default function ProfileButton() {
   const { data: session, status } = useSession();
-  const t = useTranslations('Profile')
+  const t = useTranslations('Profile');
   const pathname = usePathname();
+  const [href, setHref] = useState("");
+  const [client, setClient] = useState(false);
+  const router = useRouter()
   const {
     actions: { reset },
   } = useDataStore();
-  if (status === 'loading')
-    return (
-      <div className="min-w-[205px] scale-50">
-        <LoadingDeye />
-      </div>
-    );
-  if (status !== 'authenticated') return null;
-  // console.log(session)
+
   const handleLocalStorage = () => {
     localStorage.removeItem('my-calculation');
   };
+
+  useEffect(() => {
+    setClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (window) {
+      setHref(window.location.origin);
+    }
+  }, [client]);
+
 
   const [savedDevicesList, setSavedDevicesList, clearLocalStorage] =
     useLocalStorage('devices-list');
@@ -52,8 +62,79 @@ export default function ProfileButton() {
     persist.clearStorage();
     handleLocalStorage();
     reset();
-    signOut();
+    // router.push("/")
+    signOut({ callbackUrl: `${href}`});
   }
+  // console.log(href)
+  if (pathname.startsWith('/auth')) return null;
+  if (status === 'loading')
+    return (
+      <div className="min-w-[205px] scale-50">
+        <LoadingDeye />
+      </div>
+    );
+
+  if (status !== 'authenticated')
+    return (
+      // <div className="flex h-full gap-3">
+      // <div className="group relative inline-flex">
+      //   <div className="transitiona-all animate-tilt absolute -inset-[0.005rem] rounded-xl bg-gradient-to-r from-[#ff4444] via-[#ff4498] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-3 group-hover:opacity-70 group-hover:duration-200 dark:from-[#44BCFF] dark:via-[#448fff] dark:to-[#6c5eff] dark:group-hover:opacity-100"></div>
+      //   <Button asChild variant="outlinePurpleToBlue">
+      //     <Link href="/auth/login">
+      //       <span className="relative rounded-md bg-white/90 !px-5 !py-3 transition-all duration-75 ease-in group-hover:bg-white group-hover:bg-opacity-0 dark:bg-gray-900/80  group-hover:dark:bg-gray-900 dark:group-hover:bg-opacity-0">
+      //         Fazer login
+      //       </span>
+      //     </Link>
+      //   </Button>
+      // </div>
+      // <div className="group relative inline-flex">
+      //   <div className="transitiona-all animate-tilt absolute -inset-[0.005rem] rounded-xl bg-gradient-to-r from-[#ff4444] via-[#ff4498] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-3 group-hover:opacity-70 group-hover:duration-200 dark:from-[#44BCFF] dark:via-[#448fff] dark:to-[#6c5eff] dark:group-hover:opacity-100"></div>
+      //   <Button asChild variant="purpleToBlue">
+      //     <Link href="/auth/login">
+
+      //         Criar conta
+
+      //     </Link>
+      //   </Button>
+      // </div>
+      // </div>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="link" className="rounded-full">
+            <LogIn strokeWidth="0.08rem" className="h-7 w-7" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="p-5">
+          <DropdownMenuLabel className='text-center'>
+            Deseja fazer login ou se cadastrar?
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator className='mb-5' />
+          <DropdownMenuGroup className='flex gap-5'>
+            <DropdownMenuItem  asChild>
+              <div className="group relative inline-flex">
+                <div className="transitiona-all   animate-tilt absolute -inset-[0.001rem] rounded-xl bg-gradient-to-r from-zinc-300 via-slate-500 to-stone-300 opacity-70 blur-lg duration-1000 group-hover:-inset-[3px] dark:group-hover:-inset-3 group-hover:from-zinc-300  group-hover:via-slate-500 group-hover:to-stone-300  group-hover:opacity-100 group-hover:duration-200 dark:from-[#44BCFF] dark:via-[#448fff] dark:to-[#6c5eff] dark:group-hover:from-[#44BCFF] dark:group-hover:via-[#448fff] dark:group-hover:to-[#6c5eff]  dark:group-hover:opacity-100 backdrop-blur-lg"></div>
+                <Button asChild variant="loginButton">
+                  <Link href="/auth/login">
+                    <span className="relative rounded-md bg-white/90 !px-5 !py-3 transition-all duration-75 ease-in group-hover:bg-white group-hover:bg-opacity-0 dark:bg-gray-900/80  group-hover:dark:bg-gray-900 dark:group-hover:bg-opacity-0">
+                      Fazer login
+                    </span>
+                  </Link>
+                </Button>
+              </div>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <div className="group relative inline-flex">
+                <div className="transitiona-all  animate-tilt absolute -inset-[0.001rem] rounded-xl bg-gradient-to-r from-zinc-300 via-slate-500 to-stone-300 opacity-70 blur-lg duration-1000 group-hover:-inset-[3px] dark:group-hover:-inset-3 group-hover:from-zinc-300  group-hover:via-slate-500 group-hover:to-stone-300 group-hover:opacity-100 group-hover:duration-200 dark:from-[#44BCFF] dark:via-[#448fff] dark:to-[#6c5eff] dark:group-hover:from-[#44BCFF] dark:group-hover:via-[#448fff] dark:group-hover:to-[#6c5eff] dark:group-hover:opacity-100 backdrop-blur-lg"></div>
+                <Button asChild variant="registerButton">
+                  <Link href="/auth/login?page=cadastro">Criar conta</Link>
+                </Button>
+              </div>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  // console.log(session)
 
   return (
     <DropdownMenu>
