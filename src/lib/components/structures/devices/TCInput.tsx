@@ -13,6 +13,28 @@ function TCInput() {
     actions: { addFC },
   } = useDataStore();
 
+
+  function formatInput(input: any) {
+    // Ensure the input value is a number
+    let value = parseInt(input);
+
+    // Check if the entered value is within the range 1 to 99
+    if (isNaN(value) || value < 1) {
+      
+      return '';
+    }
+
+    if (value > 99) {
+      
+      return '99';
+    }
+
+
+    // Pad the number with leading zero if necessary
+    return value.toLocaleString('en-US', {minimumIntegerDigits: 2 });
+  }
+
+  // console.log(FC)
   return (
     <div className="grid w-full items-center  space-y-[0.4rem]">
       <div className='relative mx-0 sm:mx-auto mb-6'>
@@ -27,12 +49,10 @@ function TCInput() {
       <Input
         id="FC"
         placeholder="0.94"
-        value={FC}
+        value={FC.toLocaleString('en-US', {minimumIntegerDigits: 2 })}
         onChange={(e) =>
           addFC(
-            parseFloat(e.target.value) > 100
-              ? 99
-              : parseFloat(e.target.value.replace(/0+$/, '')) || 0
+            +(formatInput(e.target.value))
           )
         }
         className="block !appearance-none pl-[25px] focus:border-none sm:mx-auto sm:w-auto"
