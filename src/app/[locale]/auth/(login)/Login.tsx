@@ -57,6 +57,10 @@ const LoginPageContent = ({ setAuthPage }: Props) => {
     setOpen(true);
     startTransition(async () => {
     try {
+      const isEdit = localStorage.getItem('my-calculation');
+      if (isEdit !== null) {
+        localStorage.removeItem('my-calculation');
+      }
       const result = await signIn('credentials', {
         ...loginData,
         redirect: false,

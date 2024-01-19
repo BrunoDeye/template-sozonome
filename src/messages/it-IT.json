@@ -79,15 +79,19 @@
     "typeAtr": "Tipo",
     "powerAtr": "Potenza[W]",
     "qntAtr": "Quantità",
-    "coefAlert": "Seleziona il tempo massimo di carica e scarica."
-,
+    "coefAlert": "Seleziona il tempo massimo di carica",
     "h": " ora",
     "hs": " ore",
     "min": " minuto",
     "mins": " minuti",
     "and": "e",
     "AlertOtherInverters": "Il numero massimo consentito di inverter in parallelo per questo modello {inverterModel} è di {inverterModelLimit} unità.",
-"AlertInverter": "Il numero massimo consentito di inverter in parallelo per questo modello {inverterModel} è di {inverterModelLimit} unità. Si consiglia di ricalcolare o considerare una modifica nella configurazione della rete."
+    "AlertInverter": "Il numero massimo consentito di inverter in parallelo per questo modello {inverterModel} è di {inverterModelLimit} unità. Si consiglia di ricalcolare o considerare una modifica nella configurazione della rete.",
+    "AlertTitle": "ATTENZIONE",
+    "RemakeButton": "Ricalcola",
+"ChangeGridButton": "Cambia Griglia",
+"coefMessage": "Tempo massimo di ricarica della batteria: {selectedCoef, plural, =0 {0 ora} =1 {1 ora} other {# ore}}"
+
 
   },
   "Grids": {
@@ -118,9 +122,8 @@
   },
 
   "Coef": {
-    "description": "Il tempo massimo di carica e scarica è una stima approssimativa e può variare in base alle impostazioni di carica e scarica dell'inverter, nonché alle particolarità di ciascun sistema. Modificando il valore, cambierà anche la quantità di inverter."
-
-  },
+    "description": "Il tempo massimo di ricarica è una stima approssimativa e può variare in base alle impostazioni di carica dell'inverter, nonché alle particolarità di ogni sistema. Modificando il valore, la quantità di inverter potrebbe finire per essere modificata."
+},
   "Login": {
     "enter": "Accedi",
     "email": "Email",
@@ -268,5 +271,38 @@
     "errorMsg": "Ops, qualcosa è andato storto...",
     "errorPassword": "La nuova password deve contenere almeno 6 caratteri.",
     "errorConfirm": "Le password non coincidono."
-  }
+  },
+  "LoginButtons": {
+    "title": "Vuoi effettuare il login o registrarti?",
+    "login": "Accedi",
+    "register": "Registrati"
+  },
+  "HVDescription": {
+    "title": "Informazioni Extra:",
+    
+    "combinerBox": "(OPZIONALE) Una unità è utilizzata per ogni 4 rack di batterie; funge da scatola di giunzione. Lo scopo di questo dispositivo è unire le batterie, collegandole a un'unica entrata dell'inverter.",
+    "canBridge": "(OPZIONALE) Solo quando la comunicazione tra inverter e batteria e tra batterie supera i 50m.",
+    "parallelLabel": "Parallelo",
+    "parallel": "Si noti che ogni inverter collegato in parallelo dovrebbe avere la stessa quantità di batterie. Ad esempio, per 2 inverter paralleli da 50k, ciascun inverter avrà una batteria di 12 unità.",
+    "BMU": "(ESSENZIALE) Un'unità per un massimo di 12 batterie."
+},
+"mobileTable": {
+  "title": "Calcoli",
+  "tooltipTitle": "Informazioni",
+  "description": "Descrizione",
+  "inverter": "Inverter",
+  "battery": "Batteria",
+  "power": "Potenza",
+  "consumption": "Consumo",
+  "actions": "Azioni",
+  "print": "Stampa",
+  "edit": "Modifica",
+  "del": "Elimina"
+},
+"Header": {
+  "editingTitle": "Modifica Calcolo:"
+},
+"EmptyTable": {
+  "content": "Nessun calcolo effettuato."
+}
 }

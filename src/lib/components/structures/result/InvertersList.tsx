@@ -147,7 +147,7 @@ export default function InvertersList({ printData }: Props) {
     </span>
   ) : (
     <div className="flex flex-col gap-6">
-      <p className="print-show -mt-6 hidden px-4 text-center text-lg">{`Tempo de carregamento máximo das baterias: ${selectedCoef} horas`}</p>
+      <p className="print-show -mt-6 hidden px-4 text-center text-lg">{t('coefMessage', { selectedCoef })}</p>
       <div>
         <h4 className="margin-print-fixer text-center text-xl font-bold tracking-tight sm:text-2xl">
           {t('recommendationTitle')}
@@ -297,7 +297,7 @@ export default function InvertersList({ printData }: Props) {
                               defaultChecked
                               value={`${value}`}
                             >
-                              {`${value} ${value === 1 ? 'hora' : 'horas'}`}
+                              {`${value}${value === 1 ? t('h') : t('hs')}`}
                             </SelectItem>
                           );
                         }
@@ -312,7 +312,7 @@ export default function InvertersList({ printData }: Props) {
                         // if ((minCoef * inverterQty) / value < 1) return;
                         return (
                           <SelectItem key={`${value}-horas`} value={`${value}`}>
-                            {value} horas
+                            {`${value}${value === 1 ? t('h') : t('hs')}`}
                           </SelectItem>
                         );
                       })

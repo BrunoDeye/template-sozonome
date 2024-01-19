@@ -19,6 +19,7 @@ import {
 } from '@/lib/components/ui/table2';
 import CalcsToggleTable from './CalcsToggleTable';
 import React, { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -33,7 +34,7 @@ export default function CalcsTable<TData, TValue>({
   data,
   headers
 }: DataTableProps<TData, TValue>) {
-  
+  const t = useTranslations("EmptyTable")
   const [sorting, setSorting] = useState<SortingState>([]);
   const table = useReactTable({
     data,
@@ -105,7 +106,7 @@ export default function CalcsTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  Nenhum cálculo ainda.
+                  {t("content")}
                 </TableCell>
               </TableRow>
             )}

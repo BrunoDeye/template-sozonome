@@ -200,6 +200,21 @@ const EditProfile:NextPage = () => {
             />
           </div>
           {fieldEdit.name.isEdit ? (
+            <div className=' max-sm:w-full flex gap-2 justify-between'>
+              <Button
+                  variant="gradientSky"
+                  className="w-full sm:min-w-[100px] sm:max-w-[100px]"
+                  onClick={() =>
+                    setFieldEdit({
+                      phone: {
+                        isEdit: fieldEdit.phone.isEdit,
+                      },
+                      name: { isEdit: false },
+                    })
+                  }
+                >
+                  {t('cancelButton')}
+                </Button>
             <Button
               variant="gradientDarkBlue"
               className="w-full  sm:min-w-[100px] sm:max-w-[100px]"
@@ -207,7 +222,9 @@ const EditProfile:NextPage = () => {
             >
               {t('editButton')}
             </Button>
+            </div>
           ) : (
+
             <Button
               variant="link"
               onClick={() =>
@@ -244,6 +261,21 @@ const EditProfile:NextPage = () => {
             />
           </div>
           {fieldEdit.phone.isEdit ? (
+            <div className=' max-sm:w-full flex gap-2 justify-between'>
+              <Button
+                  variant="gradientSky"
+                  className="w-full sm:min-w-[100px] sm:max-w-[100px]"
+                  onClick={() =>
+                    setFieldEdit({
+                      name: {
+                        isEdit: fieldEdit.name.isEdit,
+                      },
+                      phone: { isEdit: false },
+                    })
+                  }
+                >
+                  {t('cancelButton')}
+                </Button>
             <Button
               variant="gradientDarkBlue"
               className="w-full sm:min-w-[100px] sm:max-w-[100px]"
@@ -251,6 +283,7 @@ const EditProfile:NextPage = () => {
             >
               {t('editButton')}
             </Button>
+              </div>
           ) : (
             <Button
               variant="link"

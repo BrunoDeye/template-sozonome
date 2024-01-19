@@ -23,6 +23,7 @@ import {
   LucideInfo,
 } from 'lucide-react';
 import CoefDescription from './CoefDescription';
+import { useTranslations } from 'next-intl';
 
 const tableVariants = cva(
   'flex flex-wrap items-center justify-center px-2 py-2 sm:flex-nowrap',
@@ -98,7 +99,7 @@ export default function Tables({
 }: TableProps) {
   const [loaded, setLoaded] = useState(false);
   const [isClient, setIsClient] = useState(false);
-
+  const t = useTranslations("HVDescription")
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -129,25 +130,25 @@ export default function Tables({
                   height={18}
                   width={18}
                 />
-                <span className=" whitespace-nowrap">Informações extras:</span>
+                <span className=" whitespace-nowrap">{t("title")}</span>
               </div>
               
               {}{' '}
               <div className=" flex flex-col gap-3">
               <div className="flex items-baseline mr-auto">
-                  <CoefDescription message="(OPCIONAL) 1x para cada 4 racks de baterias, basicamente tem que ser feito um barramento, este equipamento apenas irá facilitar" />
+                  <CoefDescription message={t("combinerBox")} />
                   <span className="ml-2 leading-none  whitespace-nowrap">Combiner Box</span>
                 </div>
                 <div className="flex items-baseline mr-auto">
-                  <CoefDescription message="(OPCIONAL) Apenas quando a comunicação entre inversor-bateria e bateria-bateria for maior que 50m" />
+                  <CoefDescription message={t("canBridge")} />
                   <span className="ml-2 leading-none whitespace-nowrap">Can Bridge</span>
                 </div>
                 <div className="flex items-baseline mr-auto">
-                  <CoefDescription message="Saiba que cada inversor que está conectado em paralelo deverá ter a mesma quantidade de baterias, exemplo 2 inversores de 50k, em cada inversor haverá 1 banco de baterias de 12 unidades" />
-                  <span className="ml-2 leading-none  whitespace-nowrap">Paralelo</span>
+                  <CoefDescription message={t("parallel")} />
+                  <span className="ml-2 leading-none  whitespace-nowrap">{t("parallelLabel")}</span>
                 </div>
                 <div className="flex items-baseline mr-auto">
-                  <CoefDescription message="(ESSENCIAL) 1x para até 12 baterias" />
+                  <CoefDescription message={t("BMU")} />
                   <span className="ml-2 leading-none  whitespace-nowrap">BMU</span>
                 </div>
               </div>

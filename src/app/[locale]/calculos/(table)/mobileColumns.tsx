@@ -20,17 +20,24 @@ import { editCalc, printExternal } from './columns';
 import { server } from '@/url';
 import { DeleteDialog } from './delete/DeleteDialog';
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 export const mobileColumns: ColumnDef<Calculation>[] = [
-
   {
     accessorKey: 'description',
     id: 'Informações',
-    header: () => <div className='absolute mx-auto max-[330px]:w-[230px] w-[280px] top-5 left-0 bottom-0 right-0'>Cálculos</div>,
+    header: () => {
+      const t = useTranslations('mobileTable');
+      return (
+        <div className="absolute bottom-0 left-0 right-0 top-5 mx-auto w-[280px] max-[330px]:w-[230px]">
+          {t('title')}
+        </div>
+      );
+    },
     cell: ({ row, table, additionalProp }) => {
-      const data = row.original
-      return (<DataTooltip data={data} />)
-    }
+      const data = row.original;
+      return <DataTooltip data={data} />;
+    },
   },
 
   {
@@ -43,7 +50,7 @@ export const mobileColumns: ColumnDef<Calculation>[] = [
     cell: ({ row, additionalProp }) => {
       const calculations = row.original;
       const [open, setOpen] = useState(false);
-
+      const t = useTranslations('mobileTable');
       return (
         <>
           <DeleteDialog
@@ -60,20 +67,20 @@ export const mobileColumns: ColumnDef<Calculation>[] = [
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Ações</DropdownMenuLabel>
+              <DropdownMenuLabel>{t('actions')}</DropdownMenuLabel>
               <DropdownMenuItem
                 onClick={() => {
                   printExternal(server + '/result?print=true', calculations);
                 }}
               >
-                Imprimir
+                {t('print')}
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link
                   onClick={() => editCalc(calculations)}
                   href={{ pathname: '/devices', query: { edit: 'true' } }}
                 >
-                  Editar
+                  {t('edit')}
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
@@ -82,7 +89,7 @@ export const mobileColumns: ColumnDef<Calculation>[] = [
                 onClick={() => setOpen(true)}
                 className="text-red-500"
               >
-                Deletar
+                {t('del')}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

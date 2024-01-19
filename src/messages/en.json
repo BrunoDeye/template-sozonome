@@ -78,7 +78,7 @@
     "typeAtr": "Type",
     "powerAtr": "Power[W]",
     "qntAtr": "Quantity",
-    "coefAlert": "Select the maximum charging and discharging time.",
+    "coefAlert": "Select the maximum charging time",
 
     "h": " hour",
     "hs": " hours",
@@ -86,7 +86,11 @@
     "mins": " minutes",
     "and": "and",
     "AlertOtherInverters": "The maximum allowed number of parallel inverters for the {inverterModel} model is {inverterModelLimit} units.",
-    "AlertInverter": "The maximum allowed number of parallel inverters for the {inverterModel} model is {inverterModelLimit} units. It is recommended to recalculate or consider a change in the network configuration."
+    "AlertInverter": "The maximum allowed number of parallel inverters for the {inverterModel} model is {inverterModelLimit} units. It is recommended to recalculate or consider a change in the network configuration.",
+    "AlertTitle": "ATTENTION",
+    "RemakeButton": "Remake Calculation",
+"ChangeGridButton": "Change Grid",
+"coefMessage": "Maximum battery charging time: {selectedCoef, plural, =0 {0 hour} =1 {1 hour} other {# hours}}"
 
   },
   "Grids": {
@@ -116,9 +120,8 @@
     "label1": "Available Energy[kWh]"
   },
   "Coef": {
-    "description": "The maximum charging and discharging time is an approximate estimate and may vary based on the inverter's charging and discharging settings, as well as the peculiarities of each system. Changing the value will also affect the number of inverters."
-
-  },
+    "description": "The maximum charging time is an approximate estimate and may vary depending on the inverter's load settings, as well as the specifics of each system. Modifying the value may also end up altering the number of inverters."
+},
   "Login": {
     "enter": "Enter",
     "email": "Email",
@@ -266,5 +269,39 @@
     "errorMsg": "Oops, something went wrong...",
     "errorPassword": "New password must be at least 6 characters.",
     "errorConfirm": "Passwords do not match."
-  }
+  },
+  
+"LoginButtons": {
+  "title": "Do you want to log in or register?",
+  "login": "Log In",
+  "register": "Register"
+  },
+  "HVDescription": {
+    "title": "Extra Information:",
+    
+    "combinerBox": "(OPTIONAL) One unit is used for every 4 battery racks; it serves as a junction box. The purpose of this equipment is to combine the batteries, connecting them to a single input of the inverter.",
+    "canBridge": "(OPTIONAL) Only when communication between inverter-battery and battery-battery exceeds 50m.",
+    "parallelLabel": "Parallel",
+    "parallel": "Note that each inverter connected in parallel should have the same number of batteries. For example, for 2 parallel-connected 50k inverters, each inverter will have a battery bank of 12 units.",
+    "BMU": "(ESSENTIAL) One unit for up to 12 batteries."
+},
+"mobileTable": {
+  "title": "Calculations",
+  "tooltipTitle": "Information",
+  "description": "Description",
+  "inverter": "Inverter",
+  "battery": "Battery",
+  "power": "Power",
+  "consumption": "Consumption",
+  "actions": "Actions",
+  "print": "Print",
+  "edit": "Edit",
+  "del": "Delete"
+},
+"Header": {
+  "editingTitle": "Editing Calculation:"
+},
+"EmptyTable": {
+  "content": "No calculations yet."
+}
 }

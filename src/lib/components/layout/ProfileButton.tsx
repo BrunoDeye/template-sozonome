@@ -1,10 +1,13 @@
 'use client';
 import {
+  BookLockIcon,
   CalculatorIcon,
   Home,
   Lock,
   LogIn,
+  LogInIcon,
   LogOut,
+  LucideBookKey,
   User,
   UserCircle2Icon,
 } from 'lucide-react';
@@ -27,11 +30,14 @@ import { useDataStore } from '@/store/data';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
+import { LockClosedIcon } from '@radix-ui/react-icons';
+import LogInIconSvg from "./LogInIcon"
 const { persist } = useDataStore;
 
 export default function ProfileButton() {
   const { data: session, status } = useSession();
   const t = useTranslations('Profile');
+  const tL = useTranslations('LoginButtons')
   const pathname = usePathname();
   const [href, setHref] = useState("");
   const [client, setClient] = useState(false);
@@ -100,33 +106,33 @@ export default function ProfileButton() {
       // </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="link" className="rounded-full">
-            <LogIn strokeWidth="0.08rem" className="h-7 w-7" />
+          <Button variant="link" className="rounded-full shadow-md hover:shadow-lg hover:-translate-y-[1px] hover:-translate-x-[1px] hover:shadow-red-200  shadow-red-200  dark:hover:shadow-sky-300 dark:shadow-sky-300">
+            <LogInIconSvg strokeWidth="0.08rem" className="max-h-7 max-w-7" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="p-5">
           <DropdownMenuLabel className='text-center'>
-            Deseja fazer login ou se cadastrar?
+           {tL("title")}
           </DropdownMenuLabel>
           <DropdownMenuSeparator className='mb-5' />
           <DropdownMenuGroup className='flex gap-5'>
             <DropdownMenuItem  asChild>
-              <div className="group relative inline-flex">
-                <div className="transitiona-all   animate-tilt absolute -inset-[0.001rem] rounded-xl bg-gradient-to-r from-zinc-300 via-slate-500 to-stone-300 opacity-70 blur-lg duration-1000 group-hover:-inset-[3px] dark:group-hover:-inset-3 group-hover:from-zinc-300  group-hover:via-slate-500 group-hover:to-stone-300  group-hover:opacity-100 group-hover:duration-200 dark:from-[#44BCFF] dark:via-[#448fff] dark:to-[#6c5eff] dark:group-hover:from-[#44BCFF] dark:group-hover:via-[#448fff] dark:group-hover:to-[#6c5eff]  dark:group-hover:opacity-100 backdrop-blur-lg"></div>
+              <div className="group focus:bg-transparent relative inline-flex">
+                <div className="transitiona-all   animate-tilt absolute inset-3 dark:-inset-1 rounded-xl bg-gradient-to-r from-purple-300 via-red-400 to-purple-300 opacity-70 blur-lg duration-1000 group-hover:inset-1  dark:group-hover:-inset-3 group-hover:from-purple-300  group-hover:via-red-400 group-hover:to-purple-300  group-hover:opacity-100 group-hover:duration-200 dark:from-[#44BCFF] dark:via-[#448fff] dark:to-[#6c5eff] dark:group-hover:from-[#44BCFF] dark:group-hover:via-[#448fff] dark:group-hover:to-[#6c5eff]  dark:group-hover:opacity-100 backdrop-blur-lg"></div>
                 <Button asChild variant="loginButton">
                   <Link href="/auth/login">
                     <span className="relative rounded-md bg-white/90 !px-5 !py-3 transition-all duration-75 ease-in group-hover:bg-white group-hover:bg-opacity-0 dark:bg-gray-900/80  group-hover:dark:bg-gray-900 dark:group-hover:bg-opacity-0">
-                      Fazer login
+                      {tL("login")}
                     </span>
                   </Link>
                 </Button>
               </div>
             </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <div className="group relative inline-flex">
-                <div className="transitiona-all  animate-tilt absolute -inset-[0.001rem] rounded-xl bg-gradient-to-r from-zinc-300 via-slate-500 to-stone-300 opacity-70 blur-lg duration-1000 group-hover:-inset-[3px] dark:group-hover:-inset-3 group-hover:from-zinc-300  group-hover:via-slate-500 group-hover:to-stone-300 group-hover:opacity-100 group-hover:duration-200 dark:from-[#44BCFF] dark:via-[#448fff] dark:to-[#6c5eff] dark:group-hover:from-[#44BCFF] dark:group-hover:via-[#448fff] dark:group-hover:to-[#6c5eff] dark:group-hover:opacity-100 backdrop-blur-lg"></div>
+            <DropdownMenuItem autoFocus={false}   asChild>
+              <div className="group focus:bg-transparent relative inline-flex">
+                <div className="transitiona-all  animate-tilt absolute inset-3 dark:-inset-1  rounded-xl bg-gradient-to-r from-purple-300 via-red-400 to-purple-300 opacity-70 blur-lg duration-1000 group-hover:inset-1 dark:group-hover:-inset-3  group-hover:from-purple-300  group-hover:via-red-400 group-hover:to-purple-300 group-hover:opacity-100 group-hover:duration-200 dark:from-[#44BCFF] dark:via-[#448fff] dark:to-[#6c5eff] dark:group-hover:from-[#44BCFF] dark:group-hover:via-[#448fff] dark:group-hover:to-[#6c5eff] dark:group-hover:opacity-100 backdrop-blur-lg"></div>
                 <Button asChild variant="registerButton">
-                  <Link href="/auth/login?page=cadastro">Criar conta</Link>
+                  <Link className='' href="/auth/login?page=cadastro">{tL("register")}</Link>
                 </Button>
               </div>
             </DropdownMenuItem>

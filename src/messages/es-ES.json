@@ -79,7 +79,7 @@
     "typeAtr": "Tipo",
     "powerAtr": "Potencia[W]",
     "qntAtr": "Cantidad",
-    "coefAlert": "Seleccione el tiempo máximo de carga y descarga."
+    "coefAlert": "Seleccione el tiempo máximo de carga"
 ,
     "h": " hora",
     "hs": " horas",
@@ -87,7 +87,12 @@
     "mins": " minutos",
     "and": "y",
     "AlertOtherInverters": "El número máximo permitido de inversores en paralelo para este modelo {inverterModel} es de {inverterModelLimit} unidades.",
-"AlertInverter": "El número máximo permitido de inversores en paralelo para este modelo {inverterModel} es de {inverterModelLimit} unidades. Se recomienda recalcular o considerar un cambio en la configuración de la red."
+"AlertInverter": "El número máximo permitido de inversores en paralelo para este modelo {inverterModel} es de {inverterModelLimit} unidades. Se recomienda recalcular o considerar un cambio en la configuración de la red.",
+"AlertTitle": "ATENCIÓN",
+"RemakeButton": "Volver a Calcular",
+"ChangeGridButton": "Cambiar Red",
+"coefMessage": "Tiempo máximo de carga de la batería: {selectedCoef, plural, =0 {0 hora} =1 {1 hora} other {# horas}}"
+
 
   },
   "Grids": {
@@ -117,9 +122,8 @@
     "label1": "Energía Disponible[kWh]"
   },
   "Coef": {
-    "description": "El tiempo máximo de carga y descarga es una estimación aproximada y puede variar según las configuraciones de carga y descarga del inversor, así como las particularidades de cada sistema. Al cambiar el valor, también se modificará la cantidad de inversores."
-
-  },
+    "description": "El tiempo de carga máximo es una estimación aproximada y puede variar según las configuraciones de carga del inversor, así como las particularidades de cada sistema. Al modificar el valor, la cantidad de inversores puede terminar siendo alterada también."
+},
   "Login": {
     "enter": "Ingresar",
     "email": "Correo electrónico",
@@ -267,5 +271,38 @@
     "errorMsg": "Ups, algo salió mal...",
     "errorPassword": "La nueva contraseña debe tener al menos 6 caracteres.",
     "errorConfirm": "Las contraseñas no coinciden."
+  },
+  "LoginButtons": {
+    "title": "¿Quieres iniciar sesión o registrarte?",
+    "login": "Iniciar sesión",
+    "register": "Crear cuenta"
+    },
+    "HVDescription": {
+      "title": "Información Adicional:",
+      
+      "combinerBox": "(OPCIONAL) Se utiliza una unidad por cada 4 racks de baterías; funciona como una caja de unión. El propósito de este equipo es unir las baterías, conectándolas a una única entrada del inversor.",
+      "canBridge": "(OPCIONAL) Solo cuando la comunicación entre inversor-batería y batería-batería excede los 50m.",
+      "parallelLabel": "Paralelo",
+      "parallel": "Tenga en cuenta que cada inversor conectado en paralelo debe tener la misma cantidad de baterías. Por ejemplo, para 2 inversores paralelos de 50k, cada inversor tendrá un banco de baterías de 12 unidades.",
+      "BMU": "(ESSENCIAL) Una unidad para hasta 12 baterías."
+  },
+  "mobileTable": {
+    "title": "Cálculos",
+    "tooltipTitle": "Información",
+    "description": "Descripción",
+    "inverter": "Inversor",
+    "battery": "Batería",
+    "power": "Potencia",
+    "consumption": "Consumo",
+    "actions": "Acciones",
+    "print": "Imprimir",
+    "edit": "Editar",
+    "del": "Eliminar"
+  },
+  "Header": {
+    "editingTitle": "Editando Cálculo:"
+  },
+  "EmptyTable": {
+    "content": "Aún no hay cálculos."
   }
 }

@@ -15,7 +15,10 @@ export default function Title() {
           important: (chuncks) => <strong>{chuncks}</strong>
         })}
       </p>
+      <div className="pt-3">
+
       <ConfirmButton label={t('confirmButton')} />
+      </div>
     </div>
   );
 }

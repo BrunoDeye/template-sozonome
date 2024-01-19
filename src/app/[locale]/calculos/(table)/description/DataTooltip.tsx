@@ -36,13 +36,14 @@ const DataTooltip = ({ data }: Props) => {
     attribute: key,
     value: value as any,
   }));
+  const t = useTranslations("mobileTable")
 
   const info2 = [
-    { attribute: 'Descrição', value: data.description },
-    { attribute: 'Inversor', value: data.recommendedInverter },
-    { attribute: 'Bateria', value: data.selectedBattery },
-    { attribute: 'Potência', value: data.totalPower },
-    { attribute: 'Consumo', value: data.totalEnergy },
+    { attribute: t('description'), value: data.description },
+    { attribute: t('inverter'), value: data.recommendedInverter },
+    { attribute: t('battery'), value: data.selectedBattery },
+    { attribute: t('power'), value: data.totalPower },
+    { attribute: t('consumption'), value: data.totalEnergy },
   ];
 
   return isClient ? (
@@ -62,7 +63,7 @@ const DataTooltip = ({ data }: Props) => {
         side="bottom"
         className="z-50 max-h-[250px] w-[280px] overflow-hidden overflow-y-scroll whitespace-normal bg-gray-50 p-3 text-justify shadow-inner shadow-slate-300 dark:bg-black dark:shadow-blue-400  sm:w-80 "
       >
-        <h6 className="text-center text-base">Informações {data.title}</h6>
+        <h6 className="text-center text-base">{t("tooltipTitle")} {data.title}</h6>
         {/* <InfoCard info={info}/> */}
         <div className="z-50 flex flex-col gap-5 py-5">
           {info2.map((item) => (

@@ -28,7 +28,11 @@ export async function POST(request: NextRequest) {
       );
 
     const transponder = nodemailer.createTransport({
-      service: 'gmail',
+      service: "Outlook365",
+      host: "deyeinversores.com.br",
+      port: 587,
+      secure: true,
+      tls:  { ciphers: 'SSLv3' },
       auth: {
         user: process.env.EMAIL,
         pass: process.env.EMAIL_PASSWORD,

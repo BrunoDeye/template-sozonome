@@ -20,7 +20,7 @@ function Warning({ children }: Props) {
         <div className="flex">
           <ExclamationTriangleIcon className="!mr-2 h-10 w-10 font-bold" />
           <AlertTitle className="text-2xl font-bold uppercase">
-            Atenção
+            {t("AlertTitle")}
           </AlertTitle>
         </div>
         <div className="text-center sm:w-[70%]">{t('coefAlert')}:</div>

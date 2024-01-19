@@ -399,7 +399,7 @@ export function getFirstAndLastWords(phrase: string) {
   const lastWord = words[words.length - 1];
 
   // Return an object with the first and last words
-  return firstWord + ' ' + lastWord;
+  return words.length === 1 ? firstWord : firstWord + ' ' + lastWord;
 }
 
 export function getLocaleString(pathname: any) {

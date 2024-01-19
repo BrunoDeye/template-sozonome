@@ -22,7 +22,7 @@ function Danger({ message, hasButton = false }: Props) {
         <div className="flex">
           <ExclamationTriangleIcon className="!mr-2 h-10 w-10 font-bold" />
           <AlertTitle className="text-2xl font-bold uppercase text-black">
-            Atenção
+          {t("AlertTitle")}
           </AlertTitle>
         </div>
         <div className="text-center font-bold sm:w-[70%]">{message}</div>
@@ -32,10 +32,10 @@ function Danger({ message, hasButton = false }: Props) {
         {hasButton ? (
           <div className="mt-2 print-hidden flex gap-5 items-baseline">
             <Button asChild variant="gradientRed">
-              <Link href="/devices">Refazer Cálculo</Link>
+              <Link href="/devices">{t("RemakeButton")}</Link>
             </Button>
             <Button asChild variant="gradientRed">
-              <Link href="/grid">Mudar Rede</Link>
+              <Link href="/grid">{t("ChangeGridButton")}</Link>
             </Button>
           </div>
         ) : null}
