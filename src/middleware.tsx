@@ -21,7 +21,7 @@ const authMiddleware = withAuth(
     callbacks: {
       authorized: ({token, req}) => token != null,
     },
-    secret: process.env.jwtSecretKey,
+    secret: process.env.NEXTAUTH_SECRET,
     pages: {
       signIn: '/auth/login'
     }

@@ -25,37 +25,37 @@ export async function POST(
           ...data,
         },
       });
-      if (body.totalPower >= 50000) {
-        const transponder = nodemailer.createTransport({
-          service: "Outlook365",
-          host: "deyeinversores.com.br",
-          port: 587,
-          secure: false,
-          tls:  { ciphers: 'SSLv3' },
-          auth: {
-            user: process.env.EMAIL,
-            pass: process.env.EMAIL_PASSWORD,
-          },
-        });
-        const mailOptions = {
-          from: process.env.EMAIL,
-          to: process.env.EMAIL,
-          subject: `Cálculo super dimensionado de ${session.user.email} foi detectado`,
-          text: `A potência total foi de ${body.totalPower}W`,
-          html: `<p>A potência total foi de ${body.totalPower}W, esses são os dados para contatar o usuário:</p></br><p>Nome: ${session.user.name}</p><p>Email: ${session.user.email}</p><p>Telefone: ${session.user.phoneNumber}</p>`,
-        };
+      // if (body.totalPower >= 50000) {
+      //   const transponder = nodemailer.createTransport({
+      //     service: "Outlook365",
+      //     host: "deyeinversores.com.br",
+      //     port: 587,
+      //     secure: false,
+      //     tls:  { ciphers: 'SSLv3' },
+      //     auth: {
+      //       user: process.env.EMAIL,
+      //       pass: process.env.EMAIL_PASSWORD,
+      //     },
+      //   });
+      //   const mailOptions = {
+      //     from: process.env.EMAIL,
+      //     to: process.env.EMAIL,
+      //     subject: `Cálculo super dimensionado de ${session.user.email} foi detectado`,
+      //     text: `A potência total foi de ${body.totalPower}W`,
+      //     html: `<p>A potência total foi de ${body.totalPower}W, esses são os dados para contatar o usuário:</p></br><p>Nome: ${session.user.name}</p><p>Email: ${session.user.email}</p><p>Telefone: ${session.user.phoneNumber}</p>`,
+      //   };
 
-        await new Promise((resolve, reject) => {
-          transponder.sendMail(mailOptions, (error, info) => {
-            if (error) {
-              reject(error);
-              return NextResponse.json({ error: 'Algo deu errado' }, { status: 500 });
-            } else {
-              resolve(info);
-            }
-          });
-        });
-      }
+      //   await new Promise((resolve, reject) => {
+      //     transponder.sendMail(mailOptions, (error, info) => {
+      //       if (error) {
+      //         reject(error);
+      //         return NextResponse.json({ error: 'Algo deu errado' }, { status: 500 });
+      //       } else {
+      //         resolve(info);
+      //       }
+      //     });
+      //   });
+      // }
 
       return NextResponse.json(calculations);
     } else {

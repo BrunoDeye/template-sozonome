@@ -13,11 +13,24 @@ import { z } from 'zod';
 import nodemailer from 'nodemailer';
 import prisma from '@/app/client/prisma';
 import { CalcBody } from '../(types)/body';
+import { EmailClient, KnownEmailSendStatus } from '@azure/communication-email';
+import { getLocaleString } from '@/utils/functions';
+import { getTranslations } from 'next-intl/server';
 export const dynamic = 'force-dynamic'
 
 export async function PATCH(
   req: NextRequest
 ): Promise<NextResponse<Calculation | { error: string }> | undefined> {
+  const connectionString = process.env.COMMUNICATION_SERVICES_CONNECTION_STRING;
+  const { pathname } = new URL(
+    new Headers(req.headers).get('referer') as any
+  );
+  const locale = getLocaleString(pathname);
+  const t = await getTranslations({
+    locale: locale || 'pt-BR',
+    namespace: 'Register',
+  });
+  const emailClient = new EmailClient(connectionString, {});
   try {
     const session = await getServerSession<AuthOptions, Session>(authOptions);
     // console.log(session)
@@ -47,35 +60,35 @@ export async function PATCH(
           data,
         });
 
-        if(getCalculation.totalPower < 50000 && data.totalPower >= 50000) {
-          const transponder = nodemailer.createTransport({
-            service: "Outlook365",
-            host: "deyeinversores.com.br",
-            port: 587,
-            secure: false,
-            tls:  { ciphers: 'SSLv3' },
-            auth: {
-              user: process.env.EMAIL,
-              pass: process.env.EMAIL_PASSWORD,
-            },
-          });
-          const mailOptions = {
-            from: process.env.EMAIL,
-            to: process.env.EMAIL,
-            subject: `Atualização super dimensionada de ${session.user.email} foi detectada`,
-            text: `A potência total foi atualizada de ${getCalculation.totalPower}W, para ${data.totalPower}W`,
-            html: `<p>A potência total foi atualizada de ${getCalculation.totalPower}W, para ${data.totalPower}W, esses são os dados para contatar o usuário:</p></br><p>Nome: ${session.user.name}</p><p>Email: ${session.user.email}</p><p>Telefone: ${session.user.phoneNumber}</p>`,
-          };
+        // if(getCalculation.totalPower < 50000 && data.totalPower >= 50000) {
+        //   const transponder = nodemailer.createTransport({
+        //     service: "Outlook365",
+        //     host: "deyeinversores.com.br",
+        //     port: 587,
+        //     secure: false,
+        //     tls:  { ciphers: 'SSLv3' },
+        //     auth: {
+        //       user: process.env.EMAIL,
+        //       pass: process.env.EMAIL_PASSWORD,
+        //     },
+        //   });
+        //   const mailOptions = {
+        //     from: process.env.EMAIL,
+        //     to: process.env.EMAIL,
+        //     subject: `Atualização super dimensionada de ${session.user.email} foi detectada`,
+        //     text: `A potência total foi atualizada de ${getCalculation.totalPower}W, para ${data.totalPower}W`,
+        //     html: `<p>A potência total foi atualizada de ${getCalculation.totalPower}W, para ${data.totalPower}W, esses são os dados para contatar o usuário:</p></br><p>Nome: ${session.user.name}</p><p>Email: ${session.user.email}</p><p>Telefone: ${session.user.phoneNumber}</p>`,
+        //   };
   
-          transponder.sendMail(mailOptions, (error, info) => {
-            if (error) {
-              return NextResponse.json(
-                { error: 'Algo deu errado' },
-                { status: 500 }
-              );
-            }
-          });
-        }
+        //   transponder.sendMail(mailOptions, (error, info) => {
+        //     if (error) {
+        //       return NextResponse.json(
+        //         { error: 'Algo deu errado' },
+        //         { status: 500 }
+        //       );
+        //     }
+        //   });
+        // }
 
         return NextResponse.json(calculations);
       } else {

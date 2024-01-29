@@ -2,12 +2,25 @@ import prisma from '@/app/client/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import jwt from 'jsonwebtoken';
+import { server } from '@/url';
+import { getLocaleString } from '@/utils/functions';
+import { getTranslations } from 'next-intl/server';
+import { EmailClient, KnownEmailSendStatus } from '@azure/communication-email';
+
 
 export async function POST(request: NextRequest) {
+  const connectionString = process.env.COMMUNICATION_SERVICES_CONNECTION_STRING;
+  const { pathname } = new URL(
+    new Headers(request.headers).get('referer') as any
+  );
+  const locale = getLocaleString(pathname);
+  const t = await getTranslations({
+    locale: locale || 'pt-BR',
+    namespace: 'ForgotPassword',
+  });
+  const emailClient = new EmailClient(connectionString, {});
   try {
     const body = await request.json();
-    const url = request.nextUrl.clone();
-    url.pathname = '';
     const { email } = body;
     const user = await prisma.user.findUnique({
       where: {
@@ -27,48 +40,63 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
 
-    const transponder = nodemailer.createTransport({
-      service: "Outlook365",
-      host: "deyeinversores.com.br",
-      port: 587,
-      secure: true,
-      tls:  { ciphers: 'SSLv3' },
-      auth: {
-        user: process.env.EMAIL,
-        pass: process.env.EMAIL_PASSWORD,
+    // const transponder = nodemailer.createTransport({
+    //   service: "Outlook365",
+    //   host: "deyeinversores.com.br",
+    //   port: 587,
+    //   secure: true,
+    //   tls:  { ciphers: 'SSLv3' },
+    //   auth: {
+    //     user: process.env.EMAIL,
+    //     pass: process.env.EMAIL_PASSWORD,
+    //   },
+    // });
+
+    const token = jwt.sign(
+      { id: user.id },
+      process.env.jwtSecretKey + user.id,
+      {
+        expiresIn: '1d',
+      }
+    );
+
+    const message = {
+      senderAddress: t('senderFrom'),
+      content: {
+        subject: t('subject'),
+        plainText: `${server}/auth/mudar-senha?token=${token}&id=${user.id}`,
+        html: `
+        <p>${t('htmlP')}</p>
+        </br>
+        <a href="${server}/auth/mudar-senha?token=${token}&id=${user.id}">${t(
+          'htmlA'
+        )}</a>`,
       },
-    });
-
-    const token = jwt.sign({ id: user.id }, process.env.jwtSecretKey + user.id, {
-      expiresIn: '1d',
-    });
-
-    const mailOptions = {
-      from: process.env.EMAIL,
-      to: user.email,
-      subject: 'Mudar a senha',
-      text: `${url}auth/mudar-senha?token=${token}&id=${user.id}`,
-      html: `
-      <p>Mude a sua senha clicando no link abaixo:</p>
-      </br>
-      <a href="${url}auth/mudar-senha?token=${token}&id=${user.id}">Link para mudar a senha</a>`,
+      recipients: {
+        to: [
+          {
+            address: user.email,
+            displayName: user.name,
+          },
+        ],
+      },
     };
 
-    await new Promise((resolve, reject) => {
-      transponder.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          reject(error);
-          return NextResponse.json({ error: 'Algo deu errado' }, { status: 500 });
-        } else {
-          resolve(info);
-        }
-      });
-    });
+    const poller = await emailClient.beginSend(message);
+    if (!poller.getOperationState().isStarted) {
+      throw NextResponse.json('Poller was not started.', { status: 401 });
+    }
 
     const { password: _, ...result } = user;
 
-    return NextResponse.json(result, { status: 201 });
+    return await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(NextResponse.json(result, { status: 201 }));
+      }, 500)
+    });
+
   } catch (error: any) {
     console.log({ error });
+    return NextResponse.json(error, { status: 401 });
   }
 }

@@ -5,7 +5,6 @@ import { Input } from '@/lib/components/ui/input';
 import { NextPage } from 'next';
 import { Link } from '@/navigation';
 import { useState, startTransition } from 'react';
-import SuccessDialog from './SuccessDialog';
 import { Checkbox } from '@/lib/components/ui/checkbox';
 import TermsDialog from './TermsDialog';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -28,6 +27,7 @@ import PhoneInput, {
 } from 'react-phone-number-input/input';
 import br from 'react-phone-number-input/locale/pt-BR.json';
 import { useLocale, useTranslations } from 'next-intl';
+import RegisterDialog from './RegisterDialog';
 
 interface Props {
   setAuthPage: React.Dispatch<
@@ -113,7 +113,7 @@ function RegisterPageContent({ setAuthPage }: Props) {
     if (!values.terms) {
       setAlert({
         status: 'error',
-        message: 'Você precisa aceitar os termos',
+        message: t('errorTerms'),
       });
     } else {
       startTransition(async () => {
@@ -125,13 +125,15 @@ function RegisterPageContent({ setAuthPage }: Props) {
           console.log(result);
           form.reset();
           if (result.status === 409) {
-            setAlert({ status: 'error', message: 'Email já cadastrado' });
+            setAlert({ status: 'error', message: t('errorRegisteredEmail') });
+          } else if (!result.ok) {
+            setAlert({ status: 'error', message: t('errorDefault') });
           } else {
-            setAlert({ status: 'success', message: 'Cadastrado com sucesso!' });
+            setAlert({ status: 'success', message: t('successMsg') });
           }
         } catch (error: any) {
           console.log({ error });
-          setAlert({ status: 'error', message: 'Algo deu errado' });
+          setAlert({ status: 'error', message: t('errorDefault') });
         }
       });
     }
@@ -144,7 +146,7 @@ function RegisterPageContent({ setAuthPage }: Props) {
         {t('title')}
       </h3>
 
-      <SuccessDialog
+      <RegisterDialog
         isLoading={isLoading}
         alert={alert}
         open={open}
@@ -208,44 +210,43 @@ function RegisterPageContent({ setAuthPage }: Props) {
                 </FormItem>
               )}
             />
-            <div className='lg:col-span-full'>
-                <FormField
-              control={form.control}
-              name="phoneNumber"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel htmlFor="phoneNumber">{t('phone')}</FormLabel>
-                  <div className="flex gap-3 max-[340px]:flex-col">
-                    <div className="">
-                      <CountrySelect
-                        labels={br}
-                        value={country}
-                        onChange={setCountry}
-                      />
-                    </div>
-
-                    <div className="w-full">
-                      <FormControl>
-                        <PhoneInput
-                          autoComplete="on"
-                          id="phoneNumber"
-                          type={'text'}
-                          inputComponent={Input}
-                          required
-                          country={country as any}
-                          aria-required
-                          {...field}
+            <div className="lg:col-span-full">
+              <FormField
+                control={form.control}
+                name="phoneNumber"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel htmlFor="phoneNumber">{t('phone')}</FormLabel>
+                    <div className="flex gap-3 max-[340px]:flex-col">
+                      <div className="">
+                        <CountrySelect
+                          labels={br}
+                          value={country}
+                          onChange={setCountry}
                         />
-                      </FormControl>
-                    </div>
-                  </div>
+                      </div>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                      <div className="w-full">
+                        <FormControl>
+                          <PhoneInput
+                            autoComplete="on"
+                            id="phoneNumber"
+                            type={'text'}
+                            inputComponent={Input}
+                            required
+                            country={country as any}
+                            aria-required
+                            {...field}
+                          />
+                        </FormControl>
+                      </div>
+                    </div>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
-          
 
             <FormField
               control={form.control}

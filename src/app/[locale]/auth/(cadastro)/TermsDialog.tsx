@@ -42,17 +42,16 @@ export default function TermsDialog({
   form,
 }: Props) {
   const locale = useLocale();
-  const [checked, setChecked] = useState<CheckedState>(false);
   const t = useTranslations('TermsAndPrivacy');
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => setIsClient(true), []);
 
-  useEffect(() => {
-    if (open) {
-      setChecked(false);
-    }
-  }, [open]);
+  // useEffect(() => {
+  //   if (open) {
+  //     setChecked(false);
+  //   }
+  // }, [open]);
 
   return !isClient ? null : (
     <Dialog modal open={open} onOpenChange={setOpen}>
@@ -452,8 +451,9 @@ export default function TermsDialog({
             <div className="flex items-center justify-center space-x-2">
               <Checkbox
                 id="read-terms"
-                onCheckedChange={(value) => setChecked(value)}
-                checked={checked}
+                onCheckedChange={(value) => form.setValue("terms", Boolean(value))}
+                
+                checked={form.watch("terms")}
                 aria-required
                 required
               />
@@ -464,18 +464,17 @@ export default function TermsDialog({
                 {t('readCheckbox')}
               </label>
             </div>
-            <div className={`${!checked ? 'cursor-not-allowed' : ''}`}>
+            <div className={`${!form.watch("terms") ? 'cursor-not-allowed' : ''} mt-6`}>
               <Button
                 onClick={() => {
                   setAccept(true);
                   setOpen(false);
                   form.clearErrors('terms');
                 }}
-                className={`mt-6`}
                 variant="gradientDefault"
                 type="submit"
-                aria-disabled={!checked}
-                disabled={!checked}
+                aria-disabled={!form.watch("terms")}
+                disabled={!form.watch("terms")}
               >
                 {t('acceptButton')}
               </Button>

@@ -153,13 +153,24 @@
     "errorEmail": "Email non valida",
     "errorPassword": "La password deve contenere almeno 6 caratteri.",
     "errorTerms": "Si prega di accettare i termini per continuare.",
-    "errorConfirm": "Le password non corrispondono."
+    "errorConfirm": "Le password non corrispondono.",
+    "senderFrom": "non-rispondere@deyeinversores.com.br",
+    "subject": "Conferma la tua email",
+  "htmlP": "Conferma la tua email cliccando sul link sottostante e inizia a utilizzare la nostra calcolatrice:",
+  "htmlA": "Link di Attivazione",
+  "errorRegisteredEmail": "Email già registrata",
+  "errorDefault": "Qualcosa è andato storto",
+  "successMsg": "Registrazione avvenuta con successo"
   },
   "ForgotPassword": {
     "email": "E-mail",
     "title": "Richiedi Cambio Password",
     "send": "Invia",
-    "remember": "Ricordi la password? <a>Torna indietro</a>"
+    "remember": "Ricordi la password? <a>Torna indietro</a>",
+    "senderFrom": "non-rispondere@deyeinversores.com.br",
+    "subject": "Cambia la password",
+    "htmlP": "Cambia la tua password cliccando sul link sottostante:",
+    "htmlA": "Link per cambiare la password"
   },
   "TermsAndPrivacy": {
     "title": "Termini di Servizio e Informativa sulla Privacy",
@@ -175,7 +186,7 @@
     "term5Title": "Registrazione",
     "term5Content": "<p>L'accesso alle funzionalità della piattaforma richiederà una registrazione preliminare.</p> <p>Al momento della registrazione, l'utente deve fornire informazioni complete, recenti e valide. È responsabilità esclusiva dell'utente mantenere questi dati aggiornati e l'utente si impegna per la veridicità dei dati forniti.</p> <p>L'utente si impegna a non comunicare i suoi dati di registrazione e/o di accesso alla piattaforma a terzi, assumendosi integralmente la responsabilità dell'uso che ne sarà fatto.</p> <p>I minorenni di 18 anni e coloro che non hanno piena capacità giuridica devono ottenere preventivamente il consenso espresso dei loro responsabili legali per l'uso della piattaforma e dei servizi o prodotti. La responsabilità di tale accesso è esclusiva dei responsabili legali per l'eventuale accesso di minorenni e di coloro che non hanno piena capacità giuridica senza autorizzazione preventiva.</p> <p>Con la registrazione, l'utente dichiara e garantisce espressamente di essere pienamente in grado di esercitare e godere liberamente dei servizi e dei prodotti.</p> <p>L'utente deve fornire un indirizzo email valido, attraverso il quale il sito effettuerà tutte le comunicazioni necessarie.</p> <p>Dopo la conferma della registrazione, l'utente avrà un nome utente e una password personale, che assicura all'utente l'accesso individuale agli stessi. Pertanto, è responsabilità esclusiva dell'utente mantenere la password confidenziale e sicura, evitando l'accesso indebito alle informazioni personali.</p> <p>Non sarà consentito assegnare, vendere, affittare o trasferire in alcun modo l'account, che è personale e non trasferibile.</p> <p>L'utente deve assicurarsi che il suo dispositivo sia compatibile con le caratteristiche tecniche che consentono l'uso della piattaforma e dei servizi o prodotti.</p> <p>L'utente può richiedere in qualsiasi momento la cancellazione della sua registrazione sul sito <a>www.calculadora.app.deyeinversores.com.br</a>. La cancellazione sarà effettuata il più rapidamente possibile.</p> <p>Accettando i Termini e l'Informativa sulla privacy, l'utente autorizza espressamente la piattaforma a raccogliere, utilizzare, conservare, elaborare, cedere o utilizzare informazioni derivate dall'uso dei servizi, del sito e di qualsiasi piattaforma, comprese tutte le informazioni fornite dall'utente durante la registrazione o l'aggiornamento, oltre ad altre espressamente descritte nell'Informativa sulla privacy che deve essere autorizzata dall'utente.</p>",
     "term6Title": "Assistenza",
-    "term6Content": "<p>In caso di dubbi, suggerimenti o problemi nell'uso della piattaforma, l'utente può contattare il supporto via email a <strong>calculadora.deye@gmail.com</strong>.</p> <p>Questi servizi di assistenza all'utente saranno disponibili nei seguenti giorni e orari: dal lunedì al venerdì, dalle 8:00 alle 18:00.</p>",
+    "term6Content": "<p>In caso di dubbi, suggerimenti o problemi nell'uso della piattaforma, l'utente può contattare il supporto via email a <strong>nao-responda@deyeinversores.com.br</strong>.</p> <p>Questi servizi di assistenza all'utente saranno disponibili nei seguenti giorni e orari: dal lunedì al venerdì, dalle 8:00 alle 18:00.</p>",
     "term7Title": "Delle responsabilità",
     "term7Content": "<p>È responsabilità dell'utente:</p><ol><li>difetti o difetti tecnici originati nel proprio sistema dell'utente;</li> <li>l'uso corretto della piattaforma, dei servizi o prodotti offerti, favorendo la buona convivenza, il rispetto e la cordialità, promuovendo un ambiente di qualità;</li> <li>il rispetto e il rispetto dell'insieme di regole stabilite in questo Termine di Condizioni Generali di Utilizzo, nella corrispondente Informativa sulla Privacy e nella legislazione nazionale e internazionale;</li> <li>la protezione dei dati di accesso al proprio account/profilo (nome utente e password).</li></ol> <p>È responsabilità della piattaforma <a>www.calculadora.app.deyeinversores.com.br</a>:</p> <ol><li>indicare le caratteristiche del servizio o prodotto;</li> <li>i difetti e i difetti riscontrati nel servizio o prodotto offerto purché ne siano stati la causa;</li> <li>le informazioni che ha divulgato, con commenti o informazioni divulgate dagli utenti che sono di esclusiva responsabilità degli stessi utenti;</li> <li>i contenuti o le attività illecite svolte attraverso la sua piattaforma.</li></ol> <p>La piattaforma non è responsabile dei collegamenti esterni contenuti nel suo sistema che possono reindirizzare l'utente a un ambiente esterno alla sua rete.</p> <p>Non possono essere inclusi collegamenti esterni o pagine che servano a scopi commerciali o pubblicitari o informazioni illecite, violente, controverse, pornografiche, xenofobe, discriminatorie o offensive.</p>",
     "term8Title": "Diritti d'autore",
@@ -199,7 +210,7 @@
     "section8Title": "COOKIE O DATI DI NAVIGAZIONE",
     "section8Content": "<p>I cookie si riferiscono a file di testo inviati dalla piattaforma al computer dell'utente e del visitatore e che rimangono memorizzati, contenenti informazioni relative alla navigazione sul sito. Tali informazioni sono legate ai dati di accesso come luogo e orario di accesso e vengono memorizzate dal browser dell'utente e del visitatore in modo che il server della piattaforma possa leggerle successivamente per personalizzare i servizi della piattaforma.</p> <p>L'utente e il visitatore della piattaforma <strong>Deye – Calcolatrice Solare</strong> dichiara di conoscere e accettare l'utilizzo di un sistema di raccolta di dati di navigazione mediante l'uso di cookie.</p> <p>Il cookie persistente rimane sull'hard disk dell'utente e del visitatore anche dopo la chiusura del browser e verrà utilizzato dal browser nelle visite successive al sito. I cookie persistenti possono essere rimossi seguendo le istruzioni del proprio browser. Il cookie di sessione, invece, è temporaneo e scompare dopo la chiusura del browser. È possibile impostare il proprio browser web per rifiutare tutti i cookie, ma alcune funzionalità della piattaforma potrebbero non funzionare correttamente se la capacità di accettare i cookie è disabilitata.</p>",
     "section9Title": "CONSENSO",
-    "section9Content": "<p>Utilizzando i servizi e fornendo le informazioni personali sulla piattaforma, l'utente acconsente a questa Informativa sulla privacy.</p> <p>L'utente, registrandosi, dichiara di conoscere e può esercitare i suoi diritti di cancellare la sua registrazione, accedere e aggiornare i suoi dati personali e garantisce la veridicità delle informazioni da lui fornite.</p> <p>L'utente ha il diritto di revocare il suo consenso in qualsiasi momento, per farlo deve contattare tramite l'e-mail <strong>calculadora.deye@gmail.com</strong>.</p>",
+    "section9Content": "<p>Utilizzando i servizi e fornendo le informazioni personali sulla piattaforma, l'utente acconsente a questa Informativa sulla privacy.</p> <p>L'utente, registrandosi, dichiara di conoscere e può esercitare i suoi diritti di cancellare la sua registrazione, accedere e aggiornare i suoi dati personali e garantisce la veridicità delle informazioni da lui fornite.</p> <p>L'utente ha il diritto di revocare il suo consenso in qualsiasi momento, per farlo deve contattare tramite l'e-mail <strong>nao-responda@deyeinversores.com.br</strong>.</p>",
     "section10Title": "MODIFICHE A QUESTA POLITICA SULLA PRIVACY",
     "section10Content": "<p>Ci riserviamo il diritto di modificare questa Politica sulla privacy in qualsiasi momento, pertanto è consigliabile che l'utente la riveda frequentemente.</p> <p>Le modifiche e le spiegazioni avranno effetto immediato dopo la loro pubblicazione sulla piattaforma. Gli utenti saranno notificati delle modifiche apportate. Utilizzando il servizio o fornendo informazioni personali dopo eventuali modifiche, l'utente e il visitatore manifestano il loro assenso alle nuove norme.</p> <p>In caso di fusione o vendita della piattaforma a un'altra azienda, i dati degli utenti possono essere trasferiti ai nuovi proprietari per garantire la continuità dei servizi offerti.</p>",
     "section11Title": "GIURISDIZIONE PER LA RISOLUZIONE DI CONTROVERSIE",
@@ -259,8 +270,12 @@
   },
   "SuccessDialog": {
     "title": "Registrazione completata con successo!",
-    "content": "È stata inviata una email di attivazione alla tua casella di posta. Accedi al link di attivazione dell'account quando lo ricevi. <p>Se non ricevi l'email di attivazione entro alcuni minuti, controlla la tua cartella dello spam o contattaci a <strong>calculadora.deye@gmail.com</strong>.</p>",
-    "confirm": "Conferma"
+    "content": "È stata inviata una email di attivazione alla tua casella di posta. Accedi al link di attivazione dell'account quando lo ricevi. <p>Se non ricevi l'email di attivazione entro alcuni minuti, controlla la tua cartella dello spam o contattaci a <strong>nao-responda@deyeinversores.com.br</strong>.</p>",
+    "confirm": "Conferma",
+    "processing": "Elaborazione...",
+    "somethingWrong": "Qualcosa è andato storto",
+    "verifiedEmailMsg": "Email verificata",
+    "okMsg": "Accesso effettuato con successo. Goditi l'esperienza!"
   },
   "ForgotPage": {
     "title": "Cambia Password",

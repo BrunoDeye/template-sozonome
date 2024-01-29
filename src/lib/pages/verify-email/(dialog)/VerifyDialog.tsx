@@ -15,6 +15,18 @@ import { Input } from '@/lib/components/ui/input';
 import { Label } from '@/lib/components/ui/label';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/lib/components/ui/alert-dialog"
+import { useRouter } from '@/navigation';
 
 type Props = {
   open: boolean;
@@ -32,6 +44,14 @@ export default function VerifyDialog({
   const t = useTranslations('SuccessDialog');
   const [isLoaded, setIsloaded] = useState(false);
   const [loadedStatus, setLoadedStatus] = useState("")
+  const [message, setMessage] = useState(alert.message);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (alert.message) {
+      setMessage(alert.message);
+    }
+  }, [alert.message]);
 
   useEffect(() => {
     if (!isLoading && !isLoaded) {
@@ -48,49 +68,48 @@ export default function VerifyDialog({
   }, [isLoading]);
 
   return (
-    <Dialog modal open={open} onOpenChange={setOpen}>
-      <DialogContent className="flex  flex-col items-center justify-around sm:max-w-[525px]">
+    <AlertDialog open={open} onOpenChange={setOpen}>
+      <AlertDialogContent className="flex  flex-col items-center justify-around sm:max-w-[525px]">
         {(isLoading || loadedStatus === '') && !isLoaded ? (
-          <DialogHeader className="">
-            <DialogTitle className="mb-8 text-center">
-              Processando...
-            </DialogTitle>
+          <AlertDialogHeader className="">
+            <AlertDialogTitle className="mb-8 text-center">
+              {t("processing")}
+            </AlertDialogTitle>
 
-            <DialogDescription className="my-auto text-justify">
+            <AlertDialogDescription className="my-auto text-justify">
               <p className="m-5">
                 <LoadingDeye />
               </p>
-            </DialogDescription>
-          </DialogHeader>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
         ) : loadedStatus === 'error' ? (
-          <DialogHeader className="">
-            <DialogTitle className="mb-8 text-center">
-              Algo deu Errado
-            </DialogTitle>
+          <AlertDialogHeader className="">
+            <AlertDialogTitle className="mb-8 text-center">
+              {t("somethingWrong")}
+            </AlertDialogTitle>
 
-            <DialogDescription className="text-justify">
-              <p className="mb-5">{alert.message}</p>
-            </DialogDescription>
-          </DialogHeader>
+            <AlertDialogDescription className="text-justify">
+              <p className="mb-5">{message}</p>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
         ) : loadedStatus === 'success' || isLoaded ? (
-          <DialogHeader className="">
-            <DialogTitle className="mb-8 text-center">Email Verificado</DialogTitle>
-
-            <DialogDescription className="text-justify">
-              Tudo certo, aproveite o site
-            </DialogDescription>
-          </DialogHeader>
+          <AlertDialogHeader className="">
+            <AlertDialogTitle className="mb-8 text-center">{t("verifiedEmailMsg")}</AlertDialogTitle>
+            <AlertDialogDescription className="text-justify">
+              {t("okMsg")}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
         ) : (
           <LoadingDeye />
         )}
          {!isLoaded ? null : (
-          <DialogFooter className="mt-auto">
-            <DialogClose asChild>
+          <AlertDialogFooter className="mt-auto">
+            <AlertDialogAction onClick={() => router.refresh()} asChild>
               <Button>{t('confirm')}</Button>
-            </DialogClose>
-          </DialogFooter>
+            </AlertDialogAction>
+          </AlertDialogFooter>
         )}
-      </DialogContent>
-    </Dialog>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }
