@@ -89,11 +89,11 @@ export async function POST(request: NextRequest) {
 
     const { password: _, ...result } = user;
 
-    return await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(NextResponse.json(result, { status: 201 }));
-      }, 500)
-    });
+    await new Promise((resolve) =>
+      setTimeout(resolve, 500)
+    );
+
+    return NextResponse.json(result, { status: 200 });
 
   } catch (error: any) {
     console.log({ error });

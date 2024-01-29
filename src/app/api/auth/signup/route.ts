@@ -102,12 +102,11 @@ export async function POST(request: NextRequest) {
     //   );
     const { password: _, ...result } = newUser;
 
-    return await new Promise((resolve) =>
-      setTimeout(() => {
-        resolve(NextResponse.json(result, { status: 201 }));
-      }, 500)
+    await new Promise((resolve) =>
+      setTimeout(resolve, 500)
     );
 
+    return NextResponse.json(result, { status: 201 });
     // } else {
     //   await prisma.user.delete({ where: { id: newUser.id } });
     //   throw NextResponse.json(poller.getResult()?.error, { status: 401 });
