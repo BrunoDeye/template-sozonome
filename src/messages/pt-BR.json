@@ -169,7 +169,11 @@
     "senderFrom": "nao-responda@deyeinversores.com.br",
     "subject": "Mudar a senha",
     "htmlP": "Mude a sua senha clicando no link abaixo:",
-    "htmlA": "Link para mudar a senha"
+    "htmlA": "Link para mudar a senha",
+    "errorEmail": "Email não cadastrado",
+    "errorNotVerified": "Email cadastrado, mas não verificado",
+    "errorDefault": "Algo deu errado",
+    "successMsg": "Enviado com sucesso! Verifique sua caixa de spam."
   },
   "TermsAndPrivacy": {
     "title": "Termos de Serviço e Política de Privacidade",

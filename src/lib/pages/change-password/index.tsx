@@ -4,7 +4,7 @@ import { Input } from '@/lib/components/ui/input';
 import { Label } from '@/lib/components/ui/label';
 import { Link, usePathname, useRouter } from '@/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, useTransition } from 'react';
 import { NextPage } from 'next';
 import { useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
@@ -20,9 +20,11 @@ import {
   FormMessage,
   FormLabel,
 } from '@/lib/components/ui/form';
+import SuccessDialog from './SuccessDialog';
 const ChangePasswordPage: NextPage = () => {
   const wrapperRef = useRef(null);
   const router = useRouter();
+  const [open,  setOpen] = useState(false);
   const { data: session, status, update } = useSession();
   const locale = useLocale();
   const t = useTranslations('ForgotPage');
@@ -48,6 +50,7 @@ const ChangePasswordPage: NextPage = () => {
         }),
     [locale]
   );
+  const [isLoading, startTransition] = useTransition();
   const [loginData, setLoginData] = useState({
     password: '',
   });
@@ -65,6 +68,8 @@ const ChangePasswordPage: NextPage = () => {
   const id = searchParams.get('id')
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setOpen(true);
+    startTransition(async () => {
     try {
       const result = await signIn('change', {
         password: values.password,
@@ -77,7 +82,7 @@ const ChangePasswordPage: NextPage = () => {
     } catch (error: any) {
       console.log({ error });
       setAlert({ status: 'error', message: t('errorMsg') });
-    }
+    }})
   }
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -104,6 +109,12 @@ const ChangePasswordPage: NextPage = () => {
       <h3 className="bg-gradient-to-br from-gray-200 to-blue-700 bg-clip-text text-3xl font-bold text-transparent md:text-3xl">
         {t('title')}
       </h3>
+      <SuccessDialog
+        isLoading={isLoading}
+        alert={alert}
+        open={open}
+        setOpen={setOpen}
+      />
       {alert.message && (
         <div
           style={{

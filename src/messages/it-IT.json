@@ -170,7 +170,11 @@
     "senderFrom": "non-rispondere@deyeinversores.com.br",
     "subject": "Cambia la password",
     "htmlP": "Cambia la tua password cliccando sul link sottostante:",
-    "htmlA": "Link per cambiare la password"
+    "htmlA": "Link per cambiare la password",
+    "errorEmail": "Email non registrata",
+    "errorNotVerified": "Email registrata, ma non verificata",
+    "errorDefault": "Qualcosa è andato storto",
+    "successMsg": "Inviato con successo! Controlla la tua cartella spam."
   },
   "TermsAndPrivacy": {
     "title": "Termini di Servizio e Informativa sulla Privacy",

@@ -170,7 +170,11 @@
     "senderFrom": "no-responder@deyeinversores.com.br",
     "subject": "Cambiar contraseña",
     "htmlP": "Cambia tu contraseña haciendo clic en el siguiente enlace:",
-    "htmlA": "Enlace para cambiar la contraseña"
+    "htmlA": "Enlace para cambiar la contraseña",
+    "errorEmail": "Email no registrado",
+  "errorNotVerified": "Email registrado, pero no verificado",
+  "errorDefault": "Algo salió mal",
+  "successMsg": "Enviado con éxito. Por favor, revisa tu carpeta de spam."
   },
   "TermsAndPrivacy": {
     "title": "Términos de Servicio y Política de Privacidad",

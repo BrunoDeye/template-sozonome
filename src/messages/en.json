@@ -168,7 +168,11 @@
     "senderFrom": "do-not-reply@deyeinversores.com.br",
     "subject": "Change Password",
     "htmlP": "Change your password by clicking the link below:",
-    "htmlA": "Link to change the password"
+    "htmlA": "Link to change the password",
+    "errorEmail": "Email not registered",
+  "errorNotVerified": "Email registered but not verified",
+  "errorDefault": "Something went wrong",
+  "successMsg": "Sent successfully! Please check your spam folder."
   },
   "TermsAndPrivacy": {
     "title": "Terms of Service and Privacy Policy",
