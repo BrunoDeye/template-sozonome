@@ -314,9 +314,18 @@
   "del": "Delete"
 },
 "Header": {
-  "editingTitle": "Editing Calculation:"
+  "editingTitle": "Editing Calculation:",
+  "instructions": "(Proceed to the results page to save changes and finalize the editing.)"
 },
 "EmptyTable": {
   "content": "No calculations yet."
+}, 
+"Update": {
+  "buttonEdit": "Update Calculation",
+  "buttonSave": "Save to My Calculations",
+  "title": "Save Calculation",
+  "description": "To save, define a <strong>title</strong> and a <strong>description</strong> for your calculation; the description is <strong>optional</strong>.",
+  "titleLabel": "Title",
+  "descriptionLabel": "Description"
 }
 }

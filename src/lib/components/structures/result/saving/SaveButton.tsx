@@ -4,6 +4,7 @@ import { Button } from '../../../ui/button';
 import { CalcBody } from '@/app/api/calculations/(types)/body';
 import { useDataStore } from '@/store/data';
 import SaveModal from './SaveModal';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   headers: any;
@@ -13,7 +14,7 @@ function SaveButton({ headers }: Props) {
   const [isClient, setIsClient] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [open, setOpen] = useState(false);
-
+  const t = useTranslations("Update")
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -42,7 +43,7 @@ function SaveButton({ headers }: Props) {
           onClick={() => setOpen(true)}
           variant="gradientGreen"
         >
-          {isEdit ? 'Atualizar Cálculo' : 'Salvar nos Meus Cálculos'}
+          {isEdit ? t("buttonEdit") : t("buttonSave")}
         </Button>
       </div>
     </>

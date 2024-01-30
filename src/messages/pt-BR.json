@@ -317,9 +317,19 @@
     "del": "Deletar"
   },
   "Header": {
-    "editingTitle": "Editando Cálculo:"
+    "editingTitle": "Editando Cálculo:",
+    "instructions": "(Prossiga até a página de resultados para salvar as alterações e finalizar a edição.)"
   },
   "EmptyTable": {
     "content": "Nenhum cálculo ainda."
+  },
+  "Update": {
+    "buttonEdit": "Atualizar Cálculo",
+    "buttonSave": "Salvar nos Meus Cálculos",
+    "title": "Salvar Cálculo",
+    "description": "Para salvar defina um <strong>título</strong> e uma <strong>descrição</strong> para o seu cálculo; a descrição é <strong>opcional</strong>.",
+    "titleLabel": "Título",
+    "descriptionLabel": "Descrição"
+    
   }
 }

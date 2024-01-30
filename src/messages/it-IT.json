@@ -315,9 +315,19 @@
   "del": "Elimina"
 },
 "Header": {
-  "editingTitle": "Modifica Calcolo:"
+  "editingTitle": "Modifica Calcolo:",
+  "instructions": "(Procedi alla pagina dei risultati per salvare le modifiche e finalizzare la modifica.)"
 },
 "EmptyTable": {
   "content": "Nessun calcolo effettuato."
+},
+"Update": {
+  "buttonEdit": "Aggiorna Calcolo",
+  "buttonSave": "Salva nei Miei Calcoli",
+  "title": "Salva Calcolo",
+  "description": "Per salvare, definisci un <strong>titolo</strong> e una <strong>descrizione</strong> per il tuo calcolo; la descrizione è <strong>opzionale</strong>.",
+  "titleLabel": "Titolo",
+  "descriptionLabel": "Descrizione"
 }
+
 }

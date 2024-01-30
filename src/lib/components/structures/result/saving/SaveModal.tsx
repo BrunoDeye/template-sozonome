@@ -29,6 +29,7 @@ import {
 } from '@/lib/components/ui/form';
 import { useRouter, usePathname } from '@/navigation';
 import LoadingDeye from '@/lib/components/Loading';
+import { useTranslations } from 'next-intl';
 
 const formSchema = z.object({
   title: z
@@ -80,6 +81,7 @@ export default function SaveModal({
       description: '',
     },
   });
+  const t = useTranslations("Update"); 
 
   useEffect(() => {
     setIsClient(true);
@@ -169,24 +171,28 @@ export default function SaveModal({
               <>
                 <DialogHeader className="">
                   <DialogTitle className="mb-6 text-center">
-                    Salvar Cálculo
+                  {isEdit ? t("buttonEdit") : t("buttonSave")}
                   </DialogTitle>
                   <DialogDescription className="text-center">
-                    Para salvar defina um{' '}
+                    {t.rich("description", {
+                      strong: (chunks) => <strong className="font-bold">{chunks}</strong>
+                    })}
+                    {/* Para salvar defina um{' '}
                     <span className="font-bold">título</span> e uma{' '}
                     <span className="font-bold">descrição</span> para o seu
                     cálculo, a descrição é{' '}
-                    <span className="font-bold">opcional</span>.
+                    <span className="font-bold">opcional</span>. */}
                   </DialogDescription>
                 </DialogHeader>
                 <FormField
                   control={form.control}
                   name="title"
+                  
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Título</FormLabel>
+                    <FormItem >
+                      <FormLabel >Título</FormLabel>
                       <FormControl>
-                        <Input placeholder="" {...field} />
+                        <Input  required placeholder="" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -212,7 +218,7 @@ export default function SaveModal({
                     type="submit"
                     size="large"
                   >
-                    {isEdit ? 'Atualizar Cálculo' : 'Salvar Cálculo'}
+                    {isEdit ? t("buttonEdit") : t("buttonSave")}
                   </Button>
                 </DialogFooter>{' '}
               </>

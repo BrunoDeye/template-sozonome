@@ -189,13 +189,13 @@ export const formatBattery = (
           : 'Low Voltage(LV)',
       },
       {
+        attribute: "BMU",
+        value: Math.ceil(+battery.quantity / 12),
+      },
+      {
         attribute: qntAtr,
         value:
           coef < 1 ? (Math.ceil(+battery.quantity / coef) < 4 ? 4 : Math.ceil(+battery.quantity / coef)) : (+battery.quantity < 4 ? 4 : battery.quantity),
-      },
-      {
-        attribute: "BMU",
-        value: Math.ceil(+battery.quantity / 12),
       },
     ] : [
         {
