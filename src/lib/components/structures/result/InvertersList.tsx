@@ -368,10 +368,11 @@ export default function InvertersList({ printData }: Props) {
                   <div className="pt-6 sm:px-4">
                     {' '}
                     <Danger
-                      message={t('AlertOtherInverters', {
+                      message={t.rich('AlertOtherInverters', {
                         inverterModel: inverter.model,
                         inverterModelLimit: inverterGridLimit(grid as any),
-                      })}
+                        span: (chunks) => <span className='text-gray-50 mx-1'>{chunks}</span>
+                      }) as string}
                     />
                   </div>
                 ) : null}

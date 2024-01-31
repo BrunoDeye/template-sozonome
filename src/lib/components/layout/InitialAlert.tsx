@@ -80,11 +80,11 @@ export default function InitialAlert() {
     <AlertDialog open={shouldEmitAlert}>
       {shouldEmitAlert ? (
         <div
-          className="absolute inset-x-0 top-[-10rem] z-[9999999] transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
+          className="absolute inset-x-0 top-[-10rem] z-[99999999] transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
           aria-hidden="true"
         >
           <div
-            className="relative left-0 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80cc] to-[#ff8080] opacity-30 dark:from-[#80d5ff] dark:to-[#9089fc] dark:opacity-60 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
+            className="relative left-0 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80cc] to-[#ff8080] opacity-25 dark:from-[#80d5ff] dark:to-[#9089fc] dark:opacity-60 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
             style={{
               clipPath:
                 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
@@ -92,8 +92,8 @@ export default function InitialAlert() {
           />
         </div>
       ) : null}
-      <AlertDialogContent className="scroll max-h-[100vh]  space-y-0   text-center sm:min-h-[50vh] sm:min-w-[35vw] ">
-        <div className="no-scrollbar max-h-[95vh] space-y-5 overflow-y-scroll p-4 sm:space-y-4 sm:p-9 sm:pt-4">
+      <AlertDialogContent className="scroll max-h-[100vh]   space-y-0   text-center sm:min-h-[50vh] sm:min-w-[35vw] ">
+        <div className="no-scrollbar max-h-[95vh] space-y-5  overflow-y-scroll p-4 sm:space-y-4 sm:p-9 sm:pt-4">
           <AlertDialogHeader>
             {shouldEmitAlert ? (
               <div className="absolute translate-y-[-15vh]  max-sm:hidden sm:translate-x-[45vw]  2xl:translate-y-[-18vh]">
@@ -103,7 +103,7 @@ export default function InitialAlert() {
             <AlertDialogTitle className="pb-4 text-center text-3xl tracking-widest sm:mb-6 sm:text-4xl">
               {t.rich('title', {
                 span: (chunks) => (
-                  <span className="bg-gradient-to-br from-gray-200 to-blue-700 bg-clip-text font-bold text-transparent">
+                  <span className="bg-gradient-to-br from-gray-200 to-blue-700 bg-clip-text font-bold text-transparent ">
                     {chunks}
                   </span>
                 ),
