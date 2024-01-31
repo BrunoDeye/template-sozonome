@@ -15,6 +15,7 @@ import { Suspense } from 'react';
 import Loading from './loading';
 import SessionProviders from '@/lib/components/providers/SessionProvider';
 import { useLocale } from 'next-intl';
+import InitialAlert from '@/lib/components/layout/InitialAlert';
 
 const Layout = dynamic(() => import('@/lib/components/layout'), {
   loading: () => <Loading />,
@@ -96,6 +97,7 @@ const RootLayout = async ({
                       <div className="flex-1">
                         {children}
                         <Analytics />
+                        <InitialAlert />
                       </div>
                     </Suspense>
                   </Layout>

@@ -15,8 +15,8 @@ const LogInIcon = ({ props }: any) => (
       y1="568.36070199205"
       y2="346.61429722687"
     >
-      <stop offset="0" stop-color="#4422bf" />
-      <stop offset="1" stop-color="#2175BE"   />
+      <stop offset="0" stopColor="#4422bf" />
+      <stop offset="1" stopColor="#2175BE"   />
     </linearGradient>
     <g transform="translate(58.665702 15.707861)">
       <path
@@ -28,7 +28,7 @@ const LogInIcon = ({ props }: any) => (
       <path
         d="m349.21439 451.03706c-.0125 1.79854 1.17476 3.53045 3.55633 5.94498l92.76999 83.82059c4.68822 4.82865 11.82411 2.47964 11.88969-7.03778l.33471-26.82757 61.20822.53114c6.59384.0451 11.95127-5.23872 11.99672-11.8334l.44019-85.65778c.0442-6.51987-5.2393-11.86564-11.75806-11.92219l-61.28323-.5316.19046-27.65317c.0646-9.44255-9.37756-9.50756-11.79162-7.20094l-93.91541 82.47221c-2.41407 2.30665-3.6255 4.09697-3.63788 5.89558z"
         fill="#22c55e"
-        fill-rule="evenodd"
+        fillRule="evenodd"
         className="fill-green-500 dark:fill-green-400 transition-[fill] duration-1000"
       />
     </g>

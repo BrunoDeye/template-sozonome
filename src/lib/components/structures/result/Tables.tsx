@@ -35,6 +35,7 @@ const tableVariants = cva(
         sky: 'rounded-lg border-none bg-gradient-to-br from-gray-100 to-sky-200 font-semibold text-sky-600 shadow-xl hover:from-gray-200 hover:to-sky-400 hover:text-sky-700 dark:border-sky-500 dark:from-sky-600 dark:to-sky-400 dark:!text-white dark:shadow-lg dark:shadow-sky-700 dark:hover:from-sky-700 dark:hover:to-blue-300 dark:hover:!text-sky-100',
         darkBlue:
           'rounded-lg border-none bg-gradient-to-br from-gray-100 to-blue-400 font-semibold text-blue-600 shadow-xl hover:from-gray-200 hover:to-blue-600 hover:!text-blue-800 hover:text-sky-700 dark:border-sky-500 dark:from-blue-800 dark:to-sky-600 dark:!text-white dark:shadow-lg dark:shadow-sky-700 dark:hover:from-blue-700 dark:hover:to-blue-300 dark:hover:!text-sky-100',
+        
       },
     },
     defaultVariants: {
@@ -100,6 +101,7 @@ export default function Tables({
   const [loaded, setLoaded] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const t = useTranslations("HVDescription")
+  const tB = useTranslations("Batteries")
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -172,13 +174,13 @@ export default function Tables({
             {data.slice(1).map((attribute) => (
               <TableRow
                 key={attribute.attribute}
-                className="border-gray-200 dark:border-sky-300"
+                className={`border-gray-200 ${attribute.attribute === tB("qntAtr") ? "bg-sky-800 group dark:bg-blue-950 dark:hover:bg-blue-900 text-white !font-extrabold text-lg" : ""} dark:border-sky-300`}
               >
-                <TableCell className="font-medium">
+                <TableCell className={`${attribute.attribute === tB("qntAtr") ? "font-extrabold rounded-tl-sm rounded-bl-lg sm:rounded-bl-sm text-lg group-hover:!text-sky-950 dark:group-hover:!text-gray-100" : "font-medium"}`}>
                   {attribute.attribute}
                 </TableCell>
 
-                <TableCell className="text-right">{attribute.value}</TableCell>
+                <TableCell className={`${attribute.attribute === tB("qntAtr") ? "rounded-br-lg sm:rounded-br-2xl rounded-tr-sm group-hover:!text-sky-950 dark:group-hover:!text-gray-100 " : ""} text-right`}>{attribute.value}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -190,7 +192,7 @@ export default function Tables({
                   height={18}
                   width={18}
                 />
-                <span className="whitespace-nowrap">Informações extras:</span>
+                <span className="whitespace-nowrap">{t("title")}</span>
               </div>
               {}{' '}
               <div className=" flex flex-col gap-3">
@@ -204,7 +206,7 @@ export default function Tables({
                 </div>
                 <div className="flex items-baseline mr-auto">
                   <CoefDescription message="Para uso de inversores e baterias HV, saiba que caso haja o paralelo entre os inversores, é obrigatório que a quantidade de baterias seja exatamente igual em cada inversor." />
-                  <span className="ml-2 leading-none  whitespace-nowrap">Paralelo</span>
+                  <span className="ml-2 leading-none  whitespace-nowrap">{t("parallelLabel")}</span>
                 </div>
                 <div className="flex items-baseline mr-auto">
                   <CoefDescription message="O Gerenciador Unitário de Bateria (BMU) é um controlador de carga responsável por controlar o uso das baterias. Cada unidade de BMU é projetada para suportar até 12 baterias." />

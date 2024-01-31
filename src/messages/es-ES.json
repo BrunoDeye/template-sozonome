@@ -69,7 +69,6 @@
     "qntAtr": "Cantidad",
     "yearsUnit": "{count, plural, =1 {# año} other {# años}}",
     "dangerBattery": "La batería {batteryModel} ha excedido la cantidad permitida de {batteryModelLimit} unidades según el BMS para este modelo."
-
   },
   "Inverters": {
     "recommendationTitle": "Inversor Recomendado",
@@ -79,21 +78,18 @@
     "typeAtr": "Tipo",
     "powerAtr": "Potencia[W]",
     "qntAtr": "Cantidad",
-    "coefAlert": "Seleccione el tiempo máximo de carga"
-,
+    "coefAlert": "La cantidad de inversores puede haber sido ajustada para adaptarse al tiempo máximo de carga de las baterías. Seleccione otro valor si lo desea",
     "h": " hora",
     "hs": " horas",
     "min": " minuto",
     "mins": " minutos",
     "and": "y",
     "AlertOtherInverters": "El número máximo permitido de inversores en paralelo para este modelo {inverterModel} es de {inverterModelLimit} unidades.",
-"AlertInverter": "El número máximo permitido de inversores en paralelo para este modelo {inverterModel} es de {inverterModelLimit} unidades. Se recomienda recalcular o considerar un cambio en la configuración de la red.",
-"AlertTitle": "ATENCIÓN",
-"RemakeButton": "Volver a Calcular",
-"ChangeGridButton": "Cambiar Red",
-"coefMessage": "Tiempo máximo de carga de la batería: {selectedCoef, plural, =0 {0 hora} =1 {1 hora} other {# horas}}"
-
-
+    "AlertInverter": "El número máximo permitido de inversores en paralelo para este modelo {inverterModel} es de {inverterModelLimit} unidades. Se recomienda recalcular o considerar un cambio en la configuración de la red.",
+    "AlertTitle": "ATENCIÓN",
+    "RemakeButton": "Volver a Calcular",
+    "ChangeGridButton": "Cambiar Red",
+    "coefMessage": "Tiempo máximo de carga de la batería: {selectedCoef, plural, =0 {0 hora} =1 {1 hora} other {# horas}}"
   },
   "Grids": {
     "yourGrid": "Para tu red",
@@ -123,7 +119,7 @@
   },
   "Coef": {
     "description": "El tiempo de carga máximo es una estimación aproximada y puede variar según las configuraciones de carga del inversor, así como las particularidades de cada sistema. Al modificar el valor, la cantidad de inversores puede terminar siendo alterada también."
-},
+  },
   "Login": {
     "enter": "Ingresar",
     "email": "Correo electrónico",
@@ -156,9 +152,9 @@
     "errorConfirm": "Las contraseñas no coinciden.",
     "senderFrom": "no-responder@deyeinversores.com.br",
     "subject": "Confirma tu correo electrónico",
-  "htmlP": "Confirma tu correo electrónico haciendo clic en el enlace de abajo y comienza a utilizar nuestra calculadora:",
-  "htmlA": "Enlace de Activación",
-  "errorRegisteredEmail": "Correo electrónico ya registrado",
+    "htmlP": "Confirma tu correo electrónico haciendo clic en el enlace de abajo y comienza a utilizar nuestra calculadora:",
+    "htmlA": "Enlace de Activación",
+    "errorRegisteredEmail": "Correo electrónico ya registrado",
     "errorDefault": "Algo salió mal",
     "successMsg": "Registrado con éxito"
   },
@@ -172,9 +168,9 @@
     "htmlP": "Cambia tu contraseña haciendo clic en el siguiente enlace:",
     "htmlA": "Enlace para cambiar la contraseña",
     "errorEmail": "Email no registrado",
-  "errorNotVerified": "Email registrado, pero no verificado",
-  "errorDefault": "Algo salió mal",
-  "successMsg": "Enviado con éxito. Por favor, revisa tu carpeta de spam."
+    "errorNotVerified": "Email registrado, pero no verificado",
+    "errorDefault": "Algo salió mal",
+    "successMsg": "Enviado con éxito. Por favor, revisa tu carpeta de spam."
   },
   "TermsAndPrivacy": {
     "title": "Términos de Servicio y Política de Privacidad",
@@ -295,15 +291,15 @@
     "title": "¿Quieres iniciar sesión o registrarte?",
     "login": "Iniciar sesión",
     "register": "Crear cuenta"
-    },
-    "HVDescription": {
-      "title": "Información Adicional:",
-      
-      "combinerBox": "(OPCIONAL) Se utiliza una unidad por cada 4 racks de baterías; funciona como una caja de unión. El propósito de este equipo es unir las baterías, conectándolas a una única entrada del inversor.",
-      "canBridge": "(OPCIONAL) Solo cuando la comunicación entre inversor-batería y batería-batería excede los 50m.",
-      "parallelLabel": "Paralelo",
-      "parallel": "Tenga en cuenta que cada inversor conectado en paralelo debe tener la misma cantidad de baterías. Por ejemplo, para 2 inversores paralelos de 50k, cada inversor tendrá un banco de baterías de 12 unidades.",
-      "BMU": "(ESSENCIAL) Una unidad para hasta 12 baterías."
+  },
+  "HVDescription": {
+    "title": "Información Adicional:",
+
+    "combinerBox": "(OPCIONAL) Se utiliza una unidad por cada 4 racks de baterías; funciona como una caja de unión. El propósito de este equipo es unir las baterías, conectándolas a una única entrada del inversor.",
+    "canBridge": "(OPCIONAL) Solo cuando la comunicación entre inversor-batería y batería-batería excede los 50m.",
+    "parallelLabel": "Paralelo",
+    "parallel": "Tenga en cuenta que cada inversor conectado en paralelo debe tener la misma cantidad de baterías. Por ejemplo, para 2 inversores paralelos de 50k, cada inversor tendrá un banco de baterías de 12 unidades.",
+    "BMU": "(ESSENCIAL) Una unidad para hasta 12 baterías."
   },
   "mobileTable": {
     "title": "Cálculos",
@@ -324,7 +320,7 @@
   },
   "EmptyTable": {
     "content": "Aún no hay cálculos."
-  }, 
+  },
   "Update": {
     "buttonEdit": "Actualizar Cálculo",
     "buttonSave": "Guardar en Mis Cálculos",
@@ -332,6 +328,15 @@
     "description": "Para guardar, define un <strong>título</strong> y una <strong>descripción</strong> para tu cálculo; la descripción es <strong>opcional</strong>.",
     "titleLabel": "Título",
     "descriptionLabel": "Descripción"
-  }
-  
+  },
+  "GlobalAlert": {
+    "title": "<span>Bienvenido</span> <span>a la Nueva</span> <span>Calculadora</span> <span>de</span> <span>Sistemas</span> <span>Híbridos</span> <span>de</span> <span>Deye!</span>",
+    "p1": "Ahora, ofrecemos la opción de registro para guardar todos tus cálculos. Regístrate ahora o inicia sesión en tu cuenta existente.",
+    "p2": "Recuerda, sin registro, los cálculos no se guardarán. Asegura el almacenamiento seguro de tus análisis registrándote hoy.",
+    "checkbox": "Deseo continuar sin registrarme",
+    "continue": "Continuar",
+    "login": "Iniciar sesión",
+    "register": "Crear cuenta"
+}
+
 }

@@ -130,7 +130,7 @@ export default function InvertersList({ printData }: Props) {
 
         setMinCoef(tempMinCoef);
         setSelectedCoef(
-          `${Math.min(
+          `${Math.max(
             ...new Set(
               filteredArray.length === 0 ? [tempMinCoef] : filteredArray
             )
@@ -230,7 +230,7 @@ export default function InvertersList({ printData }: Props) {
                         )} */}
                 <Select
                   onValueChange={setSelectedCoef}
-                  defaultValue={`${Math.min(
+                  defaultValue={`${Math.max(
                     ...new Set(
                       [Math.ceil(minCoef), 1, 2, 4, 6, 8, 10].filter(
                         (value, index, array) => {
@@ -253,7 +253,7 @@ export default function InvertersList({ printData }: Props) {
                   <SelectTrigger className="mt-2 h-full w-[100px] border-none bg-amber-300 shadow-inner shadow-yellow-600 backdrop-blur-md dark:bg-amber-200 dark:shadow-yellow-700">
                     <SelectValue
                       // defaultValue={`${Math.ceil(minCoef)}`}
-                      placeholder={Math.min(
+                      placeholder={Math.max(
                         ...new Set(
                           [Math.ceil(minCoef), 1, 2, 4, 6, 8, 10].filter(
                             (value, index, array) => {

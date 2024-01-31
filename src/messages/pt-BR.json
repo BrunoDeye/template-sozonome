@@ -78,7 +78,7 @@
     "typeAtr": "Tipo",
     "powerAtr": "Potência[W]",
     "qntAtr": "Quantidade",
-    "coefAlert": "Selecione o tempo de carregamento máximo",
+    "coefAlert": "A quantidade de inversores pode ter sido modificada para se adequar ao tempo máximo de carregamento das baterias. Selecione outro valor caso desejar",
     "h": " hora",
     "hs": " horas",
     "min": " minuto",
@@ -335,5 +335,14 @@
     "titleLabel": "Título",
     "descriptionLabel": "Descrição"
     
+  },
+  "GlobalAlert": {
+    "title": "<span>Bem-vindo</span> <span>à Nova</span> <span>Calculadora</span> <span>de</span> <span>Sistemas</span> <span>Híbridos</span> <span>da</span> <span>Deye!</span>",
+    "p1": "Agora, oferecemos a opção de cadastro para salvar todos os seus cálculos. Registre-se agora ou faça login na sua conta existente.",
+    "p2": "Lembre-se, sem cadastro, os cálculos não serão salvos. Garanta o armazenamento seguro das suas análises cadastrando-se hoje.",
+    "checkbox": "Desejo continuar sem me cadastrar",
+    "continue": "Continuar",
+    "login": "Fazer Login",
+    "register": "Criar Cadastro"
   }
 }

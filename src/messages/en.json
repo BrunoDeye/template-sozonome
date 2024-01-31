@@ -78,7 +78,7 @@
     "typeAtr": "Type",
     "powerAtr": "Power[W]",
     "qntAtr": "Quantity",
-    "coefAlert": "Select the maximum charging time",
+    "coefAlert": "The number of inverters may have been adjusted to fit the maximum battery charging time. Choose another value if desired",
 
     "h": " hour",
     "hs": " hours",
@@ -331,5 +331,15 @@
   "description": "To save, define a <strong>title</strong> and a <strong>description</strong> for your calculation; the description is <strong>optional</strong>.",
   "titleLabel": "Title",
   "descriptionLabel": "Description"
+},
+"GlobalAlert": {
+  "title": "<span>Welcome</span> <span>to the New</span> <span>Hybrid Systems</span> <span>Calculator</span> <span>by</span> <span>Deye!</span>",
+  "p1": "Now, we offer the option to register to save all your calculations. Register now or log in to your existing account.",
+  "p2": "Remember, without registration, the calculations will not be saved. Ensure secure storage of your analyses by registering today.",
+  "checkbox": "I wish to continue without registering",
+  "continue": "Continue",
+  "login": "Log In",
+  "register": "Create Account"
 }
+
 }
