@@ -130,7 +130,7 @@ export default function InitialAlert() {
               {t('checkbox')}
             </label>
           </div>
-          <AlertDialogFooter className="!w-full !max-w-full items-end justify-end max-sm:space-y-3 gap-2 sm:gap-4">
+          <AlertDialogFooter className="!w-full !max-w-full items-end justify-end gap-2 max-sm:space-y-3 sm:gap-4">
             <div className="w-full max-sm:mr-auto max-sm:mt-2">
               <div className="my-2 flex items-center space-x-2 max-sm:justify-center sm:hidden">
                 <Checkbox
@@ -168,7 +168,7 @@ export default function InitialAlert() {
                 </div>
               </div>
             </div>
-            <div className="w-full sm:hidden max-w-full">
+            <div className="w-full max-w-full sm:hidden">
               <div className="group relative inline-flex focus:bg-transparent max-sm:w-full">
                 <div className="transitiona-all animate-tilt absolute inset-3 min-w-full rounded-xl bg-gradient-to-r from-purple-300 via-red-400 to-purple-300 opacity-70 blur-lg backdrop-blur-lg duration-1000 group-hover:inset-1 group-hover:from-purple-300  group-hover:via-red-400 group-hover:to-purple-300  group-hover:opacity-100 group-hover:duration-200  dark:-inset-1 dark:from-[#44BCFF] dark:via-[#448fff] dark:to-[#6c5eff] dark:group-hover:-inset-3 dark:group-hover:from-[#44BCFF] dark:group-hover:via-[#448fff] dark:group-hover:to-[#6c5eff]  dark:group-hover:opacity-100 max-sm:!w-full max-sm:-scale-x-110"></div>
                 <AlertDialogAction
@@ -185,8 +185,8 @@ export default function InitialAlert() {
                 </AlertDialogAction>
               </div>
             </div>
-            <div className=" flex gap-4 w-full">
-            <div className="group max-sm:hidden relative inline-flex focus:bg-transparent max-sm:w-full">
+            <div className=" flex w-full sm:justify-end gap-4">
+              <div className="group relative inline-flex focus:bg-transparent max-sm:hidden max-sm:w-full">
                 <div className="transitiona-all animate-tilt absolute inset-3 min-w-full rounded-xl bg-gradient-to-r from-purple-300 via-red-400 to-purple-300 opacity-70 blur-lg backdrop-blur-lg duration-1000 group-hover:inset-1 group-hover:from-purple-300  group-hover:via-red-400 group-hover:to-purple-300  group-hover:opacity-100 group-hover:duration-200  dark:-inset-1 dark:from-[#44BCFF] dark:via-[#448fff] dark:to-[#6c5eff] dark:group-hover:-inset-3 dark:group-hover:from-[#44BCFF] dark:group-hover:via-[#448fff] dark:group-hover:to-[#6c5eff]  dark:group-hover:opacity-100 max-sm:!w-full max-sm:-scale-x-110"></div>
                 <AlertDialogAction
                   asChild
