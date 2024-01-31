@@ -27,11 +27,11 @@ export default function InitialAlert() {
   const t = useTranslations('GlobalAlert');
   const VerifyShouldEmitAlert = (lastAlertTime: Date) => {
     const currentTime = new Date();
-    const twelveHoursAgo = set(currentTime, {
-      hours: currentTime.getHours() - 12,
+    const fourHoursAgo = set(currentTime, {
+      hours: currentTime.getHours() - 4,
     });
 
-    return lastAlertTime < twelveHoursAgo;
+    return lastAlertTime < fourHoursAgo;
   };
 
   const checkAndEmitAlert = () => {

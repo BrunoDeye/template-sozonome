@@ -371,7 +371,7 @@ export default function InvertersList({ printData }: Props) {
                       message={t.rich('AlertOtherInverters', {
                         inverterModel: inverter.model,
                         inverterModelLimit: inverterGridLimit(grid as any),
-                        span: (chunks) => <span className='text-gray-50 mx-1'>{chunks}</span>
+                        span: (chunks) => <span className='text-red-100 bg-red-950 rounded-lg  px-2 mx-1 leading-6'>{chunks}</span>
                       }) as string}
                     />
                   </div>
