@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { parseISO, set } from 'date-fns';
 import {
   AlertDialog,
@@ -21,10 +21,11 @@ import LocaleSwitcher from '../LocaleSwitcher';
 
 export default function InitialAlert() {
   const { status } = useSession();
-
+  const timeoutRef = useRef<number | undefined>();
   const [isClient, setIsClient] = useState(false);
   const [shouldEmitAlert, setShouldEmitAlert] = useState(false);
   const t = useTranslations('GlobalAlert');
+  const [disableClick, setDisableClick] = useState(false);
   const VerifyShouldEmitAlert = (lastAlertTime: Date) => {
     const currentTime = new Date();
     const fourHoursAgo = set(currentTime, {
@@ -76,8 +77,19 @@ export default function InitialAlert() {
     }
   }, [isClient, status]);
 
+  const openChangeHandler = (open: boolean) => {
+    if (open) {
+      clearTimeout(timeoutRef.current);
+      setDisableClick(true);
+    } else {
+      // Casting it here because Node is returning `Timeout` and this handler will run in the browser.
+      const enableClicks = () => setDisableClick(false)
+      timeoutRef.current = setTimeout(enableClicks, 50) as unknown as number;
+    }
+  };
+
   return isClient ? (
-    <AlertDialog open={shouldEmitAlert}>
+    <AlertDialog  open={shouldEmitAlert}>
       {shouldEmitAlert ? (
         <div
           className="absolute inset-x-0 top-[-10rem] z-[99999999] transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
@@ -117,7 +129,7 @@ export default function InitialAlert() {
             </AlertDialogDescription>
           </AlertDialogHeader>
 
-          <div className="my-2 flex items-center space-x-2 pt-6 max-sm:hidden">
+          <div  className="my-2 flex items-center space-x-2 pt-6 max-sm:hidden">
             <Checkbox
               checked={checked}
               onCheckedChange={(value) => setChecked(Boolean(value))}
@@ -130,9 +142,9 @@ export default function InitialAlert() {
               {t('checkbox')}
             </label>
           </div>
-          <AlertDialogFooter className="!w-full !max-w-full items-end justify-end gap-2 max-sm:space-y-3 sm:gap-4">
-            <div className="w-full max-sm:mr-auto max-sm:mt-2">
-              <div className="my-2 flex items-center space-x-2 max-sm:justify-center sm:hidden">
+          <AlertDialogFooter  className={`${disableClick ? "pointer-events-none" : ""} !w-full !max-w-full items-end justify-end gap-2 max-sm:space-y-3 sm:gap-4`}>
+            <div  className="w-full max-sm:mr-auto max-sm:mt-2">
+              <div  className="my-2 flex items-center space-x-2 max-sm:justify-center sm:hidden">
                 <Checkbox
                   checked={checked}
                   onCheckedChange={(value) => setChecked(Boolean(value))}
@@ -140,7 +152,7 @@ export default function InitialAlert() {
                 />
                 <label
                   htmlFor="terms"
-                  className="whitespace-nowrap text-left text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  className="whitespace-normal text-center text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
                   {t('checkbox')}
                 </label>
@@ -219,8 +231,8 @@ export default function InitialAlert() {
             </div>
           </AlertDialogFooter>
           {shouldEmitAlert ? (
-            <div className="flex justify-center pt-2 sm:hidden">
-              <LocaleSwitcher />
+            <div className="flex justify-center pt-2 max-sm:pb-5 sm:hidden">
+              <LocaleSwitcher setDisableClick={openChangeHandler} />
             </div>
           ) : null}
         </div>

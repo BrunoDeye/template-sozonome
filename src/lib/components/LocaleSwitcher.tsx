@@ -55,7 +55,12 @@ const languages = [
   },
 ];
 
-export default function LocaleSwitcher() {
+type Props = {
+  setDisableClick?: any
+}
+
+
+export default function LocaleSwitcher({ setDisableClick }: Props) {
   const t = useTranslations('LocaleSwitcher');
   const [isPending, startTransition] = useTransition();
   const locale = useLocale();
@@ -94,7 +99,7 @@ export default function LocaleSwitcher() {
         </div>
       ) : (
         <Select
-          onOpenChange={handleOpenChange}
+          onOpenChange={(open) =>{  handleOpenChange(open); setDisableClick ? setDisableClick(open) : null}}
           onValueChange={onSelectChange}
           defaultValue={locale}
         >

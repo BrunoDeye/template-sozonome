@@ -83,6 +83,7 @@ const RootLayout = async ({
           'min-h-screen bg-background font-sans antialiased',
           fontSans.variable
         )}
+        id="__next"
       >
         <NextIntlClientProvider
           timeZone={timeZone}
@@ -91,7 +92,7 @@ const RootLayout = async ({
         >
             <SessionProviders>
               <Providers>
-                <div id="__next">
+                <div >
                   <Layout>
                     <Suspense fallback={<Loading />}>
                       <div className="flex-1">
