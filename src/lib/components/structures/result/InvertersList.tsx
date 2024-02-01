@@ -114,8 +114,6 @@ export default function InvertersList({ printData }: Props) {
 
         const filteredArray = [tempMinCoef, 1, 2, 4, 6, 8, 10].filter(
           (value, index, array) => {
-            
-
             if (
               !isInverterGridUnderLimit(
                 grid as any,
@@ -147,7 +145,9 @@ export default function InvertersList({ printData }: Props) {
     </span>
   ) : (
     <div className="flex flex-col gap-6">
-      <p className="print-show -mt-6 hidden px-4 text-center text-lg">{t('coefMessage', { selectedCoef })}</p>
+      <p className="print-show -mt-6 hidden px-4 text-center text-lg">
+        {t('coefMessage', { selectedCoef })}
+      </p>
       <div>
         <h4 className="margin-print-fixer text-center text-xl font-bold tracking-tight sm:text-2xl">
           {t('recommendationTitle')}
@@ -191,8 +191,6 @@ export default function InvertersList({ printData }: Props) {
           <div className="sm:px-4">
             {[Math.ceil(minCoef), 1, 2, 4, 6, 8, 10].filter(
               (value, index, array) => {
-                
-
                 if (
                   !isInverterGridUnderLimit(
                     grid as any,
@@ -205,14 +203,21 @@ export default function InvertersList({ printData }: Props) {
             ).length === 0 ? (
               <Danger
                 hasButton
-                message={t('AlertInverter', {
-                  inverterModel: invertersList!.filter((inverter) =>
-                    invertersList![0].model.includes('HP')
-                      ? inverter.model.includes('HP')
-                      : inverter.model.includes('LP')
-                  )[0].model,
-                  inverterModelLimit: inverterGridLimit(grid as any),
-                })}
+                message={
+                  t.rich('AlertInverter', {
+                    inverterModel: invertersList!.filter((inverter) =>
+                      invertersList![0].model.includes('HP')
+                        ? inverter.model.includes('HP')
+                        : inverter.model.includes('LP')
+                    )[0].model,
+                    inverterModelLimit: inverterGridLimit(grid as any),
+                    span: (chunks) => (
+                      <span className="mx-1 whitespace-nowrap rounded-lg bg-red-950  px-2 leading-6 text-gray-100">
+                        {chunks}
+                      </span>
+                    ),
+                  }) as string
+                }
               />
             ) : (
               <Warning>
@@ -234,8 +239,6 @@ export default function InvertersList({ printData }: Props) {
                     ...new Set(
                       [Math.ceil(minCoef), 1, 2, 4, 6, 8, 10].filter(
                         (value, index, array) => {
-                          
-
                           if (
                             !isInverterGridUnderLimit(
                               grid as any,
@@ -257,8 +260,6 @@ export default function InvertersList({ printData }: Props) {
                         ...new Set(
                           [Math.ceil(minCoef), 1, 2, 4, 6, 8, 10].filter(
                             (value, index, array) => {
-                              
-
                               if (
                                 !isInverterGridUnderLimit(
                                   grid as any,
@@ -278,7 +279,6 @@ export default function InvertersList({ printData }: Props) {
                     {[...new Set([Math.ceil(minCoef), 1, 2, 4, 6, 8, 10])]
                       .sort((a, b) => a - b)
                       .filter((value, index, array) => {
-                        
                         if (
                           !isInverterGridUnderLimit(
                             grid as any,
@@ -368,11 +368,17 @@ export default function InvertersList({ printData }: Props) {
                   <div className="pt-6 sm:px-4">
                     {' '}
                     <Danger
-                      message={t.rich('AlertOtherInverters', {
-                        inverterModel: inverter.model,
-                        inverterModelLimit: inverterGridLimit(grid as any),
-                        span: (chunks) => <span className='text-red-100 bg-red-950 rounded-lg  px-2 mx-1 leading-6'>{chunks}</span>
-                      }) as string}
+                      message={
+                        t.rich('AlertOtherInverters', {
+                          inverterModel: inverter.model,
+                          inverterModelLimit: inverterGridLimit(grid as any),
+                          span: (chunks) => (
+                            <span className="mx-1 whitespace-nowrap rounded-lg bg-red-950  px-2 leading-6 text-gray-100">
+                              {chunks}
+                            </span>
+                          ),
+                        }) as string
+                      }
                     />
                   </div>
                 ) : null}

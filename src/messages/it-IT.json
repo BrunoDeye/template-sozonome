@@ -69,7 +69,7 @@
     "modelAtr": "Modello",
     "qntAtr": "Quantità",
     "yearsUnit": "{count, plural, =1 {# anno} other {# anni}}",
-    "dangerBattery": "La batteria {batteryModel} ha superato la quantità consentita di {batteryModelLimit} unità come indicato dal BMS per questo modello."
+    "dangerBattery": "La batteria <span>{batteryModel}</span> ha superato la quantità consentita di <span>{batteryModelLimit}</span> unità come indicato dal BMS per questo modello."
   },
   "Inverters": {
     "recommendationTitle": "Inverter Consigliato",

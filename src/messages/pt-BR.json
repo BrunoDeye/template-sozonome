@@ -68,7 +68,7 @@
     "modelAtr": "Modelo",
     "qntAtr": "Quantidade",
     "yearsUnit": "{count, plural, =1 {# ano} other {# anos}}",
-    "dangerBattery": "A bateria {batteryModel} excedeu a quantidade de {batteryModelLimit} unidades permitida pelo BMS para esse modelo."
+    "dangerBattery": "A bateria <span>{batteryModel}</span> excedeu a quantidade de <span>{batteryModelLimit}</span> unidades permitida pelo BMS para esse modelo."
   },
   "Inverters": {
     "recommendationTitle": "Inversor Recomendado",
@@ -85,7 +85,7 @@
     "mins": " minutos",
     "and": "e",
     "AlertOtherInverters": "O número máximo permitido de inversores em paralelo para o modelo <span>{inverterModel}</span> é de <span>{inverterModelLimit}</span> unidades.",
-    "AlertInverter": "O número máximo permitido de inversores em paralelo para o modelo <span>{inverterModel}</span> é de {inverterModelLimit} unidades. Recomenda-se recalcular ou considerar a alteração na configuração da rede.",
+    "AlertInverter": "O número máximo permitido de inversores em paralelo para o modelo <span>{inverterModel}</span> é de <span>{inverterModelLimit}</span> unidades. Recomenda-se recalcular ou considerar a alteração na configuração da rede.",
     "AlertTitle": "ATENÇÃO",
     "RemakeButton": "Refazer Cálculo",
     "ChangeGridButton": "Mudar Rede",

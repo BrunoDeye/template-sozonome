@@ -85,7 +85,7 @@ function Batteries({ printData }: Props) {
             <LoadingDeye />
           </div>
         </div>
-      ) : batteryModel ? (
+      ) : batteryModel && invertersList ? (
         <>
           <Tables
             coef={battery.modelFullName.includes('BOS') ? true : false}
@@ -113,10 +113,17 @@ function Batteries({ printData }: Props) {
           ) ? null : (
             <div className="sm:mx-4">
               <Danger
-                message={t('dangerBattery', {
-                  batteryModel: batteryModel,
-                  batteryModelLimit: batteryModelLimit(batteryModel as any),
-                })}
+                message={
+                  t.rich('dangerBattery', {
+                    batteryModel: batteryModel,
+                    batteryModelLimit: batteryModelLimit(batteryModel as any),
+                    span: (chunks) => (
+                      <span className="mx-1 whitespace-nowrap rounded-lg bg-red-950  px-2 leading-6 text-gray-100">
+                        {chunks}
+                      </span>
+                    ),
+                  }) as string
+                }
               />
             </div>
           )}
