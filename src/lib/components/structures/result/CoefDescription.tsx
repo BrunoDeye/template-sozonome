@@ -36,7 +36,7 @@ const CoefDescription = ({ message }: Props) => {
       <PopoverTrigger
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="print-hidden z-50 ml-1 translate-y-1 rounded-full hover:bg-sky-200 dark:hover:bg-sky-500"
+        className="print-hidden z-10 ml-1 translate-y-1 rounded-full hover:bg-sky-200 dark:hover:bg-sky-500"
       >
         <LucideInfo height={18} width={18} />
       </PopoverTrigger>
