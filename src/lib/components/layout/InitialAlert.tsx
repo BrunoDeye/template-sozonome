@@ -92,7 +92,7 @@ export default function InitialAlert() {
     <AlertDialog  open={shouldEmitAlert}>
       {shouldEmitAlert ? (
         <div
-          className="absolute inset-x-0 top-[-10rem] z-[99999999] transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
+          className="absolute inset-x-0 top-[-10rem] z-[999999] transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
           aria-hidden="true"
         >
           <div
@@ -104,7 +104,7 @@ export default function InitialAlert() {
           />
         </div>
       ) : null}
-      <AlertDialogContent className="scroll max-h-[100vh]   space-y-0   text-center sm:min-h-[50vh] sm:min-w-[35vw] ">
+      <AlertDialogContent className="scroll bg-[rgba(255,255,255,0.1)] dark:bg-[rgba(0,0,0,0.1)] backdrop-blur-2xl max-h-[100vh]   space-y-0   text-center sm:min-h-[50vh] sm:min-w-[35vw] ">
         <div className="no-scrollbar max-h-[95vh] space-y-5  overflow-y-scroll p-4 sm:space-y-4 sm:p-9 sm:pt-4">
           <AlertDialogHeader>
             {shouldEmitAlert ? (
