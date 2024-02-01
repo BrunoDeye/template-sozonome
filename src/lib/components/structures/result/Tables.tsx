@@ -112,7 +112,7 @@ export default function Tables({
           {isClient ? (
             <div className={`flex justify-between items-center `}>
               {coef ? (
-                <TableCaption className="max-[330px]:-ml-3 print-hidden mb-2 flex flex-col items-start justify-start  gap-5 pb-3 pl-3 align-middle font-bold text-sky-600 dark:text-sky-100 sm:hidden sm:pl-5">
+                <TableCaption className="max-[330px]:-ml-4 print-hidden mb-2 flex flex-col items-start justify-start  gap-5 pb-3 pl-3 align-middle font-bold text-sky-600 dark:text-sky-100 sm:hidden sm:pl-5">
                   <div className="flex items-center">
                     <LucideAlertTriangle
                       className="ml-1 mr-2 inline"
