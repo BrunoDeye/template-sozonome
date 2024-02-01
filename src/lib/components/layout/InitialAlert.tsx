@@ -108,7 +108,7 @@ export default function InitialAlert() {
         <div className="no-scrollbar max-h-[95vh] space-y-5  overflow-y-scroll p-4 sm:space-y-4 sm:p-9 sm:pt-4">
           <AlertDialogHeader>
             {shouldEmitAlert ? (
-              <div className="absolute translate-y-[-15vh]  max-sm:hidden sm:translate-x-[45vw]  2xl:translate-y-[-18vh]">
+              <div className="absolute top-1/2 right-1/2 translate-y-[calc(-50vh+5px)] xl:translate-y-[calc(-50vh+50px)]  max-sm:hidden translate-x-[49vw] xl:translate-x-[40vw] ">
                 <LocaleSwitcher />
               </div>
             ) : null}
@@ -231,7 +231,7 @@ export default function InitialAlert() {
             </div>
           </AlertDialogFooter>
           {shouldEmitAlert ? (
-            <div className="flex justify-center pt-2 max-sm:pb-5 sm:hidden">
+            <div className="flex justify-center pt-5 max-sm:pb-5 sm:hidden">
               <LocaleSwitcher setDisableClick={openChangeHandler} />
             </div>
           ) : null}
