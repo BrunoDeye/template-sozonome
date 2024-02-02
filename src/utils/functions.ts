@@ -145,7 +145,7 @@ export const formatBattery = (
   qntAtr = 'Quantidade',
   yearsUnit = 'anos',
   coef = 1,
-  inverterQty = 3,
+  inverterQty = 3
 ) =>
   !battery.modelFullName || battery.modelFullName === '\u00A0'
     ? [
@@ -279,12 +279,9 @@ export const formatBattery = (
         },
         {
           attribute: qntAtr,
-          value: calculateAdjustedBatteries(
-            inverterQty,
-            (coef < 1
-              ? Math.ceil(+battery.quantity / coef)
-              : battery.quantity) as number
-          ),
+          value: (coef < 1
+            ? Math.ceil(+battery.quantity / coef)
+            : battery.quantity) as number,
         },
       ];
 
