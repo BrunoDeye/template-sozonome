@@ -98,7 +98,7 @@ export default function RegisterDialog({
               {t.rich('content', {
                 p: (chunks) => <div className="mt-6">{chunks}</div>,
                 strong: (chunks) => (
-                  <span className="font-bold tracking-tight">{chunks}</span>
+                  <span className="font-bold tracking-tight whitespace-nowrap">{chunks}</span>
                 ),
               })}
             </AlertDialogDescription>
