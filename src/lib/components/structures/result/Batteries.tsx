@@ -18,9 +18,10 @@ import Danger from './Danger';
 
 type Props = {
   printData: Calculation | null;
+  selectedCoef: string;
 };
 
-function Batteries({ printData }: Props) {
+function Batteries({ printData, selectedCoef }: Props) {
   const t = useTranslations('Batteries');
   const [selectedBattery, setSelectedBattery] = useState<string | undefined>(
     undefined
@@ -38,7 +39,15 @@ function Batteries({ printData }: Props) {
   const calculateBatteriesMutation = useCalculateBatteriesMutation();
 
   const {
-    state: { FC, totalEnergy, grid, totalPower, batteryModel, batteryQty },
+    state: {
+      FC,
+      totalEnergy,
+      grid,
+      totalPower,
+      batteryModel,
+      batteryQty,
+      inverterQty,
+    },
     actions: { addBatteryQty },
   } = useDataStore();
 
@@ -104,7 +113,24 @@ function Batteries({ printData }: Props) {
                 invertersList![0].model.includes('HP')
                   ? inverter.model.includes('HP')
                   : inverter.model.includes('LP')
-              )[0].coef
+              )[0].coef /** Tempo de Carregamento nao ajustado **/,
+              invertersList!.filter((inverter) =>
+                invertersList![0].model.includes('HP')
+                  ? inverter.model.includes('HP')
+                  : inverter.model.includes('LP')
+              )[0].coef /** Tempo de Carregamento nao ajustado **/ >=
+                +selectedCoef
+                ? Math.ceil(
+                    (invertersList!.filter(
+                      (inverter) =>
+                        invertersList![0].model.includes('HP')
+                          ? inverter.model.includes('HP')
+                          : inverter.model.includes('LP')
+                    )[0].coef /** Tempo de Carregamento nao ajustado **/ *
+                      inverterQty) /
+                      +selectedCoef
+                  )
+                : inverterQty
             )}
           />
           {isBatteryModelUnderLimit(

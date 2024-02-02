@@ -44,9 +44,11 @@ export const inverters = [
 
 type Props = {
   printData: Calculation | null;
+  selectedCoef: string;
+  setSelectedCoef: React.Dispatch<React.SetStateAction<string>>; 
 };
 
-export default function InvertersList({ printData }: Props) {
+export default function InvertersList({ printData, selectedCoef, setSelectedCoef }: Props) {
   const t = useTranslations('Inverters');
   const [
     grid,
@@ -69,7 +71,6 @@ export default function InvertersList({ printData }: Props) {
   ]);
 
   const [minCoef, setMinCoef] = useState(0);
-  const [selectedCoef, setSelectedCoef] = useState(``);
 
   const requestData = {
     gridVoltage: printData
@@ -104,15 +105,14 @@ export default function InvertersList({ printData }: Props) {
   useEffect(() => {
     if (invertersList) {
       if (invertersList.length !== 0) {
-        const tempMinCoef = Math.ceil(
+        const tempMinCoef = 
           invertersList!.filter((inverter) =>
             invertersList![0].model.includes('HP')
               ? inverter.model.includes('HP')
               : inverter.model.includes('LP')
           )[0].adjustedCoef
-        );
 
-        const filteredArray = [tempMinCoef, 1, 2, 4, 6, 8, 10].filter(
+        const filteredArray = Array.from(new Set([ 1, 2, 4, 6, 8, 10])).filter(
           (value, index, array) => {
             if (
               !isInverterGridUnderLimit(

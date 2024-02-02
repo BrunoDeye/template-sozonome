@@ -32,6 +32,7 @@ export default function Body() {
   const [selectedBattery, setSelectedBattery] = useState<string | undefined>(
     undefined
   );
+  const [selectedCoef, setSelectedCoef] = useState(``);
   const [printData, setPrintData] = useState<Calculation | null>(null);
   const [battery, setBattery] = useState({
     modelFullName: '\u00A0',
@@ -94,14 +95,14 @@ export default function Body() {
 
       <div className="space-y-6">
         <FadeIn className="w-full space-y-6" yMinus>
-          {systemType === 'AllInOne' ? <AllInOnesList /> : <InvertersList printData={printData} />}
+          {systemType === 'AllInOne' ? <AllInOnesList /> : <InvertersList selectedCoef={selectedCoef} setSelectedCoef={setSelectedCoef} printData={printData} />}
           <div
             className={`${
               systemType !== 'AllInOne' ? 'print-show' : ''
             } invisible hidden`}
           ></div>
 
-          {<Batteries printData={printData} />}
+          {<Batteries selectedCoef={selectedCoef} printData={printData} />}
           
         </FadeIn>
         

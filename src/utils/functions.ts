@@ -90,9 +90,38 @@ export const formatInverter = (
         },
         {
           attribute: qntAtr,
-          value: Math.ceil((minCoef * inverter.quantity) / selectedCoef),
+
+          value:
+            minCoef >= selectedCoef
+              ? Math.ceil((minCoef * inverter.quantity) / selectedCoef)
+              : inverter.quantity,
+          // value:  minCoef,
         },
       ];
+
+function calculateAdjustedBatteries(
+  inverterQuantity: number,
+  batteryQuantity: number
+): number {
+  const minBatteriesPerInverter = 4;
+
+  // Calculate the minimum required total batteries
+  const minTotalBatteries = inverterQuantity * minBatteriesPerInverter;
+
+  // Adjust the battery quantity if it's less than the minimum required
+  const adjustedBatteryQuantity = Math.max(minTotalBatteries, batteryQuantity);
+
+  // Calculate the adjusted quantity for each inverter
+  const adjustedBatteriesPerInverter = Math.ceil(
+    adjustedBatteryQuantity / inverterQuantity
+  );
+
+  // Calculate the final adjusted battery quantity
+  const finalAdjustedBatteryQuantity =
+    adjustedBatteriesPerInverter * inverterQuantity;
+
+  return finalAdjustedBatteryQuantity;
+}
 
 type Battery = {
   modelFullName: string;
@@ -115,7 +144,8 @@ export const formatBattery = (
   modelAtr = 'Modelo',
   qntAtr = 'Quantidade',
   yearsUnit = 'anos',
-  coef = 1
+  coef = 1,
+  inverterQty = 3,
 ) =>
   !battery.modelFullName || battery.modelFullName === '\u00A0'
     ? [
@@ -148,56 +178,66 @@ export const formatBattery = (
           value: '\u00A0',
         },
       ]
-    :  battery.modelFullName.includes('BOS') ? [
-      {
-        attribute: batteryAtr,
-        value: battery.modelFullName || '\u00A0',
-      },
-      {
-        attribute: dodLifespanAtr,
-        value:
-          battery.dod !== '\u00A0'
-            ? `${battery.dod} / ${yearsUnit}`
-            : '\u00A0',
-      },
-      {
-        attribute: energyAtr,
-        value:
-          typeof battery.nominalEnergy === 'string'
-            ? '\u00A0'
-            : battery.nominalEnergy === 0
-            ? '\u00A0'
-            : battery.nominalEnergy.toFixed(2),
-      },
-      {
-        attribute: availEnergyAtr,
-        value:
-          typeof battery.nominalEnergy === 'string'
-            ? '\u00A0'
-            : battery.nominalEnergy === 0
-            ? '\u00A0'
-            : ((battery.dod as any) * battery.nominalEnergy).toFixed(2),
-      },
-      {
-        attribute: ciclesAtr,
-        value: battery.nominalEnergy === 0 ? '\u00A0' : 6000,
-      },
-      {
-        attribute: modelAtr,
-        value: battery.modelFullName.includes('BOS')
-          ? 'High Voltage(HV)'
-          : 'Low Voltage(LV)',
-      },
-      {
-        attribute: "BMU",
-        value: Math.ceil(+battery.quantity / 12),
-      },
-      {
-        attribute: qntAtr,
-        value:
-          coef < 1 ? (Math.ceil(+battery.quantity / coef) < 4 ? 4 : Math.ceil(+battery.quantity / coef)) : (+battery.quantity < 4 ? 4 : battery.quantity),
-      },
-    ] : [
+    : battery.modelFullName.includes('BOS')
+    ? [
+        {
+          attribute: batteryAtr,
+          value: battery.modelFullName || '\u00A0',
+        },
+        {
+          attribute: dodLifespanAtr,
+          value:
+            battery.dod !== '\u00A0'
+              ? `${battery.dod} / ${yearsUnit}`
+              : '\u00A0',
+        },
+        {
+          attribute: energyAtr,
+          value:
+            typeof battery.nominalEnergy === 'string'
+              ? '\u00A0'
+              : battery.nominalEnergy === 0
+              ? '\u00A0'
+              : battery.nominalEnergy.toFixed(2),
+        },
+        {
+          attribute: availEnergyAtr,
+          value:
+            typeof battery.nominalEnergy === 'string'
+              ? '\u00A0'
+              : battery.nominalEnergy === 0
+              ? '\u00A0'
+              : ((battery.dod as any) * battery.nominalEnergy).toFixed(2),
+        },
+        {
+          attribute: ciclesAtr,
+          value: battery.nominalEnergy === 0 ? '\u00A0' : 6000,
+        },
+        {
+          attribute: modelAtr,
+          value: battery.modelFullName.includes('BOS')
+            ? 'High Voltage(HV)'
+            : 'Low Voltage(LV)',
+        },
+        {
+          attribute: 'BMU',
+          value: Math.ceil(+battery.quantity / 12),
+        },
+        {
+          attribute: qntAtr,
+          value: calculateAdjustedBatteries(
+            inverterQty,
+            (coef < 1
+              ? Math.ceil(+battery.quantity / coef) < 4
+                ? 4
+                : Math.ceil(+battery.quantity / coef)
+              : +battery.quantity < 4
+              ? 4
+              : battery.quantity) as number
+          ),
+        },
+      ]
+    : [
         {
           attribute: batteryAtr,
           value: battery.modelFullName || '\u00A0',
@@ -239,8 +279,12 @@ export const formatBattery = (
         },
         {
           attribute: qntAtr,
-          value:
-            coef < 1 ? Math.ceil(+battery.quantity / coef) : battery.quantity,
+          value: calculateAdjustedBatteries(
+            inverterQty,
+            (coef < 1
+              ? Math.ceil(+battery.quantity / coef)
+              : battery.quantity) as number
+          ),
         },
       ];
 
@@ -281,7 +325,7 @@ export const formatBatteryOptions = (
   yearsUnit = 'anos'
 ) =>
   !battery.model || battery.model === '\u00A0'
-    ?  [
+    ? [
         {
           attribute: batteryAtr,
           value: '\u00A0',
@@ -437,24 +481,20 @@ export function isInverterGridUnderLimit(
   }
 }
 
-export function inverterGridLimit(
-  grid: GridType,
-): number {
+export function inverterGridLimit(grid: GridType): number {
   switch (grid) {
     case '127V (Fase + Neutro/Terra)':
-      return 10
+      return 10;
     case '220V (Fase + Fase + Terra/Neutro)':
-      return 16
+      return 16;
     case '220V (Fase + Neutro + Terra)':
-      return 16
+      return 16;
     case '220V (Fase + Fase + Fase + Terra + Neutro)':
-      return 10
+      return 10;
     case '380V (Fase + Fase + Fase + Terra + Neutro)':
-      return 10
+      return 10;
   }
 }
-
-
 
 type ModelType =
   | 'RW.M6.1 (120Ah)'
@@ -473,7 +513,7 @@ export function isBatteryModelUnderLimit(model: ModelType, batteryQty: number) {
     case 'SE-G5.1 PRO (100Ah)':
       if (batteryQty > 64) return false;
       else return true;
-    case "BOS-G (100Ah)":
+    case 'BOS-G (100Ah)':
       if (batteryQty > 192) return false;
       else return true;
   }
@@ -487,8 +527,7 @@ export function batteryModelLimit(model: ModelType) {
       return 32;
     case 'SE-G5.1 PRO (100Ah)':
       return 64;
-    case "BOS-G (100Ah)":
+    case 'BOS-G (100Ah)':
       return 192;
   }
 }
-
