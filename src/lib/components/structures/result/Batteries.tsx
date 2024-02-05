@@ -27,6 +27,7 @@ function Batteries({ printData, selectedCoef }: Props) {
     undefined
   );
   const [coefValue, setCoefValue] = useState(1);
+  const [originalCoef, setOriginalCoef] = useState(1);
   const [defaultCoef, setDefaultCoef] = useState(1);
   const [battery, setBattery] = useState({
     modelFullName: '\u00A0',
@@ -91,10 +92,19 @@ function Batteries({ printData, selectedCoef }: Props) {
           invertersList![0].model.includes('HP')
             ? inverter.model.includes('HP')
             : inverter.model.includes('LP')
+        )[0].adjustedCoef
+      );
+      setOriginalCoef(
+        invertersList!.filter((inverter) =>
+          invertersList![0].model.includes('HP')
+            ? inverter.model.includes('HP')
+            : inverter.model.includes('LP')
         )[0].coef
       );
     }
   }, [invertersList, batteryModel, selectedCoef]);
+
+
 
   return (
     <>
@@ -122,7 +132,7 @@ function Batteries({ printData, selectedCoef }: Props) {
               t('modelAtr'),
               t('qntAtr'),
               t('yearsUnit', { count: battery.lifespan }),
-              defaultCoef /** Tempo de Carregamento nao ajustado **/,
+              originalCoef /** Tempo de Carregamento nao ajustado **/,
               defaultCoef /** Tempo de Carregamento nao ajustado **/ >=
                 +selectedCoef
                 ? Math.ceil(

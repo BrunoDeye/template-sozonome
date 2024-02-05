@@ -116,6 +116,7 @@ function calculateAdjustedBatteries(
     adjustedBatteryQuantity / inverterQuantity
   );
 
+
   // Calculate the final adjusted battery quantity
   const finalAdjustedBatteryQuantity =
     adjustedBatteriesPerInverter * inverterQuantity;
