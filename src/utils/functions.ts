@@ -499,7 +499,7 @@ type ModelType =
   | 'SE-G5.1 PRO (100Ah)'
   | 'BOS-G (100Ah)';
 
-export function isBatteryModelUnderLimit(model: ModelType, batteryQty: number) {
+export function isBatteryModelUnderLimit(model: ModelType, batteryQty: number, inverterQty = 1) {
   switch (model) {
     case 'RW.M6.1 (120Ah)':
       if (batteryQty > 32) return false;
@@ -511,12 +511,12 @@ export function isBatteryModelUnderLimit(model: ModelType, batteryQty: number) {
       if (batteryQty > 64) return false;
       else return true;
     case 'BOS-G (100Ah)':
-      if (batteryQty > 192) return false;
+      if (batteryQty > (192 * inverterQty)) return false;
       else return true;
   }
 }
 
-export function batteryModelLimit(model: ModelType) {
+export function batteryModelLimit(model: ModelType, inverterQty = 1) {
   switch (model) {
     case 'RW.M6.1 (120Ah)':
       return 32;
@@ -525,6 +525,6 @@ export function batteryModelLimit(model: ModelType) {
     case 'SE-G5.1 PRO (100Ah)':
       return 64;
     case 'BOS-G (100Ah)':
-      return 192;
+      return (192 * inverterQty);
   }
 }

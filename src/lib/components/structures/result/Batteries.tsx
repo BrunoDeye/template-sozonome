@@ -27,6 +27,7 @@ function Batteries({ printData, selectedCoef }: Props) {
     undefined
   );
   const [coefValue, setCoefValue] = useState(1);
+  const [defaultCoef, setDefaultCoef] = useState(1);
   const [battery, setBattery] = useState({
     modelFullName: '\u00A0',
     nominalVoltage: '\u00A0',
@@ -61,7 +62,6 @@ function Batteries({ printData, selectedCoef }: Props) {
   };
   const { invertersList, isLoading, isError } =
     useCalculateInvertersQuery(requestData);
-
   useEffect(() => {
     if (batteryModel) {
       const requestData = {
@@ -83,6 +83,19 @@ function Batteries({ printData, selectedCoef }: Props) {
       });
     }
   }, [coefValue]);
+
+  useEffect(() => {
+    if (invertersList && batteryModel && selectedCoef) {
+      setDefaultCoef(
+        invertersList!.filter((inverter) =>
+          invertersList![0].model.includes('HP')
+            ? inverter.model.includes('HP')
+            : inverter.model.includes('LP')
+        )[0].coef
+      );
+    }
+  }, [invertersList, batteryModel, selectedCoef]);
+
   return (
     <>
       <h4 className="margin-print-fixer text-center text-xl font-bold tracking-tight sm:text-2xl">
@@ -109,24 +122,11 @@ function Batteries({ printData, selectedCoef }: Props) {
               t('modelAtr'),
               t('qntAtr'),
               t('yearsUnit', { count: battery.lifespan }),
-              invertersList!.filter((inverter) =>
-                invertersList![0].model.includes('HP')
-                  ? inverter.model.includes('HP')
-                  : inverter.model.includes('LP')
-              )[0].coef /** Tempo de Carregamento nao ajustado **/,
-              invertersList!.filter((inverter) =>
-                invertersList![0].model.includes('HP')
-                  ? inverter.model.includes('HP')
-                  : inverter.model.includes('LP')
-              )[0].coef /** Tempo de Carregamento nao ajustado **/ >=
+              defaultCoef /** Tempo de Carregamento nao ajustado **/,
+              defaultCoef /** Tempo de Carregamento nao ajustado **/ >=
                 +selectedCoef
                 ? Math.ceil(
-                    (invertersList!.filter(
-                      (inverter) =>
-                        invertersList![0].model.includes('HP')
-                          ? inverter.model.includes('HP')
-                          : inverter.model.includes('LP')
-                    )[0].coef /** Tempo de Carregamento nao ajustado **/ *
+                    (defaultCoef /** Tempo de Carregamento nao ajustado **/ *
                       inverterQty) /
                       +selectedCoef
                   )
@@ -135,14 +135,36 @@ function Batteries({ printData, selectedCoef }: Props) {
           />
           {isBatteryModelUnderLimit(
             batteryModel as any,
-            +battery.quantity
+            +battery.quantity,
+            invertersList![0].model.includes('HP')
+              ? defaultCoef /** Tempo de Carregamento nao ajustado **/ >=
+                +selectedCoef
+                ? Math.ceil(
+                    (defaultCoef /** Tempo de Carregamento nao ajustado **/ *
+                      inverterQty) /
+                      +selectedCoef
+                  )
+                : inverterQty
+              : undefined
           ) ? null : (
             <div className="sm:mx-4">
               <Danger
                 message={
                   t.rich('dangerBattery', {
                     batteryModel: batteryModel,
-                    batteryModelLimit: batteryModelLimit(batteryModel as any),
+                    batteryModelLimit: batteryModelLimit(
+                      batteryModel as any,
+                      invertersList![0].model.includes('HP')
+                        ? defaultCoef /** Tempo de Carregamento nao ajustado **/ >=
+                          +selectedCoef
+                          ? Math.ceil(
+                              (defaultCoef /** Tempo de Carregamento nao ajustado **/ *
+                                inverterQty) /
+                                +selectedCoef
+                            )
+                          : inverterQty
+                        : undefined
+                    ),
                     span: (chunks) => (
                       <span className="mx-1 whitespace-nowrap rounded-lg bg-red-950  px-2 leading-6 text-gray-100">
                         {chunks}
