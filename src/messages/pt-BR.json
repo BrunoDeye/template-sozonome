@@ -304,7 +304,7 @@
     "combinerBox": "(OPCIONAL) Para cada 4 racks de baterias, utiliza-se uma unidade, é um barramento de junção. O propósito deste equipamento é unir as baterias, conectando-as a uma única entrada do inversor.",
     "canBridge": "(OPCIONAL) Apenas quando a comunicação entre inversor-bateria e bateria-bateria for maior que 50m.",
     "parallelLabel": "Paralelo",
-    "parallel": "Saiba que cada inversor que está conectado em paralelo deverá ter a mesma quantidade de baterias. Por exemplo, para 2 inversores de 50k, em cada inversor haverá um banco de baterias de 12 unidades.",
+    "parallel": "Cada inversor High Voltage conectado em paralelo deve ser associado a mesma quantidade de baterias. Por exemplo, se houver dois inversores de 50kW, cada um deles deve estar acompanhado de um banco de baterias com uma quantidade igual de unidades.",
     "BMU": "(ESSENCIAL) Uma unidade para até 12 baterias."
   },
   "mobileTable": {

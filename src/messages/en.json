@@ -301,7 +301,7 @@
     "combinerBox": "(OPTIONAL) One unit is used for every 4 battery racks; it serves as a junction box. The purpose of this equipment is to combine the batteries, connecting them to a single input of the inverter.",
     "canBridge": "(OPTIONAL) Only when communication between inverter-battery and battery-battery exceeds 50m.",
     "parallelLabel": "Parallel",
-    "parallel": "Note that each inverter connected in parallel should have the same number of batteries. For example, for 2 parallel-connected 50k inverters, each inverter will have a battery bank of 12 units.",
+    "parallel": "Each High Voltage inverter connected in parallel must be associated with the same quantity of batteries. For example, if there are two 50kW inverters, each of them must be accompanied by a battery bank with an equal quantity of units.",
     "BMU": "(ESSENTIAL) One unit for up to 12 batteries."
 },
 "mobileTable": {

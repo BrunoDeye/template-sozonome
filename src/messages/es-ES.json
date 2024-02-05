@@ -298,7 +298,7 @@
     "combinerBox": "(OPCIONAL) Se utiliza una unidad por cada 4 racks de baterías; funciona como una caja de unión. El propósito de este equipo es unir las baterías, conectándolas a una única entrada del inversor.",
     "canBridge": "(OPCIONAL) Solo cuando la comunicación entre inversor-batería y batería-batería excede los 50m.",
     "parallelLabel": "Paralelo",
-    "parallel": "Tenga en cuenta que cada inversor conectado en paralelo debe tener la misma cantidad de baterías. Por ejemplo, para 2 inversores paralelos de 50k, cada inversor tendrá un banco de baterías de 12 unidades.",
+    "parallel": "Cada inversor de alta tensión conectado en paralelo debe estar asociado a la misma cantidad de baterías. Por ejemplo, si hay dos inversores de 50 kW, cada uno de ellos debe ir acompañado de un banco de baterías con una cantidad igual de unidades.",
     "BMU": "(ESSENCIAL) Una unidad para hasta 12 baterías."
   },
   "mobileTable": {

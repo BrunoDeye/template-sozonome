@@ -302,7 +302,7 @@
     "combinerBox": "(OPZIONALE) Una unità è utilizzata per ogni 4 rack di batterie; funge da scatola di giunzione. Lo scopo di questo dispositivo è unire le batterie, collegandole a un'unica entrata dell'inverter.",
     "canBridge": "(OPZIONALE) Solo quando la comunicazione tra inverter e batteria e tra batterie supera i 50m.",
     "parallelLabel": "Parallelo",
-    "parallel": "Si noti che ogni inverter collegato in parallelo dovrebbe avere la stessa quantità di batterie. Ad esempio, per 2 inverter paralleli da 50k, ciascun inverter avrà una batteria di 12 unità.",
+    "parallel": "Ogni inverter ad alta tensione collegato in parallelo deve essere associato alla stessa quantità di batterie. Ad esempio, se ci sono due inverter da 50 kW, ciascuno di essi deve essere accompagnato da una banca di batterie con una quantità uguale di unità.",
     "BMU": "(ESSENZIALE) Un'unità per un massimo di 12 batterie."
 },
 "mobileTable": {
