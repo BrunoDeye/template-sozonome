@@ -14,7 +14,7 @@ import {
 } from '@/lib/components/ui/alert-dialog';
 import { Button } from '@/lib/components/ui/button';
 import { useSession } from 'next-auth/react';
-import { Link } from '@/navigation';
+import { Link, usePathname } from '@/navigation';
 import { Checkbox } from '../ui/checkbox';
 import { useTranslations } from 'next-intl';
 import LocaleSwitcher from '../LocaleSwitcher';
@@ -26,6 +26,7 @@ export default function InitialAlert() {
   const [shouldEmitAlert, setShouldEmitAlert] = useState(false);
   const t = useTranslations('GlobalAlert');
   const [disableClick, setDisableClick] = useState(false);
+  const pathname = usePathname()
   const VerifyShouldEmitAlert = (lastAlertTime: Date) => {
     const currentTime = new Date();
     const fourHoursAgo = set(currentTime, {
@@ -38,7 +39,9 @@ export default function InitialAlert() {
   const checkAndEmitAlert = () => {
     const lastAlertTime = localStorage.getItem('calc-alert');
 
-    if (
+    if(pathname.includes("auth")) {
+      setShouldEmitAlert(false)
+    } else if (
       status === 'unauthenticated' &&
       (!lastAlertTime ||
         VerifyShouldEmitAlert(parseISO(JSON.parse(lastAlertTime)?.alertTime)) ||
