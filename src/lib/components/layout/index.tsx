@@ -11,7 +11,9 @@ import { useDataStore } from '@/store/data';
 import { motion , AnimatePresence, delay } from 'framer-motion';
 const  Header = dynamic(() => import('./Header'))
 const  Footer = dynamic(() => import('./Footer'), { ssr: false })
-import { usePathname  } from 'next-intl/client';
+import {usePathname } from '@/navigation';
+import { unstable_setRequestLocale } from 'next-intl/server';
+// import { NextUIProvider } from '@nextui-org/system';
 
 type LayoutProps = {
   children: ReactNode;
@@ -20,10 +22,9 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => {
   const pathname = usePathname()
   
-  
   return (
-    
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      {/* <NextUIProvider> */}
       <AnimatePresence mode='popLayout' initial={false} >
       <motion.div key={pathname} className="flex min-h-screen flex-col">
         <Header />
@@ -44,6 +45,7 @@ const Layout = ({ children }: LayoutProps) => {
         <Footer />
       </motion.div>
       </AnimatePresence>
+    {/* </NextUIProvider> */}
     </ThemeProvider>
   );
 };

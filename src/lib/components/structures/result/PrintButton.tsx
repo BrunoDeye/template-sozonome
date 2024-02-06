@@ -13,21 +13,38 @@ function PrintButton() {
     setIsClient(true);
   }, []);
 
+  const [isEdit, setIsEdit] = useState(false);
+
+  useEffect(() => {
+    if (isClient) {
+      const myCalculation = localStorage.getItem('my-calculation');
+      if (myCalculation !== null) {
+        setIsEdit(true);
+      }
+    }
+  }, [isClient]);
+
   const handleClick = async () => {
     setTheme('light');
     setTimeout(() => {
       window.print();
     }, 600);
     setTimeout(() => {
-      setTheme(theme || systemTheme as string);
+      setTheme(theme || (systemTheme as string));
     }, 1000);
-    
   };
 
   return isClient ? (
-    <Button className="print-hidden -z-10 w-full sm:w-auto" variant="gradientDefault" onClick={handleClick}>
-      {t('printButton')}
-    </Button>
+    isEdit ? null : (
+      <Button
+        size="large"
+        className="print-hidden -z-10 !w-full"
+        variant="gradientDefault"
+        onClick={handleClick}
+      >
+        {t('printButton')}
+      </Button>
+    )
   ) : null;
 }
 

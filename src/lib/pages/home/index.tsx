@@ -1,7 +1,7 @@
-'use client';
 import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import { useTranslations } from 'next-intl';
+import { unstable_setRequestLocale } from 'next-intl/server';
 
 // import FadeIn from '@/lib/components/animations/FadeIn';
 // import Hero from '@/lib/components/structures/home/Hero';
@@ -12,7 +12,10 @@ const StartButton = dynamic(
   () => import('@/lib/components/structures/home/StartButton')
 );
 
-const Home: NextPage = () => {
+const Home: NextPage = ({
+  params: {locale}
+}: any) => {
+  unstable_setRequestLocale(locale);
   const t = useTranslations('Index');
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center gap-8 text-center">

@@ -154,6 +154,7 @@ const DevicesList = ({ handleEquipList, id }: DeviceListProps) => {
             <Button
               disabled={value === ''}
               onClick={handleClick}
+              size="large"
               variant="gradientSky"
               className="w-auto mx-auto"
               type="submit"

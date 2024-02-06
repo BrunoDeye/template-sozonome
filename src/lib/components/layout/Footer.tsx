@@ -5,39 +5,43 @@ import logoDeyeWhite from '@/images/logoDeyeWhite.png';
 import { useTheme } from 'next-themes';
 import { startTransition, useEffect } from 'react';
 import { useDataStore } from '@/store/data';
-import { usePathname, useRouter } from 'next-intl/client';
+import {Link,usePathname, useRouter } from '@/navigation';
 import { useLocale } from 'next-intl';
 import LocaleSwitcher from '../LocaleSwitcher';
+import { useSession } from 'next-auth/react';
 
 const Footer = () => {
   const { theme, setTheme, systemTheme } = useTheme();
   const router = useRouter();
   const locale = useLocale();
   const {
-    state: { grid },
+    state: { grid, batteryModel, batteryQty },
   } = useDataStore();
   const pathname = usePathname();
+
+  const { status } = useSession()
 
   useEffect(() => {
     setTheme(theme === 'system' ? systemTheme : (theme as any));
   }, []);
 
   useEffect(() => {
+    // console.log((grid === '' || batteryModel === ''));
     if (
-      pathname !== '/' &&
-      pathname !== `/termos-de-uso` &&
-      pathname !== `/grid` &&
-      grid === ''
+      pathname === '/result' && status !== 'loading' &&
+     (grid === '' || batteryModel === '')
     ) {
 
       startTransition(() => {
         router.replace(`/`, { locale: locale });
       });
     }
+
+    
   }, [pathname, grid]);
 
   return (
-    <footer className="wrapper print-hidden mt-6 z-[9999]">
+    <footer className="wrapper print-hidden mt-6">
       <div className="flex flex-col justify-center gap-8">
         <div className="mx-auto flex flex-col gap-2 text-xs items-center justify-center">
           <div className="relative ">

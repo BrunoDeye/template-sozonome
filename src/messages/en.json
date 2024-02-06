@@ -14,9 +14,9 @@
     "label": "Back"
   },
   "Terms": {
-    "title": "Terms of Use",
+    "title": "Important Considerations",
     "content": "Welcome to the Deye Hybrid Systems Calculator, a tool developed by our engineers with the <important>educational purpose</important> of assisting you in sizing a backup system. It's important to note that Deye <important>does not assume</important> responsibility for the sizing resulting from the use of this calculator. We recommend that a design engineer or a responsible professional assess the feasibility of sizing to ensure that your specific needs are adequately met. Hybrid backup systems are a strategic decision to ensure that in your home, business, or industry, unexpected interruptions in the power supply do not occur, providing comfort and confidence for you.",
-    "confirmButton": "I accept the Terms"
+    "confirmButton": "Understood"
   },
   "Grid": {
     "title": "Grid Voltage",
@@ -50,7 +50,7 @@
     "total": "TOTAL:",
     "totalPower": "Total Power [W]",
     "totalConsumption": "Total Consumption [Wh]",
-    "resultButton": "Results",
+    "batteryButton": "Choose Battery",
     "modalTitle": "Residential Device Catalog",
     "modalDescription": "Below, we highlight the main devices in residential homes, along with estimates of their Power [W] and Autonomy [h].",
     "modalSelectLabel": "Choose a device...",
@@ -59,7 +59,7 @@
     "modalConfirmButton": "Confirm"
   },
   "Batteries": {
-    "title": "<show>Battery</show><hidden>Batteries</hidden>",
+    "title": "Battery",
     "batteryAtr": "Battery",
     "dodLifespanAtr": "DoD/Lifespan",
     "energyAtr": "Energy[kWh]",
@@ -67,7 +67,8 @@
     "ciclesAtr": "Cycles",
     "modelAtr": "Model",
     "qntAtr": "Quantity",
-    "yearsUnit": "{count, plural, =1 {# year} other {# years}}"
+    "yearsUnit": "{count, plural, =1 {# year} other {# years}}",
+    "dangerBattery": "The <span>{batteryModel}</span> battery has exceeded the allowed quantity of <span>{batteryModelLimit}</span> units as per the BMS for this model."
   },
   "Inverters": {
     "recommendationTitle": "Recommended Inverter",
@@ -76,7 +77,21 @@
     "inverterAtr": "Inverter",
     "typeAtr": "Type",
     "powerAtr": "Power[W]",
-    "qntAtr": "Quantity"
+    "qntAtr": "Quantity",
+    "coefAlert": "The number of inverters may have been adjusted to fit the maximum battery charging time. Choose another value if desired",
+
+    "h": " hour",
+    "hs": " hours",
+    "min": " minute",
+    "mins": " minutes",
+    "and": "and",
+    "AlertOtherInverters": "The maximum allowed number of parallel inverters for the <span>{inverterModel}</span> model is <span>{inverterModelLimit}</span> units.",
+    "AlertInverter": "The maximum allowed number of parallel inverters for the <span>{inverterModel}</span> model is <span>{inverterModelLimit}</span> units. It is recommended to recalculate or consider a change in the network configuration.",
+    "AlertTitle": "ATTENTION",
+    "RemakeButton": "Remake Calculation",
+"ChangeGridButton": "Change Grid",
+"coefMessage": "Maximum battery charging time: {selectedCoef, plural, =0 {0 hour} =1 {1 hour} other {# hours}}"
+
   },
   "Grids": {
     "yourGrid": "For your grid",
@@ -88,7 +103,7 @@
   },
   "Result": {
     "title": "Results",
-    "subtitle": "Next, some recommendations for <important>Inverters</important> and <important>Batteries</important> options will be presented."
+    "subtitle": "Next, you will see some recommendations for <important>Inverters</important> and the chosen <important>Battery</important>."
   },
   "SelectBattery": {
     "placeholder": "Select a Battery",
@@ -97,5 +112,234 @@
   "ResultButtons": {
     "printButton": "Print Result",
     "recalcButton": "Recalculate Result"
-  }
+  },
+  "BatteriesPage": {
+    "title": "Batteries",
+    "subtitle": "Select a battery from the options in the list.",
+    "resultButton": "Result",
+    "label1": "Available Energy[kWh]"
+  },
+  "Coef": {
+    "description": "The maximum charging time is an approximate estimate and may vary depending on the inverter's load settings, as well as the specifics of each system. Modifying the value may also end up altering the number of inverters."
+},
+  "Login": {
+    "enter": "Enter",
+    "email": "Email",
+    "password": "Password",
+    "forgot": "Forgot Password",
+    "account": "Don't have an account? <a>Create an account</a>",
+    "emptyError": "Please enter an email and a password",
+    "emailError": "User with this email does not exist",
+    "passwordError": "Incorrect Password",
+    "verificationError": "Email not verified",
+    "defaultError": "Something went wrong",
+    "emptyPasswordError": "Please enter a new password",
+    "tokenConfirmError": "Confirmation expired"
+  },
+  "Register": {
+    "title": "Registration",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "password": "Password",
+    "confirm": "Confirm Password",
+    "accept": "Accept <a>terms and conditions</a>",
+    "acceptSub": "You agree to our Terms of Service and Privacy Policy.",
+    "createButton": "Create Account",
+    "loginText": "Already have an account? <a>Login here</a>",
+    "errorName": "User's name must have at least 6 characters.",
+    "errorEmail": "Invalid email",
+    "errorPassword": "Password must be at least 6 characters.",
+    "errorTerms": "Please accept the terms to continue.",
+    "errorConfirm": "Passwords do not match.",
+    "senderFrom": "do-not-reply@deyeinversores.com.br",
+    "subject": "Confirm Your Email",
+  "htmlP": "Confirm your email by clicking on the link below and start using our calculator:",
+  "htmlA": "Activation Link",
+  "errorRegisteredEmail": "Email already registered",
+    "errorDefault": "Something went wrong",
+    "successMsg": "Registered successfully"
+  },
+  "ForgotPassword": {
+    "email": "Email",
+    "title": "Request Password Change",
+    "send": "Send",
+    "remember": "Remembered the password? <a>Go back</a>",
+    "senderFrom": "do-not-reply@deyeinversores.com.br",
+    "subject": "Change Password",
+    "htmlP": "Change your password by clicking the link below:",
+    "htmlA": "Link to change the password",
+    "errorEmail": "Email not registered",
+  "errorNotVerified": "Email registered but not verified",
+  "errorDefault": "Something went wrong",
+  "successMsg": "Sent successfully! Please check your spam folder."
+  },
+  "TermsAndPrivacy": {
+    "title": "Terms of Service and Privacy Policy",
+    "subtitle": "General terms and conditions of use for the site <a>www.calculadora.app.deyeinversores.com.br</a>.",
+    "term1Title": "Introduction",
+    "term1Content": "The services of the site <a>www.calculadora.app.deyeinversores.com.br</a> are provided by the legal entity with the following Corporate Name: <strong>DEYE BRASIL SUPPORT CENTER COMERCIO DE INVERSORES FOTOVOLTAICOS LTDA</strong>, doing business as <strong>DEYE BRASIL SUPPORT CENTER</strong>, registered with CNPJ under No. <strong>32.574.888/0001-62</strong>, the holder of intellectual property rights over software, website, applications, content, and other assets related to the <strong>Deye – Solar Calculator</strong> platform.",
+    "term2Title": "About the object",
+    "term2Content": "<p>The platform aims to license the use of its software, website, applications, and other intellectual property assets, providing tools to assist and streamline the daily lives of its users.</p> <p>The platform is characterized by providing the following service: sizing of hybrid systems exclusively for educational purposes.</p>",
+    "term3Title": "About Acceptance",
+    "term3Content": "<p>This Agreement establishes contracted obligations of free and spontaneous will, indefinitely, between the platform and individuals or legal entities, users of the site.</p><p>By using the platform, the user fully accepts these rules and undertakes to observe them, at the risk of applicable penalties.</p><p>Acceptance of this instrument is essential for access and for the use of any services provided by the company. If you do not agree with the provisions of this instrument, the user should not use them.</p>",
+    "term4Title": "User Access",
+    "term4Content": "All technical solutions available to the platform manager will be used to allow access to the service 24 (twenty-four) hours a day, 7 (seven) days a week. However, browsing the platform or any of its pages may be interrupted, limited, or suspended for updates, modifications, or any action necessary for its proper functioning.",
+    "term5Title": "About Registration",
+    "term5Content": "<p>Access to the platform's features will require prior registration.</p> <p>When registering, the user must provide complete, recent, and valid information. It is the user's sole responsibility to keep this data updated, and the user commits to the veracity of the provided data.</p> <p>The user agrees not to inform their registration and/or access data to third parties, being fully responsible for the use made of them.</p> <p>Individuals under 18 years of age and those who do not have full legal capacity must obtain the express consent of their legal guardians prior to using the platform and services or products. It is the sole responsibility of legal guardians for any access by minors and those without full legal capacity without prior authorization.</p> <p>Upon completing the registration, the user expressly declares and guarantees to be fully capable, able to freely exercise and enjoy the services and products.</p> <p>The user must provide a valid email address, through which the site will make all necessary communications.</p> <p>After confirming the registration, the user will have a login and a personal password, which ensures the user's individual access to it. Thus, it is the user's sole responsibility to maintain said password confidential and secure, avoiding undue access to personal information.</p> <p>It will not be allowed to assign, sell, rent, or transfer the account in any way, which is personal and non-transferable.</p> <p>The user must ensure that their equipment is compatible with the technical characteristics that enable the use of the platform and services or products.</p> <p>The user may, at any time, request the cancellation of their registration on the site <a>www.calculadora.app.deyeinversores.com.br</a>. Their deregistration will be carried out as quickly as possible.</p> <p>By accepting the Terms and Privacy Policy, the user expressly authorizes the platform to collect, use, store, process, assign, or use information derived from the use of services, the site, and any platforms, including all information filled in by the user when registering or updating, in addition to others expressly described in the Privacy Policy that must be authorized by the user.</p>",
+    "term6Title": "About Support",
+    "term6Content": "<p>In case of any doubt, suggestion, or issue with the use of the platform, the user can contact support via email <strong>app-support@deyeinversores.com.br</strong>.</p> <p>These user support services will be available on the following days and hours: Monday to Friday, from 8:00 AM to 6:00 PM.</p>",
+    "term7Title": "About Responsibilities",
+    "term7Content": "<p>It is the user's responsibility:</p><ol><li>defects or technical faults originating in the user's own system;</li> <li>the correct use of the platform, services, or products offered, fostering good coexistence, respect, and cordiality, promoting a quality environment;</li> <li>compliance and respect for the set of rules set forth in this General Terms of Use, the corresponding Privacy Policy, and national and international legislation;</li> <li>protecting access data to their account/profile (email and password).</li></ol> <p>It is the responsibility of the platform <a>www.calculadora.app.deyeinversores.com.br</a>:</p> <ol><li>to indicate the characteristics of the service or product;</li> <li>the defects and faults found in the offered service or product provided that they have caused them;</li> <li>the information it has disclosed, with comments or information disclosed by users being the sole responsibility of the users themselves;</li> <li>contents or illegal activities carried out through its platform.</li></ol> <p>The platform is not responsible for external links contained in its system that may redirect the user to an environment outside its network.</p> <p>External links or pages serving commercial or advertising purposes or any illicit, violent, controversial, pornographic, xenophobic, discriminatory, or offensive information cannot be included.</p>",
+    "term8Title": "About Copyrights",
+    "term8Content": "<p>This Terms of Use grants users a non-exclusive, non-transferable, and non-sublicensable license to access and use the platform and the services and products offered by it.</p> <p>The structure of the website or application, trademarks, logos, trade names, layouts, graphics and interface design, images, illustrations, photographs, presentations, videos, written and sound and audio content, computer programs, databases, transmission files, and any other information and intellectual property rights of the legal entity <strong>DEYE BRASIL SUPPORT CENTER COMERCIO DE INVERSORES FOTOVOLTAICOS LTDA</strong>, are duly reserved, observing the terms of the <linkone>Industrial Property Law</linkone> (Law nº <linkone>9.279/96</linkone>), <linktwo>Copyright Law</linktwo> (Law nº <linktwo>9.610/98</linktwo>), and <linkthree>Software Law</linkthree> (Law nº <linkthree>9.609/98</linkthree>).</p>",
+    "section": "before:content-['SECTION_'_counter(list-item,_decimal)_'_-']",
+    "privacyTitle": "Privacy Policy",
+    "section1Title": "GENERAL INFORMATION",
+    "section1Content": "<p>This Privacy Policy provides information about the collection, use, storage, processing, and protection of the personal data of users and visitors of the website <a>www.calculadora.app.deyeinversores.com.br</a>, with the purpose of demonstrating absolute transparency on the subject and informing all interested parties about the types of data collected, the reasons for collection, and how users can manage or delete their personal information.</p> <p>This Privacy Policy applies to all users and visitors of the website <a>www.calculadora.app.deyeinversores.com.br</a> and is part of the General Terms and Conditions of Use of the website www.calculadora.app.deyeinversores.com.br, duly registered with CNPJ under number 32.574.888/0001-62, located at Avenida José Meloni, No. 351, Box 15, ZIP Code: 08.773-120, Vila Mogilar neighborhood, municipality of Mogi das Cruzes – SP, hereinafter referred to as <strong>DEYE BRASIL SUPPORT CENTER</strong>.</p> <p>This document has been prepared in accordance with the <linkone>General Data Protection Law</linkone> (Law <linkone>13.709/18</linkone>), the <linktwo>Civil Rights Framework for the Internet</linktwo> (Law <linktwo>12.965/14</linktwo>), and the <linkthree>EU Regulation</linkthree> No. <linkthree>2016/679</linkthree>). Additionally, the document may be updated due to regulatory changes, so users are invited to periodically check this section.</p>",
+    "section2Title": "HOW DO WE COLLECT USER'S PERSONAL DATA?",
+    "section2Content": "<p>The user's and visitor's personal data is collected by the platform in the following way:</p> <ul><li><p>When the user creates an account on the platform <strong>Deye – Solar Calculator</strong>: these data include basic identification information, such as email address, full name, and phone number. From these, we can identify the user, ensuring greater security and well-being for their needs.</p></li></ul>",
+    "section3Title": "WHAT PERSONAL DATA DO WE COLLECT ABOUT THE USER?",
+    "section3Content": "<p>The collected personal data of the user and visitor include the following:</p><ul><li><p>Data for the creation of the account/profile on the platform <strong>Deye – Solar Calculator</strong>: these data include basic identification information such as email address, full name, and phone number.</p></li> <li><p>Data for optimizing navigation: access to pages, IP address, browser used, operating system used, as well as self-stored data to enable resuming from where it left off.</p></li></ul>",
+    "section4Title": "FOR WHAT PURPOSES DO WE USE USER'S PERSONAL DATA?",
+    "section4Content": "<p>The user's and visitor's personal data collected and stored by the platform <strong>Deye – Solar Calculator</strong> are for the following purposes:</p><ul><li><p>User well-being: improve the product and/or service offered, facilitate, expedite, and fulfill the commitments established between the user and the company, enhance user experience, and provide specific features depending on the user's basic characteristics.</p></li> <li><p>Platform improvements: understand how the user uses the platform's services to assist in business and technical development.</p></li> <li><p>User profile prediction: automated processing of personal data to assess usage on the platform.</p></li> <li><p>Registration data: enable user access to certain platform contents, exclusive to registered users.</p></li> <li><p>Proactive communication: send messages or emails to users when they reach certain internal parameters predefined by the company, to verify the user's interest in quoting specific systems or services.</p></li></ul> <p>The processing of personal data for purposes not provided in this Privacy Policy will only occur upon prior communication to the user, so that the rights and obligations set forth herein remain applicable.</p>",
+    "section5Title": "FOR HOW LONG ARE PERSONAL DATA STORED?",
+    "section5Content": "<p>The user's and visitor's personal data is stored by the platform for the period necessary for the provision of the service or the fulfillment of the purposes set forth in this document, as provided in <linkone>section I</linkone> of <linktwo>article 15</linktwo> of Law <linkthree>13.709/18</linkthree>.</p> <p>Data can be removed or anonymized at the user's request, except in cases where the law provides for a different treatment.</p> <p>Furthermore, the personal data of users can only be retained after the end of their processing in the following hypotheses provided for in article 16 of said law:</p> <ol><li>compliance with a legal or regulatory obligation by the data controller;</li> <li>study by a research organization, ensuring, whenever possible, the anonymization of personal data;</li> <li>transfer to a third party, provided that the data processing requirements set forth in this Law are respected;</li> <li>exclusive use by the data controller, with third-party access prohibited, and provided that the data is anonymized.</li></ol>",
+    "section6Title": "SECURITY OF STORED PERSONAL DATA",
+    "section6Content": "<p>The platform commits to applying technical and organizational measures suitable to protect personal data from unauthorized access and situations of destruction, loss, alteration, communication, or dissemination of such data.</p> <p>The platform does not exempt itself from responsibility for the exclusive fault of third parties, such as in the case of attacks by hackers or crackers, or the exclusive fault of the user, as in the case where the user transfers their data to third parties. The site commits to inform the user in case of any security breach of their personal data.</p> <p>The stored personal data is treated with confidentiality, within legal limits. However, we may disclose your personal information if we are required by law to do so or if you violate our Terms of Service.</p>",
+    "section7Title": "WILL STORED PERSONAL DATA BE TRANSFERRED TO THIRD PARTIES?",
+    "section7Content": "Personal data will not be shared with third parties.",
+    "section8Title": "COOKIES OR BROWSING DATA",
+    "section8Content": "<p>Cookies refer to text files sent by the platform to the user's and visitor's computer and stored there, containing information related to browsing on the site. This information is linked to access data such as location and time of access and is stored by the user's and visitor's browser so that the platform's server can read it later to customize the platform's services.</p> <p>The user and visitor of the <strong>Deye – Solar Calculator</strong> platform acknowledge and accept that a system of collecting browsing data may be used through the use of cookies.</p> <p>The persistent cookie remains on the user's and visitor's hard drive even after the browser is closed and will be used by the browser in subsequent visits to the site. Persistent cookies can be removed following the browser's instructions. On the other hand, the session cookie is temporary and disappears after the browser is closed. You can set your web browser to refuse all cookies, but some features of the platform may not work correctly if the ability to accept cookies is disabled.</p>",
+    "section9Title": "CONSENT",
+    "section9Content": "<p>By using the services and providing personal information on the platform, the user is consenting to this Privacy Policy.</p> <p>The user, when registering, declares to be aware and can exercise their rights to cancel their registration, access and update their personal data, and guarantees the truthfulness of the information provided by them.</p> <p>The user has the right to withdraw their consent at any time, and to do so, they must contact through the email <strong>app-support@deyeinversores.com.br</strong>.</p>",
+    "section10Title": "CHANGES TO THIS PRIVACY POLICY",
+    "section10Content": "<p>We reserve the right to modify this Privacy Policy at any time, so it is advisable for the user to review it frequently.</p> <p>The changes and clarifications will take effect immediately after their publication on the platform. When changes are made, users will be notified. By using the service or providing personal information after any modifications, the user and visitor demonstrate their agreement with the new rules.</p> <p>In the event of a merger or sale of the platform to another company, user data may be transferred to the new owners to ensure the continuity of the services offered.</p>",
+    "section11Title": "JURISDICTION FOR DISPUTE RESOLUTION",
+    "section11Content": "<p>For the resolution of disputes arising from this instrument, Brazilian law will be fully applied.</p> <p>Any disputes should be presented in the forum of the district where the company's headquarters is located.</p>",
+    "readCheckbox": "I have read the terms and conditions",
+    "acceptButton": "Accept Terms of Service and Privacy Policy"
+  },
+  "Calculations": {
+    "title": "My Calculations",
+    "columnsButton": "Columns",
+    "columnsLabel": "Toggle Columns",
+    "titleColumn": "Title",
+    "descColumn": "Description",
+    "inverterColumn": "Recommended Inverter",
+    "batteryColumn": "Battery",
+    "qtyBatteryColumn": "Quantity of Batteries",
+    "qtyInverterColumn": "Quantity of Inverters",
+    "gridColumn": "Grid",
+    "powerColumn": "Total Power",
+    "energyColumn": "Total Consumption",
+    "actions": "Actions",
+    "print": "Print",
+    "edit": "Edit",
+    "delete": "Delete",
+    "columnId": "{id, select, title {Title} description {Description} inverterQty {Quantity of Inverters} recommendedInverter {Recommended Inverter} batteryQty {Quantity of Batteries} selectedBattery {Battery} grid {Grid} totalPower {Total Power} totalEnergy {Total Consumption} other {}}"
+  },
+  "Profile": {
+    "hello": "Hello",
+    "homeMenu": "Home",
+    "editMenu": "Edit Profile",
+    "calcMenu": "My Calculations",
+    "logoutMenu": "Logout",
+    "title": "My Profile",
+    "name": "Name",
+    "phone": "Phone",
+    "password": "Password",
+    "editButton": "Edit",
+    "confirmButton": "Confirm",
+    "cancelButton": "Cancel",
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "oldPasswordError": "Incorrect old password",
+    "updatePasswordSuccess": "Password updated successfully!",
+    "emptyError": "Please fill in all fields for password change",
+    "confirmError": "Confirmation password does not match",
+    "defaultError": "Something went wrong",
+    "updateSuccess": "Updated successfully!"
+  },
+  "ConfirmEmail": {
+    "title": "Confirm Email",
+    "email": "Email",
+    "password": "Password",
+    "button": "Log In",
+    "defaultError": "Something went wrong",
+    "successMsg": "Confirmation successful"
+  },
+  "SuccessDialog": {
+    "title": "Registration Completed Successfully!",
+    "content": "An activation email has been sent to your inbox. Please access the account activation link when you receive it. <p>If you don't receive the activation email within a few minutes, check your spam folder or contact us at <strong>app-support@deyeinversores.com.br</strong>.</p>",
+    "confirm": "Confirm",
+    "processing": "Processing...",
+    "somethingWrong": "Something Went Wrong",
+    "verifiedEmailMsg": "Email Verified",
+    "okMsg": "Login successful. Enjoy the experience!"
+  },
+  "ForgotPage": {
+    "title": "Change Password",
+    "labelNew": "New Password",
+    "labelConfirm": "Confirm New Password",
+    "changeButton": "Change",
+    "successMsg": "Change successful",
+    "errorMsg": "Oops, something went wrong...",
+    "errorPassword": "New password must be at least 6 characters.",
+    "errorConfirm": "Passwords do not match."
+  },
+  
+"LoginButtons": {
+  "title": "Do you want to log in or register?",
+  "login": "Log In",
+  "register": "Register"
+  },
+  "HVDescription": {
+    "title": "Extra Information:",
+    
+    "combinerBox": "(OPTIONAL) One unit is used for every 4 battery racks; it serves as a junction box. The purpose of this equipment is to combine the batteries, connecting them to a single input of the inverter.",
+    "canBridge": "(OPTIONAL) Only when communication between inverter-battery and battery-battery exceeds 50m.",
+    "parallelLabel": "Parallel",
+    "parallel": "Each High Voltage inverter connected in parallel must be associated with the same quantity of batteries. For example, if there are two 50kW inverters, each of them must be accompanied by a battery bank with an equal quantity of units.",
+    "BMU": "(ESSENTIAL) One unit for up to 12 batteries."
+},
+"mobileTable": {
+  "title": "Calculations",
+  "tooltipTitle": "Information",
+  "description": "Description",
+  "inverter": "Inverter",
+  "battery": "Battery",
+  "power": "Power",
+  "consumption": "Consumption",
+  "actions": "Actions",
+  "print": "Print",
+  "edit": "Edit",
+  "del": "Delete"
+},
+"Header": {
+  "editingTitle": "Editing Calculation:",
+  "instructions": "(Proceed to the results page to save changes and finalize the editing.)"
+},
+"EmptyTable": {
+  "content": "No calculations yet."
+}, 
+"Update": {
+  "buttonEdit": "Update Calculation",
+  "buttonSave": "Save to My Calculations",
+  "title": "Save Calculation",
+  "description": "To save, define a <strong>title</strong> and a <strong>description</strong> for your calculation; the description is <strong>optional</strong>.",
+  "titleLabel": "Title",
+  "descriptionLabel": "Description"
+},
+"GlobalAlert": {
+  "title": "<span>Welcome</span> <span>to the New</span> <span>Hybrid Systems</span> <span>Calculator</span> <span>by</span> <span>Deye!</span>",
+  "p1": "Now, we offer the option to register to save all your calculations. Register now or log in to your existing account.",
+  "p2": "Remember, without registration, the calculations will not be saved. Ensure secure storage of your analyses by registering today.",
+  "checkbox": "I wish to continue without registering",
+  "continue": "Continue",
+  "login": "Log In",
+  "register": "Create Account"
+}
+
 }

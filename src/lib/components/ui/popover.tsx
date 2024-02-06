@@ -24,6 +24,7 @@ const PopoverContent = React.forwardRef<
         className
       )}
       {...props}
+      data-container="body"
     />
 ))
 PopoverContent.displayName = PopoverPrimitive.Content.displayName

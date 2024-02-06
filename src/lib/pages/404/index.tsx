@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import { Button } from '@/lib/components/ui/button';
-import Link from 'next-intl/link';
+import {Link } from '@/navigation';
 
 const Page404 = () => {
   return (

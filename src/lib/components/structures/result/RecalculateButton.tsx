@@ -3,7 +3,8 @@ import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import { Button } from '../../ui/button';
 import { useDataStore } from '@/store/data';
 import { useTranslations } from 'next-intl';
-import Link from 'next-intl/link';
+import {Link,usePathname, useRouter } from '@/navigation';
+import { useEffect, useState } from 'react';
 
 export default function RecalculateButton() {
   const t = useTranslations('ResultButtons');
@@ -17,12 +18,31 @@ export default function RecalculateButton() {
     useDataStore.persist.clearStorage();
     reset();
   }
+  
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const [isEdit, setIsEdit] = useState(false);
+
+  
+  useEffect(() => {
+    if (isClient) {
+      const myCalculation = localStorage.getItem('my-calculation');
+      if (myCalculation !== null) {
+        setIsEdit(true);
+      }
+    }
+  }, [isClient]);
 
   return (
-    <Button
+    isEdit ? null : <Button
       onClick={() => handleCleaning()}
       variant="gradientSky"
-      className="w-full -z-10 sm:mx-auto sm:w-auto print-hidden"
+      size="large"
+      className="!w-full -z-10 sm:mx-auto print-hidden"
       asChild
     >
       <Link href="/">{t('recalcButton')}</Link>

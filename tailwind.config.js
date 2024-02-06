@@ -1,9 +1,15 @@
 const { fontFamily } = require('tailwindcss/defaultTheme');
-
+const {nextui} = require("@nextui-org/theme");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ['class'],
   content: ['src/**/*.{js,jsx,ts,tsx}'],
+  safelist:[
+    `before:content-['SECTION_'_counter(list-item,_decimal)_'_-']`,
+    `before:content-['SECCIÓN_'_counter(list-item,_decimal)_'_-']`,
+    `before:content-['SEZIONE_'_counter(list-item,_decimal)_'_-']`,
+    `before:content-['SEÇÃO_'_counter(list-item,_decimal)_'_-']`
+  ],
   theme: {
     container: {
       center: true,
