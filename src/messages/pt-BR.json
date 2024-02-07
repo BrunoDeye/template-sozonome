@@ -239,7 +239,8 @@
     "print": "Imprimir",
     "edit": "Editar",
     "delete": "Deletar",
-    "columnId": "{id, select, title {Título} description {Descrição} inverterQty {Quantidade de Inversores} recommendedInverter {Inversor} batteryQty {Quantidade de Baterias} selectedBattery {Bateria} grid {Rede} totalPower {Potência Total} totalEnergy {Consumo Total} other {}}"
+    "rechargeColumn": "Carregamento",
+    "columnId": "{id, select, title {Título} description {Descrição} inverterQty {Quantidade de Inversores} recommendedInverter {Inversor} batteryQty {Quantidade de Baterias} selectedBattery {Bateria} grid {Rede} totalPower {Potência Total} totalEnergy {Consumo Total} rechargeTime {Carregamento} other {}}"
   },
 
   "Profile": {

@@ -164,6 +164,16 @@ export const columns: ColumnDef<Calculation>[] = [
       );
     },
   },
+  {
+    accessorKey: 'rechargeTime',
+    id: 'rechargeTime',
+    header: ({ column }: HeaderContext<Calculation, unknown>) => {
+      const t = useTranslations('Calculations');
+      return (
+        <CalcsTableColumnHeader column={column} title={t("rechargeColumn")} />
+      );
+    },
+  },
 
   {
     accessorKey: 'actions',

@@ -53,6 +53,7 @@ export default function CalcsTable<TData, TValue>({
         grid: false,
         totalPower: false,
         totalEnergy: false,
+        rechargeTime: false
       },
     },
   });

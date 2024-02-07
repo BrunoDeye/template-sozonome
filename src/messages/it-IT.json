@@ -239,7 +239,8 @@
     "print": "Stampa",
     "edit": "Modifica",
     "delete": "Elimina",
-    "columnId": "{id, select, title {Titolo} description {Descrizione} inverterQty {Quantità di Inverter} recommendedInverter {Inverter Consigliato} batteryQty {Quantità di Batterie} selectedBattery {Batteria} grid {Rete} totalPower {Potenza Totale} totalEnergy {Consumo Totale} other {}}"
+    "rechargeColumn": "Ricarica",
+    "columnId": "{id, select, title {Titolo} description {Descrizione} inverterQty {Quantità di Inverter} recommendedInverter {Inverter Consigliato} batteryQty {Quantità di Batterie} selectedBattery {Batteria} grid {Rete} totalPower {Potenza Totale} totalEnergy {Consumo Totale} rechargeTime {Ricarica} other {}}"
   },
   "Profile": {
     "hello": "Ciao",
