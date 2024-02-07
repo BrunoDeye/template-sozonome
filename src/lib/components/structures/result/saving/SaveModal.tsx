@@ -69,7 +69,8 @@ export default function SaveModal({
       batteryQty,
       inverterQty,
       inverterQtyToSave,
-      batteryQtyToSave
+      batteryQtyToSave,
+      rechargeTime
     },
   } = useDataStore();
   const pathname = usePathname();
@@ -108,6 +109,7 @@ export default function SaveModal({
           selectedBattery: batteryModel,
           totalEnergy: totalEnergy,
           totalPower: totalPower,
+          rechargeTime: rechargeTime,
           title: '',
           description: '',
         });
@@ -127,6 +129,7 @@ export default function SaveModal({
     batteryModel,
     totalEnergy,
     totalPower,
+    rechargeTime,
   ]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {

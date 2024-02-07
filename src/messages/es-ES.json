@@ -314,7 +314,9 @@
     "edit": "Editar",
     "del": "Eliminar",
     "inverterQty": "N.º de Inversores",
-"batteryQty": "N.º de Baterías"
+"batteryQty": "N.º de Baterías",
+"rechargeTime": "Tiempo de Recarga",
+"rechargeValue": "{value} Horas"
   },
   "Header": {
     "editingTitle": "Editando Cálculo:",

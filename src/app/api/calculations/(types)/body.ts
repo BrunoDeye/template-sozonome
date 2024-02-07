@@ -12,6 +12,7 @@ export const CalcBody = z.object({
   selectedBattery: z.string(),
   title: z.string(),
   totalEnergy: z.number(),
+  rechargeTime: z.number(),
   totalPower: z.number(),
   description: z.string().optional(),
 });

@@ -26,6 +26,7 @@ export type Calculation = {
   totalEnergy: number;
   recommendedInverter: string;
   selectedBattery: string;
+  rechargeTime: number | null;
   inverterQty: number;
   batteryQty: number;
 }

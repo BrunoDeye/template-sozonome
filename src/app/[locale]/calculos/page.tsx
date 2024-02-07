@@ -59,6 +59,7 @@ async function CalculationsList({ params: { locale }, searchParams }: Props) {
             totalEnergy: 0,
             recommendedInverter: 'string',
             selectedBattery: 'string',
+            rechargeTime: 10,
             inverterQty: 0,
             batteryQty: 0,
           },

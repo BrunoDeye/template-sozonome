@@ -317,7 +317,9 @@
   "edit": "Edit",
   "del": "Delete",
   "inverterQty": "No. of Inverters",
-"batteryQty": "No. of Batteries"
+"batteryQty": "No. of Batteries",
+"rechargeTime": "Recharge Time",
+"rechargeValue": "{value} Hours"
 },
 "Header": {
   "editingTitle": "Editing Calculation:",

@@ -37,6 +37,7 @@ model Calculation {
   totalEnergy         Int
   recommendedInverter String
   selectedBattery     String
+  rechargeTime        Int?    @default(10)
   inverterQty         Int
   batteryQty          Int
   User                User    @relation(fields: [userId], references: [id], onDelete: Cascade)

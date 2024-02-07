@@ -14,6 +14,7 @@ type ActionsProps = {
   addInverterQtyToSave: (qty: number) => void;
   addBatteryQtyToSave: (qty: number) => void;
   addRecommendedInverter: (inverter: string) => void;
+  addRechargeTime: (rechargeTime: number) => void;
   reset: () => void;
 };
 
@@ -28,6 +29,7 @@ type StateProps = {
   inverterQty: number;
   inverterQtyToSave: number;
   recommendedInverter: string;
+  rechargeTime: number;
   place: string; // not using
   systemType: string; // not using
 };
@@ -48,6 +50,7 @@ const initialState: StateProps = {
   inverterQtyToSave: 0,
   batteryQtyToSave: 0,
   inverterQty: 0,
+  rechargeTime: 10,
   recommendedInverter: '',
   FC: 94,
 };
@@ -107,6 +110,10 @@ export const useDataStore = create(
           set((store) => ({
             state: { ...store.state, recommendedInverter: inverter },
           })),
+          addRechargeTime: (rechargeTime) =>
+          set((store) => ({
+            state: { ...store.state, rechargeTime: rechargeTime },
+          })),
         reset: () => {
           set({ state: { ...initialState } });
         },
@@ -133,6 +140,8 @@ export const useDataStore = create(
                 batteryQtyToSave: (persistedState as StoreProps).state.batteryQtyToSave,
                 recommendedInverter: (persistedState as StoreProps).state
                   .recommendedInverter,
+                rechargeTime: (persistedState as StoreProps).state
+                  .rechargeTime,
                 
               },
               actions: {
@@ -148,6 +157,7 @@ export const useDataStore = create(
                 addRecommendedInverter:
                   currentState.actions.addRecommendedInverter,
                 addInverterQty: currentState.actions.addInverterQty,
+                addRechargeTime: currentState.actions.addRechargeTime,
                 addInverterQtyToSave: currentState.actions.addInverterQtyToSave,
                 reset: currentState.actions.reset,
               },

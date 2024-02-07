@@ -54,7 +54,7 @@ function Batteries({ printData, selectedCoef }: Props) {
       inverterQtyToSave,
       batteryQtyToSave
     },
-    actions: { addBatteryQty, addBatteryQtyToSave },
+    actions: { addBatteryQty, addBatteryQtyToSave, addRechargeTime },
   } = useDataStore();
 
   const requestData = {
@@ -116,7 +116,8 @@ function Batteries({ printData, selectedCoef }: Props) {
       ) : (tempOriginalCoef < 1
         ? Math.ceil(batteryQty / tempOriginalCoef)
         : batteryQty) as number
-        addBatteryQtyToSave(batteryQtyToSave) 
+        addBatteryQtyToSave(batteryQtyToSave)
+        addRechargeTime(+selectedCoef) 
     }
   }, [recommendedInverter, invertersList, batteryModel, inverterQtyToSave]);
  

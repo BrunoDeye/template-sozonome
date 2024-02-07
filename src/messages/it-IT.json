@@ -318,7 +318,9 @@
   "edit": "Modifica",
   "del": "Elimina",
   "inverterQty": "N. Inverter",
-"batteryQty": "N. Batterie"
+"batteryQty": "N. Batterie",
+"rechargeTime": "Tempo di Ricarica",
+"rechargeValue": "{value} Ore"
 },
 "Header": {
   "editingTitle": "Modifica Calcolo:",

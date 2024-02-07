@@ -46,6 +46,7 @@ const DataTooltip = ({ data }: Props) => {
     { attribute: t('consumption'), value: data.totalEnergy },
     { attribute: t('batteryQty'), value: data.batteryQty },
     { attribute: t('inverterQty'), value: data.inverterQty },
+    { attribute: t("rechargeTime"), value: t("rechargeValue", { value: data.rechargeTime}) },
   ];
 
   return isClient ? (

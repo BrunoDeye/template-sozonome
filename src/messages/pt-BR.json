@@ -320,7 +320,9 @@
     "edit": "Editar",
     "del": "Deletar",
     "inverterQty": "Nº Inversores",
-    "batteryQty": "Nº Baterias"
+    "batteryQty": "Nº Baterias",
+    "rechargeTime": "Tempo de Recarga",
+    "rechargeValue": "{value} Horas"
   },
   "Header": {
     "editingTitle": "Editando Cálculo:",

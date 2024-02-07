@@ -26,7 +26,7 @@ const Title = dynamic(
   () => import('@/lib/components/structures/devices/Title')
 );
 
-const initialState = [
+export const initialState = [
   {
     id: 0,
     quantity: 1,

@@ -64,6 +64,7 @@ export default function InvertersList({
     addRecommendedInverter,
     addInverterQty,
     addInverterQtyToSave,
+    rechargeTime
   ] = useDataStore((state) => [
     state.state.grid,
     state.state.totalPower,
@@ -74,6 +75,7 @@ export default function InvertersList({
     state.actions.addRecommendedInverter,
     state.actions.addInverterQty,
     state.actions.addInverterQtyToSave,
+    state.state.rechargeTime
   ]);
 
   const [minCoef, setMinCoef] = useState(0);
@@ -133,7 +135,7 @@ export default function InvertersList({
 
         setMinCoef(tempMinCoef);
         setSelectedCoef(
-          `${Math.max(
+          printData ? `${rechargeTime}` : `${Math.max(
             ...new Set(
               filteredArray.length === 0 ? [tempMinCoef] : filteredArray
             )

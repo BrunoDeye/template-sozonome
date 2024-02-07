@@ -51,6 +51,7 @@ export default function Body() {
       addTotalPower,
       addInverterQty,
       addBatteryQty,
+      addRechargeTime
     },
     state: { FC, totalEnergy, totalPower, systemType },
   } = useDataStore();
@@ -92,6 +93,7 @@ export default function Body() {
       addGrid(parsedPrintData.grid);
       addTotalEnergy(parsedPrintData.totalEnergy);
       addTotalPower(parsedPrintData.totalPower);
+      addRechargeTime(parsedPrintData.rechargeTime as number)
       // setSavedDevicesList((JSON.parse(parsedPrintData.devicesList)))
 
       setPrintData(parsedPrintData);
