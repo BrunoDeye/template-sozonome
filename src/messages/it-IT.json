@@ -316,7 +316,9 @@
   "actions": "Azioni",
   "print": "Stampa",
   "edit": "Modifica",
-  "del": "Elimina"
+  "del": "Elimina",
+  "inverterQty": "N. Inverter",
+"batteryQty": "N. Batterie"
 },
 "Header": {
   "editingTitle": "Modifica Calcolo:",
@@ -342,7 +344,15 @@
   "continue": "Continua",
   "login": "Accedi",
   "register": "Crea un account"
-}
+},
+"DeleteDialog": {
+  "title": "Sei assolutamente sicuro?",
+  "subtitle": "Questa azione non può essere annullata.",
+  "cancel": "Annulla",
+  "delete": "Elimina"
+  }
+  
+  
 
 
 }

@@ -318,7 +318,9 @@
     "actions": "Ações",
     "print": "Imprimir",
     "edit": "Editar",
-    "del": "Deletar"
+    "del": "Deletar",
+    "inverterQty": "Nº Inversores",
+    "batteryQty": "Nº Baterias"
   },
   "Header": {
     "editingTitle": "Editando Cálculo:",
@@ -344,5 +346,11 @@
     "continue": "Continuar",
     "login": "Fazer Login",
     "register": "Criar Cadastro"
+  },
+  "DeleteDialog": {
+    "title": "Você tem absoluta certeza disso?",
+    "subtitle": "Essa ação não pode ser desfeita.",
+    "cancel": "Cancelar",
+    "delete": "Deletar"
   }
 }

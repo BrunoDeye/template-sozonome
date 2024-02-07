@@ -13,6 +13,7 @@ import { useRouter } from '@/navigation';
 import { server } from '@/url';
 import { Calculation } from '@/app/client/prisma';
 import DeleteButton from './DeleteButton';
+import { useTranslations } from 'next-intl';
 
 
 type Props = {
@@ -25,14 +26,14 @@ type Props = {
 
 
 export function DeleteDialog({ open = true, setOpen, id, headers }: Props) {
-
+  const t = useTranslations("DeleteDialog")
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent className='!px-6'>
         <AlertDialogHeader className='flex !flex-col items-center w-full'>
-          <AlertDialogTitle>Você tem absoluta certeza disso?</AlertDialogTitle>
+          <AlertDialogTitle>{t("title")}</AlertDialogTitle>
           <AlertDialogDescription>
-            Essa ação não pode ser desfeita.
+          {t("subtitle")}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter className='flex !justify-center w-full'>
@@ -40,7 +41,7 @@ export function DeleteDialog({ open = true, setOpen, id, headers }: Props) {
             onClick={() => setOpen(false)}
             variant="gradientGhost"
           >
-            Cancel
+            {t("cancel")}
           </AlertDialogCancel>
           <DeleteButton id={id} headers={headers} />
         </AlertDialogFooter>

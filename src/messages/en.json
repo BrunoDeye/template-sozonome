@@ -315,7 +315,9 @@
   "actions": "Actions",
   "print": "Print",
   "edit": "Edit",
-  "del": "Delete"
+  "del": "Delete",
+  "inverterQty": "No. of Inverters",
+"batteryQty": "No. of Batteries"
 },
 "Header": {
   "editingTitle": "Editing Calculation:",
@@ -340,6 +342,12 @@
   "continue": "Continue",
   "login": "Log In",
   "register": "Create Account"
-}
+},
+"DeleteDialog": {
+  "title": "Are you absolutely sure?",
+  "subtitle": "This action cannot be undone.",
+  "cancel": "Cancel",
+  "delete": "Delete"
+  }
 
 }
