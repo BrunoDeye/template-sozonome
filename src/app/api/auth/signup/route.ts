@@ -12,6 +12,7 @@ import {
 import { EmailClient, KnownEmailSendStatus } from '@azure/communication-email';
 import { getLocaleString } from '@/utils/functions';
 import { getTranslations } from 'next-intl/server';
+import { parseISO, set } from 'date-fns';
 
 export async function POST(request: NextRequest) {
   const connectionString = process.env.COMMUNICATION_SERVICES_CONNECTION_STRING;
@@ -34,13 +35,27 @@ export async function POST(request: NextRequest) {
         email: email,
       },
     });
+    const currentTime = new Date();
+    const oneDayAgo = set(currentTime, {
+      hours: currentTime.getHours() - 24,
+    });
 
-    if (user)
-      return NextResponse.json(
-        { error: 'Email já cadastrado' },
-        { status: 409 }
-      );
+    
 
+    if (user){
+
+      if ((parseISO(user.createdAt as any) < oneDayAgo) && !user.emailVerified) {
+        
+        await prisma.user.delete({ where: { id: user.id } })
+      } else {
+        
+        return NextResponse.json(
+          { error: 'Email já cadastrado' },
+          { status: 409 }
+        );
+      }
+
+    }
     const newUser = await prisma.user.create({
       data: { email, name, phoneNumber, password: await hash(password, 10) },
     });
