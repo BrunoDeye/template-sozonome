@@ -19,7 +19,6 @@ import DisplayTotal from '../devices/DisplayTotal';
 import { Separator } from '../../ui/separator';
 import { Calculation } from '@/app/client/prisma';
 import InvertersList from './InvertersList';
-import { initialState } from '../devices/DeviceCard';
 
 const FadeIn = dynamic(() => import('@/lib/components/animations/FadeIn'));
 const SelectBattery = dynamic(() => import('./SelectBattery'));
@@ -45,7 +44,14 @@ export default function Body() {
     quantity: '\u00A0',
   });
   const {
-    actions: { addGrid, addFC, addTotalEnergy, addTotalPower },
+    actions: {
+      addGrid,
+      addFC,
+      addTotalEnergy,
+      addTotalPower,
+      addInverterQty,
+      addBatteryQty,
+    },
     state: { FC, totalEnergy, totalPower, systemType },
   } = useDataStore();
 
@@ -75,25 +81,22 @@ export default function Body() {
     }
   }, [selectedBattery, isClient]);
 
-  
-
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   useEffect(() => {
-    const localPrintData = localStorage.getItem('my-print-calculation')
-    if (localPrintData !== null){
+    const localPrintData = localStorage.getItem('my-print-calculation');
+    if (localPrintData !== null) {
       const parsedPrintData = JSON.parse(localPrintData) as Calculation;
-        addGrid(parsedPrintData.grid);
-        addTotalEnergy(parsedPrintData.totalEnergy);
-        addTotalPower(parsedPrintData.totalPower)
+      addGrid(parsedPrintData.grid);
+      addTotalEnergy(parsedPrintData.totalEnergy);
+      addTotalPower(parsedPrintData.totalPower);
       // setSavedDevicesList((JSON.parse(parsedPrintData.devicesList)))
 
-      setPrintData(parsedPrintData)
+      setPrintData(parsedPrintData);
     }
-  }, [isClient])
-
+  }, [isClient]);
 
   return (
     <>
@@ -103,7 +106,15 @@ export default function Body() {
 
       <div className="space-y-6">
         <FadeIn className="w-full space-y-6" yMinus>
-          {systemType === 'AllInOne' ? <AllInOnesList /> : <InvertersList selectedCoef={selectedCoef} setSelectedCoef={setSelectedCoef} printData={printData} />}
+          {systemType === 'AllInOne' ? (
+            <AllInOnesList />
+          ) : (
+            <InvertersList
+              selectedCoef={selectedCoef}
+              setSelectedCoef={setSelectedCoef}
+              printData={printData}
+            />
+          )}
           <div
             className={`${
               systemType !== 'AllInOne' ? 'print-show' : ''
@@ -111,9 +122,7 @@ export default function Body() {
           ></div>
 
           {<Batteries selectedCoef={selectedCoef} printData={printData} />}
-          
         </FadeIn>
-        
       </div>
     </>
   );
