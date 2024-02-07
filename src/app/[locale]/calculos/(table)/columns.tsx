@@ -41,7 +41,7 @@ export function printExternal(url: string, calc: Calculation) {
       if (Boolean((printWindow! as any).chrome)) {
         setTimeout(function () {
           printWindow!.print();
-        }, 2000);
+        }, 5000);
       } else {
         printWindow!.print();
         printWindow!.close();
