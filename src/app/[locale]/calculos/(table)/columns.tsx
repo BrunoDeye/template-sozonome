@@ -173,6 +173,11 @@ export const columns: ColumnDef<Calculation>[] = [
         <CalcsTableColumnHeader column={column} title={t("rechargeColumn")} />
       );
     },
+    cell: ({row}) => {
+      const calculations = row.original;
+      const t = useTranslations('Calculations');
+      return t("hours", { count: calculations.rechargeTime})
+    }
   },
 
   {

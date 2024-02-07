@@ -16,6 +16,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/lib/components/ui/dropdown-menu"
+import { useTranslations } from "next-intl"
  
 interface DataTableColumnHeaderProps<TData, TValue>
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -28,6 +29,9 @@ export default function CalcsTableColumnHeader<TData, TValue>({
   title,
   className,
 }: DataTableColumnHeaderProps<TData, TValue>) {
+
+  const t = useTranslations("HeaderTableMenu") 
+
   if (!column.getCanSort()) {
     return <div className={cn(className)}>{title}</div>
   }
@@ -63,7 +67,7 @@ export default function CalcsTableColumnHeader<TData, TValue>({
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
             <EyeNoneIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
-            Esconder
+            {t("hidden")}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

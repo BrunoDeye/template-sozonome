@@ -238,6 +238,7 @@
     "edit": "Edit",
     "delete": "Delete",
     "rechargeColumn": "Recharge",
+    "hours": "{count, plural, =1 {1 hour} other {# hours}}",
     "columnId": "{id, select, title {Title} description {Description} inverterQty {Quantity of Inverters} recommendedInverter {Recommended Inverter} batteryQty {Quantity of Batteries} selectedBattery {Battery} grid {Grid} totalPower {Total Power} totalEnergy {Total Consumption} rechargeTime {Recharge}  other {}}"
   },
   "Profile": {
@@ -320,7 +321,7 @@
   "inverterQty": "No. of Inverters",
 "batteryQty": "No. of Batteries",
 "rechargeTime": "Recharge Time",
-"rechargeValue": "{value} Hours"
+"rechargeValue": "{value, plural, =1 {# hour} other {# hours}}"
 },
 "Header": {
   "editingTitle": "Editing Calculation:",
@@ -351,6 +352,10 @@
   "subtitle": "This action cannot be undone.",
   "cancel": "Cancel",
   "delete": "Delete"
+  },
+  "HeaderTableMenu": {
+    
+    "hidden":  "Hide"
   }
 
 }
