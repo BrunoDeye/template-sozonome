@@ -19,6 +19,7 @@ import DisplayTotal from '../devices/DisplayTotal';
 import { Separator } from '../../ui/separator';
 import { Calculation } from '@/app/client/prisma';
 import InvertersList from './InvertersList';
+import { initialState } from '../devices/DeviceCard';
 
 const FadeIn = dynamic(() => import('@/lib/components/animations/FadeIn'));
 const SelectBattery = dynamic(() => import('./SelectBattery'));
@@ -32,6 +33,7 @@ export default function Body() {
   const [selectedBattery, setSelectedBattery] = useState<string | undefined>(
     undefined
   );
+
   const [selectedCoef, setSelectedCoef] = useState(``);
   const [printData, setPrintData] = useState<Calculation | null>(null);
   const [battery, setBattery] = useState({
@@ -43,6 +45,7 @@ export default function Body() {
     quantity: '\u00A0',
   });
   const {
+    actions: { addGrid, addFC, addTotalEnergy, addTotalPower },
     state: { FC, totalEnergy, totalPower, systemType },
   } = useDataStore();
 
@@ -82,6 +85,11 @@ export default function Body() {
     const localPrintData = localStorage.getItem('my-print-calculation')
     if (localPrintData !== null){
       const parsedPrintData = JSON.parse(localPrintData) as Calculation;
+        addGrid(parsedPrintData.grid);
+        addTotalEnergy(parsedPrintData.totalEnergy);
+        addTotalPower(parsedPrintData.totalPower)
+      // setSavedDevicesList((JSON.parse(parsedPrintData.devicesList)))
+
       setPrintData(parsedPrintData)
     }
   }, [isClient])
