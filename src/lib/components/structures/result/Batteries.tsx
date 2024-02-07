@@ -8,6 +8,7 @@ import Tables from './Tables';
 import { ImageModelName, mapImages } from '@/utils/constants';
 import {
   batteryModelLimit,
+  calculateAdjustedBatteries,
   formatBattery,
   isBatteryModelUnderLimit,
 } from '@/utils/functions';
@@ -49,8 +50,11 @@ function Batteries({ printData, selectedCoef }: Props) {
       batteryModel,
       batteryQty,
       inverterQty,
+      recommendedInverter,
+      inverterQtyToSave,
+      batteryQtyToSave
     },
-    actions: { addBatteryQty },
+    actions: { addBatteryQty, addBatteryQtyToSave },
   } = useDataStore();
 
   const requestData = {
@@ -84,28 +88,38 @@ function Batteries({ printData, selectedCoef }: Props) {
       });
     }
   }, [coefValue]);
-
+  
   useEffect(() => {
-    if (invertersList && batteryModel && selectedCoef) {
-      setDefaultCoef(
-        invertersList!.filter((inverter) =>
-          invertersList![0].model.includes('HP')
-            ? inverter.model.includes('HP')
-            : inverter.model.includes('LP')
-        )[0].adjustedCoef
-      );
-      setOriginalCoef(
-        invertersList!.filter((inverter) =>
-          invertersList![0].model.includes('HP')
-            ? inverter.model.includes('HP')
-            : inverter.model.includes('LP')
-        )[0].coef
-      );
+    if (recommendedInverter && invertersList && batteryModel && selectedCoef) {
+      const tempDefaultCoef = invertersList!.filter((inverter) =>
+        invertersList![0].model.includes('HP')
+          ? inverter.model.includes('HP')
+          : inverter.model.includes('LP')
+      )[0].adjustedCoef;
+      const tempOriginalCoef = invertersList!.filter((inverter) =>
+        invertersList![0].model.includes('HP')
+          ? inverter.model.includes('HP')
+          : inverter.model.includes('LP')
+      )[0].coef;
+
+      setDefaultCoef(tempDefaultCoef);
+      setOriginalCoef(tempOriginalCoef);
+      const batteryQtyToSave = recommendedInverter.includes('HP') ? calculateAdjustedBatteries(
+        inverterQtyToSave,
+        (tempOriginalCoef < 1
+          ? Math.ceil(batteryQty / tempOriginalCoef) < 4
+            ? 4
+            : Math.ceil(batteryQty / tempOriginalCoef)
+          : batteryQty < 4
+          ? 4
+          : batteryQty) as number 
+      ) : (tempOriginalCoef < 1
+        ? Math.ceil(batteryQty / tempOriginalCoef)
+        : batteryQty) as number
+        addBatteryQtyToSave(batteryQtyToSave) 
     }
-  }, [invertersList, batteryModel, selectedCoef]);
-
-
-
+  }, [recommendedInverter, invertersList, batteryModel, inverterQtyToSave]);
+ 
   return (
     <>
       <h4 className="margin-print-fixer text-center text-xl font-bold tracking-tight sm:text-2xl">

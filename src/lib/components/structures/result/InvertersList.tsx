@@ -45,10 +45,14 @@ export const inverters = [
 type Props = {
   printData: Calculation | null;
   selectedCoef: string;
-  setSelectedCoef: React.Dispatch<React.SetStateAction<string>>; 
+  setSelectedCoef: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export default function InvertersList({ printData, selectedCoef, setSelectedCoef }: Props) {
+export default function InvertersList({
+  printData,
+  selectedCoef,
+  setSelectedCoef,
+}: Props) {
   const t = useTranslations('Inverters');
   const [
     grid,
@@ -59,6 +63,7 @@ export default function InvertersList({ printData, selectedCoef, setSelectedCoef
     inverterQty,
     addRecommendedInverter,
     addInverterQty,
+    addInverterQtyToSave,
   ] = useDataStore((state) => [
     state.state.grid,
     state.state.totalPower,
@@ -68,6 +73,7 @@ export default function InvertersList({ printData, selectedCoef, setSelectedCoef
     state.state.inverterQty,
     state.actions.addRecommendedInverter,
     state.actions.addInverterQty,
+    state.actions.addInverterQtyToSave,
   ]);
 
   const [minCoef, setMinCoef] = useState(0);
@@ -105,14 +111,13 @@ export default function InvertersList({ printData, selectedCoef, setSelectedCoef
   useEffect(() => {
     if (invertersList) {
       if (invertersList.length !== 0) {
-        const tempMinCoef = 
-          invertersList!.filter((inverter) =>
-            invertersList![0].model.includes('HP')
-              ? inverter.model.includes('HP')
-              : inverter.model.includes('LP')
-          )[0].adjustedCoef
+        const tempMinCoef = invertersList!.filter((inverter) =>
+          invertersList![0].model.includes('HP')
+            ? inverter.model.includes('HP')
+            : inverter.model.includes('LP')
+        )[0].adjustedCoef;
 
-        const filteredArray = Array.from(new Set([ 1, 2, 4, 6, 8, 10])).filter(
+        const filteredArray = Array.from(new Set([1, 2, 4, 6, 8, 10])).filter(
           (value, index, array) => {
             if (
               !isInverterGridUnderLimit(
@@ -137,6 +142,20 @@ export default function InvertersList({ printData, selectedCoef, setSelectedCoef
       }
     }
   }, [invertersList, inverterQty]);
+
+  useEffect(() => {
+    if (invertersList) {
+      if (invertersList.length !== 0) {
+        const inverterQtyToSave =
+          minCoef >= +selectedCoef
+            ? Math.ceil((minCoef * inverterQty) / +selectedCoef)
+            : inverterQty;
+
+        addInverterQtyToSave(inverterQtyToSave);
+      }
+    }
+  }, [inverterQty, minCoef, selectedCoef]);
+
   // console.log(minCoef + "aqui");
   // console.log(selectedCoef+ "selecionado");
   return isError ? (

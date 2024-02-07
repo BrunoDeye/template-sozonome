@@ -11,21 +11,25 @@ type ActionsProps = {
   addBatteryModel: (model: string) => void;
   addBatteryQty: (qty: number) => void;
   addInverterQty: (qty: number) => void;
+  addInverterQtyToSave: (qty: number) => void;
+  addBatteryQtyToSave: (qty: number) => void;
   addRecommendedInverter: (inverter: string) => void;
   reset: () => void;
 };
 
 type StateProps = {
-    batteryModel: string;
-    grid: string;
-    totalEnergy: number;
-    totalPower: number;
-    batteryQty: number;
-    FC: number;
-    inverterQty: number;
-    recommendedInverter: string;
-    place: string; // not using
-    systemType: string; // not using
+  batteryModel: string;
+  grid: string;
+  totalEnergy: number;
+  totalPower: number;
+  batteryQty: number;
+  batteryQtyToSave: number;
+  FC: number;
+  inverterQty: number;
+  inverterQtyToSave: number;
+  recommendedInverter: string;
+  place: string; // not using
+  systemType: string; // not using
 };
 
 type StoreProps = {
@@ -34,16 +38,18 @@ type StoreProps = {
 };
 
 const initialState: StateProps = {
-    batteryModel: '',
-    grid: '',
-    place: '',
-    systemType: '',
-    totalEnergy: 0,
-    totalPower: 0,
-    batteryQty: 0,
-    inverterQty: 0,
-    recommendedInverter: '',
-    FC: 94,
+  batteryModel: '',
+  grid: '',
+  place: '',
+  systemType: '',
+  totalEnergy: 0,
+  totalPower: 0,
+  batteryQty: 0,
+  inverterQtyToSave: 0,
+  batteryQtyToSave: 0,
+  inverterQty: 0,
+  recommendedInverter: '',
+  FC: 94,
 };
 
 export const useDataStore = create(
@@ -89,12 +95,20 @@ export const useDataStore = create(
           set((store) => ({
             state: { ...store.state, inverterQty: inverterQty },
           })),
+        addInverterQtyToSave: (inverterQtyToSave) =>
+          set((store) => ({
+            state: { ...store.state, inverterQtyToSave: inverterQtyToSave },
+          })),
+        addBatteryQtyToSave: (batteryQtyToSave) =>
+          set((store) => ({
+            state: { ...store.state, batteryQtyToSave: batteryQtyToSave },
+          })),
         addRecommendedInverter: (inverter) =>
           set((store) => ({
             state: { ...store.state, recommendedInverter: inverter },
           })),
         reset: () => {
-          set({ state: {...initialState}});
+          set({ state: { ...initialState } });
         },
       },
     }),
@@ -115,7 +129,11 @@ export const useDataStore = create(
                 FC: (persistedState as StoreProps).state.FC,
                 batteryModel: (persistedState as StoreProps).state.batteryModel,
                 inverterQty: (persistedState as StoreProps).state.inverterQty,
-                recommendedInverter: (persistedState as StoreProps).state.recommendedInverter,
+                inverterQtyToSave: (persistedState as StoreProps).state.inverterQtyToSave,
+                batteryQtyToSave: (persistedState as StoreProps).state.batteryQtyToSave,
+                recommendedInverter: (persistedState as StoreProps).state
+                  .recommendedInverter,
+                
               },
               actions: {
                 addGrid: currentState.actions.addGrid,
@@ -125,9 +143,12 @@ export const useDataStore = create(
                 addTotalEnergy: currentState.actions.addTotalEnergy,
                 addBatteryModel: currentState.actions.addBatteryModel,
                 addBatteryQty: currentState.actions.addBatteryQty,
+                addBatteryQtyToSave: currentState.actions.addBatteryQtyToSave,
                 addFC: currentState.actions.addFC,
-                addRecommendedInverter: currentState.actions.addRecommendedInverter,
+                addRecommendedInverter:
+                  currentState.actions.addRecommendedInverter,
                 addInverterQty: currentState.actions.addInverterQty,
+                addInverterQtyToSave: currentState.actions.addInverterQtyToSave,
                 reset: currentState.actions.reset,
               },
             },

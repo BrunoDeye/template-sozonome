@@ -99,7 +99,7 @@ export const formatInverter = (
         },
       ];
 
-function calculateAdjustedBatteries(
+export function calculateAdjustedBatteries(
   inverterQuantity: number,
   batteryQuantity: number
 ): number {

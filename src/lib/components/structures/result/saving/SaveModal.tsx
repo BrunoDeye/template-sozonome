@@ -30,6 +30,7 @@ import {
 import { useRouter, usePathname } from '@/navigation';
 import LoadingDeye from '@/lib/components/Loading';
 import { useTranslations } from 'next-intl';
+import { calculateAdjustedBatteries } from '@/utils/functions';
 
 const formSchema = z.object({
   title: z
@@ -64,9 +65,11 @@ export default function SaveModal({
       totalPower,
       totalEnergy,
       batteryModel,
-      batteryQty,
       recommendedInverter,
+      batteryQty,
       inverterQty,
+      inverterQtyToSave,
+      batteryQtyToSave
     },
   } = useDataStore();
   const pathname = usePathname();
@@ -91,13 +94,16 @@ export default function SaveModal({
     if (isClient) {
       const devicesList = localStorage.getItem('devices-list');
       const editCalculation = localStorage.getItem('my-calculation');
+
+      calculateAdjustedBatteries
+
       devicesList &&
         setSaveData({
           id: editCalculation ? JSON.parse(editCalculation).id : null,
-          batteryQty: batteryQty,
+          batteryQty: batteryQtyToSave,
           devicesList: devicesList,
           grid: grid,
-          inverterQty: inverterQty,
+          inverterQty: inverterQtyToSave,
           recommendedInverter: recommendedInverter,
           selectedBattery: batteryModel,
           totalEnergy: totalEnergy,
@@ -114,9 +120,9 @@ export default function SaveModal({
     }
   }, [
     isClient,
-    batteryQty,
+    batteryQtyToSave,
     grid,
-    inverterQty,
+    inverterQtyToSave,
     recommendedInverter,
     batteryModel,
     totalEnergy,
