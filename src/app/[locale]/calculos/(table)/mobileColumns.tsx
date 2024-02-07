@@ -4,7 +4,7 @@ import { Calculation } from '@/app/client/prisma';
 import CalcsToggleTable from './CalcsToggleTable';
 import { CellContext, ColumnDef, HeaderContext } from '@tanstack/react-table';
 import { Button } from '@/lib/components/ui/button';
-import { DotsVerticalIcon } from '@radix-ui/react-icons';
+import { DotsHorizontalIcon, DotsVerticalIcon } from '@radix-ui/react-icons';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,6 +21,7 @@ import { server } from '@/url';
 import { DeleteDialog } from './delete/DeleteDialog';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { ArrowBigDown, ArrowDown, ArrowDown01, ArrowDownToDot, ChevronDown } from 'lucide-react';
 
 export const mobileColumns: ColumnDef<Calculation>[] = [
   {
@@ -29,9 +30,7 @@ export const mobileColumns: ColumnDef<Calculation>[] = [
     header: () => {
       const t = useTranslations('mobileTable');
       return (
-        <div className="absolute bottom-0 left-0 right-0 top-5 mx-auto w-[280px] max-[330px]:w-[230px]">
-          {t('title')}
-        </div>
+          t('title')
       );
     },
     cell: ({ row, table, additionalProp }) => {
@@ -43,7 +42,8 @@ export const mobileColumns: ColumnDef<Calculation>[] = [
   {
     accessorKey: 'actions',
     id: 'Ações',
-    header: '',
+
+    header: () => <DotsHorizontalIcon />,
     enableSorting: false,
     enableColumnFilter: false,
     enableHiding: false,

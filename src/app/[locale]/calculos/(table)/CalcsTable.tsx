@@ -32,14 +32,14 @@ const hiddenColumns = ['batteryQty'];
 export default function CalcsTable<TData, TValue>({
   columns,
   data,
-  headers
+  headers,
 }: DataTableProps<TData, TValue>) {
-  const t = useTranslations("EmptyTable")
+  const t = useTranslations('EmptyTable');
   const [sorting, setSorting] = useState<SortingState>([]);
   const table = useReactTable({
     data,
     columns,
-    
+
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
@@ -52,34 +52,36 @@ export default function CalcsTable<TData, TValue>({
         inverterQty: false,
         grid: false,
         totalPower: false,
-        totalEnergy: false
+        totalEnergy: false,
       },
     },
   });
-  
+
   return (
     <>
       <CalcsToggleTable table={table} />
-      <div className="rounded-md border w-full !max-w-[1024px]">
+      <div className="w-full !max-w-[1024px] rounded-md border">
         <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead align="center" key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
+          
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead align="center" key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </TableHead>
+                    );
+                  })}
+                </TableRow>
+              ))}
+            </TableHeader>
+          
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
@@ -89,13 +91,10 @@ export default function CalcsTable<TData, TValue>({
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        {
-                          ...cell.getContext(),
-                          additionalProp: headers
-                        }
-                      )}
+                      {flexRender(cell.column.columnDef.cell, {
+                        ...cell.getContext(),
+                        additionalProp: headers,
+                      })}
                     </TableCell>
                   ))}
                 </TableRow>
@@ -106,7 +105,7 @@ export default function CalcsTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  {t("content")}
+                  {t('content')}
                 </TableCell>
               </TableRow>
             )}
