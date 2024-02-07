@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
 
     if (user){
 
-      if ((parseISO(user.createdAt as any) < oneDayAgo) && !user.emailVerified) {
+      if (user.createdAt < oneDayAgo && !user.emailVerified) {
         
         await prisma.user.delete({ where: { id: user.id } })
       } else {
