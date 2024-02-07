@@ -28,14 +28,14 @@ export function DeleteDialog({ open = true, setOpen, id, headers }: Props) {
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogContent>
-        <AlertDialogHeader>
+      <AlertDialogContent className='!px-6'>
+        <AlertDialogHeader className='flex !flex-col items-center w-full'>
           <AlertDialogTitle>Você tem absoluta certeza disso?</AlertDialogTitle>
           <AlertDialogDescription>
             Essa ação não pode ser desfeita.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
+        <AlertDialogFooter className='flex !justify-center w-full'>
           <AlertDialogCancel
             onClick={() => setOpen(false)}
             variant="gradientGhost"
