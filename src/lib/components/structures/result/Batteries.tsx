@@ -90,7 +90,7 @@ function Batteries({ printData, selectedCoef }: Props) {
   }, [coefValue]);
   
   useEffect(() => {
-    if (recommendedInverter && invertersList && batteryModel && selectedCoef) {
+    if (recommendedInverter && invertersList && batteryModel && selectedCoef && inverterQtyToSave) {
       const tempDefaultCoef = invertersList!.filter((inverter) =>
         invertersList![0].model.includes('HP')
           ? inverter.model.includes('HP')
@@ -117,9 +117,11 @@ function Batteries({ printData, selectedCoef }: Props) {
         ? Math.ceil(batteryQty / tempOriginalCoef)
         : batteryQty) as number
         addBatteryQtyToSave(batteryQtyToSave)
-        addRechargeTime(+selectedCoef) 
+        
     }
   }, [recommendedInverter, invertersList, batteryModel, inverterQtyToSave]);
+
+  useEffect(() => { addRechargeTime(+selectedCoef) }, [selectedCoef])
  
   return (
     <>
