@@ -143,7 +143,7 @@ export default function InvertersList({
         );
       }
     }
-  }, [invertersList, inverterQty, rechargeTime]);
+  }, [invertersList, inverterQty]);
 
   useEffect(() => {
     if (invertersList) {
@@ -198,7 +198,8 @@ export default function InvertersList({
               t('powerAtr'),
               t('qntAtr'),
               minCoef,
-              +selectedCoef
+              +selectedCoef,
+              printData
             )}
             srcImg={mapImages(
               invertersList!.filter((inverter) =>

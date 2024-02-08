@@ -52,6 +52,7 @@ export default function Body() {
     FC,
     totalEnergy,
     systemType,
+    addBatteryQty
   ] = useDataStore((state) => [
     state.actions.addGrid,
     state.actions.addTotalEnergy,
@@ -61,6 +62,8 @@ export default function Body() {
     state.state.FC,
     state.state.totalEnergy,
     state.state.systemType,
+    state.actions.addBatteryQty,
+  
   ]);
 
   const calculateBatteriesMutation = useCalculateBatteriesMutation();
@@ -102,6 +105,7 @@ export default function Body() {
       addTotalPower(parsedPrintData.totalPower);
       addBatteryModel(parsedPrintData.selectedBattery);
       addRechargeTime(+(parsedPrintData.rechargeTime as number));
+      addBatteryQty(+(parsedPrintData.batteryQty))
 
       // setSavedDevicesList((JSON.parse(parsedPrintData.devicesList)))
 

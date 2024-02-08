@@ -1,3 +1,4 @@
+import { Calculation } from '@/app/client/prisma';
 import { AllInOneData } from '@/services/types/AllInOneData';
 
 export function removeAccents(input: string) {
@@ -54,7 +55,8 @@ export const formatInverter = (
   powerAtr = 'Potência[W]',
   qntAtr = 'Quantidade',
   minCoef = 8,
-  selectedCoef = 8
+  selectedCoef = 8,
+  printData: Calculation | null = null 
 ) =>
   !inverter.model || inverter.model === '\u00A0'
     ? [
@@ -92,9 +94,9 @@ export const formatInverter = (
           attribute: qntAtr,
 
           value:
-            minCoef >= selectedCoef
+          printData? printData.inverterQty : (minCoef >= selectedCoef
               ? Math.ceil((minCoef * inverter.quantity) / selectedCoef)
-              : inverter.quantity,
+              : inverter.quantity),
           // value:  minCoef,
         },
       ];
@@ -146,7 +148,8 @@ export const formatBattery = (
   qntAtr = 'Quantidade',
   yearsUnit = 'anos',
   coef = 1,
-  inverterQty = 3
+  inverterQty = 3,
+  printData: Calculation | null = null 
 ) =>
   !battery.modelFullName || battery.modelFullName === '\u00A0'
     ? [
@@ -226,7 +229,7 @@ export const formatBattery = (
         },
         {
           attribute: qntAtr,
-          value: calculateAdjustedBatteries(
+          value: printData? printData.batteryQty : calculateAdjustedBatteries(
             inverterQty,
             (coef < 1
               ? Math.ceil(+battery.quantity / coef) < 4
@@ -280,7 +283,7 @@ export const formatBattery = (
         },
         {
           attribute: qntAtr,
-          value: (coef < 1
+          value:  printData? printData.batteryQty : (coef < 1
             ? Math.ceil(+battery.quantity / coef)
             : battery.quantity) as number,
         },

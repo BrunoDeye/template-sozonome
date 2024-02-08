@@ -71,13 +71,15 @@ function Batteries({ printData, selectedCoef }: Props) {
     if (batteryModel) {
       const requestData = {
         model: printData ? printData.selectedBattery : (batteryModel as string),
-        tEnergy: printData ? printData.totalEnergy : totalEnergy || 1 || 1,
+        tEnergy: printData ? printData.totalEnergy : totalEnergy || 1,
         fc: FC <= 100 ? FC / 100 : 0.94,
         // coef: coefValue,
       };
+      console.log(requestData)
       // console.log(requestData);
       calculateBatteriesMutation.mutate(requestData, {
         onSuccess: (data) => {
+          console.log("[teste]", data)
           addBatteryQty(data.quantity);
           setBattery(data);
           // console.log(data);
@@ -87,7 +89,7 @@ function Batteries({ printData, selectedCoef }: Props) {
         },
       });
     }
-  }, [coefValue]);
+  }, [coefValue, printData]);
 
   useEffect(() => {
     if (
@@ -125,8 +127,9 @@ function Batteries({ printData, selectedCoef }: Props) {
             ? Math.ceil(batteryQty / tempOriginalCoef)
             : batteryQty) as number);
       addBatteryQtyToSave(batteryQtyToSave);
+      console.log(tempOriginalCoef)
     }
-  }, [recommendedInverter, invertersList, batteryModel, inverterQtyToSave]);
+  }, [recommendedInverter, invertersList, batteryModel, inverterQtyToSave, selectedCoef]);
 
   useEffect(() => {
     if (+selectedCoef !== 0) {
@@ -168,7 +171,8 @@ function Batteries({ printData, selectedCoef }: Props) {
                       inverterQty) /
                       +selectedCoef
                   )
-                : inverterQty
+                : inverterQty,
+                printData
             )}
           />
           {isBatteryModelUnderLimit(

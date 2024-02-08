@@ -110,7 +110,7 @@ export const useDataStore = create(
           set((store) => ({
             state: { ...store.state, recommendedInverter: inverter },
           })),
-          addRechargeTime: (rechargeTime) =>
+        addRechargeTime: (rechargeTime) =>
           set((store) => ({
             state: { ...store.state, rechargeTime: rechargeTime },
           })),
@@ -136,13 +136,13 @@ export const useDataStore = create(
                 FC: (persistedState as StoreProps).state.FC,
                 batteryModel: (persistedState as StoreProps).state.batteryModel,
                 inverterQty: (persistedState as StoreProps).state.inverterQty,
-                inverterQtyToSave: (persistedState as StoreProps).state.inverterQtyToSave,
-                batteryQtyToSave: (persistedState as StoreProps).state.batteryQtyToSave,
+                inverterQtyToSave: (persistedState as StoreProps).state
+                  .inverterQtyToSave,
+                batteryQtyToSave: (persistedState as StoreProps).state
+                  .batteryQtyToSave,
                 recommendedInverter: (persistedState as StoreProps).state
                   .recommendedInverter,
-                rechargeTime: (persistedState as StoreProps).state
-                  .rechargeTime,
-                
+                rechargeTime: (persistedState as StoreProps).state.rechargeTime,
               },
               actions: {
                 addGrid: currentState.actions.addGrid,
