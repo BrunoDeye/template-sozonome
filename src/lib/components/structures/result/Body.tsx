@@ -43,19 +43,25 @@ export default function Body() {
     lifespan: '\u00A0',
     quantity: '\u00A0',
   });
-  const {
-    actions: {
-      addGrid,
-      addFC,
-      addTotalEnergy,
-      addTotalPower,
-      addInverterQty,
-      addBatteryQty,
-      addBatteryModel,
-      addRechargeTime
-    },
-    state: { FC, totalEnergy, totalPower, systemType },
-  } = useDataStore();
+  const [
+    addGrid,
+    addTotalEnergy,
+    addTotalPower,
+    addBatteryModel,
+    addRechargeTime,
+    FC,
+    totalEnergy,
+    systemType,
+  ] = useDataStore((state) => [
+    state.actions.addGrid,
+    state.actions.addTotalEnergy,
+    state.actions.addTotalPower,
+    state.actions.addBatteryModel,
+    state.actions.addRechargeTime,
+    state.state.FC,
+    state.state.totalEnergy,
+    state.state.systemType,
+  ]);
 
   const calculateBatteriesMutation = useCalculateBatteriesMutation();
 
@@ -94,8 +100,8 @@ export default function Body() {
       addGrid(parsedPrintData.grid);
       addTotalEnergy(parsedPrintData.totalEnergy);
       addTotalPower(parsedPrintData.totalPower);
-      addBatteryModel(parsedPrintData.selectedBattery)
-      addRechargeTime(parsedPrintData.rechargeTime as number)
+      addBatteryModel(parsedPrintData.selectedBattery);
+      addRechargeTime(+(parsedPrintData.rechargeTime as number));
 
       // setSavedDevicesList((JSON.parse(parsedPrintData.devicesList)))
 

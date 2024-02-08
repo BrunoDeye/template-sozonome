@@ -143,7 +143,7 @@ export default function InvertersList({
         );
       }
     }
-  }, [invertersList, inverterQty]);
+  }, [invertersList, inverterQty, rechargeTime]);
 
   useEffect(() => {
     if (invertersList) {

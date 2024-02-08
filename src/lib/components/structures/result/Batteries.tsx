@@ -52,7 +52,7 @@ function Batteries({ printData, selectedCoef }: Props) {
       inverterQty,
       recommendedInverter,
       inverterQtyToSave,
-      batteryQtyToSave
+      batteryQtyToSave,
     },
     actions: { addBatteryQty, addBatteryQtyToSave, addRechargeTime },
   } = useDataStore();
@@ -88,9 +88,15 @@ function Batteries({ printData, selectedCoef }: Props) {
       });
     }
   }, [coefValue]);
-  
+
   useEffect(() => {
-    if (recommendedInverter && invertersList && batteryModel && selectedCoef && inverterQtyToSave) {
+    if (
+      recommendedInverter &&
+      invertersList &&
+      batteryModel &&
+      selectedCoef &&
+      inverterQtyToSave
+    ) {
       const tempDefaultCoef = invertersList!.filter((inverter) =>
         invertersList![0].model.includes('HP')
           ? inverter.model.includes('HP')
@@ -104,25 +110,30 @@ function Batteries({ printData, selectedCoef }: Props) {
 
       setDefaultCoef(tempDefaultCoef);
       setOriginalCoef(tempOriginalCoef);
-      const batteryQtyToSave = recommendedInverter.includes('HP') ? calculateAdjustedBatteries(
-        inverterQtyToSave,
-        (tempOriginalCoef < 1
-          ? Math.ceil(batteryQty / tempOriginalCoef) < 4
-            ? 4
-            : Math.ceil(batteryQty / tempOriginalCoef)
-          : batteryQty < 4
-          ? 4
-          : batteryQty) as number 
-      ) : (tempOriginalCoef < 1
-        ? Math.ceil(batteryQty / tempOriginalCoef)
-        : batteryQty) as number
-        addBatteryQtyToSave(batteryQtyToSave)
-        
+      const batteryQtyToSave = recommendedInverter.includes('HP')
+        ? calculateAdjustedBatteries(
+            inverterQtyToSave,
+            (tempOriginalCoef < 1
+              ? Math.ceil(batteryQty / tempOriginalCoef) < 4
+                ? 4
+                : Math.ceil(batteryQty / tempOriginalCoef)
+              : batteryQty < 4
+              ? 4
+              : batteryQty) as number
+          )
+        : ((tempOriginalCoef < 1
+            ? Math.ceil(batteryQty / tempOriginalCoef)
+            : batteryQty) as number);
+      addBatteryQtyToSave(batteryQtyToSave);
     }
   }, [recommendedInverter, invertersList, batteryModel, inverterQtyToSave]);
 
-  useEffect(() => { addRechargeTime(+selectedCoef) }, [selectedCoef])
- 
+  useEffect(() => {
+    if (+selectedCoef !== 0) {
+      addRechargeTime(+selectedCoef);
+    }
+  }, [selectedCoef]);
+
   return (
     <>
       <h4 className="margin-print-fixer text-center text-xl font-bold tracking-tight sm:text-2xl">
