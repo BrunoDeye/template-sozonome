@@ -231,11 +231,7 @@ export const formatBattery = (
           attribute: qntAtr,
           value: printData? printData.batteryQty : calculateAdjustedBatteries(
             inverterQty,
-            (coef < 1
-              ? Math.ceil(+battery.quantity / coef) < 4
-                ? 4
-                : Math.ceil(+battery.quantity / coef)
-              : +battery.quantity < 4
+            (+battery.quantity < 4
               ? 4
               : battery.quantity) as number
           ),
@@ -283,9 +279,7 @@ export const formatBattery = (
         },
         {
           attribute: qntAtr,
-          value:  printData? printData.batteryQty : (coef < 1
-            ? Math.ceil(+battery.quantity / coef)
-            : battery.quantity) as number,
+          value:  printData? printData.batteryQty : (battery.quantity) as number,
         },
       ];
 
