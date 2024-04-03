@@ -95,7 +95,7 @@ export default function SelectBattery({
     data: z.infer<typeof FormSchema>
   ) => {
     addBatteryModel(data.model);
-
+    localStorage.removeItem('my-print-calculation');
     router.push('/result');
   };
 

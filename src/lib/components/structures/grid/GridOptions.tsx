@@ -49,7 +49,7 @@ const GridOptions = () => {
     data: z.infer<typeof FormSchema>
   ) => {
     addGrid(data.grid);
-
+    localStorage.removeItem('my-print-calculation');
     startTransition(() => {
     router.push('/devices');
     });
